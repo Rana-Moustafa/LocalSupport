@@ -1,0 +1,102 @@
+<header class="fixed-top" [ngClass]="commons.darkHeader? 'inner-header': 'normal-header'">
+  <div class="container">
+    <nav class="navbar">
+      <span class="navbar-icon" (click)="toggleSideNav(); menuItems()"><i class="fa fa-bars"></i> </span>
+      <div class="side-nav" [ngClass]="{ 'open': sideNav === true }">
+        <div class="close">
+          <div (click)="toggleSideNav()"><img src="../../../assets/images/cancel.svg" alt="" class="img-thumbnail">
+          </div>
+        </div>
+        <div class="sidnav-image">
+          <img src="../../../assets/images/side-menu-img.png" alt="" class="img-thumbnail">
+        </div>
+        <ul class="list-unstyled">
+          <div class="sidenav-logo">
+            <a [routerLink]="['/'+langURL]" (click)="toggleSideNav()">
+              <h2>Local support</h2>
+            </a>
+          </div>
+          <!-- <li *ngFor="let items of menuItemsNames"><a href="#">{{items.title}}</a></li> -->
+          <!-- <li><a [routerLink]="['/'+langURL, 'places-category']"
+              (click)="toggleSideNav()">{{'Places_list' | translate}}</a></li> -->
+          <li *ngFor="let category of categoriesNames">
+            <a [routerLink]="['/'+langURL, 'places-category']"
+              (click)="sendSelectedCategory(category.id, category.name);toggleSideNav()">{{category.name}}</a>
+          </li>
+          <li><a [routerLink]="['/'+langURL, 'add-new-place']"
+              (click)="toggleSideNav()">{{'Add_new_place' | translate}}</a></li>
+          <li><a [routerLink]="['/'+langURL, 'blogs']" (click)="toggleSideNav()"> {{ 'Blog' | translate }} </a></li>
+          <li><a routerLink="." fragment="newsletter" (click)="toggleSideNav()">{{ 'NL_subscribe' | translate }} </a>
+          </li>
+          <li><a [routerLink]="['/'+langURL + '/pages/q&a']"
+              (click)="toggleSideNav()">{{ 'Questions_answers' | translate }}</a></li>
+        </ul>
+      </div>
+
+      <div class="header-logo mr-auto">
+        <a class="navbar-brand" [routerLink]="['/'+langURL]">
+          <h1>Local support</h1>
+        </a>
+      </div>
+      <div class="header-items ml-auto">
+        <div class="ml-auto add-place-btn" [ngClass]="{ 'margin-right': languageSwitcherStatus === true }">
+          <a [routerLink]="['/'+langURL , 'add-new-place']">
+            <img src="../../../assets/images/ic-locationbutton.svg"
+              class="img-thumbnail" /> <span>{{'Add_new_place' | translate}}</span></a>
+        </div>
+        <div class="dropdown language" [hidden]="languageSwitcherStatus">
+          <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <span>{{ (translate.currentLang?translate.currentLang: selectedLang) | uppercase }}</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <span class="dropdown-item" *ngFor="let lang of translate.getLangs()" [value]="lang"
+              [selected]="lang === translate.currentLang" #langSelect
+              (click)="translate.use(langSelect.value); getSelectedLang(langSelect.value)">
+
+              {{ (lang != translate.currentLang)? (lang | uppercase) : ''}}
+
+            </span>
+          </div>
+        </div>
+        <div class="sign-user">
+          <a [routerLink]="'/signin'" [hidden]="this.userStatus.userLoggedIn()">{{'signin' | translate}}</a>
+          <div class="dropdown" [hidden]="!this.userStatus.userLoggedIn()">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+              <span><img *ngIf="profilePicture || profilePicture"
+                  [src]="profilePicture? (profilePicture) : (profilePicture)" /></span>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" [routerLink]="['/'+langURL, 'profile']">{{'my_profile' | translate}}</a>
+              <a class="dropdown-item" (click)="Logout()">{{'Sign_out' | translate}}</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="search-mobile">
+          <i class="fa fa-search" (click)="toggleSearch()"></i>
+        </div>
+        <div class="search-mobile-form" [ngClass]="{ 'open': mobileSearch === true }">
+          <form class="form-inline" #resultForm="ngForm" (ngSubmit)="searchResult(resultForm)">
+            <input class="form-control mr-sm-2" type="search" [placeholder]="'searchDestination' | translate"
+              aria-label="Search" type="text" name="search" ngModel #searchText="ngModel" autocomplete="off">
+            <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+        <form class="form-inline" #resultFormMobile="ngForm" (submit)="searchResult(resultFormMobile)">
+          <input class="form-control mr-sm-2" type="search" [placeholder]="'searchDestination' | translate"
+            aria-label="Search" type="text" name="search" ngModel #searchText="ngModel">
+          <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class="add-place-btn-mobile">
+  <a [routerLink]="['/'+langURL , 'add-new-place']">
+    <img src="../../../assets/images/addspot.svg" />
+  </a>
+</div>

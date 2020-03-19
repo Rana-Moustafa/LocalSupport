@@ -1,0 +1,21 @@
+<!--<app-auth></app-auth>-->
+<app-loading-spinner [hidden]="!commons.showLoading"></app-loading-spinner>
+<app-header [ngClass]="{'scrolled': minLength > 10}" [hidden]="!commons.visible"> </app-header>
+<router-outlet class="main-content" (activate)="onActivate($event)">
+  <!-- <app-testimonials></app-testimonials> -->
+</router-outlet>
+
+<app-footer [hidden]="!commons.visible"></app-footer>
+
+
+<cookie-law #cookieLaw position="bottom" name="ng4topCookieLaw" expiration="7">
+  <div class="cookie_wrapper">
+    <div class="cookie_wrapper_bg">
+      <p>{{coockiesDetails}} </p>
+      <div class="align-self-center">
+        <button type="button" class="btn btn-secondrary" (click)="dismiss()">Accept</button>
+      </div>
+    </div>
+  </div>
+</cookie-law><!-- end cookies -->
+<app-no-internet-connection></app-no-internet-connection>

@@ -1,0 +1,241 @@
+@import '../../variables';
+@import '../../fonts';
+@import '../../mixins';
+
+
+.profile-details {
+    padding-bottom: $mr-40;
+    min-height    : 72vh;
+
+    &__header {
+        background             : $white-grey url('../../assets/images/portfolio-header.jpg');
+        -moz-background-size   : cover;
+        -webkit-background-size: cover;
+        -o-background-size     : cover;
+        background-size        : cover;
+        background-position    : center;
+        width                  : 100%;
+        background-repeat      : no-repeat;
+        height                 : 347px;
+        margin-bottom          : 35px;
+        position               : relative;
+
+        @media(max-width: $lg) {
+            height: 250px;
+        }
+    }
+
+    &__content {
+        margin-top: -100px;
+
+        @media(max-width: $lg) {
+            margin-top: -9.2rem;
+        }
+
+        .col-lg-4,
+        .col-lg-8 {
+            @media(max-width: $lg) {
+                padding: 0;
+            }
+        }
+
+        .personal-deatils {
+            margin-bottom: $mr-30;
+
+            @media(max-width: $lg) {
+                display      : flex;
+                margin-bottom: 0px;
+                padding      : 15px;
+            }
+
+            .img {
+                width        : 108px;
+                height       : 108px;
+                border-radius: 50%;
+                overflow     : hidden;
+                margin-bottom: $mr-30;
+
+                @media(max-width: $lg) {
+                    width        : 60px;
+                    height       : 60px;
+                    margin-bottom: 5px;
+                }
+
+                img {
+                    height: 100%;
+                    width : 100%;
+                }
+            }
+
+            .user-name {
+                color    : $dusk;
+                font-size: 18px;
+
+                @media(max-width: $lg) {
+                    color: $white;
+                }
+            }
+
+            .info {
+                @media(max-width: $lg) {
+                    margin-left: $mr-20;
+                }
+            }
+
+            .address {
+                font-size: 18px;
+                color    : $slate-grey-two;
+
+                @media(max-width: $lg) {
+                    color: $white;
+                }
+            }
+        }
+
+        .tab-content {
+            background-color: $white;
+            border          : solid 1px #f5b19c;
+            padding         : $mr-30;
+            height          : 100%;
+
+            @media(max-width:$lg) {
+                border-top      : 0px;
+                padding         : $mr-15;
+                background-color: $white-grey;
+            }
+        }
+
+        .btn.btn-primary {
+            padding: $mr-10 $mr-20;
+            @include text-huge-regular();
+
+            @media(max-width:$lg) {
+                display: none;
+            }
+        }
+
+        .nav-pills {
+            margin-bottom: $mr-30;
+
+            @media(max-width:$lg) {
+                flex-direction: row !important;
+                margin-bottom : 0;
+                border        : 1px solid $btnColor;
+            }
+
+            .nav-link {
+                padding       : $mr-10 0;
+                color         : $darkBlueGrey;
+                @include tabs-regular();
+                border-radius: 0;
+
+                @media(max-width:$lg) {
+                    padding         : $mr-15 0;
+                    flex-basis      : 0;
+                    flex-grow       : 1;
+                    text-align      : center;
+                    background-color: $white-grey;
+                    border-right    : 1px solid $btnColor;
+
+                    &:last-child {
+                        border-right: 0px solid $btnColor;
+                    }
+                }
+
+                &.active {
+                    background-color: transparent;
+                    color           : $btnColor;
+
+                    @media(max-width:$lg) {
+                        background-color: $btnColor;
+                        color           : $white;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+p {
+    font-family: Lato;
+}
+
+img {
+    height       : 100%;
+    width        : 100%;
+    border-radius: 50%;
+}
+
+#fileInput {
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+
+   &+label{
+    color: $btnColor;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px dotted;
+    padding: 5px 15px;
+    width: 100%;
+    text-align: center;
+   }
+
+}
+
+.hoverable {
+    position     : relative;
+    display      : block;
+    cursor       : pointer;
+    height       : 110px;
+    width        : 110px;
+    border-radius: 50%;
+    overflow     : hidden;
+    border: 1px solid #c5c5c5;
+    background-color: #fff;
+
+    .hover-text {
+        position        : absolute;
+        display         : none;
+        top             : 50%;
+        left            : 50%;
+        transform       : translate(-50%, -50%);
+        z-index         : 2;
+        align-items     : center;
+        justify-content : center;
+        font-size       : 12px;
+        width           : 100%;
+        height          : 100%;
+        text-transform  : capitalize;
+        background-color: rgba(000, 000, 000, 0.5);
+        color           : white;
+    }
+
+    .background {
+        background-color: rgba(255, 255, 255, 0.5);
+        pointer-events  : none;
+        border-radius   : 50%;
+        z-index         : 1;
+    }
+
+    &:hover {
+        .hover-text {
+            display: flex;
+        }
+
+        .background {
+            display: block;
+        }
+    }
+}
+#profileImageCropper{
+    .modal-footer{
+        .btn-primary{
+            display: block;
+        }
+    }
+}

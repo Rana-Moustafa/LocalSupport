@@ -1,0 +1,153 @@
+@import '../../../variables';
+@import '../../../fonts';
+@import '../../../mixins';
+
+.may-you-like-section {
+
+    &__empty{
+      margin: 50px 0;
+      background: #f7f7f7;
+      text-align: center;
+      padding: 25px 0;
+
+      img{
+          margin-bottom: 15px;
+      }
+  }
+
+  .subtitle {
+    color: $darkBlue;
+  }
+
+  .sliding .prev {
+    position       : absolute;
+    top            : 0;
+    bottom         : 0;
+    z-index        : 1;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+  }
+
+  .sliding .next {
+    position       : absolute;
+    top            : 0;
+    bottom         : 0;
+    z-index        : 1;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+  }
+
+  .profile-favorites {
+    &__item {
+      flex     : 0 0 100%;
+      max-width: 100%;
+      margin   : $mr-10;
+    }
+
+    &__img {
+      position     : relative;
+      height       : 110px;
+      width        : 100%;
+      border-radius: 5px;
+      overflow     : hidden;
+      margin-bottom: $mr-10;
+
+      @media(max-width: $md) {
+        height: 100px;
+      }
+
+      @media(max-width: $xs) {
+        height: 80px;
+      }
+
+      img {
+        width          : 100%;
+        object-fit     : cover;
+        object-position: center;
+      }
+
+      .btn-fav {
+            position           : absolute;
+            right              : 0.5rem;
+            top                : 0.5rem;
+            // float           : right;
+            width              : 1.5em;
+            height             : 1.5em;
+            border-radius      : 3px;
+            background-color   : rgba(255, 255, 255, 0.5);
+            overflow           : hidden;
+            white-space        : nowrap;
+            cursor             : pointer;
+            color              : $btnColor;
+            margin             : 0;
+            display            : table;
+            text-align         : center;
+
+            label {
+                padding: $mr-5;
+
+                &:hover{
+                  cursor: pointer;
+                }
+            }
+
+            .fa {
+                display       : table-cell;
+                vertical-align: middle;
+                font-size     : 15px;
+            }
+
+            .active {
+                .fa {
+                    color: $mainColor;
+                }
+            }
+
+            &:hover {
+                color: $mainColor;
+
+            }
+        }
+    }
+    &__place-name-link{
+      &:hover {
+        text-decoration: none;
+        
+
+        h6{
+          color: $btnColor;
+        }
+      }
+    }
+    &__place-name {
+      @include H6-bold();
+      color        : $slate-grey;
+      line-height: 20px;
+      margin-bottom: $mr-5;
+    }
+
+    &__rating {
+      margin-bottom: $mr-5;
+
+      i {
+        color: $btnColor;
+      }
+    }
+
+    &__price {
+      color: $slate-grey;
+      @include text-regular();
+      margin: 0;
+    }
+  }
+}
+
+.star-empty {
+    opacity: 0.4 !important;
+    color: #000 !important;
+    &.star-empty {
+      opacity: 0.4;
+    }
+  }

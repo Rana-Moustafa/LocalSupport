@@ -1,0 +1,231 @@
+@import "../../variables";
+@import "../../fonts";
+@import "../../mixins";
+
+.c-single-header__wrapper {
+    background-color: $blogBg;
+    height: 450px;
+    position:relative;
+
+    &__share-buttons{
+        cursor: pointer;
+    }
+    i {
+        color           : $white;
+        font-size       : 15px;
+        border          : 1px solid;
+        padding         : 10px;
+        border-radius   : 5px;
+        background-color: rgba(255, 255, 255, 0.4);
+        position        : absolute;
+        bottom          : 31px;
+        right           : 41px;
+
+        @media (max-width: $md) {
+            font-size: 18px;
+            padding  : 6px;
+        }
+
+        @media (max-width: $sm) {
+            font-size: 10px;
+            padding  : 6px;
+            bottom   : 21px;
+            right    : 24px;
+        }
+    }  
+    &._shareicon {
+        display        : flex;
+        justify-content: flex-end;
+        align-content  : flex-end;
+    } .share {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        border-radius   : 5px;
+        background-color: #d6d0d08c;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 44px;
+        cursor: pointer;
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+
+  
+         .facebook {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        padding-left    : 14px;
+        padding-right   : 14px;
+        border-radius   : 5px;
+        background-color: #d6d0d08c;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 212px;
+
+        &:hover{
+            background-color: #3b5998;
+            border-color: #3b5998;
+        }
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+    .twitter {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        border-radius   : 5px;
+        background-color: #d6d0d08c;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 156px;
+
+        &:hover{
+            background-color: #55acee;
+            border-color: #55acee;
+        }
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+    .pinterest {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        border-radius   : 5px;
+        background-color: #d6d0d08c;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 100px;
+
+        &:hover{
+            background-color: #bd081c;
+            border-color: #bd081c;
+        }
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+    
+
+
+}
+
+.c-single-bottom__wrapper__content {
+   
+
+    @include mr-top-70 ();
+
+    &__profile {
+        display    : flex;
+        align-items: center;
+
+        .img {
+            height: 70px;
+            width : 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            
+            @media (max-width: $md) {
+                width : 50px;
+                height: 50px;
+            }
+        }
+    }
+
+    span {
+        @include single-blog-name();
+        color      : $darkBlueGrey;
+        margin-left: 30px;
+
+        @media (max-width: $md) {
+            margin-left: 20px;
+        }
+
+
+    }
+
+    &__paragraph {
+       // @include text-regular ();
+        @include mr-top-40();
+
+        h5 {
+            @include single-blog-name();
+            font-weight  : bold;
+            color        : $darkBlueGrey;
+            margin-bottom: $mr-15;
+        }
+
+        p {
+            color      : $darkBlueGrey;
+                line-height: 25px;
+                //@include blogHugeText();
+                margin-bottom: 20px;
+                font-size: 16px;
+
+            p{
+                color      : $darkBlueGrey;
+                line-height: 25px;
+                //@include blogHugeText();
+                margin-bottom: 20px;
+                font-size: 16px;
+            }
+
+        }
+    }
+
+    &__comments {
+        @include mr-top-40();
+    }
+}
+
+.c_blog__wrapper_bigpost_icons_section_tags {
+    color: $darkgreytext;
+    @include blogHugeText();
+}
+
+.social_icons {
+    display        : flex;
+    justify-content: flex-end;
+    color          : $darkgreytext;
+    @include blogHugeText();
+
+    .c_blog__wrapper_bigpost_links {
+        display    : flex;
+        margin-left: 10px;
+        color      : $darkgreytext;
+
+        i {
+            margin-right   : $mr-5;
+            display        : flex;
+            justify-content: center;
+            align-self     : center;
+        }
+
+        p {
+            display        : flex;
+            justify-content: center;
+            align-self     : center;
+        }
+    }
+}
+
+.c_blog__wrapper_bigpost_icons_section {
+
+    color: $darkgreytext;
+}
+
+.owl-nav {
+    height: 0;
+}

@@ -1,0 +1,39 @@
+<div class="container padding-top">
+  <div class="row">
+    <div class="col-lg-6 single-place__slider">
+      <!-- <div class="btn-fav btn-group-toggle" data-toggle="buttons" (click)="addToFav(singlePlaceData.id)"
+        *ngIf="singlePlaceData && userStatus.isLoggedIn">
+        <label class="btn" [ngClass]="{'active' : singlePlaceData.is_favorited === true }">
+          <input type="checkbox" checked autocomplete="off">
+          <i class="fa fa-heart"></i>
+        </label>
+      </div> -->
+      <app-add-to-fav-list 
+      [addToFavId]="singlePlaceData.id" 
+      [addToFavStatus]="singlePlaceData.is_favorited"
+        *ngIf="singlePlaceData && userStatus.isLoggedIn">
+      </app-add-to-fav-list>
+      <div *ngIf="!singlePlaceParent">
+        <img src="./../assets/images/icon-img-placeholder.svg" class="img-fluid">
+      </div>
+      <div *ngIf="singlePlaceParent">
+        <app-slider [singlePlaceSlider]="singlePlaceParent"></app-slider>
+      </div>
+      <div *ngIf="singlePlaceParent">
+        <app-details *ngIf="!showDetailsDesktop" [singlePlaceDetails]="singlePlaceParent"></app-details>
+      </div>
+      <app-comments id="reviews"></app-comments>
+    </div>
+    <div class="col-lg-6 single-place__details">
+      <div class="alert alert-warning" role="alert" *ngIf="placeNotTranslated">
+        This place has not been translated yet!
+      </div>
+      <div *ngIf="singlePlaceParent">
+        <app-details *ngIf="showDetailsDesktop" [singlePlaceDetails]="singlePlaceParent"></app-details>
+      </div>
+    </div>
+  </div>
+  <div class="" *ngIf="singlePlaceParent">
+    <app-related-places [returnedRelatedPlaces]="singlePlaceParent.related_places"></app-related-places>
+  </div>
+</div>

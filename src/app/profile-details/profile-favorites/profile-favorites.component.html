@@ -1,0 +1,47 @@
+<section class="profile-favorites">
+  <div class="container">
+    <div class="row">
+      <div class="profile-favorites__empty" *ngIf="favListEmpty">
+        <img src="./assets/images/star.svg" />
+        <p> {{ 'no_fav_places' | translate }} ! </p>
+      </div>
+      <!-- start -->
+      <div class="row search-results" infiniteScroll [infiniteScrollDistance]="15" [infiniteScrollThrottle]="50"
+        [immediateCheck]="true" [infiniteScrollDisabled]="isFullListDisplayed" (scrolled)="GetFavoritesList()">
+        <div class="profile-favorites__item" *ngFor="let Favorite of allFavPlaces; let i = index">
+
+          <div class="profile-favorites__img">
+            <a [routerLink]="['/'+langURL, 'single-place', Favorite.id, Favorite.slug]">
+              <img src="{{Favorite? Favorite.featured_image: ''}}" alt="" class="img-thumbnail">
+            </a>
+
+            <app-add-to-fav-list [addToFavId]="Favorite.id" [addToFavStatus]="Favorite.is_favorited"
+            (updateFavListEvent)="updateFavList($event)"
+              *ngIf="Favorite">
+            </app-add-to-fav-list>
+          </div>
+          <a class="profile-favorites__place-name"
+            [routerLink]="['/'+langURL, 'single-place', Favorite.id, Favorite.slug]">
+            <h6>
+              {{  Favorite? Favorite.title.rendered: ''}}
+            </h6>
+          </a>
+  
+          <div class="profile-favorites__rating">
+            <i class="fa fa-star"
+                [ngClass]="{'star-empty': (Favorite.avg_rating | number:'1.0-0')< 1}"></i>
+            <i class="fa fa-star"
+                [ngClass]="{'star-empty': (Favorite.avg_rating | number:'1.0-0')< 2}"></i>
+            <i class="fa fa-star"
+                [ngClass]="{'star-empty': (Favorite.avg_rating | number:'1.0-0')< 3}"></i>
+            <i class="fa fa-star"
+                [ngClass]="{'star-empty': (Favorite.avg_rating | number:'1.0-0')< 4}"></i>
+            <i class="fa fa-star"
+                [ngClass]="{'star-empty': (Favorite.avg_rating | number:'1.0-0')< 5}"></i>
+        </div>
+        </div>
+      </div>
+      <!-- end -->
+    </div>
+  </div>
+</section>

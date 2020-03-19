@@ -1,0 +1,32 @@
+.toast{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    background-color: #fff;
+    z-index: 99;
+    text-align: center;
+    width: 98%;
+    margin: auto;
+    border-radius: 15px;
+    height: 95%;
+    z-index: 99999;
+    top: 0;
+
+    .toast-body{
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        flex-direction: column;
+        img{
+            width: auto;
+            max-width: 300px;
+            margin: 0 auto 10px !important;
+            display: block;
+        }
+        h4{
+            margin-bottom: 15px;
+        }
+    }
+}

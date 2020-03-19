@@ -1,0 +1,130 @@
+@import '../../variables';
+@import '../../fonts';
+@import '../../mixins';
+
+
+
+
+
+.places-category{
+    margin-top: 150px;
+}
+.pagination{
+    text-align: center;
+}
+.open {
+    left                   : 0;
+    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter        : blur(50px);
+    box-shadow             : 0 2px 30px 0 rgba(73, 73, 100, 0.3);
+  }
+
+  .close {
+    position: absolute;
+    left    : 20px;
+    top     : 20px;
+    opacity : 1;
+    z-index: 8888;
+    width   : 18px;
+    height  : 18px;
+    cursor: pointer;
+
+    @media(max-width: $lg) {
+      width : 13px;
+      height: 13px;
+    }
+  }
+
+  .side-nav {
+    position          : fixed;
+    right             : -350px;
+    top               : 0;
+    background-color  : $white;
+    width             : 350px;
+    z-index           : 9999;
+    height            : 100vh;
+    transition        : all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition   : all 0.3s ease-in-out;
+    -ms-transition    : all 0.3s ease-in-out;
+    -o-transition     : all 0.3s ease-in-out;
+
+    &.open {
+        right                  : 0;
+      -webkit-backdrop-filter: blur(50px);
+      backdrop-filter        : blur(50px);
+      box-shadow             : 0 2px 30px 0 rgba(73, 73, 100, 0.3);
+    }
+
+    .close {
+      position: absolute;
+      right    : 20px;
+      top     : 20px;
+      opacity : 1;
+      width   : 18px;
+      height  : 18px;
+      cursor: pointer;
+
+      @media(max-width: $lg) {
+        
+      }
+    }
+
+    .sidnav-image {
+      height: 268px;
+
+      @media(max-width: $lg) {
+        height: 176px;
+      }
+
+      img {
+        width          : 100%;
+        height         : 100%;
+        object-position: center;
+        object-fit     : cover;
+      }
+    }
+
+    ul {
+      padding: $mr-20;
+
+      li {
+        a {
+          display       : block;
+          color         : $charcoal-grey;
+          @include text-huge-regular();
+          padding: $mr-10 0;
+
+          @media(max-width: $lg) {
+            font-size: 18px;
+          }
+
+          &:hover {
+            color: $btnColor;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .sidenav-logo {
+       
+        a{
+          &:hover{
+              text-decoration: none;
+          }
+        }
+        h2{
+          font-family: "AbrilFatface-Regular";
+          color: #3e415a;
+          font-weight: 100;
+          font-size: 30px;
+          cursor: pointer;
+          margin-bottom: 25px;
+        }
+
+        @media(max-width: $lg) {
+          
+        }
+      }
+    }
+  }

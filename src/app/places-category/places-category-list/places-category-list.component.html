@@ -1,0 +1,112 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<section class="places-category__list">
+  <div class="places-category__list__controls">
+    <div class="category">
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{customText | translate}} <span class="badge badge-light">{{ totalPlacesNumber }} </span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="changePlaceType('All',0,0); placesCategories()"> {{ 'All' | translate }} </a>
+          <a class="dropdown-item" *ngFor="let place of placesTypeList; let i = index;"
+            (click)="changePlaceType(place.name, place.id, i); placesCategories()">
+            {{place.name}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="sortby">
+      <p class="label">
+        <!-- <span class="results-number">{{ totalPlacesNumber }} Total </span>| -->
+        <span class="ml-1"> {{ 'Sort_by' | translate }} </span>
+      </p>
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button" id="sortbyButton" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{sortText | translate}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="SortByButton">
+          <a class="dropdown-item" (click)="changeSortName('Latest', 'sort_latest'); emptyPlace(); placesCategories()">
+            {{ 'Latest' | translate }}
+          </a>
+          <a class="dropdown-item" *ngFor="let sort of sortByNames"
+            (click)="changeSortName(sort.name, sort.sortBy);emptyPlace();placesCategories()">
+
+            {{ sort.name | translate}}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="btn-filter">
+      <button class="btn btn-secondary" type="button" (click)="toggleSideNav()">
+        <img src="../../../assets/images/filter-icons/filter-results-button.svg" alt="" class="img-thumbnail">
+        {{"filter" | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="places-results">
+    <h4 class="subtitle">
+      {{'check_experience' | translate}} <i class="fas fa-star-half-alt"></i>
+    </h4>
+    <div class="places-results__wrapper">
+      <div class="places-results__wrapper__empty" *ngIf="allPlaces && allPlaces.length === 0">
+        <img src="../../../assets/images/pin.png" />
+        <p> No places to show! </p>
+      </div>
+      <div class="row search-results" infiniteScroll [infiniteScrollDistance]="15"
+        [infiniteScrollThrottle]="50" [immediateCheck]="true"
+        [infiniteScrollDisabled]="isFullListDisplayed" (scrolled)="placesCategories()">
+        <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]"
+          class="col-lg-3 col-sm-6 col-xs-12 places-results-item " *ngFor="let place of allPlaces">
+          <div>
+            <div class="places-results__img">
+              <img [src]="place.featured_image?place.featured_image: './../assets/images/icon-img-placeholder.svg'"
+                alt="" class="img-thumbnail">
+            </div>
+            <div class="places-results__content">
+              <div class="place-name-link">
+                <h6 class="places-results__place-name">
+                  {{ place? place.title.rendered: ' '}}
+                </h6>
+              </div>
+              <div class="places-results__price">
+                <p class="cost">{{place.price_range_from ? place.price_range_from + ' -': '' }}
+                  {{place.price_range_to? place.price_range_to : ''}}</p>
+              </div>
+              <div class="description">
+                <p class="text" pattern="[A-Za-z]{10}">{{place.description | slice:0:100}}
+                  <a [routerLink]="['/'+urlLang, 'single-place', place.id, place.slug]" class="read-more">
+                    {{"read_more" | translate}}</a></p>
+              </div>
+              <div class="places-results__rating">
+                <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 1.5}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 2.5}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 3.5}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 4.5}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 5}"></i>
+              </div>
+              <p [hidden]="place.avg_rating != null || place.avg_rating === 0 ">{{"Not_rated_yet" | translate}}</p>
+              <!-- <div class="likes-number">{{place.id}}</div> -->
+            </div>
+          </div>
+        </a>
+        <!-- end -->
+      </div>
+    </div>
+  </div>
+  <!--  -->
+  <div class="filter side-nav" [ngClass]="{ 'open': sideNav === true }">
+    <div class="close">
+      <div (click)="toggleSideNav()">
+        <img src="../../../assets/images/cancel.svg" alt="" class="img-thumbnail">
+      </div>
+    </div>
+    <app-filter (placesHandlerEvent)="placesEventHandling($event)"></app-filter>
+  </div>
+  <!-- <pagination-controls (pageChange)="p=$event" class="pagination" (click)="PlacesItems()"></pagination-controls> -->
+  <!-- <pagination-controls (pageChange)="p=$event" class="pagination"></pagination-controls> -->
+  <!-- <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"></div> -->
+</section>

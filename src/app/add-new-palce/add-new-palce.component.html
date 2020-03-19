@@ -1,0 +1,304 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="c_add_place__Header-section">
+</div>
+<div class="c_add_place__content-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="c_add_place_content">
+          <form (ngSubmit)="newPlace(addPlace)" name="addPlace" #addPlace="ngForm">
+            <div class="c-activities_section">
+              <div class="c-activities_section__right">
+                <h3>
+                  {{"what_you_can_do_here" | translate}}
+                </h3>
+                <div class="c-activities_section__icons">
+                  <ul class="radio-images">
+                    <li *ngFor="let activity of activities;  let i = index;">
+                      <div class="form-group">
+                        <label class="{{activity.name}}-checkbox">
+                          <input type="checkbox" value="{{i}}">
+                          <span>
+                            <img [src]="activity.in_active_icon" alt="" class="img-thumbnail icon_inactive">
+                            <img [src]="activity.active_icon" alt="" class="img-thumbnail icon_active">
+                          </span>
+                        </label>
+                      </div>
+                      <small>{{activity.name}}</small>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="c-activities_section_left">
+                <button class="Addnew-btn" type="submit" class="btn btn-primary"
+                  [disabled]="!addPlace.valid || (!latitude && !longitude) || (!checkValidImages()) ">
+                  {{"Addplace" | translate}}</button>
+                <!-- <button class="Addnew-btn" type="submit" class="btn btn-primary" >
+                  {{"Addplace" | translate}}
+                </button> -->
+              </div>
+            </div>
+            <p class="help-block" *ngIf="addPlaceFormError && addPlace.submitted"> {{ formErrorMsg }} </p>
+            <!-- start -->
+            <div class="form-group">
+              <h4 class="subtitle">{{"give_it_a_name" | translate}} (*):</h4>
+              <div class="form-group">
+                <input type="text" class="form-control col-12" ngModel name="placename" #placename="ngModel" required>
+                <small class="help-block"
+                  *ngIf="!placename.valid && placename.touched && placename.errors.required">{{field_requird  | translate }}</small>
+              </div>
+            </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="form-group">
+              <h4 class="subtitle">{{"Address" | translate}} (*):</h4>
+              <div class="map-filters__search">
+                <div class="form-group">
+                  <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
+                    placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+                    type="text" #search ngModel name="address" #address="ngModel" required>
+                  <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
+                  {{field_requird  | translate }}</p>
+                  <p class="help-block" *ngIf="address.touched && !latitude && !longitude">You must choose the
+                    address from the autocomplete list above!</p>
+                </div>
+              </div>
+            </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="form-group">
+              <h4 class="subtitle">{{"phone" |translate}}</h4>
+              <div class="form-group">
+                <input type="text" class="form-control col-12" ngModel name="phone" #phone="ngModel" pattern="[0-9]+">
+                <p class="help-block" *ngIf="!phone.valid && phone.touched && phone.errors.pattern">Please enter a valid
+                  phone number.</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <h4 class="subtitle">{{"website" | translate}}</h4>
+              <div class="form-group">
+                <input type="url" class="form-control col-12" ngModel name="website" #website="ngModel"
+                  pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
+                <p class="help-block" *ngIf="!website.valid && website.touched && website.errors.pattern">
+                  Please enter a valid url.
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <h4 class="subtitle">{{"zipcode" |translate}}</h4>
+              <div class="form-group">
+                <input type="text" class="form-control col-12" ngModel name="zipcode" #zipcode="ngModel"
+                  pattern="^[a-zA-Z0-9_]*$">
+                <p class="help-block" *ngIf="!zipcode.valid && zipcode.touched && zipcode.errors.pattern">Please enter a
+                  valid zipcode.</p>
+              </div>
+            </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="form-group">
+              <h4 class="subtitle">{{"description" |translate}}</h4>
+              <div class="form-group">
+                <textarea type="text" class="form-control col-12" ngModel name="description"
+                  #description="ngModel"></textarea>
+              </div>
+            </div>
+            <!-- end -->
+
+            <!-- start -->
+            <div class="form-group">
+              <h4 class="subtitle">{{"category" | translate}} (required): </h4>
+              <div class="checkbox_wrapper">
+                <div class="form-half-width" *ngFor="let category of placesCategories; let i = index;">
+                  <label class="form-check-label" for="category{{category.name}}">
+                      <input class="form-check-input" type="checkbox" id="category{{category.name}}"
+                    [(ngModel)]="placesCategories[i].checked"
+                    name="{{category.name}}" (change)="checkPlayground($event, category.name)">
+                    <span>{{category.name}}</span>  
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="form-group" *ngIf="showSubCategories">
+              <h4 class="subtitle">{{"subCategory" |translate}} (required):</h4>
+              <div class="form_wrapper radio-form">
+                <p *ngFor='let subCat of subCategories; let i = index;'>
+                  <input id="cat{{i}}" type="radio" class="custom-control-input" [value]="subCat" name="subcats" ngModel
+                    #subcats="ngModel" required="showSubCategories">
+                  <label class="custom-control-label" for="cat{{i}}">
+                    {{subCat.name}}
+                  </label>
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <h4 class="subtitle">{{"Food" |translate}} :</h4>
+              <div class="checkbox_wrapper">
+                <div class="form-half-width" *ngFor="let food of foods;  let i = index;">
+                  <label class="form-check-label" for="{{food.name}}"> 
+                   <input class="form-check-input" type="checkbox" name="{{food.name}}" id="{{food.name}}" ngModel
+                   [(ngModel)]="foods[i].checked">
+                   <span>{{ food.name }}</span>
+                  </label>
+                </div>
+                <!-- <div class="form-half-width">
+                  <input class="form-check-input" type="checkbox" value="" id="bars">
+                  <label class="form-check-label" for="bars">
+                    Bars
+                  </label>
+                </div>
+                <div class="form-half-width">
+                  <input class="form-check-input" type="checkbox" value="" id="kiosks">
+                  <label class="form-check-label" for="kiosks">
+                    Kiosks
+                  </label>
+                </div> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <h4 class="subtitle">{{"feature" |translate}} :</h4>
+              <div class="checkbox_wrapper">
+                <div class="form-half-width" *ngFor="let feature of features;  let i = index;">  
+                  <label class="form-check-label" for="feature{{ feature.name }}">
+                    <input class="form-check-input" type="checkbox" name="{{ feature.name }}" id="feature{{ feature.name }}"
+                    ngModel [(ngModel)]="features[i].checked">
+                    <span>{{ feature.name }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="form-group" ngModelGroup="accessableBy">
+              <h4 class="subtitle">{{"accessable_by" |translate}} :</h4>
+              <div class="checkbox_wrapper">
+                <div class="form-half-width" *ngFor="let access of accessableBy;  let i = index;">           
+                  <label class="form-check-label" for="{{access.name}}">
+                  <input class="form-check-input" type="checkbox" value="" id="{{access}}" ngModel name="{{access}}"
+                  [(ngModel)]="accessableBy[i].checked">
+                  <span> {{access.name}}</span> 
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" ngModelGroup="accessablity">
+              <h4 class="subtitle">{{"Accessability" |translate}} :</h4>
+              <div class="checkbox_wrapper">
+                <div class="form-half-width" *ngFor="let accessble of accessablity;  let i = index;">
+                  <label class="form-check-label" for="{{accessble.name}}">
+                   <input class="form-check-input" type="checkbox" value="" id="{{accessble}}" ngModel
+                   name="{{accessble.name}}" [(ngModel)]="accessablity[i].checked" >
+                   <span>{{accessble.name}}</span> 
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <h4 class="subtitle">Size:</h4>
+              <div class="form_wrapper radio-form">
+                <div class="form-half-width" *ngFor="let size of placeSize;  let i = index;">
+                  <input id="size{{i}}" type="radio" class="custom-control-input" [value]="size" name="sizes" ngModel
+                    #sizes="ngModel">
+                  <label class="form-check-label" for="size{{i}}">
+                    {{size.name}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+                <h4 class="subtitle"> Price range :</h4>
+                <div class="form_wrapper">
+                  <ng5-slider 
+                  [(value)]="minPrice" [(highValue)]="maxPrice" [options]="priceRange"
+                  name="pricerange" ngModel></ng5-slider>
+                </div>
+              </div> -->
+            <div class="form-group hour ">
+              <h4 class="subtitle">{{"Opening_hours" | translate}} :</h4>
+              <div class="form_wrapper">
+                <div class="form-half-width">
+
+                  <div class="default-time-example">
+                    <label>{{"from" |translate}}</label>
+                    <input aria-label="default time" [ngxTimepicker]="toggleTimepickerFrom" [value]="'10:00 am'"
+                      readonly>
+                    <ngx-material-timepicker #toggleTimepickerFrom></ngx-material-timepicker>
+                  </div>
+                </div>
+                <div class="form-half-width">
+                  <div class="default-time-example">
+                    <label>{{"to" |translate}}</label>
+                    <input aria-label="default time" [ngxTimepicker]="toggleTimepickerTo" [value]="'10:00 pm'" readonly>
+                    <ngx-material-timepicker #toggleTimepickerTo></ngx-material-timepicker>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- start -->
+            <div class="form-group">
+              <h4 class="subtitle">{{"cost_range" | translate}}:</h4>
+              <div class="form_wrapper">
+                <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+              </div>
+              <p class="info-text">{{"freePlace_msg" | translate}}</p>
+            </div>
+            <!-- end -->
+            <h5 [hidden]="!((featuredImageError && !noImages)|| featuredImageError)">
+              {{"cover_image_select_msg" | translate}} (required):</h5>
+            <small class="help-block" [hidden]="((featuredImageError && !noImages)|| !featuredImageError)">
+              {{"cover_image_select_msg_error" | translate}}
+            </small> 
+            <div class="data-text">
+              <div class="custom-control custom-radio radio-form" *ngFor='let url of imagesUrls; let i = index;'>
+                <a (click)="removeImage(i)" class="remove-image"><i class="fa fa-trash"></i></a>
+                <input id="image{{i}}" type="radio" class="custom-control-input" [value]="url" name="placesimages"
+                  ngModel #placesimages="ngModel" (change)="selectedFeaturedImage(imagesNames[i], url)">
+           
+                <label class="custom-control-label" for="image{{i}}">
+                  <img [src]="url" />
+                </label>
+                <p>{{ imagesNames[i] }}</p>
+              </div>
+            </div>
+            <!--  <button type="submit" class="btn btn-primary" 
+            [disabled]="!checkValid()">{{"Addplace" | translate}}</button> -->
+            <h4 class="subtitle">{{"upload_images" | translate}} (*): </h4>
+
+            <div class="form-group form-image">
+              <a (click)="compressFile()" [ngClass]="maxNumber? 'upload-disabled': ''" [disabled]="maxNumber">
+              <!-- <input type="file" accept="image/*" #file
+              (change)="getFileDetails($event)"
+              (click)="file.compressFile()"   
+              [disabled]="maxNumber"
+              required> -->
+               
+              <div class="input-content">
+                <div class="input-content-wrapper">
+                  <div class="img">
+                    <img src="assets/images/camera-icon.svg" alt="">
+                   
+                  </div>
+                  <span class="text" [hidden]="maxNumber">
+                    {{"upload_image_msg" | translate}}
+                    <!-- <a (click)="compressFile($event)">{{maxNumber}}  Upload and compress Image</a> -->
+                  </span>
+                  <span class="text" [hidden]="!maxNumber">{{"upload_image_error" | translate}}</span>
+                </div>
+              </div>
+            </a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- <input #fileUpload type="file" (click)="fileUpload.value = null" (change)="getFileDetails($event)" style="display:none"
+      accept="image/*">
+       -->
+    </div>
+  </div>
+</div>

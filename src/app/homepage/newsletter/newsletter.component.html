@@ -1,0 +1,38 @@
+<section class="newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="newsletter_wrapper">
+          <p>
+            {{"Sign_up_for_monthly_news" | translate}}
+          </p>
+          <form action="" class="form-group" (ngSubmit)="onUserSubscribe(newsletter)" #newsletter="ngForm">
+            <input required class="form-control" type="email" [placeholder]="'enter_your_email_address' | translate"
+              ngModel name="email" email #email="ngModel">
+            <button type="submit" [disabled]="!email.valid">{{"SUBSCRIBE" | translate}}</button>
+            <div>
+
+              <small class="help-block" *ngIf="(!email.valid && email.touched && email.errors.email) || mailNotValid">
+                {{"enter_valid_email" | translate}}
+              </small>
+              <small class="help-block" *ngIf="!email.valid && email.touched && email.errors.required">
+                {{"field_requird" |translate}}
+              </small>
+            </div>
+          </form>
+          <div class="newsletter-error-message">
+            <p class="help-block" [hidden]="!alreadyRegistered">{{"newsletterError1" | translate }}</p>
+            <p class="help-block" [hidden]="!alreadyRegistered">{{"newsletterError2" | translate }}</p>
+            <p class="help-block" [hidden]="!formError">An error occured! please try again</p>
+          </div>
+          <div class="newsletter-success-message">
+            <p class="text-success help-block" [hidden]="!successRegistered">{{"successRegistered1"| translate}}</p>
+            <p class="text-success help-block" [hidden]="!successRegistered">{{"successRegistered2"| translate}}</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

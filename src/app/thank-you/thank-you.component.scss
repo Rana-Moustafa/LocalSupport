@@ -1,0 +1,52 @@
+@import '../../variables';
+@import '../../fonts';
+
+.message-page{
+    display: flex;
+    display: -webkit-flex;
+    background: $pageBg url('../../assets/images/thank-you-bg.svg') no-repeat right bottom;
+    background-size:  450px;
+    @media all and (min-width: $xxl){
+        background-size:  contain;
+    }
+    @media all and (max-width: $md){
+        flex-direction: column;
+        background-size:  300px;
+    }
+    @media all and (max-width: $sm){
+        background-size: 100%;
+    }
+
+    h1{
+        @include text-xl();
+        color: $orange;
+    }
+    h2{
+        @include text-lg;
+        color: $orange;
+        font-weight: normal;
+    }
+    .message-text{
+        min-height: 100vh;
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        justify-content: center;
+        // padding: $authenticationPadding 0 $authenticationPadding $authenticationPadding;
+
+        @media all and (max-width: 500px){
+            display: block;
+            min-height: 100vh;
+            padding-top: 150px;
+        }
+        @media all and (max-width: 375px){
+            padding-top: 70px;
+        }
+       
+    }
+    .illustrtion-bg{
+
+        @media all and (max-width: $md){
+        }
+    }
+}

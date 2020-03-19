@@ -1,0 +1,26 @@
+<section class="Featured-Place-ad">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <a 
+        [routerLink]="['/'+langURL ,'single-place', FaturedAddItemsChild.id, FaturedAddItemsChild.slug]"
+        class="Featured-Place-ad__item">
+  
+          <span class="badge badge-light">AD</span>
+          <div class="Featured-Place-ad__img">
+            <img [src]="FaturedAddItemsChild.featured_image? FaturedAddItemsChild.featured_image : '../../../assets/images/placeholder.png'" alt="" class="img-thumbnail">
+          </div>
+          <div class="Featured-Place-ad__rating">
+            <h3 class="name">{{ FaturedAddItemsChild? FaturedAddItemsChild.title.rendered : ''}}</h3>
+            <!-- <p [hidden]="FaturedAddItemsChild? FaturedAddItemsChild.avgRating != null">{{"Not_rated_yet" | translate}}</p> -->
+            <i class="fa fa-star" [ngClass]="{'star-empty': (FaturedAddItemsChild.avgRating  | number:'1.0-0')< 1}"></i>
+            <i class="fa fa-star" [ngClass]="{'star-empty': (FaturedAddItemsChild.avgRating  | number:'1.0-0')< 2}"></i>
+            <i class="fa fa-star" [ngClass]="{'star-empty': (FaturedAddItemsChild.avgRating  | number:'1.0-0')< 3}"></i>
+            <i class="fa fa-star" [ngClass]="{'star-empty': (FaturedAddItemsChild.avgRating  | number:'1.0-0')< 4}"></i>
+            <i class="fa fa-star" [ngClass]="{'star-empty': (FaturedAddItemsChild.avgRating  | number:'1.0-0')< 5}"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,114 @@
+@import '../../../variables';
+@import '../../../fonts';
+@import '../../../mixins';
+
+.testimonial {
+  background-color: $white-grey;
+  padding         : $mr-60 0;
+  margin-top      : $mr-60;
+
+  &__empty{
+    text-align: center;
+    width: 100%;
+    display: table;
+    background-color: #f7f7f7;
+    padding-bottom: 25px;
+    margin: 25px 0;
+
+    img{
+      display: block;
+      margin: 15px auto;
+      text-align: center;
+    }
+  }
+
+  @media(max-width: $lg) {
+    margin-top: $mr-30;
+  }
+
+  .subtitle {
+    color        : $darkBlue;
+    margin-bottom: $mr-30;
+  }
+
+  .sliding .prev {
+    position       : absolute;
+    top            : 0;
+    bottom         : 0;
+    z-index        : 1;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+  }
+
+  .sliding .next {
+    position       : absolute;
+    top            : 0;
+    bottom         : 0;
+    z-index        : 1;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+  }
+
+  &__item {
+    flex      : 0 0 100%;
+    max-width : 100%;
+    margin    : $mr-10;
+    text-align: center;
+
+    .testimonial-name {
+    }
+  }
+
+  &__img {
+    position     : relative;
+    height       : 120px;
+    display      : inline-block;
+    width        : 120px;
+    border-radius: 5px;
+    overflow     : hidden;
+    margin-bottom: $mr-10;
+    border-radius: 50%;
+
+    @media(max-width: $md) {
+      height: 100px;
+      width : 100px;
+    }
+
+    @media(max-width: $xs) {
+      height: 80px;
+      width : 80px;
+    }
+
+    img {
+      width          : 100%;
+      object-fit     : cover;
+      object-position: center;
+    }
+
+  }
+
+  &__place-name {
+    @include testimonials-text();
+    color        : $slate-grey;
+    margin-bottom: $mr-5;
+  }
+
+  &__rating {
+    margin-bottom: $mr-10;
+
+    i {
+      color: $btnColor;
+    }
+  }
+
+  &__qoute {
+    width : 70%;
+    margin: 0 auto;
+    color : $slate-grey;
+    @include testimonials-text();
+    line-height: 1.3;
+  }
+
+}

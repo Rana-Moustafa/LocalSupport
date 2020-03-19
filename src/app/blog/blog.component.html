@@ -1,0 +1,73 @@
+<div class="blog-page-list">
+ 
+  <div class="c_Header_section" >
+    <img src='./../assets/images/img-profile.jpg' *ngIf="blogItamsNames && blogItamsNames.length === 0" />
+    <img [src]="blogItamsNames? blogItamsNames[0].featured_image : './../assets/images/icon-img-placeholder.svg' "
+      [routerLink]="['/'+langURL, 'single-blog', blogItamsNames[0].id, blogItamsNames[0].slug]"
+      *ngIf="blogItamsNames && blogItamsNames.length > 0" />
+      
+      <div class="c_blog__wrapper" *ngIf="blogItamsNames && blogItamsNames.length === 0">
+        <h3>No Blogs to show!</h3>
+      </div>
+  </div>
+
+  <div class="c_blog__wrapper" *ngIf="blogItamsNames && blogItamsNames.length > 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="c_blog__wrapper_bigpost">
+            <h3 [routerLink]="['/'+langURL, 'single-blog', blogItamsNames[0].id, blogItamsNames[0].slug]"
+              class="c-subtitle-post">
+               {{ blogItamsNames? blogItamsNames[0].title.rendered : ''}}
+            </h3>
+            <p class="c_blog__wrapper_content">
+              {{ blogItamsNames? (blogItamsNames[0].content.rendered | slice:0:200 | filterPipe) : '' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="search-results" infiniteScroll [infiniteScrollDistance]="15"
+        [infiniteScrollContainer]="search-results" [infiniteScrollThrottle]="50" [immediateCheck]="true"
+        [infiniteScrollDisabled]="isFullListDisplayed" (scrolled)="this.blogItems(langURL)">
+        <ul>
+          <li class="list-inline" *ngFor="let blog of allBlogs | slice:1; let i = index">
+            <div class="c-smallpost-wrapper">
+              <div class="c-smallpost-wrapper_cell">
+                <div class="smallpost-cell_img">
+                  <img
+                    [src]="blog.featured_image == false && './../assets/images/icon-img-placeholder.svg' || blog.featured_image"
+                    alt="" class="img-thumbnail image" [routerLink]="['/'+langURL, 'single-blog', blog.id, blog.slug]">
+                </div>
+                <div class="c-smallpost_content">
+                  <h3 [routerLink]="['/'+langURL, 'single-blog', blog.id, blog.slug]" class="c-subtitle-post">
+                    {{blog.title.rendered }}
+                  </h3>
+                  <p class="c_blog__wrapper_content">
+                    {{blog.content.rendered | slice:0:200 | filterPipe}} ... </p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div [hidden]="!noBlogs" class="loading-spinner">
+      Loading blogs
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+
+    </div>
+  </div>
+</div>

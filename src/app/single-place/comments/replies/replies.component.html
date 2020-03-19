@@ -1,0 +1,18 @@
+<div  
+*ngFor="let reply of repliesCommentsComponent">
+
+        <div class="single-place__reviews__blocks__replies replies-list"
+        *ngIf="reply.parent === commentId">
+        
+            <img [src]="reply.user_details.image? reply.user_details.image : './../assets/images/user-placeholder.png' " />
+          <div class="single-place__reviews__blocks__replies__reply" >
+            <span class="author-name">{{reply ? reply.author_name : ""}}</span>
+            <p>{{reply? reply.comment_content: ""}}</p>
+            <div class="single-place__reviews__blocks__replies__reply__date">
+            <span>{{ reply.date | date }}</span>
+            </div>
+          </div>
+
+        </div>
+        
+      </div>

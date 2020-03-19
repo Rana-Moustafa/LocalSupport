@@ -1,0 +1,44 @@
+<div class="testimonial text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg">
+        <h3 class="subtitle">
+          {{"Recent_reviews_from_happy_people" | translate}}
+        </h3>
+        <div class="testimonial__empty" *ngIf="testimonialsDataChild.length === 0">
+          <img src="../../../assets/images/reviews.png" />
+            <p>We don't have any reviews yet!</p> 
+        </div> 
+        <owl-carousel-o [options]="sliderOPT" class="owl-slider-section"
+        *ngIf="testimonialsDataChild.length">
+ 
+            <ng-container class="item" *ngFor="let testimonial of testimonialsDataChild;let i = index">
+              <ng-template class="item" carouselSlide [id]="testimonial.id" [width]="500">
+                  <div class="testimonial__item" [stopLink]="isDragging"  data-length="{{testimonial.length}}">
+           
+                      <div class="testimonial__img">
+                        <img src="{{testimonial.user_details.image? testimonial.user_details.image: 'https://secure.gravatar.com/avatar/d34697480c05a5b8ff5dabf3fab71d31?s=96&amp;d=mm&amp;r=g'}}" alt="" class="img-thumbnail">
+                      </div>
+                      <h3 class="testimonial__place-name">
+                        <span class="testimonial-name">{{testimonial.author_name}} </span>
+                        <span class="main-color">{{testimonial.place_details.title}}</span>
+                      </h3>
+                      <div class="testimonial__rating">
+                        <i class="fa fa-star" [ngClass]="{'star-empty': (testimonial.rating | number:'1.0-0')< 1}"></i>
+                        <i class="fa fa-star" [ngClass]="{'star-empty': (testimonial.rating | number:'1.0-0')< 2}"></i>
+                        <i class="fa fa-star" [ngClass]="{'star-empty': (testimonial.rating | number:'1.0-0')< 3}"></i>
+                        <i class="fa fa-star" [ngClass]="{'star-empty': (testimonial.rating | number:'1.0-0')< 4}"></i>
+                        <i class="fa fa-star" [ngClass]="{'star-empty': (testimonial.rating | number:'1.0-0')< 5}"></i>
+        
+                      </div>
+                      <p class="testimonial__qoute">{{testimonial.comment_content}}</p>
+                    </div>
+              </ng-template>
+            </ng-container>
+         
+          </owl-carousel-o>
+     
+      </div>
+    </div>
+  </div>
+</div>

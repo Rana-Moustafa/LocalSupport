@@ -1,0 +1,47 @@
+ <form class="account-details-form"  (ngSubmit)="onEditProfile(ep)" #ep="ngForm">
+ 	<div class="help-block" *ngIf="editProfileError"> {{ editProfileErrorMsg }}</div>
+    <div class="form-group">
+      <label>{{"Name" | translate}}</label>
+      <!-- <input class="form-control" type="text" [(ngModel)]="editUserData.name" name="username" required #username="ngModel"> -->
+      <input class="form-control" type="text" placeholder="{{editUserData.name}}" name="username"  ngModel #username="ngModel">
+      <small class="help-block" *ngIf="!username.valid && username.touched && username.errors.required">{{"field_requird"| translate}}</small>
+    </div>
+    <div class="form-group">
+      <label>{{"Email" | translate}}</label>
+      <!-- <input class="form-control" type="email" [(ngModel)]="editUserData.email" name="email"  required email #email="ngModel"> -->
+      <input class="form-control" type="email" placeholder="{{editUserData.email}}" name="email"  email ngModel #email="ngModel">
+      <small class="help-block" *ngIf="!email.valid && email.touched && email.errors.email">{{"enter_vaild_email" | translate}}
+      </small>
+      <small class="help-block" *ngIf="!email.valid && email.touched && email.errors.required">email is
+        required</small>
+    </div>
+    <div class="form-group">
+      <label>{{"address" | translate}}</label>
+      <input class="form-control" type="text" placeholder="{{editUserData.address}}" name="address"  ngModel #address="ngModel">
+      <!-- <input class="form-control" type="text" [(ngModel)]="editUserData.address" name="address" required #address="ngModel"> -->
+    </div>
+    <div class="form-group">
+      <div class="form-half-width">
+        <label>{{"country" |translate}} </label>
+        <div class="dropdown">
+          <!-- <select class="form-control" [(ngModel)]="editUserData.country" name="country" required #country="ngModel"> -->
+          <select class="form-control" name="country" [(ngModel)]="editUserData.country"  ngModel #country="ngModel">
+            <option hidden>{{editUserData.country}} </option>
+            <option *ngFor="let country of countriesList"> {{ country.name }} </option>
+          </select>
+          <small class="help-block" *ngIf="!country.valid && country.touched && country.errors.required">{{"field_requird"| translate}}</small>
+        </div>
+      </div>
+      <div class="form-half-width">
+        <label>{{"City" |translate}}</label>
+        <!-- <input class="form-control" type="text" [(ngModel)]="editUserData.city" name="city"  #city="ngModel"> -->
+        <input class="form-control" type="text" placeholder="{{editUserData.city}}" name="city" ngModel #city="ngModel">
+        <small class="help-block" *ngIf="!city.valid && city.touched && city.errors.required">{{"field_requird"| translate}}</small>
+      </div>
+    </div>
+    <div class="btns-wrapper">
+      
+      <a class="btn btn-primary" (click)="endEditMode()">{{"cancel" | translate}}</a>
+      <button type="submit" class="btn btn-primary float-right">{{"change" | translate}}</button>
+    </div>
+  </form>

@@ -1,0 +1,81 @@
+@import '../../../variables';
+@import '../../../fonts';
+
+.b-footer{
+    background: $pale-grey;
+    float: left;
+    width: 100%;
+    padding:$mr-40 0;
+    .col*{
+        padding-left: 0px;
+    }
+    &__contacts{
+        // padding: 0 $mr-15; 
+        word-break: break-all;
+        position: relative;
+        &-title{
+            margin-bottom: $mr-20;
+            color: $slate-grey;
+            word-break: break-word;
+        }
+        &-list{
+            margin-bottom:  $mr-20;
+            padding-left:0;
+            list-style: none;
+            word-break: break-word;
+            li{
+                position: relative; 
+                padding-left: $mr-15;
+              
+                &::before {
+                    content: '-';
+                    display: inline-block;
+                    color: $slate-grey;
+                    position: absolute;
+                    left: 0;
+                    top: -4px;
+                }
+            }
+            a{
+                display: block;
+                color: $slate-grey;
+                margin-bottom: $mr-10;
+                cursor: pointer;
+                @include text-huge-regular();
+            }
+        }
+    }
+    .social-links{
+        color: $slate-grey;
+        display: table;
+        float: right;
+        @media (max-width:$lg) {
+            float: none;
+        }
+        @media (max-width:$sm) {
+            margin: $mr-20 auto;
+        }
+        a{
+            margin-left:$mr-25; 
+            &:hover, &:focus{
+                text-decoration: none;
+            }
+        }
+        i{
+            font-size: 16px;
+            color: $pale-grey;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            background: $slate-grey;
+        }
+    }
+    .copyright{
+        text-align: center;
+        @include text-huge-regular();
+        color: $slate-grey;
+     }
+}

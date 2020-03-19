@@ -1,0 +1,6 @@
+<div class="btn-fav btn-group-toggle" data-toggle="buttons" (click)="addToFav(addToFavId)">
+  <label class="btn" [ngClass]="{'active' : addToFavStatus === true || nnn === true }"> 
+    <input type="checkbox"  autocomplete="off">
+    <i class="fa fa-heart" [ngClass]="{'not-fav': notAdded === true, 'fav' : added === true}"></i>
+  </label>
+</div>

@@ -1,0 +1,278 @@
+@import '../../../variables';
+@import '../../../fonts';
+@import '../../../mixins';
+
+.profile-reviews {
+    &__item {
+        margin-bottom: $mr-15;
+    }
+
+    &__content{
+        a{
+            &:hover{
+                text-decoration: none;
+                
+                h6{
+                    color: $btnColor;
+                }
+            }
+        }
+    }
+
+    &__empty {
+        text-align: center;
+        width     : 100%;
+        display   : table;
+
+        .wrapper {
+            display       : table-cell;
+            vertical-align: middle;
+            height        : 100%;
+        }
+
+        img {
+            width  : 90px;
+            display: block;
+            margin : 25px auto 10px;
+        }
+
+        p {
+            color: $darkBlueGrey;
+        }
+    }
+
+    .reviews-form {
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .btn-primary {
+            margin-top: $mr-10;
+        }
+    }
+
+    &__img {
+        height       : 160px;
+        width        : 100%;
+        border-radius: 5px;
+        overflow     : hidden;
+        margin-bottom: $mr-10;
+        position     : relative;
+
+        @media(max-width: $md) {
+            height: 135px;
+        }
+
+        @media(max-width: $xs) {
+            height: 90px;
+        }
+
+        img {
+            width          : 100%;
+            object-fit     : cover;
+            object-position: center;
+        }
+
+        .btn-fav {
+            position           : absolute;
+            right              : 0.5rem;
+            top                : 0.5rem;
+            // float           : right;
+            width              : 1.5em;
+            height             : 1.5em;
+            border-radius      : 3px;
+            background-color   : rgba(255, 255, 255, 0.5);
+            overflow           : hidden;
+            white-space        : nowrap;
+            cursor             : pointer;
+            color              : $warm-grey;
+            margin             : 0;
+            display            : table;
+            text-align         : center;
+
+            .fa {
+                display       : table-cell;
+                vertical-align: middle;
+                font-size     : 15px;
+            }
+
+            &:hover {
+                color: $mainColor;
+            }
+        }
+    }
+
+    &__place-name {
+        @include H6-bold();
+        color        : $slate-grey;
+        margin-bottom: $mr-5;
+    }
+
+    &__rating {
+        margin-bottom: $mr-5;
+
+        i {
+            color: $btnColor;
+
+            &.star-empty {
+                color: $cloudy-blue;
+            }
+        }
+    }
+
+    &__price {
+        display        : flex;
+        justify-content: space-between;
+        color          : $darkBlueGrey;
+        @include text-regular();
+        margin: 0 0 10px 0;
+
+        p {
+            margin: 0 0 $mr-5;
+        }
+    }
+
+    .edit-area {
+        display         : block;
+        width           : 100%;
+        padding         : .375rem .75rem;
+        font-size       : 1rem;
+        font-weight     : 400;
+        line-height     : 1.5;
+        color           : #495057;
+        background-color: #fff;
+        background-clip : padding-box;
+        border          : 1px solid #ced4da;
+        border-radius   : .25rem;
+        transition      : border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: transparent;
+        opacity         : 1;
+        border          : 0;
+        padding         : 0;
+        max-height      : 250px;
+        overflow-y      : auto;
+        resize          : none;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    .likes {
+        float: right;
+        .number {
+            color: $gunmetal;
+            @include text-huge-regular();
+            margin-left: $mr-5;
+
+        }
+    }
+
+    .description {
+        background-color: $dark-peach-50;
+        padding         : $mr-15;
+        color           : $cool-grey;
+
+        .text {
+            display: inline-block;
+
+
+        }
+
+        textarea {
+            @include text-regular();
+            line-height: 19px;
+        }
+
+        .action {
+            // margin-left: $mr-5;
+            @include text-huge-regular();
+            font-weight: 500;
+
+            color  : $darkBlueGrey;
+            display: inline-block;
+            cursor : pointer;
+
+            span,
+            a {
+                margin-right  : $mr-10;
+            }
+        }
+    }
+
+
+}
+
+form {
+    overflow: hidden;
+
+    .single-place__comments__area__rating {
+        display: inline-block;
+
+        &:not(:checked) {
+            &>input {
+                position: absolute;
+                top     : -9999px;
+                clip    : rect(0, 0, 0, 0);
+            }
+
+            &>label {
+                float      : right;
+                width      : 1em;
+                padding    : 0.1em;
+                overflow   : hidden;
+                white-space: nowrap;
+                cursor     : pointer;
+                @include text-huge-regular();
+                line-height: 1.2;
+                color      : $warm-grey;
+                margin     : 0;
+
+                &:hover {
+                    color: $mainColor;
+
+                    &~label {
+                        .fa {
+                            color: $mainColor;
+                        }
+
+                    }
+
+                    &~input {
+                        &:checked {
+                            &~label {
+                                .fa {
+                                    color: $btnColor;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &>input {
+            &:checked {
+                &~label {
+                    .fa {
+                        color: $firePlace;
+                    }
+
+                    &:hover {
+                        .fa {
+                            color: $btnColor;
+                        }
+
+                        &~label {
+                            color: $btnColor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

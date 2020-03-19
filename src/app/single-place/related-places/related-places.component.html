@@ -1,0 +1,59 @@
+<div class="may-you-like-section">
+    <h4 class="subtitle">{{"You_may_also_like!" |translate}}</h4>
+    <div class="may-you-like-section__empty" *ngIf="relatedPlacesList && relatedPlacesList.length == 0">
+        <img src="../../../assets/images/pin.png" />
+        <p> No related places to show</p>
+    </div>
+    <owl-carousel-o [options]="customOptions">
+
+        <ng-container class="item" *ngFor="let relatedPlace of relatedPlacesList;let i = index">
+            <ng-template [width]="190" carouselSlide [id]="relatedPlace.id">
+                <div class="profile-favorites__item">
+                    <div class="profile-favorites__img">
+
+                        <img [src]="relatedPlace.featured_image?relatedPlace.featured_image: './../assets/images/icon-img-placeholder.svg'"
+                            alt="" class="img-thumbnail">
+
+                        <app-add-to-fav-list [addToFavId]="relatedPlace.id" [addToFavStatus]="relatedPlace.is_favorited"
+                            *ngIf="relatedPlace && userStatus.isLoggedIn">
+                        </app-add-to-fav-list>
+                    </div>
+
+                    <a [stopLink]="isDragging"
+                        [owlRouterLink]="['/'+langURL, 'single-place', relatedPlace.id, relatedPlace.slug]"
+                        target="_blank" class="profile-favorites__place-name-link">
+                        <!-- <a (click)="navigateToPlace(relatedPlace.id, relatedPlace.slug)"                  
+                            class="profile-favorites__place-name-link"> -->
+                        <h6 class="profile-favorites__place-name">
+                            {{relatedPlace.title.rendered}}
+                        </h6>
+                    </a>
+                    <div class="profile-favorites__rating">
+                        <i class="fa fa-star"
+                            [ngClass]="{'star-empty': relatedPlace.rating | number:'1.0-0'< 1, 'star-empty':relatedPlace.rating == null }"></i>
+
+                        <i class="fa fa-star"
+                            [ngClass]="{'star-empty': relatedPlace.rating < 2, 'star-empty':relatedPlace.rating == null }"></i>
+
+                        <i class="fa fa-star"
+                            [ngClass]="{'star-empty': relatedPlace.rating | number:'1.0-0' < 3, 'star-empty':relatedPlace.rating == null }"></i>
+
+                        <i class="fa fa-star"
+                            [ngClass]="{'star-empty': relatedPlace.rating| number:'1.0-0' < 4, 'star-empty':relatedPlace.rating == null }"></i>
+
+                        <i class="fa fa-star" [ngClass]="{'star-empty': relatedPlace.rating | number:'1.0-0' < 5, 
+                                    'star-empty':relatedPlace.rating == null }"></i>
+                        <!-- <p [hidden]="relatedPlace.rating != null">{{"Not_rated_yet" | translate}}</p> -->
+
+                    </div>
+
+                    <p class="profile-favorites__price">
+                        {{relatedPlace.price_range_from ? relatedPlace.price_range_from  + ' -' : ''}}
+                        {{relatedPlace.price_range_to? relatedPlace.price_range_to : ''}}</p>
+                </div>
+            </ng-template>
+        </ng-container>
+
+    </owl-carousel-o>
+
+</div>

@@ -1,0 +1,91 @@
+<div class="category-slider-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>
+                    {{placesCategoriesChildName? placesCategoriesChildName: 'Favourite_Places' | translate}}
+                    <a (click)="showMorePlaces(placesCategoriesChildId, placesCategoriesChildName)"
+                        [hidden]="!placesCategoriesChildName">{{'show_more' | translate}}</a>
+                </h3>
+
+                <div class="category-slider-section__empty"
+                    *ngIf="(!categorySliderDetails || categorySliderDetails.length == 0) ">
+                    <img src="./assets/images/slider.svg" />
+                    <p> {{ "no_places" | translate }}
+                        {{placesCategoriesChildName? placesCategoriesChildName : 'Favourite_Places' | translate}}
+                        {{'yet' |translate}}!
+                    </p>
+                </div>
+                <div class="category-slider-section__empty"
+                    *ngIf="(favoritePlacesSliderChild && (favoritePlacesSliderChild.length == 0))">
+                    <img src="./assets/images/slider.svg" />
+                    <p> {{ 'no' | translate }}
+                        {{placesCategoriesChildName? placesCategoriesChildName : 'Favourite_Places' | translate}}
+                        {{'yet' |translate}}!
+                    </p>
+                </div>
+                <div class="slider-wrapper">
+                    <owl-carousel-o [options]="customOptions" class="owl-slider-section">
+
+                        <ng-container
+                            *ngFor="let categorySlider of ( favoritePlacesSliderChild? favoritePlacesSliderChild :categorySliderDetails );let i = index">
+                            <ng-template class="item" carouselSlide [id]="categorySlider.id" [width]="190">
+
+                                <div class="category-slider__item" data-length="{{categorySlider.length}}">
+                                    <div class="category-slider__img">
+                                        <a [stopLink]="isDragging"
+                                            [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
+                                            class="category-slider__place-name-link">
+                                            <img src="{{categorySlider.featured_image?categorySlider.featured_image: './../assets/images/icon-img-placeholder.svg'}}"
+                                                alt="" class="img-thumbnail">
+                                        </a>
+                                        <app-add-to-fav-list [addToFavId]="categorySlider.id"
+                                            [addToFavStatus]="categorySlider.is_favorited"
+                                            *ngIf="categorySlider && userStatus.isLoggedIn"
+                                            (updateFavListEvent)="updateFavList($event)">
+                                        </app-add-to-fav-list>
+
+                                    </div>
+                                   
+                                    <div class="category-slider__rating">
+
+                                        <i class="fa fa-star"
+                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 1}"></i>
+                                        <i class="fa fa-star"
+                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 2}"></i>
+                                        <i class="fa fa-star"
+                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 3}"></i>
+                                        <i class="fa fa-star"
+                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 4}"></i>
+                                        <i class="fa fa-star"
+                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 5}"></i>
+
+                                        <p [hidden]="categorySlider.avg_rating != null">
+                                            {{"Not_rated_yet" | translate}}
+                                        </p>
+
+                                    </div>
+                                    <a class="category-slider__place-name" [stopLink]="isDragging"
+                                        [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
+                                        class="category-slider__place-name-link">
+                                        <h6>
+                                            {{categorySlider.title.rendered}} 
+                                        </h6>
+                                    </a>
+
+                                    <p class="category-slider__price">
+                                        {{categorySlider.price_range_from ? categorySlider.price_range_from + ' -': '' }}
+                                        {{categorySlider.price_range_to? categorySlider.price_range_to : ''}}</p>
+                                </div>
+
+                            </ng-template>
+                        </ng-container>
+
+                    </owl-carousel-o>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,625 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./variables";
+@import "./fonts";
+@import "./mixins";
+@import "~ngx-sharebuttons/styles/share-buttons";
+@import "~ngx-sharebuttons/styles/themes/circles/circles-theme";
+@import "sweetalert2/src/sweetalert2.scss";
+
+body {
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+
+  .btn:disabled {
+    cursor: not-allowed !important;
+  }
+
+  .container {
+    &.padding-top {
+      overflow: hidden;
+      padding-top: 125px;
+
+      @media all and (max-width: 991px) {
+        padding-top: 90px;
+      }
+
+      @media all and (max-width: 430px) {
+        padding-top: 60px;
+      }
+    }
+
+    @media all and (max-width: $md) {
+      max-width: 100%;
+    }
+  }
+
+  .help-block {
+    color: $mainColor;
+    margin-top: 5px;
+
+    a {
+      color: $mainColor;
+    }
+  }
+
+  .loading-spinner {
+    float: left;
+    margin-bottom: 50px;
+
+    .spinner-grow-sm {
+      &:nth-of-type(1) {
+        color: $mainColor;
+      }
+
+      &:nth-of-type(2) {
+        color: $playGround;
+      }
+
+      &:nth-of-type(3) {
+        color: $btnColor;
+      }
+
+      &:nth-of-type(4) {
+        color: $firePlace;
+      }
+    }
+  }
+}
+
+h1 {
+  @include H1-bold();
+}
+
+h2 {
+  @include H2-bold();
+}
+
+h3 {
+  @include H3-bold();
+}
+
+h4 {
+  @include H4-bold();
+}
+
+h5 {
+  @include H5-bold();
+}
+
+h6 {
+  @include H6-bold();
+}
+
+p {
+  @include text-regular();
+  margin: 0;
+}
+
+a {
+  @include text-regular();
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.red {
+  color: $mainColor !important;
+}
+
+// buttons color//
+.btn-blue {
+  background: $softBlue;
+  border-color: $softBlue;
+}
+
+.btn-dark {
+  background: $darkBlueGrey;
+  border-color: $darkBlueGrey;
+  color: $white;
+}
+
+.btn-white {
+  background: $white;
+  border-color: $darkBlueGrey;
+  color: $darkBlueGrey !important;
+}
+
+.btn-primary {
+  background: $btnColor !important;
+  border-color: $btnColor !important;
+  color: $white !important;
+}
+
+.main-color {
+  color: $btnColor;
+}
+
+.btn-secondrary {
+  background: $white;
+  border-color: $btnColor;
+  color: $btnColor !important;
+}
+
+.btn {
+  @include text-huge-regular();
+  border-radius: 0;
+}
+
+.img-thumbnail {
+  padding: 0;
+  background-color: transparent !important;
+  border: 0;
+  border-radius: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+.search-results{
+  width: 100%;
+}
+
+.scrolled {
+  header {
+    background-color: #fbeee8;
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+    z-index: 99999;
+    &.inner-header {
+      .sign-user{
+        a{
+          color: $darkBlueGrey !important;
+        }
+      }
+      .navbar {
+        .navbar-icon {
+          color: $darkBlueGrey !important;
+        }
+        .header-logo {
+          .navbar-brand {
+            h1 {
+              color: $darkBlueGrey !important;
+            }
+          }
+        }
+        .header-items {
+          .language {
+            .dropdown-toggle {
+              color: $darkBlueGrey !important;
+            }
+            .sign-user {
+              a {
+                color: $darkBlueGrey !important;
+              }
+            }
+          }
+          .dropdown {
+            .dropdown-toggle {
+              color: $darkBlueGrey !important;
+            }
+          }
+          .search-mobile {
+            color: $darkBlueGrey !important;
+          }
+        }
+      }
+    }
+
+    .navbar {
+      @include transition-duration(0.3s);
+      @include transition-timing-function(ease-in-out);
+      padding: $mr-20 0 !important;
+
+      @media (max-width: $lg) {
+        padding: $mr-15 0 !important;
+      }
+    }
+  }
+}
+
+.owl-carousel .owl-next,
+.owl-carousel .owl-prev {
+  @include text-huge-regular();
+  border-radius: 50% !important;
+  background-color: $white !important;
+  color: $darkBlueGrey !important;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  cursor: pointer;
+  top: 50px;
+  display: flex !important;
+  justify-content: center !important;
+
+  @media (max-width: 375px) {
+    margin-top: -35px;
+  }
+
+  .fa {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.fa-star {
+  // color: $btnColor;
+
+  &.star-empty {
+    opacity: 0.4;
+    color: #000 !important;
+  }
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.owl-carousel .prev-slide {
+  background: balck no-repeat scroll 0 0;
+  left: -10px;
+}
+
+.owl-carousel .owl-prev {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: -15px;
+}
+
+.owl-carousel .owl-next {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: -15px;
+}
+
+.owl-blog .prev-slide {
+  top: 50% !important;
+  left: 5%;
+
+  @media (max-width: $md) {
+    top: 40% !important;
+    left: 2%;
+  }
+
+  @media (max-width: 400px) {
+    top: 70% !important;
+  }
+}
+
+.owl-carousel .next-slide {
+  background: balck no-repeat scroll -24px 0px;
+  right: -10px;
+}
+
+.owl-blog .next-slide {
+  top: 50% !important;
+  right: 5%;
+
+  @media (max-width: $md) {
+    top: 40% !important;
+    right: 2%;
+  }
+
+  @media (max-width: 400px) {
+    top: 70% !important;
+  }
+}
+
+.scrolled.black {
+  header.fixed-top {
+    background-color: rgba(000, 000, 000, 0.6) !important;
+  }
+}
+
+// .testimonial .owl-carousel .nav-btn {
+//     height: 50px !important;
+//     width : 50px !important;
+//     @include text-md();
+// }
+
+.owl-theme .owl-nav {
+  margin: 0;
+  height: 0;
+}
+
+.stepBarClass {
+  width: 90%;
+  height: 10px;
+  background: lightgray;
+  border-radius: 5px;
+}
+
+.stepSliderClass {
+  width: 20px;
+  height: 20px;
+  background: lightgray;
+  border-radius: 50%;
+  border: 1px solid royalblue;
+  bottom: -50% !important;
+}
+
+.stephighlightClass {
+  background: royalblue;
+}
+
+.distance-slider {
+  .ng5-slider-pointer {
+    cursor: pointer;
+    width: 50px !important;
+    height: 35px !important;
+    top: -14px;
+    background-color: #fff !important;
+    z-index: 3;
+    text-align: center;
+    box-shadow: 2px 2px 10px #bdb7b4 !important;
+    -webkit-box-shadow: 2px 2px 10px #bdb7b4 !important;
+    -moz-box-shadow: 2px 2px 10px #bdb7b4 !important;
+    -o-box-shadow: 2px 2px 10px #bdb7b4 !important;
+    -ms-box-shadow: 2px 2px 10px #bdb7b4 !important;
+    border-radius: 0 !important;
+
+    &:after {
+      display: none !important;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+    }
+  }
+
+  span.ng5-slider-span.ng5-slider-bubble.ng5-slider-model-value {
+    bottom: -13px !important;
+    z-index: 99 !important;
+  }
+
+  .ng5-slider.animate .ng5-slider-bubble.ng5-slider-limit {
+    display: none;
+  }
+}
+
+.category-slider-section .slider-wrapper {
+  margin: 0 -10px;
+
+  @media (max-width: $lg) {
+    margin: 0;
+  }
+
+  agm-map {
+    height: 85vh;
+
+    .marker-popup {
+      z-index: 999;
+    }
+  }
+
+  agm-marker {
+    position: relative;
+    z-index: 9999999999999;
+    width: 200px;
+  }
+}
+
+cookie-law-component.ng-tns-c4-0.cookie-law.ng-star-inserted {
+  background-color: $btnColor;
+  color: $white;
+}
+
+.cookie-law-wrapper .copy {
+  padding: 0 !important;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.cookie-law-wrapper {
+  background-color: transparent !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.btn-fav {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  // float           : right;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  color: $btnColor;
+  margin: 0;
+  display: table;
+  text-align: center;
+
+  label {
+    padding: $mr-5;
+
+    &:hover {
+      cursor: pointer;
+
+      .fa {
+        color: $mainColor;
+      }
+    }
+
+    .fa {
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 15px;
+
+      transition: all 0.3s ease-in;
+      -webkit-transition: all 0.3s ease-in;
+      -moz-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      -ms-transition: all 0.3s ease-in;
+
+      &.not-fav {
+        color: #000;
+
+        &:hover {
+          color: $mainColor;
+        }
+      }
+      &.fav {
+        color: $mainColor;
+
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .active {
+    .fa {
+      color: $mainColor;
+    }
+  }
+
+  &:hover {
+    color: $mainColor;
+  }
+}
+
+img {
+  image-orientation: 90deg !important;
+  /* Rotate 90deg */
+  image-orientation: 90deg flip !important;
+  /* Rotate 90deg, and flip it horizontally */
+  image-orientation: flip !important;
+  /* No rotation, only applies a horizontal flip */
+}
+
+.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
+  left: 10% !important;
+}
+
+.cookie-law-wrapper .dismiss svg {
+  display: none !important;
+}
+
+.intro-slider {
+  .owl-dots {
+    transform: rotateZ(90deg);
+    width: 200px;
+    position: absolute;
+    top: 53%;
+    left: 1%;
+
+    @media (max-width: $lg) {
+      transform: rotateZ(0deg);
+      top: 87%;
+      left: 30%;
+    }
+  }
+
+  .owl-dots .owl-dot {
+    margin: 12px;
+    padding: 1px 0px !important;
+    outline: none;
+
+    &.active {
+      border: 1px solid white;
+      border-radius: 50%;
+    }
+
+    &.active span,
+    :hover span {
+      background: #ffffff;
+      height: 11px;
+      width: 10px;
+    }
+  }
+
+  span {
+    margin: 15px;
+  }
+}
+
+.help-block {
+  margin: 5px 0;
+}
+
+.ng5-slider .ng5-slider-pointer,
+.ng5-slider .ng5-slider-selection {
+  background: $btnColor !important;
+}
+
+.ng5-slider .ng5-slider-pointer:after {
+  background: $white !important;
+}
+
+span.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min,
+span.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min {
+  outline: none !important;
+}
+
+.distance-slider span.ng5-slider-span.ng5-slider-bubble.ng5-slider-model-value {
+  color: $white !important;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: $btnColor !important;
+  border: 1px solid $btnColor !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(229, 144, 105, 0.34) !important;
+}
+
+.timepicker-overlay {
+  .timepicker {
+    &__header {
+      background-color: $btnColor !important;
+    }
+
+    &__main-content {
+      .timepicker {
+        &__action {
+          justify-content: center !important;
+        }
+      }
+    }
+
+    &__action {
+      justify-content: center !important;
+    }
+  }
+
+  .clock-face {
+    &__number {
+      span {
+        &.active {
+          background-color: $btnColor !important;
+        }
+      }
+    }
+  }
+}
+
+.timepicker-button {
+  color: $btnColor !important;
+}
+
+.timepicker-dial__control {
+  outline: 0;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.clock-face__clock-hand {
+  background-color: $btnColor !important;
+}

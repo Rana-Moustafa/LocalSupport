@@ -1,0 +1,32 @@
+<div class="form-group">
+
+  <label>{{"Name" | translate}}</label>
+  <p class="details">{{ ( profileDataChild &&  profileDataChild.name) ?  profileDataChild.name : " __"}}</p>
+
+</div>
+<div class="form-group">
+  <label>{{"Email" | translate}}</label>
+  <p class="details">{{ ( profileDataChild && profileDataChild.email) ?  profileDataChild.email : " __"}}</p>
+</div>
+<div class="form-group">
+  <label>{{"address" | translate}} </label>
+  <p class="details">{{ (profileDataChild && profileDataChild.address) ?  profileDataChild.address : "__"}}</p>
+</div>
+<div class="form-group">
+  <div class="form-half-width">
+    <label>{{"country" |translate}} </label>
+    <p class="details">{{ (profileDataChild && profileDataChild.country) ?  profileDataChild.country : "__"}}</p>
+  </div>
+  <div class="form-half-width">
+    <label>{{"City" |translate}}</label>
+    <p class="details">{{ (profileDataChild && profileDataChild.city) ?  profileDataChild.city : " __ "}}</p>
+  </div>
+</div>
+<!-- CHANGE PASSWORD -->
+<div class="form-group" *ngIf="changePassword">
+  <label>{{"password" |translate}}</label>
+  <!-- <p class="details">********</p> -->
+  <div class="btn-wrapper">
+    <button class="btn btn-primary" (click)="startpasswordEditMode()">{{"change_password" | translate}}</button>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<section class="profile-reviews">
+  <div class="row">
+    <div class="profile-reviews__empty" *ngIf="MainComment.length === 0">
+      <div class="wrapper">
+        <img src="./assets/images/review.svg" />
+        <p> {{'no_reviews' | translate }} ! </p>
+      </div>
+    </div>
+    <!-- start -->
+    <div class="row search-results" infiniteScroll [infiniteScrollDistance]="50" [infiniteScrollThrottle]="50"
+      [immediateCheck]="true" [infiniteScrollDisabled]="isFullListDisplayed" (scrolled)="getComments()">
+      <div class="col-sm-12" *ngFor="let comment of MainComment; let i = index">
+        <div class="profile-reviews__item">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="profile-reviews__img">
+                <img src="{{comment.place_details.image}}" alt="" class="img-thumbnail">
+                <!-- <span class="btn-fav"><i class="fa fa-heart"></i></span> -->
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="profile-reviews__content ">
+                <a [routerLink]="['/'+langURL, 'single-place', comment.place_details.id, comment.place_details.slug]">
+                  <h6 class="profile-reviews__place-name">
+                    {{comment.place_details? comment.place_details.title: ''}}
+                  </h6>
+                </a>
+                <div class="profile-reviews__rating" *ngIf="!editForm">
+                  <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 1}"></i>
+                  <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 2}"></i>
+                  <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 3}"></i>
+                  <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 4}"></i>
+                  <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 5}"></i>
+                </div>
+                <div class="profile-reviews__price">
+                  <div class="cost">
+                    <p *ngIf="comment.place_details.price_from && comment.place_details.price_to">
+                      Price range
+                      {{comment.place_details.price_from ? comment.place_details.price_from  + ' -': ''}}
+                      {{comment.place_details.price_to  ? comment.place_details.price_to: ''}}
+                    </p>
+                  </div>
+                  <div class="likes"> <i class="fa fa-thumbs-up"></i><span
+                      class="number">{{comment.likes_number}}</span></div>
+                </div>
+
+                <div class="description">
+                  <div class="showed-details">
+                    <form class="reviews-form" name="commentsReplyForm" #commentsReplyForm="ngForm" [id]="'collapse'+i"
+                      (ngSubmit)="onEditProfile(commentsReplyForm, comment.id, comment.rating)"
+                      [ngClass]="{'showww': editSucces === true }">
+                      <div class="form-group">
+                        <textarea type="text" class="form-control" [ngModel]="comment.comment_content" name="username"
+                          #username="ngModel" required [disabled]="!editEnabled || editIndex != comment.id"></textarea>
+                      </div>
+                      <span class="action">
+                        <button type="submit" class="btn btn-primary"
+                          [hidden]="!editEnabled || editIndex != comment.id">{{"Change" |translate}}</button>
+                        <a role="button" class="edit" (click)="toggleEditMode(comment.id)"
+                          [hidden]="editEnabled && editIndex === comment.id">{{"edit" |translate}}</a>
+                        <a class="delete" [hidden]="editEnabled  && editIndex === comment.id"
+                          (click)="DeleteProfileReviewFunction(comment.id,comment.content.type)">{{"delete" |translate}}</a>
+                      </span>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+    </div>
+  </div>
+</section>

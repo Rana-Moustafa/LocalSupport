@@ -1,0 +1,24 @@
+@import '../../variables';
+@import '../../fonts';
+@import '../../mixins';
+
+.inner-pages{
+    min-height: 600px;
+    padding: 100px 0;      
+}
+
+.empty{
+    background-color: $pale-grey;
+    text-align: center;
+    padding: 25px 0;
+
+    img{
+        margin-bottom: 50px;
+    }
+
+    p{
+        font-size: 30px;
+        font-family: "AbrilFatface-Regular";
+        color: $btnColor;
+    }
+}

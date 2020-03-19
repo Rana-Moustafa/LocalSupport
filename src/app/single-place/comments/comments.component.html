@@ -1,0 +1,166 @@
+<div class="single-place reviews">
+  <div class="single-place__comments">
+    <h4> {{"Viewersreviews" | translate}}
+      ({{(showParentComments && showParentComments.length > 0)? showParentComments[0].total_comments : '0'}})</h4>
+    <!-- <div class="single-place__comments__empty" [hidden]="userStatus.isLoggedIn">
+      <p>
+        {{ (showParentComments && showParentComments.length > 0)? 'To be able to add a review you must login' : ("empty_comments" | translate)}}
+      </p>
+      <a [hidden]="userStatus.isLoggedIn"> {{ "login" | translate }} / {{ "Sign_Up" | translate }} </a>
+    </div> -->
+    <div class="single-place__comments__empty" 
+    [hidden]="showParentComments && showParentComments.length > 0">
+    <p> {{ "empty_comments" | translate }} </p>
+      <a *ngIf="!userStatus.isLoggedIn"> {{ "login" | translate }} / {{ "Sign_Up" | translate }} {{showParentComments.length}}</a>
+    </div>
+
+    <form class="reviews-form" (ngSubmit)="sendComment(commentsForm)" #commentsForm="ngForm"
+      [hidden]="!userStatus.isLoggedIn">
+      <div class="single-place__comments__area">
+        <div class="form-group">
+          <label>{{"Leave_your_review_and_rating_for_this_place" | translate}}</label>
+
+          <textarea [placeholder]="'Add your comment...' | translate" name="comment" id="comment" ngModel required
+            #comment="ngModel"></textarea>
+        </div>
+
+        <fieldset class="single-place__comments__area__rating">
+          <input type="radio" name="5" value="5" [checked]="rating===5" name="starRating" ngModel />
+          <label  (click)='onClick(5)'
+          tooltip="5 Stars - Excellent" placement="top" show-delay="100"> <i class="fa fa-star"></i></label>
+
+          <input type="radio" name="4" value="4" [checked]="rating===4" name="starRating" ngModel />
+          <label  (click)='onClick(4)'
+          tooltip="4 Stars - Very Good" placement="bottom" show-delay="100"> <i class="fa fa-star"></i></label>
+
+          <input type="radio" name="3" value="3" [checked]="rating===3" name="starRating" ngModel />
+          <label (click)='onClick(3)'
+          tooltip="3 Stars - Average" placement="top" show-delay="100"> <i class="fa fa-star"></i></label>
+
+          <input type="radio" name="2" value="2" [checked]="rating===2" name="starRating" ngModel />
+          <label  (click)='onClick(2)'
+          tooltip="2 Stars - Poor" placement="bottom" show-delay="100"> <i class="fa fa-star"></i></label>
+
+          <input type="radio" name="1" value="1" [checked]="rating===1" name="starRating" ngModel />
+          <label  (click)='onClick(1)'
+          tooltip="1 Star - Terrible" placement="top" show-delay="100"> <i class="fa fa-star"></i></label>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!commentsForm.valid">{{ "Add_Review" | translate}}
+      </button>
+    </form>
+  </div>
+  <div class="message-text">
+
+  </div>
+  <div class="single-place__reviews">
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="5" [infiniteScrollThrottle]="300"
+      [immediateCheck]="true" [infiniteScrollDisabled]="isFullListDisplayed" (scrolled)="getComments()">
+
+
+      <div *ngFor="let comment of showParentComments; let i=index">
+        <div class="single-place__reviews__blocks">
+          <div>
+            <img [src]="comment.user_details? comment.user_details.image : './../assets/images/user-placeholder.png' " />
+            <div class="single-place__reviews__blocks__review">
+              <span class="author-name">{{comment.author_name}}</span>
+              <p> {{comment.comment_content}} </p>
+              <div class="single-place__reviews__blocks__review__reply__rating" *ngIf="comment.rating != null">
+                <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 1}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 2}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 3}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 4}"></i>
+                <i class="fa fa-star" [ngClass]="{'star-empty': comment.rating < 5}"></i>
+              </div>
+              <div class="single-place__reviews__blocks__review__reply" [hidden]="userStatus.isLoggedIn">
+                <span *ngIf="comment.total_comments > 0">
+                  {{ comment.likes_number }} Likes
+                </span>
+              </div>
+              <div class="single-place__reviews__blocks__review__reply" [hidden]="!userStatus.isLoggedIn">
+                <div class="like-btn btn-group-toggle" data-toggle="buttons"
+                  (click)="likeComment(comment.id, comment.liked_by_user )" [hidden]="!userStatus.isLoggedIn">
+                  <label class="btn" [ngClass]="{'active' : comment.liked_by_user === true }">
+                    <input type="checkbox" checked autocomplete="off">
+                    <span>
+                      {{ comment.likes_number }}
+                    </span>
+
+                    <span *ngIf="comment.liked_by_user === true ">
+                      Unlike
+                    </span>
+                    <span *ngIf="comment.liked_by_user === false ">
+                      Like
+                    </span>
+                  </label>
+                </div>
+
+                .
+                <a role="button" [href]="'#collapse'+i" data-toggle="collapse" aria-expanded="false"
+                  [attr.aria-controls]="'collapse'+i" (click)="getReplies(comment.id)"
+                  [hidden]="!userStatus.isLoggedIn">Relpy or View replies</a>
+
+              </div>
+            </div>
+            <div class="single-place__reviews__blocks__date">
+              {{ comment.date | date  }}
+            </div>
+          </div>
+          <div class="single-place__reviews__blocks__replies add-new-reply" [hidden]="!userStatus.isLoggedIn">
+            <div class="reviews-form collapse" [id]="'collapse'+i" [attr.aria-labelledby]="'collapse'+i">
+              <div class="add-new-reply">
+                <app-add-replies [parentCommentIndex]="comment.id" (talk)="talkBack($event)"></app-add-replies>
+
+              </div>
+
+              <div [hidden]="!noReplies" class="loading-spinner">
+                Loading replies
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+                </span>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+                </span>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+                </span>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+                </span>
+
+              </div>
+              <div class="view-replies">
+
+                <app-replies [repliesCommentsComponent]="replies" [commentId]="comment.id"></app-replies>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div [hidden]="!loadingComments" class="loading-spinner">
+      Loading more comments
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
+
+      </span>
+
+    </div>
+  </div>
+  <div>
+
+  </div>

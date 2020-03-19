@@ -1,0 +1,116 @@
+
+//transition
+
+@mixin transition($transition...) {
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    -webkit-transition: $transition;
+    transition: $transition;
+}
+
+@mixin transition-property($property...) {
+    -moz-transition-property: $property;
+    -o-transition-property: $property;
+    -webkit-transition-property: $property;
+    transition-property: $property;
+}
+
+@mixin transition-duration($duration...) {
+    -moz-transition-duration: $duration;
+    -o-transition-duration: $duration;
+    -webkit-transition-duration: $duration;
+    transition-duration: $duration;
+}
+
+@mixin transition-timing-function($timing...) {
+    -moz-transition-timing-function: $timing;
+    -o-transition-timing-function: $timing;
+    -webkit-transition-timing-function: $timing;
+    transition-timing-function: $timing;
+}
+
+@mixin transition-delay($delay...) {
+    -moz-transition-delay: $delay;
+    -o-transition-delay: $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay: $delay;
+}
+
+//transform
+// generic transform
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
+
+
+
+@mixin transform-origin ($origin) {
+    moz-transform-origin: $origin;
+    -o-transform-origin: $origin;
+    -ms-transform-origin: $origin;
+    -webkit-transform-origin: $origin;
+    transform-origin: $origin;
+}
+
+@mixin rotate ($deg) {
+    @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scale) {
+    @include transform(scale($scale));
+}
+
+@mixin translate ($x, $y) {
+    @include transform(translate($x, $y));
+}
+
+@mixin skew ($x, $y) {
+    @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+// margin ///
+@mixin mr-60 {
+    margin:60px;
+    @media (max-width: $lg) {
+        margin:30px;
+    }
+}
+
+@mixin sectionPadding (){
+    padding: 115px 0;
+    @media(max-width: $lg){
+        padding: 60px 0;   
+    }
+}
+
+@mixin no-padding-left {
+    padding-left:0;
+} 
+
+@mixin no-padding {
+    padding: 0;
+}
+@mixin  mr-top-10 {
+    margin-top: 10px;
+}
+@mixin  mr-top-30 {
+    margin-top: 30px;
+}
+
+@mixin  mr-top-70 {
+    margin-top: 70px;
+    @media(max-width: $md){
+        margin-top: 25px;
+    }
+
+}
+@mixin  mr-top-40 {
+    margin-top:40px;
+    @media(max-width: $sm){
+        margin-top: 25px;
+    }
+}

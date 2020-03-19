@@ -1,0 +1,12 @@
+<form (ngSubmit)="sendReply(parentCommentIndex)" name="commentsReplyForm" #commentsReplyForm="ngForm">
+
+  <div>
+    <img src="./../assets/images/user-placeholder.png" />
+    <div class="single-place__reviews__blocks__replies__area">
+      <textarea type="text" placeholder="Your comment" name="message" ngModel #message="ngModel"
+        required></textarea>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="!commentsReplyForm.valid" (click)="talkBack('No!')">{{"Comment" | translate}}
+  </button>
+</form>

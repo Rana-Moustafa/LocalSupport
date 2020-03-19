@@ -1,0 +1,295 @@
+@import "../../variables";
+@import "../../fonts";
+@import "../../mixins";
+
+.blog-page-list{
+    min-height: 70vh;
+}
+.c_Header_section {
+    background-color   : #fff;
+    height             : 556px;
+    width              : 100%;
+    background-size    : cover;
+    background-repeat  : no-repeat;
+    background-position: center;
+    position           : relative;
+    overflow           : hidden;
+
+    @media(max-width: $md) {
+        height: auto;
+    }
+
+    img {
+        width : 100%;
+        cursor: pointer;
+    }
+
+    // @media (max-width: $sm) {
+    //     height: 300px;
+    // }
+
+    &._shareicon {
+        display        : flex;
+        justify-content: flex-end;
+        align-content  : flex-end;
+    }
+
+    .share {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        border-radius   : 5px;
+        background-color: $white-04;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 44px;
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+
+
+    .facebook {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        padding-left    : 14px;
+        padding-right   : 14px;
+        border-radius   : 5px;
+        background-color: $white-04;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 212px;
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+
+    .twitter {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        border-radius   : 5px;
+        background-color: $white-04;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 156px;
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+
+    .pinterest {
+        color           : $white;
+        font-size       : 20px;
+        border          : 1px solid;
+        padding         : 10px;
+        border-radius   : 5px;
+        background-color: $white-04;
+        position        : absolute;
+        bottom          : 43px;
+        right           : 100px;
+
+        @media (max-width: $sm) {
+            bottom: 20px;
+        }
+    }
+
+
+}
+
+.c_blog__wrapper {
+
+    &_bigpost {
+        margin-top   : 45px;
+        margin-bottom: 20px;
+        width        : 100%;
+        border-bottom: 1px solid $border-color;
+
+        @media(max-width: $md) {
+            margin-top: 20px;
+        }
+
+        &_icons_section {
+            display        : flex;
+            justify-content: flex-end;
+
+            .social_icons {
+                display        : flex;
+                justify-content: flex-end;
+            }
+
+            &_tags {
+                @include tabs-regular;
+                color: $textGrey;
+            }
+        }
+
+        .share_ {
+            @media (max-width: $sm) {
+                font-size: 21px;
+
+            }
+        }
+
+        &_links {
+            display    : flex;
+            margin-left: 10px;
+            color      : $textGrey;
+
+            h5 {
+                color      : $textGrey;
+                font-weight: 100;
+            }
+        }
+
+    }
+
+    &_content {
+        @include adText();
+        line-height  : 32px;
+        color        : $darkGrey;
+        font-weight  : 200;
+        margin-bottom: 30px;
+
+        @media (max-width: $md) {
+            font-size  : 15px;
+            line-height: 21px;
+        }
+    }
+
+    .c-smallpost-wrapper {
+
+        &_cell {
+            height: 300px;
+            margin: 40px 0;
+            height: 100%;
+            width : 100%;
+
+            .smallpost-cell_img {
+                @media (max-width: $md) {
+                    height  : 200px;
+                    overflow: hidden;
+                }
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .c-subtitle-post {
+        @include text-post-md();
+        @include mr-top-10();
+        color : $grape-purple;
+        cursor: pointer;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover {
+            color: $btnColor;
+        }
+    }
+
+    h1 {
+        @include H2-bold;
+        color      : $darkBlueGrey;
+        font-weight: 500;
+        margin-top : 30px;
+
+        @media (max-width: $md) {
+            @include text-md();
+        }
+    }
+
+    h3 {
+        @include text-post-md();
+    }
+}
+
+ul {
+    list-style-type: none;
+    padding        : 0;
+    display        : flex;
+    flex-wrap      : wrap;
+
+    li {
+        display       : inline-block;
+        vertical-align: top;
+        width         : 50%; // should be less than 50%
+
+        @media (max-width: $md) {
+            width: 100%;
+        }
+
+        &:nth-child(odd) {
+            .c-smallpost-wrapper {
+                border-right : 1px solid $border-color;
+                padding-right: $padding29;
+
+                @media (max-width: $md) {
+                    padding-right: 0;
+                    border-right : 0px solid $border-color;
+                }
+            }
+
+            border-bottom: 1px solid $border-color;
+
+            &:last-child {
+                border-bottom: 0px solid $border-color;
+            }
+
+            &:nth-last-child(2) {
+                border-bottom: 0px solid $border-color;
+
+                @media (max-width: $md) {
+                    border-bottom: 1px solid $border-color;
+                }
+            }
+        }
+
+        &:nth-child(even) {
+            padding-left : $padding29;
+            border-bottom: 1px solid $border-color;
+
+            @media (max-width: $md) {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                border-bottom: 0px solid $border-color;
+            }
+        }
+    }
+}
+
+
+.image {
+    height    : 250px;
+    object-fit: cover;
+    cursor    : pointer;
+}
+
+// h1 {
+//     @include H3-bold;
+//     color      : $grape-purple;
+//     font-weight: 300;
+//     margin-top : 13px;
+
+//     @media (max-width: $sm) {
+//         font-size: 20px;
+//     }
+
+//     & img {
+//         width: 100%;
+//     }
+// }

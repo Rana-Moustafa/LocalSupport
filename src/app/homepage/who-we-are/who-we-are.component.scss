@@ -1,0 +1,34 @@
+@import '../../../variables';
+@import '../../../fonts';
+@import '../../../mixins';
+
+.message-page{
+    background: $pageBg url('../../../assets/images/who-we-are.png') no-repeat right bottom;
+    background-size:  530px;
+    @include sectionPadding();
+    @media all and (max-width: $lg){
+        flex-direction: column;
+        background-size:  250px;
+    }
+    @media(max-width: $xs){
+        padding-bottom: 200px;
+    }
+
+    h1{
+        @include text-xl();
+        color: $orange;
+    }
+    p{
+        @include text-sm;
+        color: $orange;
+        font-weight: normal;
+        line-height: 30px;
+    }
+    .btn-dark{
+        @include huge-btn();
+        padding: $mr-15 $mr-25;
+        @media(max-width:$lg){
+            padding: $mr-10 $mr-20;
+        }
+    }
+}

@@ -1,0 +1,67 @@
+<div class="map-adjust"></div>
+<div class="map-filters">
+  <div class="container">
+    <div class="map-filters__search">
+      <div class="form-group">
+        <input type="text" class="form-control" (keydown.enter)="searchPlaces()"
+          [placeholder]="'Search_nearest_location'| translate" autocorrect="on" autocapitalize="off" spellcheck="on"
+          type="text" #search>
+        <button (click)="setCurrentLocation(latitude,longitude)"
+          class="map-filters__search__near">{{"Near_me" | translate}}</button>
+        <a class="map-filters__search__action" (click)="searchPlaces()">
+          <img src="../../../assets/images/ic-location-light.svg" />
+        </a>
+      </div>
+    </div>
+
+    <div class="map-filters__tabs">
+      <form>
+        <div class="form-group">
+          <div class="map-filters__tabs__categories" *ngFor="let placeType of placesTypesTabs; let i=index;">
+            <label class="place-type-checkbox">
+              <input type="radio" [value]=placeType.id name="placetype" [(ngModel)]="selected"
+                (change)="selectedCategory(selected, i)">
+              <span class="place-type-{{i}}">
+                <span>
+                  <img [src]="placeType.active_icon" class="active-icon" />
+                  <img [src]="placeType.in_active_icon" class="inactive-icon" />
+                </span>
+                {{ placeType.name }} </span>
+            </label>
+          </div>
+          <!-- <label class="fireplace-checkbox">
+            <input type="checkbox" value="2"><span><span></span> Fireplace</span>
+          </label>
+          <label class="kids-path-checkbox">
+            <input type="checkbox" value="3"><span> <span></span> Kids path</span>
+          </label> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [styles]="styles" [zoomControlOptions]="zoomControlOptions"
+  [streetViewControl]="streetViewControl"  [scrollwheel]="false" #AgmMap
+  [fitBounds]="fitBoundsMarkers">
+  <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="currentMarkerIcon"></agm-marker>
+  <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="markerIcon"
+    (markerClick)="clickedMarker(infowindow)" [agmFitBounds]="fitBoundsMarkers">
+
+    <agm-info-window [disableAutoPan]="true" #infowindow [maxWidth]="250" class="marker-popup">
+      <a [routerLink]="['/'+langURL, 'single-place', m.id, m.slug]" class="place-name-link">
+        <h4 style="z-index: 9999999999; position: relative;">{{m.title}}</h4>
+      </a>
+      <div class="rating">
+        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 1}"></i>
+        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 2}"></i>
+        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 3}"></i>
+        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 4}"></i>
+        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 5}"></i>
+      </div>
+      <p>{{m.address}}</p>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+<!-- <h5>Address: {{address}}</h5>
+<div>Latitude: {{latitude}}</div>
+<div>Longitude: {{longitude}}</div> -->

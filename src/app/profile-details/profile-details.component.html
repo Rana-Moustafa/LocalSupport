@@ -1,0 +1,95 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<section class="profile-details">
+  <div class="profile-details__header">
+  </div>
+  <div class="profile-details__content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+
+          <div class="personal-deatils img">
+            <label class="hoverable">
+
+              <img [src]="newProfilePicture ?  newProfilePicture : url" alt="" class="img-thumbinal" #profileImage>
+              <div class="hover-text" data-toggle="modal" data-target="#profileImageCropper">
+                {{ 'upload_picture' | translate }} </div>
+
+              <div class="background"></div>
+            </label>
+            <br />
+            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profileImageCropper">
+              Choose file
+            </button> -->
+            <div class="modal fade" id="profileImageCropper" tabindex="-1" role="dialog"
+              aria-labelledby="profileImageCropper" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ 'update_profile_picture' | translate }} </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                      [aspectRatio]="4 / 4" [resizeToWidth]="500" [roundCropper]="true" [cropper]="cropper" format="png"
+                      (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                      (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+                    <input id="fileInput" type='file' (change)="fileChangeEvent($event)">
+                    <label for="fileInput"> {{ 'choose_new_picture' | translate }} </label>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateProfilePicture()">
+                      {{ 'save_changes' | translate }}  
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <button *ngIf="url" (click)="delete()">delete</button> -->
+            <!-- <div class="img">
+              <img
+                [src]="selectedUserInfo.profile_image"
+                alt="" class="img-thumbinal">
+            </div> -->
+            <div class="info">
+              <h2 class="user-name"> {{ (selectedUserInfo && selectedUserInfo.name)? selectedUserInfo.name: ''}}</h2>
+              <p class="address"> {{ (selectedUserInfo && selectedUserInfo.city)? selectedUserInfo.city +',': ''}}
+                {{ (selectedUserInfo && selectedUserInfo.country)? selectedUserInfo.country: ''}} </p>
+            </div>
+          </div>
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="accountDetails-tab" data-toggle="pill" href="#accountDetails" role="tab"
+              aria-controls="accountDetails" aria-selected="true">{{"Account_Details" |translate }}</a>
+            <a class="nav-link" id="favourites-tab" data-toggle="pill" href="#favourites" role="tab"
+              aria-controls="favourites" aria-selected="false">{{"Favourites_Spot" |translate}}</a>
+            <a class="nav-link" id="reviews-tab" data-toggle="pill" href="#reviews" role="tab" aria-controls="reviews"
+              aria-selected="false"> {{"Reviews" |translate}}</a>
+          </div>
+          <button class="btn btn-primary" (click)="removeAccountFunction()">{{"Delete_Account" |translate}}</button>
+        </div>
+        <div class="col-lg-8">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="accountDetails" role="tabpanel"
+              aria-labelledby="accountDetails-tab">
+
+              <app-account-details (userProfilePicture)="getSelectedUserProfilePicture($event)"></app-account-details>
+
+            </div>
+            <div class="tab-pane fade" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
+              <app-profile-favorites></app-profile-favorites>
+            </div>
+            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <app-profile-reviews></app-profile-reviews>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

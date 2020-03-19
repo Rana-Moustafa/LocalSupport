@@ -1,0 +1,170 @@
+@import '../../variables';
+@import '../../fonts';
+
+
+.registration-form-section {
+    
+    .auth-form{
+        margin-top: 60px;
+    }
+    .row{
+        height: 100vh;
+    }
+
+    @media(max-width:$lg) {
+        background-image   : url('../../assets/images/authentication/mobile-registr3x.png');
+        background-size    : cover;
+        background-position: center;
+        min-height         : 100%;
+        display: block;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    &__Background {
+        background-image   : url('../../assets/images/authentication/bg-registr@3x.png');
+        background-size    : cover;
+        background-position: center;
+        min-height         : 100%;
+        padding            : $authenticationPadding;
+        display: block;
+        position: relative;
+        overflow-x: hidden;
+
+        @media(max-width:$lg) {
+            height          : auto;
+            background-image: none;
+            padding         : $padding29;
+        }
+    }
+    &__logo-wrapper{
+        height       : 65px;
+        width        : 65px;
+        &:hover{
+            text-decoration: none;
+        }  
+    }
+    &__logo-text {
+        font-family: "AbrilFatface-Regular";
+        color: $darkBlueGrey;
+        font-weight: 100;
+        font-size: 40px;
+
+        @media(max-width:$lg) {
+            height: 29px;
+        }
+    }
+    &__logo {
+        margin-bottom: $mr-30;
+        height       : 65px;
+        width        : 65px;
+        display      : block;
+
+        @media(max-width:$lg) {
+            height       : 45px;
+            width        : 45px;
+            margin-bottom: $mr-20;
+        }
+
+        
+    }
+    
+
+    
+
+    &__form {
+        padding: $authenticationPadding;
+        background-color: $lightGrey;
+        min-height: 100vh;
+        @media(max-width:$lg) {
+            padding: $padding29;
+            background-color: transparent;
+        }
+
+        .nav-tabs {
+            border: none;
+            // margin-bottom: $mr-40;
+            .nav-link {
+                @include H4-bold();
+                padding: 0;
+                color :$darkBlueGrey;
+                outline: none;
+                border: 2px solid transparent;
+                border-radius: 0;
+                padding: 10px;
+
+                transition: all 0.3s ease-in;
+                -webkit-transition: all 0.3s ease-in;
+                -moz-transition: all 0.3s ease-in;
+                -ms-transition: all 0.3s ease-in;
+                -o-transition: all 0.3s ease-in;
+
+                &:hover{
+                    color: $btnColor;
+                    text-decoration: underline;
+                    border: 2px solid $btnColor;
+                }
+                &.active {
+                    border: 0px;
+                    background: none;
+                    color: $btnColor;
+                    border: 2px solid $btnColor;
+                }
+
+                &:first-child {
+                    margin-right: auto;
+                }
+            }
+        }
+    }
+    #resetpass-tab{
+        text-align: center;
+        color: $darkBlueGrey;
+        width: 200px;
+        margin: auto;
+
+        &:hover{
+            color: $btnColor;
+        }
+        @media all and (max-width: 992px){
+            color: #fff;
+
+            &:hover{
+                color: $darkBlueGrey;
+            }
+        }
+    }
+}
+.language_banner {
+    background: #e59069;
+    width: 100%;
+    position: fixed;
+    z-index: 99;
+    color: white;
+    padding: 10px;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+
+    @media all and (max-width: 640px){
+        font-size: 12px;
+        letter-spacing: 1px;
+        word-spacing: 2px;
+    }
+
+    &.hide-lang-banner{
+        display: none;
+    }
+
+}
+.earth_icon {
+    padding-left: 5px;
+}
+.color_black{
+    color: black;
+    font-weight: 999;
+    cursor: pointer;
+    font-size: 14px;
+    @media all and (max-width: 640px){
+        font-size: 12px;
+    }
+}

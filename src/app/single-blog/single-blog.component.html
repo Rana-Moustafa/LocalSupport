@@ -1,0 +1,63 @@
+<div class="c-single-header__wrapper">
+  <img [src]="blogItem.featured_image?blogItem.featured_image: ''" alt="" class="img-thumbnail d-block w-100">
+  <i class="fa fa-share-alt share" (click)="isShow=!isShow"></i>
+  <div [hidden]="isShow" class="c-single-header__wrapper__share-buttons">
+
+    <!-- <share-button [theme]="'modern-dark'" [button]="facebook" [url]="currentURL+endurl"
+      [title]="blogItem.title.rendered" [description]="blogItem.content.rendered"
+      [image]="blogItem.featured_image" [autoSetMeta]="false"></share-button> -->
+    <div shareButton="facebook" [title]="(blogItem && blogItem.title)?blogItem.title.rendered: ''"
+      [description]="(blogItem && blogItem.content)?blogItem.content.rendered:''"
+      [image]="blogItem?blogItem.featured_image: ''"> <i class="fa fa-facebook facebook"></i></div>
+    <div shareButton="twitter" [image]="blogItem.featured_image"
+      [title]="(blogItem && blogItem.title)?blogItem.title.rendered: ''"
+      [description]="(blogItem && blogItem.content)?blogItem.content.rendered:''">
+      <i class="fa fa-twitter twitter"></i></div>
+    <div shareButton="pinterest" [image]="blogItem?blogItem.featured_image:''"><i class="fa fa-pinterest pinterest"></i>
+    </div>
+  </div>
+
+
+  <!-- 
+  <owl-carousel [options]="sliderOPT" [items]="images" [carouselClasses]="['owl-theme', 'sliding']" class="owl-blog">
+    <div class="item" *ngFor="let image of images;let i = index">
+      <img [src]="blogItem.featured_image?blogItem.featured_image: './../assets/images/icon-img-placeholder.svg'"alt="" class="img-thumbnail d-block w-100">
+    </div>
+  </owl-carousel> -->
+</div>
+<div class="c-single-bottom__wrapper">
+  <div class="container">
+    <div class="c-single-bottom__wrapper__content">
+      <div class="alert alert-warning" role="alert" *ngIf="placeNotTranslated">
+        This place has not been translated yet!
+      </div>
+      <div class="c-single-bottom__wrapper__content__profile">
+        <div class="img">
+          <img [src]="authorInfoAvatar" alt="" class="img-thumbnail" *ngIf="authorInfo && !noAuthorInfoAvatar">
+          <img [src]="'./../assets/images/user-placeholder.png'" alt="" class="img-thumbnail"
+            *ngIf="noAuthorInfoAvatar">
+
+        </div>
+
+        {{blogItem.url}}
+        <span>{{authorInfo? authorInfo.name: ''}}</span>
+      </div>
+
+      <div class="c-single-bottom__wrapper__content__paragraph">
+        <h5>
+          {{ (blogItem && blogItem.title)? blogItem.title.rendered : ' '}}
+        </h5>
+        <p [innerHTML]="blogItem.content? blogItem.content.rendered: ''">
+        </p>
+
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <div class="c-single-bottom__wrapper__content__comments">
+      <app-comments></app-comments>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,69 @@
+
+<div *ngIf="isLoading" class="loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form id="registeration-form" class="registeration-form" (ngSubmit)="onUserRegister(f)" #f="ngForm" >
+    <p class="help-block" *ngIf="formError && f.submitted"> {{ formErrorMsg }} </p>
+    <div class="form-group">
+        <label>{{"Full_name" | translate}} <span class="red">*</span></label>
+        <input class="form-control" type="text" ngModel name="username" required #username="ngModel">
+        <small class="help-block" *ngIf="!username.valid && username.touched && username.errors.required">{{"field_requird"| translate}}</small>
+    </div>
+    <div class="form-group">
+        <label>{{"email" | translate}} <span class="red">*</span></label>
+        <input class="form-control" type="email" ngModel name="email" required email #email="ngModel">
+        <small class="help-block" *ngIf="!email.valid && email.touched && email.errors.email">{{"enter_valid_email" | translate}}</small>
+        <small class="help-block" *ngIf="!email.valid && email.touched && email.errors.required">{{"field_requird" |translate}}</small>
+    </div>
+    <div class="form-group">
+        <label>{{"address" | translate}} <span class="red">*</span></label>
+        <small class="form-text text-muted">{{"detect_near_place" | translate}}</small>
+        <input class="form-control" type="text" ngModel name="address" #address="ngModel" required>
+        <small class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">{{"field_requird" |translate}}</small>
+    </div>
+    <div class="form-group">
+        <div class="form-half-width">
+            <label>{{"country" |translate}} <span class="red">*</span></label>
+            <div class="dropdown">
+                <select class="form-control" ngModel name="country" required #country="ngModel">
+                    <option hidden> </option>
+                    <option *ngFor="let country of countriesList"> {{ country.name }} </option>
+                </select>
+                <small class="help-block" *ngIf="!country.valid && country.touched && country.errors.required">{{"field_requird" |translate}}</small>
+            </div>
+        </div>
+        <div class="form-half-width">
+            <label> {{"City" |translate}}<span class="red">*</span></label>
+            <input class="form-control" type="text" ngModel name="city" required #city="ngModel">
+            <small class="help-block" *ngIf="!city.valid && city.touched && city.errors.required">{{"field_requird" |translate}}</small>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>{{"password" |translate}}<span class="red">*</span></label>
+        <input class="form-control" type="password" ngModel name="password" required #password="ngModel" minlength="6"
+            validateEqual="confirmpassword" reverse="true">
+
+        <small class="help-block" *ngIf="password.touched && password.invalid && password.errors.required">{{"field_requird" |translate}}</small>
+        <small class="help-block" *ngIf="password.touched && password.invalid && password.errors.minlength ">{{"password_must_6char" | translate}}</small>
+
+    </div>
+    <div class="form-group">
+        <label>{{ 'Confirm_Password' | translate }} <span class="red">*</span></label>
+        <input class="form-control" type="password" ngModel name="confirmpassword" required #confirmpassword="ngModel"
+            minlength="6" validateEqual="password">
+        <small class="help-block"
+            *ngIf="confirmpassword.touched && confirmpassword.invalid && confirmpassword.errors.required">{{"field_requird" |translate}}</small>
+        <small class="help-block"
+            *ngIf="confirmpassword.touched && confirmpassword.invalid && confirmpassword.errors.minlength">{{"password_must_6char" | translate}}<br/></small>
+        <!--<small class="help-block" *ngIf="confirmpassword.invalid && confirmpassword.touched  && !confirmpassword.errors.required">Confirm Password must match password</small>-->
+        <small class="help-block"
+            [hidden]="confirmpassword.valid ||  (confirmpassword.pristine && !f.submitted ) || confirmpassword.errors.required">
+          {{"password_not_match" | translate}}
+        </small>
+    </div>
+    <div class="btn-wrapper">
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">{{ 'Sign_Up' | translate }} </button>
+        <a href="" class="terms-link">{{ 'trems_of_use' | translate }} </a> | <a href="">  {{ 'privacy_policy' | translate }} </a>
+    </div>
+
+</form>
