@@ -1,7 +1,9 @@
 <div class="map-adjust"></div>
+
 <div class="map-filters">
   <div class="container">
     <div class="map-filters__search">
+     
       <div class="form-group">
         <input type="text" class="form-control" (keydown.enter)="searchPlaces()"
           [placeholder]="'Search_nearest_location'| translate" autocorrect="on" autocapitalize="off" spellcheck="on"
@@ -14,30 +16,7 @@
       </div>
     </div>
 
-    <div class="map-filters__tabs">
-      <form>
-        <div class="form-group">
-          <div class="map-filters__tabs__categories" *ngFor="let placeType of placesTypesTabs; let i=index;">
-            <label class="place-type-checkbox">
-              <input type="radio" [value]=placeType.id name="placetype" [(ngModel)]="selected"
-                (change)="selectedCategory(selected, i)">
-              <span class="place-type-{{i}}">
-                <span>
-                  <img [src]="placeType.active_icon" class="active-icon" />
-                  <img [src]="placeType.in_active_icon" class="inactive-icon" />
-                </span>
-                {{ placeType.name }} </span>
-            </label>
-          </div>
-          <!-- <label class="fireplace-checkbox">
-            <input type="checkbox" value="2"><span><span></span> Fireplace</span>
-          </label>
-          <label class="kids-path-checkbox">
-            <input type="checkbox" value="3"><span> <span></span> Kids path</span>
-          </label> -->
-        </div>
-      </form>
-    </div>
+    
   </div>
 </div>
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [styles]="styles" [zoomControlOptions]="zoomControlOptions"

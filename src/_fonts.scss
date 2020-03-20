@@ -103,7 +103,7 @@
 }
 
 @mixin H2-bold {
-    font-family   : google_sansbold;
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 40px;
     font-weight   : bold;
     font-style    : normal;
@@ -117,7 +117,7 @@
 }
 
 @mixin H3-bold {
-    font-family   : google_sansbold;
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 28px;
     font-weight   : bold;
     font-style    : normal;
@@ -131,7 +131,7 @@
 }
 
 @mixin H4-bold {
-    font-family   : google_sansbold;
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 22px;
     font-weight   : bold;
     font-style    : normal;
@@ -145,7 +145,7 @@
 }
 
 @mixin H5-bold {
-    font-family   : google_sansbold;
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 16px;
     font-weight   : bold;
     font-style    : normal;
@@ -159,7 +159,7 @@
 }
 
 @mixin H6-bold {
-    font-family   : google_sansbold;
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 17px;
     font-weight   : bold;
     font-style    : normal;
@@ -171,7 +171,7 @@
 }
 
 @mixin text-regular {
-    font-family   : 'google_sansregular';
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 14px;
     font-weight   : normal;
     font-style    : normal;
@@ -185,7 +185,7 @@
 }
 
 @mixin text-huge-regular {
-    font-family   : 'google_sansregular';
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 16px;
     font-weight   : normal;
     font-style    : normal;
@@ -199,7 +199,7 @@
 }
 
 @mixin tabs-regular {
-    font-family   : 'google_sansregular';
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 20px;
     font-weight   : normal;
     font-style    : normal;
@@ -225,7 +225,7 @@
 //     }
 // }
 @mixin text-xl {
-    font-family: 'google_sansregular';
+    font-family: 'Quicksand', sans-serif;
     font-size  : 75px;
 
     @media (max-width: $lg) {
@@ -234,7 +234,7 @@
 }
 
 @mixin text-lg {
-    font-family: 'google_sansregular';
+    font-family: 'Quicksand', sans-serif;
     font-size  : 45px;
 
     @media (max-width: $lg) {
@@ -243,7 +243,7 @@
 }
 
 @mixin text-md {
-    font-family: 'google_sansregular';
+    font-family: 'Quicksand', sans-serif;
     font-size  : 22px;
 
     @media (max-width: $lg) {
@@ -252,7 +252,7 @@
 }
 
 @mixin text-sm {
-    font-family: 'google_sansregular';
+    font-family: 'Quicksand', sans-serif;
     font-size  : 16px;
 
     @media (max-width: $lg) {
@@ -260,7 +260,7 @@
     }
 }
 @mixin adText {
-    font-family: 'google_sansregular';
+    font-family: 'Quicksand', sans-serif;
     font-size  : 18px;
 
     @media (max-width: $lg) {
@@ -269,7 +269,7 @@
 }
 
 @mixin huge-btn {
-    font-family   : 'google_sansregular';
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 14px;
     font-weight   : 600;
     font-style    : normal;
@@ -283,7 +283,7 @@
 }
 
 @mixin testimonials-text {
-    font-family   : 'google_sansregular';
+    font-family   : 'Quicksand', sans-serif;
     font-size     : 20px;
     font-weight   : 100;
     font-style    : normal;

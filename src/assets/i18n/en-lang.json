@@ -17,7 +17,7 @@
   "Your_search_results":"Your search results:",
   "entity": "Entity",
   "yet": "yet",
-  "Addplace": "Add Place",
+  "Addplace": "Add Business",
   "Places_list": "Places list",
   "Viewersreviews": "Reviews",
   "Leave_your_review_and_rating_for_this_place": "Leave your review and rating for this place.",
@@ -107,7 +107,7 @@
   "feature": "Properties",
   "category": "Category",
   "size" : "Size",
-  "give_it_a_name": "Give it a name",
+  "give_it_a_name": "Business Name",
   "what_you_can_do_here": "What you can do here?",
   "Food": "Food",
   "previous": "Previous",
@@ -1228,5 +1228,7 @@
   "account_delete_success_1": "Deleted!",
   "account_delete_success_2": "Youe account has been deleted.",
   "no_places": "We don’t have any",
-  "OR": "or"
+  "OR": "or",
+  "delivery": "Delivery",
+  "payment_method": "Payment method"
 }

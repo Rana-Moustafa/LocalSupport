@@ -1,41 +1,14 @@
+
 <header class="fixed-top" [ngClass]="commons.darkHeader? 'inner-header': 'normal-header'">
+ 
   <div class="container">
     <nav class="navbar">
-      <span class="navbar-icon" (click)="toggleSideNav(); menuItems()"><i class="fa fa-bars"></i> </span>
-      <div class="side-nav" [ngClass]="{ 'open': sideNav === true }">
-        <div class="close">
-          <div (click)="toggleSideNav()"><img src="../../../assets/images/cancel.svg" alt="" class="img-thumbnail">
-          </div>
-        </div>
-        <div class="sidnav-image">
-          <img src="../../../assets/images/side-menu-img.png" alt="" class="img-thumbnail">
-        </div>
-        <ul class="list-unstyled">
-          <div class="sidenav-logo">
-            <a [routerLink]="['/'+langURL]" (click)="toggleSideNav()">
-              <h2>Local support</h2>
-            </a>
-          </div>
-          <!-- <li *ngFor="let items of menuItemsNames"><a href="#">{{items.title}}</a></li> -->
-          <!-- <li><a [routerLink]="['/'+langURL, 'places-category']"
-              (click)="toggleSideNav()">{{'Places_list' | translate}}</a></li> -->
-          <li *ngFor="let category of categoriesNames">
-            <a [routerLink]="['/'+langURL, 'places-category']"
-              (click)="sendSelectedCategory(category.id, category.name);toggleSideNav()">{{category.name}}</a>
-          </li>
-          <li><a [routerLink]="['/'+langURL, 'add-new-place']"
-              (click)="toggleSideNav()">{{'Add_new_place' | translate}}</a></li>
-          <li><a [routerLink]="['/'+langURL, 'blogs']" (click)="toggleSideNav()"> {{ 'Blog' | translate }} </a></li>
-          <li><a routerLink="." fragment="newsletter" (click)="toggleSideNav()">{{ 'NL_subscribe' | translate }} </a>
-          </li>
-          <li><a [routerLink]="['/'+langURL + '/pages/q&a']"
-              (click)="toggleSideNav()">{{ 'Questions_answers' | translate }}</a></li>
-        </ul>
+      <div class="care-link">
+        <img src="../../../assets/images/care.png" />
       </div>
-
       <div class="header-logo mr-auto">
         <a class="navbar-brand" [routerLink]="['/'+langURL]">
-          <h1>Local support</h1>
+          <h1><img src="../../../assets/images/local-hero-logo.svg"></h1>
         </a>
       </div>
       <div class="header-items ml-auto">

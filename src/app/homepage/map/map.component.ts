@@ -248,6 +248,7 @@ export class MapComponent implements OnInit {
   }
 
   loadTabs() {
+    this.selectedCategory(0, 3);
     if (localStorage.getItem('current_lang') === 'en') {
       this.selectedCategory(17, 3);
     } else {
@@ -267,7 +268,8 @@ export class MapComponent implements OnInit {
 
     this.selected = e;
     this.map.getMapLocations(e).subscribe(data => {
-      // console.log(data)
+      console.log('all map places')
+      console.log(data)
       this.markers = JSON.parse(JSON.stringify(data));
       switch (index) {
         case 0: {

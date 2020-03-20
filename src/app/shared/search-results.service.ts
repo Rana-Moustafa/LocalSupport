@@ -18,13 +18,14 @@ export class SearchResultsService implements OnDestroy {
 
   constructor(private http: HttpClient) { }
 
-  GetSearchResults(result) {
-    console.log(result)
+  GetSearchResults(result, page, perpage) {
+    console.log(result);
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_search=' + result + '&lang=en')
-    }
-    else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_search=' + result)
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_search=' + result + '&lang=en&page=' +
+      page + '&per_page=' + perpage)
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_search=' + result + '&page=' +
+      page + '&per_page=' + perpage);
     }
   }
 

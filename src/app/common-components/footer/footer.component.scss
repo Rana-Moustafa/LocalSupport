@@ -1,81 +1,112 @@
-@import '../../../variables';
-@import '../../../fonts';
+@import "../../../variables";
+@import "../../../fonts";
 
-.b-footer{
-    background: $pale-grey;
-    float: left;
-    width: 100%;
-    padding:$mr-40 0;
-    .col*{
-        padding-left: 0px;
+.b-footer {
+  background: #fff;
+  float: left;
+  width: 100%;
+  padding: 15px 0;
+  border-top: 1px solid #ddd;
+  margin-top: 25px;
+
+  .row {
+    justify-content: space-between;
+  }
+  .navbar {
+    .navbar-nav {
+      flex-direction: row;
+
+      .nav-item {
+        margin-right: 25px;
+        &:first-of-type {
+          margin-right: 150px;
+        }
+        .nav-link {
+          font-size: 20px;
+
+          &:hover {
+            color: $localSecondary;
+            cursor: pointer;
+          }
+        }
+      }
     }
-    &__contacts{
-        // padding: 0 $mr-15; 
-        word-break: break-all;
+  }
+  .col* {
+    padding-left: 0px;
+  }
+  &__contacts {
+    // padding: 0 $mr-15;
+    word-break: break-all;
+    position: relative;
+    &-title {
+      margin-bottom: $mr-20;
+      color: $slate-grey;
+      word-break: break-word;
+    }
+    &-list {
+      margin-bottom: $mr-20;
+      padding-left: 0;
+      list-style: none;
+      word-break: break-word;
+      li {
         position: relative;
-        &-title{
-            margin-bottom: $mr-20;
-            color: $slate-grey;
-            word-break: break-word;
+        padding-left: $mr-15;
+
+        &::before {
+          content: "-";
+          display: inline-block;
+          color: $slate-grey;
+          position: absolute;
+          left: 0;
+          top: -4px;
         }
-        &-list{
-            margin-bottom:  $mr-20;
-            padding-left:0;
-            list-style: none;
-            word-break: break-word;
-            li{
-                position: relative; 
-                padding-left: $mr-15;
-              
-                &::before {
-                    content: '-';
-                    display: inline-block;
-                    color: $slate-grey;
-                    position: absolute;
-                    left: 0;
-                    top: -4px;
-                }
-            }
-            a{
-                display: block;
-                color: $slate-grey;
-                margin-bottom: $mr-10;
-                cursor: pointer;
-                @include text-huge-regular();
-            }
-        }
-    }
-    .social-links{
+      }
+      a {
+        display: block;
         color: $slate-grey;
-        display: table;
-        float: right;
-        @media (max-width:$lg) {
-            float: none;
-        }
-        @media (max-width:$sm) {
-            margin: $mr-20 auto;
-        }
-        a{
-            margin-left:$mr-25; 
-            &:hover, &:focus{
-                text-decoration: none;
-            }
-        }
-        i{
-            font-size: 16px;
-            color: $pale-grey;
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-            text-align: center;
-            display: table-cell;
-            vertical-align: middle;
-            background: $slate-grey;
-        }
-    }
-    .copyright{
-        text-align: center;
+        margin-bottom: $mr-10;
+        cursor: pointer;
         @include text-huge-regular();
-        color: $slate-grey;
-     }
+      }
+    }
+  }
+  .social-links {
+    color: $slate-grey;
+    display: table;
+    float: right;
+    @media (max-width: $lg) {
+      float: none;
+    }
+    @media (max-width: $sm) {
+      margin: $mr-20 auto;
+    }
+    a {
+      margin-left: $mr-25;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+    i {
+      font-size: 16px;
+      color: $pale-grey;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      background: $slate-grey;
+    }
+  }
+  .copyright {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    span {
+      font-size: 20px;
+    }
+  }
 }

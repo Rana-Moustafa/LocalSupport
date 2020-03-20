@@ -161,17 +161,17 @@ export class FilterComponent implements OnInit {
   public filterPlaces(form) {
     const filterObject = this.constructFiltertObject();
     console.log(filterObject);
-
-    this.places.filterPlaces(filterObject).subscribe(data => {
-      console.log(data);
-      form.reset();
-      if (data) {
-        this.placesHandlerEvent.emit(data);
-      } else {
-      }
-    }, (errorMessage) => {
-      // console.log(errorMessage);
-    });
+    this.placesHandlerEvent.emit(filterObject);
+    // this.places.filterPlaces(filterObject).subscribe(data => {
+    //   console.log(data);
+    //   form.reset();
+    //   if (data) {
+    //     this.placesHandlerEvent.emit(data);
+    //   } else {
+    //   }
+    // }, (errorMessage) => {
+    //   // console.log(errorMessage);
+    // });
 
   }
   onItemChange(event, size) {

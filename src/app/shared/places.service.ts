@@ -196,20 +196,20 @@ export class PlacesService {
   }
 
   addNewPlace(place,
-    featured,
-    placeName,
-    selectedCategories,
-    selectedAccessableBy,
-    selectedAccessability,
-    selectedFeatures,
-    selectedFood,
-    selectedActivities,
-    imagesNames,
-    imagesUrls,
-    latitude,
-    longitude,
-    minValue,
-    maxValue) {
+              featured,
+              placeName,
+              selectedCategories,
+              selectedAccessableBy,
+              selectedAccessability,
+              selectedFeatures,
+              selectedFood,
+              selectedActivities,
+              imagesNames,
+              imagesUrls,
+              latitude,
+              longitude,
+              minValue,
+              maxValue) {
 
     // //console.log(place)
 
@@ -297,6 +297,127 @@ export class PlacesService {
 
     }
   }
+
+  filteredPlaces(filterObj, page, perpage) {
+    let filterAccessible = '';
+    let filterAccessibleBy = '';
+    let filterFood = '';
+    let filterFeature = '';
+    let filterActivities = '';
+    let filterCategories = '';
+    let filterRating;
+    let filterMaxvalue;
+    let filterMinvalue;
+    let filterDistance;
+    let filterSize;
+    console.log(filterObj);
+
+    // if (filterObj.size && (filterObj.size.length > 0)) {
+    //   for (var i = 0; i < filterObj.size.length; i++) {
+    //     if (filterObj.size) {
+    //       filterSize = filterSize + '&size[' + i + ']=' + filterObj.size[i].name;
+    //     } else {
+    //       filterSize = '';
+    //     }
+    //   }
+    // }
+if (filterObj){
+
+
+
+    if (filterObj && filterObj.acescsible_by.length > 0) {
+      for (var i = 0; i < filterObj.acescsible_by.length; i++) {
+        if (filterObj.acescsible_by) {
+          filterAccessibleBy = filterAccessibleBy + '&accessible_by[' + i + ']=' + filterObj.acescsible_by[i].name;
+        } else {
+          filterAccessibleBy = '';
+        }
+      }
+    }
+    if (filterObj && filterObj.accessablity.length > 0) {
+      for (var j = 0; j < filterObj.accessablity.length; j++) {
+        if (filterObj.accessablity) {
+          filterAccessible = filterAccessible + '&accessibility[' + j + ']=' + filterObj.accessablity[j].name;
+        } else {
+          filterAccessible = ''
+        }
+      }
+    }
+    if (filterObj && filterObj.selectedFood.length > 0) {
+      for (var l = 0; l < filterObj.selectedFood.length; l++) {
+        if (filterObj.selectedFood) {
+          filterFood = filterFood + '&food[' + l + ']=' + filterObj.selectedFood[l].name;
+        } else {
+          filterFood = '';
+        }
+      }
+    }
+    if (filterObj && filterObj.selectedFeatures.length > 0) {
+      for (var m = 0; m < filterObj.selectedFeatures.length; m++) {
+        if (filterObj.selectedFeatures) {
+          filterFeature = filterFeature + '&features[' + m + ']=' + filterObj.selectedFeatures[m].name;
+        } else {
+          filterFeature = ''
+        }
+      }
+    }
+
+
+    if (filterObj && filterObj.selectedCategory.length > 0) {
+
+      for (var o = 0; o < filterObj.selectedCategory.length; o++) {
+        if (filterObj.selectedCategory) {
+          filterCategories = filterCategories + '&place_type[' + o + ']=' + filterObj.selectedCategory[o].id;
+        } else {
+          filterCategories = '';
+        }
+      }
+    }
+    // if (filterObj.size == undefined) {
+    //   filterSize = filterObj.size = ''
+    // } else {
+    //   filterSize = '&size=' + filterObj.size;
+    // }
+    if (filterObj && filterObj.rating_filter == undefined) {
+      filterRating = '&rating_filter=' + (filterObj.rating_filter = 0);
+    } else {
+      filterRating = '&rating_filter=' + filterObj.rating_filter;
+    }
+    if (filterObj && filterObj.distance == undefined) {
+      filterDistance = filterObj.distance = 0
+    } else {
+      filterDistance = '&distance=' + filterObj.distance;
+    }
+    if (filterObj && filterObj.minValue == undefined) {
+      filterMinvalue = filterObj.minValue = 0
+    } else {
+      filterMinvalue = '&min_price=' + filterObj.minValue;
+    }
+    if (filterObj && filterObj.maxValue == undefined) {
+      filterMaxvalue = filterObj.maxValue = 10000;
+    } else {
+      filterMaxvalue = '&max_price=' + filterObj.maxValue;
+    }
+
+
+  }
+    if (localStorage.getItem('current_lang') === 'en') {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' +
+        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
+        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + 
+        '&skip_cache=1&lang=en&page=' + page + '&per_page=' + perpage);
+    }
+    else {
+      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' + filterSize +
+        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
+        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1')
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
+        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
+        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + 
+        '&skip_cache=1&page=' + page + '&per_page=' + perpage);
+    }
+  }
+
   filterPlaces(filterObj) {
     this.pagee ++;
     let filterAccessible = '';
@@ -376,17 +497,17 @@ export class PlacesService {
     // } else {
     //   filterSize = '&size=' + filterObj.size;
     // }
-    if (filterObj.rating_filter == undefined) {
+    if (filterObj && filterObj.rating_filter == undefined) {
       filterRating = '&rating_filter=' + (filterObj.rating_filter = 0);
     } else {
       filterRating = '&rating_filter=' + filterObj.rating_filter;
     }
-    if (filterObj.distance == undefined) {
+    if (filterObj && filterObj.distance == undefined) {
       filterDistance = filterObj.distance = 0
     } else {
       filterDistance = '&distance=' + filterObj.distance;
     }
-    if (filterObj.minValue == undefined) {
+    if (filterObj && filterObj.minValue == undefined) {
       filterMinvalue = filterObj.minValue = 0
     } else {
       filterMinvalue = '&min_price=' + filterObj.minValue;

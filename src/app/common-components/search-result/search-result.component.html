@@ -1,13 +1,33 @@
-<section class="places-category__list">
-    <div class="container">
+<div *ngIf="isLoading" class="loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+<div class="container padding-top">
+    <section class="places-category__list">
+
         <div class="places-results">
+            <div class="filter side-nav" [ngClass]="{ 'open': sideNav === true }">
+                <div class="close">
+                    <div (click)="toggleSideNav()">
+                        <img src="../../../assets/images/cancel.svg" alt="" class="img-thumbnail">
+                    </div>
+                </div>
+                <app-filter (placesHandlerEvent)="sendFilterPlaces($event)"></app-filter>
+            </div>
             <h4 class="subtitle">
                 {{'Your_search_results' | translate}}
             </h4>
+            <div class="btn-filter">
+                <button class="btn btn-secondary" type="button" (click)="toggleSideNav()">
+                    <img src="../../../assets/images/filter-icons/filter-results-button.svg" alt=""
+                        class="img-thumbnail">
+                    {{"filter" | translate}}
+                </button>
+            </div>
             <div class="places-results__wrapper">
 
                 <div class="row search-results">
                     <div class="col-lg-12">
+
                         <div class="result-notfound" *ngIf="notfound">
                             <div class="result-notfound__image">
                                 <img src="../../../assets/images/pin.png" alt="" class="img-thumbnail">
@@ -24,48 +44,55 @@
                     <!-- <div class="col-lg-3 col-sm-6 col-xs-12 places-results-item "
                 *ngFor="let place of PlacesItemsDetails "
                 *ngFor="let place of PlacesItemsDetails | paginate:{itemsPerPage: 5, currentPage:p}" -->
-                    <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]"
-                        class="col-lg-3 col-sm-6 col-xs-12 places-results-item"  *ngFor="let place of results">
+                    <div class="row search-results" infiniteScroll [infiniteScrollDistance]="15"
+                        [infiniteScrollThrottle]="50" [immediateCheck]="true"
+                        [infiniteScrollDisabled]="isFullListDisplayed" 
+                        (scrolled)="((allPlaces.length > 0) ? getFilterPlaces() : searchQuery(searchWord))">
+                        <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]"
+                            class="col-lg-3 col-sm-6 col-xs-12 places-results-item"
+                            *ngFor="let place of ((allPlaces.length > 0) ? allPlaces : allSearchPlaces)">
 
-                        <div class="places-results__img">
-                            <img [src]="place.featured_image?place.featured_image: '../../../assets/images/icon-img-placeholder.svg'"
-                                alt="" class="img-thumbnail">
-                        </div>
-                        <div class="places-results__content">
-                            <div class="place-name-link">
-                                <h6 class="places-results__place-name">
-                                    {{ place.title.rendered? place.title.rendered: ' '}}
-                                </h6>
+                            <div class="places-results__img">
+                                <img [src]="place.featured_image?place.featured_image: '../../../assets/images/icon-img-placeholder.svg'"
+                                    alt="" class="img-thumbnail">
                             </div>
-                            <div class="places-results__price">
-                                <p class="cost">{{place.price_range_from + '-' ? place.price_range_from: '' }}
-                                    {{place.price_range_to? place.price_range_to : ''}}</p>
-                            </div>
-                            <div class="description">
-                                <p class="text" pattern="[A-Za-z]{10}">{{place.description | slice:0:100}}
-                                    <a [routerLink]="['/single-place', place.id, place.slug]" class="read-more">
-                                        {{"read_more" | translate}}</a></p>
-                            </div>
-                            <div class="places-results__rating">
+                            <div class="places-results__content">
+                                <div class="place-name-link">
+                                    <h6 class="places-results__place-name">
+                                        {{ place.title.rendered? place.title.rendered: ' '}}
+                                    </h6>
+                                </div>
+                                <div class="places-results__price">
+                                    <p class="cost">{{place.price_range_from + '-' ? place.price_range_from: '' }}
+                                        {{place.price_range_to? place.price_range_to : ''}}</p>
+                                </div>
+                                <div class="description">
+                                    <p class="text" pattern="[A-Za-z]{10}">{{place.description | slice:0:100}}
+                                        <a [routerLink]="['/single-place', place.id, place.slug]" class="read-more">
+                                            {{"read_more" | translate}}</a></p>
+                                </div>
+                                <div class="places-results__rating">
 
-                                <i class="fa fa-star"
-                                    [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 1}"></i>
-                                <i class="fa fa-star"
-                                    [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 2}"></i>
-                                <i class="fa fa-star"
-                                    [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 3}"></i>
-                                <i class="fa fa-star"
-                                    [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 4}"></i>
-                                <i class="fa fa-star"
-                                    [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 5}"></i>
+                                    <i class="fa fa-star"
+                                        [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 1}"></i>
+                                    <i class="fa fa-star"
+                                        [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 2}"></i>
+                                    <i class="fa fa-star"
+                                        [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 3}"></i>
+                                    <i class="fa fa-star"
+                                        [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 4}"></i>
+                                    <i class="fa fa-star"
+                                        [ngClass]="{'star-empty': (place.avg_rating | number:'1.0-0')< 5}"></i>
 
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                     <!-- end -->
                 </div>
 
             </div>
         </div>
-    </div>
-</section>
+
+    </section>
+</div>

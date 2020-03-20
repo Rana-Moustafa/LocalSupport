@@ -88,7 +88,7 @@ export class HomepageComponent implements OnInit {
       for (var i = 0; i < this.homeData.length; i++) {
         if (this.homeData[i].acf_fc_layout === 'featured_place') {
           this.FaturedAddItems = this.homeData[i];
-          console.log(this.FaturedAddItems);
+         // console.log(this.FaturedAddItems);
         }
         if (this.homeData[i].acf_fc_layout === 'testimonials') {
           this.testimonialsData = this.homeData[i].chosen_testimonials;

@@ -38,12 +38,12 @@ export class LoginComponent implements OnInit {
       this.userData = data;
       localStorage.setItem('token', JSON.stringify(this.userData.token));
       localStorage.setItem('profile_image', this.userData.profile_image);
-      this.userData.changeProfilePicture(this.userData.profile_image);
+      this.userDataService.changeProfilePicture(this.userData.profile_image);
       localStorage.setItem('id', JSON.stringify(this.userData.id));
       this.loginForm.reset();
       this.router.navigate(['']);
-      this.newProfilePicture = this.userData.profile_image;
-      this.userDataService.changeProfilePicture(this.newProfilePicture);
+      // this.newProfilePicture = this.userData.profile_image;
+      // this.userDataService.changeProfilePicture(this.newProfilePicture);
       // this.authService.autoLogout(this.userData.token_expiration_date)
     }, (errorMessage) => {
       this.formError = true;

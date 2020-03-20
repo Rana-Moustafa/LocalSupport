@@ -1,6 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SearchResultsService } from '../../shared/search-results.service';
+import { PlacesService } from 'src/app/shared/places.service';
 
 
 @Component({
@@ -25,13 +26,22 @@ export class SearchResultComponent implements OnInit {
   dict;
   notfound = false;
   langURL = localStorage.getItem('current_lang');
-
+  sideNav = false;
   constructor(public searchResultsService: SearchResultsService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private placesService: PlacesService) { }
   result;
   searchResults;
   results;
   searchWord;
+  page = 0;
+  perPage = 8;
+  placesResults;
+  allPlaces = [];
+  allSearchPlaces = [];
+  isFullListDisplayed = false;
+  filterComponent;
+  isLoading = false;
 
   ngOnInit() {
     // this.searchResult();
@@ -45,18 +55,66 @@ export class SearchResultComponent implements OnInit {
     this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')));
     // this.searchResults = this.route.snapshot.queryParamMap.get('search')
   }
-  searchQuery(search) {
-    this.searchResultsService.GetSearchResults(search).subscribe(data => {
+
+  toggleSideNav() {
+    this.sideNav = !this.sideNav;
+  }
+  sendFilterPlaces(event) {
+    this.page = 0;
+    this.filterComponent = event;
+    this.allPlaces = [];
+    this.isFullListDisplayed = false;
+    this.getFilterPlaces();
+  }
+  getFilterPlaces() {
+    this.isLoading = true;
+    this.page++;
+    this.placesService.filteredPlaces(this.filterComponent, this.page, this.perPage).subscribe(data => {
+      console.log('filtered places');
       console.log(data);
+      this.isLoading = false;
+      this.sideNav = false;
+      this.placesResults = JSON.parse(JSON.stringify(data));
+      for (var i = 0; i < this.placesResults.length; i++) {
+        this.allPlaces.push(this.placesResults[i]);
+      }
+      if ((this.placesResults && this.placesResults.length === 0) || !this.placesResults) {
+        console.log('no comments');
+        this.isFullListDisplayed = true;
+        // this.loadingComments = false;
+      }
+    }, (errorMessage) => {
+      console.log(errorMessage);
+      this.isLoading = false;
+      if (errorMessage.status === 400 ) {
+        this.isFullListDisplayed = true;
+      }
+    });
+  }
+  searchQuery(search) {
+    this.isLoading = true;
+    this.page++;
+    this.searchResultsService.GetSearchResults(search, this.page, this.perPage).subscribe(data => {
+      console.log(data);
+      this.isLoading = false;
       this.results = data;
-      if (this.results.length === 0) {
+      for (var i = 0; i < this.results.length; i++) {
+        this.allSearchPlaces.push(this.results[i]);
+      }
+      if ((this.results && this.results.length === 0) || !this.results) {
+        console.log('no comments');
+        this.isFullListDisplayed = true;
+        // this.loadingComments = false;
+      }
+      if (this.allSearchPlaces.length === 0) {
         this.notfound = true;
       } else {
         this.notfound = false;
       }
-     // this.SearchResultsService.getSearchResultSubject().next(data)
+      // this.SearchResultsService.getSearchResultSubject().next(data)
     }, error => {
       console.log(error);
+      this.isLoading = false;
     });
   }
 }

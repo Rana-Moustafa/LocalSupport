@@ -1254,5 +1254,7 @@
   "account_delete_success_1": "Gelöscht!",
   "account_delete_success_2": "Dein Profil wurde gelöscht.",
   "no_places": "Es wurde noch kein",
-  "OR": "oder"
+  "OR": "oder",
+  "delivery": "Delivery",
+  "payment_method": "Payment method"
 }

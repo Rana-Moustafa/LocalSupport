@@ -1,7 +1,16 @@
 @import "../../../variables";
 @import "../../../fonts";
 @import "../../../mixins";
-
+.care-link{
+  position: absolute;
+  width: 150px;
+  top: 20px;
+  z-index: 9;
+  cursor: pointer;
+  img{
+    width: 100%;
+  }
+}
 header {
   &.inner-header {
     .navbar {
@@ -309,7 +318,6 @@ header {
       }
 
       .navbar-brand {
-        margin-left: $mr-30;
         width: 292px;
 
         @media all and (max-width: 1200px) {
