@@ -2,7 +2,7 @@
 @import "../../fonts";
 @import "../../mixins";
 
-.care_link{
+.care_link {
   position: absolute;
   top: 10px;
   left: 0;
@@ -19,26 +19,27 @@
   align-items: center;
   border: 5px solid #000;
   cursor: pointer;
+  z-index: 999;
 
-  &.small{
+  &.small {
     display: none;
   }
 
-  @media all and (max-width: 640px){
+  @media all and (max-width: 640px) {
     left: auto;
     right: 10px;
     width: 90px;
     height: 90px;
 
-    &.large{
+    &.large {
       display: none;
     }
-    &.small{
+    &.small {
       display: flex;
     }
   }
 
-  a{
+  a {
     font-size: 13px;
     transform: rotate(-45deg);
     line-height: 20px;
@@ -46,62 +47,103 @@
     font-weight: 900;
   }
 }
+.skip {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 10px;
+  display: block;
+  font-size: 16px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
 .intro {
-  .logo-link{
+  display: flex;
+  display: -webkit-flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  overflow-y: auto;
+  @media all and (max-width: 640px) {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .logo-link {
     position: absolute;
     top: 15px;
     left: 15px;
   }
   &__side {
     width: 50%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 95px 0 0;
     float: left;
     color: #000;
-
-    @media all and (max-width: 640px){
+    padding: 100px 7% 40px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media all and (max-width: 1300px){
+      height: 110vh;
+    }
+    @media all and (max-width: 640px) {
+      display: block;
       width: 100%;
       height: auto;
-      padding: 30px 0 40px;
+      min-height: auto;
+      padding: 30px 7% 40px;
     }
 
     &:nth-of-type(1) {
       background-color: $localPrimary;
-      padding: 100px 0 40px;
+      @media all and (max-width: 640px) {
+        padding-top: 100px;
+      }
     }
     &:nth-of-type(2) {
       background-color: $localSecondary;
     }
     &__text {
       width: auto;
-      max-width: 65%;
-      margin: auto;
 
-      @media all and (max-width: 1470px){
-        max-width: 67%;
-      }
-      @media all and (max-width: 1200px){
-        max-width: 75%;
-      }
-      @media all and (max-width: 1070px){
-        max-width: 80%;
-      }
       &__big {
         font-size: 70px;
         font-weight: 900;
         line-height: 77px;
-        @media all and (max-width: 992px){
+        @media all and (max-width: 1300px){
+          font-size: 60px;
+        }
+        @media all and (max-width: 992px) {
           font-size: 50px;
           font-weight: 900;
           line-height: 55px;
         }
+        @media all and (max-width: 992px) {
+          font-size: 38px;
+          line-height: 44px;
+        }
+        @media all and (max-width: 640px) {
+          font-size: 30px;
+          line-height: 44px;
+        }
       }
       &__small {
         margin-top: 15px;
+
+       
         p {
           line-height: 20px;
           word-break: break-word;
           font-weight: 500;
+          @media all and (max-width: 640px) {
+            font-size: 14px;
+          }
         }
       }
       &__link {
@@ -115,8 +157,10 @@
         margin: 25px auto 0;
         font-weight: bold;
         border: 5px solid #000;
-
-        @media all and (max-width: 640px){
+        @media all and (max-width: 1300px){
+          font-size: 16px;
+        }
+        @media all and (max-width: 640px) {
           border-width: 3px;
         }
       }

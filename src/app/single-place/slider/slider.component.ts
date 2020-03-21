@@ -16,6 +16,8 @@ export class SliderComponent implements OnInit, OnChanges  {
 
   ngOnInit() {
     this.isActive = 1;
+    console.log('singlePlaceSlider');
+    console.log(this.singlePlaceSlider)
   }
   ngOnChanges() { }
 

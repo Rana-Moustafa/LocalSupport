@@ -1,5 +1,5 @@
-<div class="single-place">
-  <div class="single-place__rating">
+<div class="single-place padding-top">
+  <!-- <div class="single-place__rating">
 
     <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 1}"></i>
     <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 2}"></i>
@@ -8,23 +8,23 @@
     <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 5}"></i>
 
     <span class="stars-count" *ngIf="starRating > 0">
-      <!-- ( {{ singlePlaceDetails.comments_number }}  persons rated this place ) -->
-      <!-- <a routerLink="." fragment="reviews" target="_self"> -->
-     <small> {{singlePlaceDetails? singlePlaceDetails.comments_number_rated: ''}}
-      person<span [hidden]="singlePlaceDetails && singlePlaceDetails.comments_number_rated < 2">s</span> rated this
-      place</small>
-      <!-- </a> -->
+    
+      <small> {{singlePlaceDetails? singlePlaceDetails.comments_number_rated: ''}}
+        person<span [hidden]="singlePlaceDetails && singlePlaceDetails.comments_number_rated < 2">s</span> rated this
+        place</small>
+    
     </span>
     <span class="stars-count" *ngIf="starRating === 0">
       <small>{{"This_place_has_not_been_rated_yet!" | translate}}</small>
     </span>
-  </div>
-
+  </div> -->
+<!-- <a [routerLink]="['/'+langURL, 'edit-place', singlePlaceDetails.id, singlePlaceDetails.slug]">Edit</a> -->
   <div class="single-place__title">
     {{ singlePlaceDetails.title ? singlePlaceDetails.title.rendered : ' '}}
     <div class="single-place__title__subtitle">
-      <span *ngFor="let place of singlePlaceDetails.place_type; let i = index"> <span *ngIf="i != 0"> / </span>
-        {{ singlePlaceAddress?  place.name : ' ' }} </span>
+      <span> {{singlePlaceDetails? singlePlaceDetails.place_type: ''}}</span>
+      <!-- <span *ngFor="let place of singlePlaceDetails.place_type; let i = index"> <span *ngIf="i != 0"> / </span>
+        {{ singlePlaceAddress?  place.name : ' ' }} </span> -->
 
     </div>
   </div>
@@ -37,13 +37,17 @@
 
   <div class="single-place__overview">
     <h4>{{"overview" | translate}}</h4>
-    <p>{{ singlePlaceAddress?  singlePlaceDetails.description : ' ' }}</p>
+    <p>{{ singlePlaceDetails?  singlePlaceDetails.description : ' ' }}</p>
   </div>
   <div class="single-place__contacts">
     <h4>{{"Contact_details" | translate}}</h4>
     <div class="single-place__contacts__website">
       <img src="./../assets/images/ic-site.svg" />
       <span>{{ singlePlaceDetails.website?  singlePlaceDetails.website : ('no_website' | translate) }}</span>
+    </div>
+    <div class="single-place__contacts__website">
+      <img src="./../assets/images/ic-site.svg" />
+      <span>{{ singlePlaceDetails.email?  singlePlaceDetails.email : ('no_website' | translate) }}</span>
     </div>
     <div class="single-place__contacts__phone">
       <img src="./../assets/images/ic-phone.svg" /> <span>
@@ -52,47 +56,12 @@
   </div>
   <div class="single-place__decription">
     <div class="single-place__decription__list">
-      <ul>
-        <li>
-          -  {{"size" | translate}}: {{ singlePlaceDetails.size?  singlePlaceDetails.size : '()' }}
-        </li>
-        <li>
-          -  {{"accessable_by" | translate}}:
-          <span *ngIf="singlePlaceDetails.accessible_by.length === 0">
-            ()
-          </span>
-          <span *ngFor="let access of singlePlaceDetails.accessible_by; let i = index">
-            <span *ngIf="i != 0"> / </span> {{ access }}
-          </span>
-        </li>
-        <li>-  {{"Accessability" | translate}}:
-          <span *ngFor="let access of singlePlaceDetails.accessibility; let i = index">
-            <span *ngIf="i != 0"> / </span> {{ access }}
-          </span>
-        </li>
-        <li>
-          - {{"Opening_hours" | translate}}: from {{ singlePlaceDetails.hr_from?  singlePlaceDetails.hr_from : '  () ' }}
-          - {{ singlePlaceDetails.hr_to?  singlePlaceDetails.hr_to : ' () ' }}
-        </li>
-        <li>
-          - {{"foods" | translate}}:
-          <span *ngIf="singlePlaceDetails.food.length === 0">
-            ()
-          </span>
-          <span *ngFor="let food of singlePlaceDetails.food; let i = index">
-            <span *ngIf="i != 0"> / </span> {{ food }}
-          </span>
-        </li>
-
-        <li>
-          - {{ 'distance' | translate }} {{distance? distance: ' () '}} km away from your location
-        </li>
-        <li>
-          - {{'cost_range' | translate }}
-          {{ singlePlaceDetails.price_range_from ?  singlePlaceDetails.price_range_from : '()' + 'CHF - to'}}
-          {{ singlePlaceDetails.price_range_to?  singlePlaceDetails.price_range_to : ' () ' }} CHF
-        </li>
-      </ul>
+    <ul>
+      <li>
+        - {{"Opening_hours" | translate}}: {{"from"|translate}} {{ singlePlaceDetails.hr_from?  singlePlaceDetails.hr_from : '  () ' }}
+        - {{"to"|translate}} {{ singlePlaceDetails.hr_to?  singlePlaceDetails.hr_to : ' () ' }}
+      </li>
+    </ul>
     </div>
     <!-- <div class="single-place__decription__route">
       <span>{{"Find_route?" | translate}}</span>
@@ -100,10 +69,29 @@
     </div> -->
   </div>
   <div class="single-place__services">
-    <div class="single-place__services__blocks" *ngFor="let feature of singlePlaceDetails.features; let i = index">
+    <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.category">
+      <strong> {{ "local_Category" | translate }}</strong>
+      <ul>
+        <li *ngFor="let category of singlePlaceDetails.category"> {{category}} </li>
+      </ul>
+    </div>
+    <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.delivery">
+      <strong>{{ "local_Delievery" | translate }}</strong>
+      <ul>
+        <li *ngFor="let delivery of singlePlaceDetails.delivery"> {{delivery}} </li>
+      </ul>
+    </div>
+    <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.payment_methods">
+      <strong>{{ "local_Payment_Method" | translate }}</strong>
+      <ul>
+        <li *ngFor="let payment of singlePlaceDetails.payment_methods"> {{payment}} </li>
+      </ul>
+    </div>
+    
+    <!-- <div class="single-place__services__blocks" *ngFor="let feature of singlePlaceDetails.features; let i = index">
       <div> <img [src]="feature.icon" /></div>
       <span>{{ feature.name }}</span>
-    </div>
+    </div> -->
 
   </div>
 

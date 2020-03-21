@@ -27,7 +27,11 @@ import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { AboutUsComponent } from './inner-pages/about-us/about-us.component';
 import { from } from 'rxjs';
 import { SearchResultComponent } from './common-components/search-result/search-result.component';
-let ll = localStorage.getItem('current_lang')
+import { EditPlaceComponent } from './single-place/edit-place/edit-place.component';
+import { LegalComponent } from './inner-pages/legal/legal.component';
+import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
+
+let ll = localStorage.getItem('current_lang');
 // let ll = 'de'
 
 const appRoutes: Routes = [
@@ -58,7 +62,9 @@ const appRoutes: Routes = [
 	{ path: ':language/reset-password', component: ResetPasswordComponent },
 	{ path: ':language/single-blog/:id/:slug', component: SingleBlogComponent },
 	{ path: ':language/blogs', component: BlogComponent },
+	{ path: ':language/edit-place/:id/:slug', component: EditPlaceComponent },
 	{ path: ':language/not-found', component: NotfoundPageComponent },
+	{ path: ':language/advertising', component: AdvertisingComponent },
 	{
 		path: ':language/pages', component: InnerPagesComponent, children: [
 			{ path: 'about-us', component: AboutUsComponent },
@@ -66,13 +72,13 @@ const appRoutes: Routes = [
 			{ path: 'press', component: PressComponent },
 			{ path: 'impressum', component: ImpressumComponent },
 			{ path: 'q&a', component: QuestionsAndAnswersComponent },
-			{ path: 'advertising', component: AdvertisingComponent }
+			{ path: 'advertising', component: AdvertisingComponent },
+			{ path: 'legal', component: LegalComponent },
+			{ path: 'privacy-policy', component: PrivacyComponent }
 		]
 	},
 	{
-		path: '**',
-		redirectTo: 'de-ch/',
-		pathMatch: 'full'
+		path: '**',component: NotfoundPageComponent 
 	},
 
 ];
@@ -80,7 +86,6 @@ const appRoutes: Routes = [
 @NgModule({
 	imports: [RouterModule.forRoot(appRoutes, {
 		onSameUrlNavigation: 'reload',
-		enableTracing: true,
 		anchorScrolling: 'enabled',
 		scrollPositionRestoration: 'enabled',
 		scrollOffset: [0, 64]

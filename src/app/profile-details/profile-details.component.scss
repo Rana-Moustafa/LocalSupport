@@ -5,10 +5,9 @@
 
 .profile-details {
     padding-bottom: $mr-40;
-    min-height    : 72vh;
+    min-height    : 90vh;
 
     &__header {
-        background             : $white-grey url('../../assets/images/portfolio-header.jpg');
         -moz-background-size   : cover;
         -webkit-background-size: cover;
         -o-background-size     : cover;
@@ -16,7 +15,7 @@
         background-position    : center;
         width                  : 100%;
         background-repeat      : no-repeat;
-        height                 : 347px;
+        height                 : 300px;
         margin-bottom          : 35px;
         position               : relative;
 
@@ -94,7 +93,7 @@
 
         .tab-content {
             background-color: $white;
-            border          : solid 1px #f5b19c;
+            border          : solid 1px #000;
             padding         : $mr-30;
             height          : 100%;
 
@@ -120,7 +119,7 @@
             @media(max-width:$lg) {
                 flex-direction: row !important;
                 margin-bottom : 0;
-                border        : 1px solid $btnColor;
+                border        : 1px solid #000;
             }
 
             .nav-link {
@@ -135,20 +134,20 @@
                     flex-grow       : 1;
                     text-align      : center;
                     background-color: $white-grey;
-                    border-right    : 1px solid $btnColor;
+                    border-right    : 1px solid $localPrimary;
 
                     &:last-child {
-                        border-right: 0px solid $btnColor;
+                        border-right: 0px solid $localPrimary;
                     }
                 }
 
                 &.active {
                     background-color: transparent;
-                    color           : $btnColor;
+                    color           : #000;
+                    font-weight: 500;
 
                     @media(max-width:$lg) {
-                        background-color: $btnColor;
-                        color           : $white;
+                       
                     }
                 }
             }

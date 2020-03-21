@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="language_banner"  [ngClass]="{ 'hide-lang-banner': hideLanguageBanner === true }">
     <i class="fa fa-globe  earth_icon" aria-hidden="true"></i>
     {{ 'visit_website_in'  | translate }}
@@ -7,20 +7,23 @@
    <div class="close">
     <i class="fa fa-close" aria-hidden="true" (click)="hideBanner()"></i>
    </div>
-</div>
+</div> -->
+<app-header></app-header>
 
-<div class="registration-form-section">
+<div class="registration-form-section padding-top">
   <div class="container-fluid">
     <div class="row">
     
       <div class="col-lg-5 no-padding">
         <div class="registration-form-section__Background">
-          <a href="#" class="registration-form-section__logo-wrapper">
-            <img src="../../assets/images/logo.svg" alt="" class="registration-form-section__logo">
-            <h1 class="registration-form-section__logo-text">
-              Local support
-            </h1>
-          </a>
+         <h1>{{"local_login_header" | translate }}</h1>
+
+         <p>{{"local_login_text_1" | translate }}</p> <br/>
+         <p>{{"local_login_text_2" | translate }}</p><br/>
+         <p>{{"local_login_text_3" | translate }}</p>
+         <p>{{"local_login_text_5" | translate }}</p>
+         <p>{{"local_login_text_5" | translate }}</p><br/>
+         <p>{{"local_login_text_6" | translate }}</p>
         </div>
       </div>
       <div class="col-lg-7 no-padding">

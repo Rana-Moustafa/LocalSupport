@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
   address: string;
   private geoCoder;
   markerIcon = {
-    url: '../../assets/images/ic-location-orange.svg',
+    url: '../../assets/images/ic-location-dark-blue.svg',
     scaledSize: { height: 30, width: 30 }
   };
 
@@ -237,25 +237,24 @@ export class MapComponent implements OnInit {
     this.translation.langUpdated.subscribe(
       (lang) => {
         // console.log(lang)
-        this.placesTypes();
         this.loadTabs();
       }
     );
 
     this.loadTabs();
     this.loadMap();
-    this.placesTypes();
   }
 
   loadTabs() {
-    this.selectedCategory(0, 3);
-    if (localStorage.getItem('current_lang') === 'en') {
-      this.selectedCategory(17, 3);
-    } else {
-      this.selectedCategory(3, 3);
-    }
+    this.selectedCategory();
+    // if (localStorage.getItem('current_lang') === 'en') {
+    //   this.selectedCategory(17, 3);
+    // } else {
+    //   this.selectedCategory(3, 3);
+    // }
   }
-  selectedCategory(e, index) {
+
+  selectedCategory() {
 
     if (this.searchElementRef) {
       if ((this.searchElementRef.nativeElement.value).length < 1) {
@@ -266,49 +265,41 @@ export class MapComponent implements OnInit {
 
     }
 
-    this.selected = e;
-    this.map.getMapLocations(e).subscribe(data => {
-      console.log('all map places')
-      console.log(data)
+   //  this.selected = e;
+    this.map.getMapLocations().subscribe(data => {
+      console.log('all map places');
+      console.log(data);
       this.markers = JSON.parse(JSON.stringify(data));
-      switch (index) {
-        case 0: {
-          this.markerIcon = {
-            url: '../../assets/images/ic-location-gray.svg',
-            scaledSize: { height: 30, width: 30 }
-          };
-          break;
-        }
-        case 1: {
-          this.markerIcon = {
-            url: '../../assets/images/ic-location-orange.svg',
-            scaledSize: { height: 30, width: 30 }
-          };
-          break;
-        }
-        case 2: {
-          this.markerIcon = {
-            url: '../../assets/images/ic-location-dark-blue.svg',
-            scaledSize: { height: 30, width: 30 }
-          };
-          break;
-        }
-        default: {
-          this.markerIcon = {
-            url: '../../assets/images/ic-location-dark-blue.svg',
-            scaledSize: { height: 30, width: 30 }
-          };
-          break;
-        }
-      }
-    }, error => {
-      // console.log(error);
-    });
-  }
-  placesTypes() {
-    this.places.getPlacesTypes().subscribe(data => {
-      // console.log(data)
-      this.placesTypesTabs = data;
+      // switch (index) {
+      //   case 0: {
+      //     this.markerIcon = {
+      //       url: '../../assets/images/ic-location-gray.svg',
+      //       scaledSize: { height: 30, width: 30 }
+      //     };
+      //     break;
+      //   }
+      //   case 1: {
+      //     this.markerIcon = {
+      //       url: '../../assets/images/ic-location-orange.svg',
+      //       scaledSize: { height: 30, width: 30 }
+      //     };
+      //     break;
+      //   }
+      //   case 2: {
+      //     this.markerIcon = {
+      //       url: '../../assets/images/ic-location-dark-blue.svg',
+      //       scaledSize: { height: 30, width: 30 }
+      //     };
+      //     break;
+      //   }
+      //   default: {
+      //     this.markerIcon = {
+      //       url: '../../assets/images/ic-location-orange.svg',
+      //       scaledSize: { height: 30, width: 30 }
+      //     };
+      //     break;
+      //   }
+      // }
     }, error => {
       // console.log(error);
     });
@@ -354,9 +345,9 @@ export class MapComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.lat = this.latitude + 0.29;
+        this.lat = this.latitude;
         this.lng = this.longitude;
-        this.zoom = 10;
+        this.zoom = 15;
         this.getAddress(this.latitude, this.longitude);
       });
     }

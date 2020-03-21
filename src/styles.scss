@@ -6,9 +6,21 @@
 @import "~ngx-sharebuttons/styles/themes/circles/circles-theme";
 @import "sweetalert2/src/sweetalert2.scss";
 
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
 body {
   font-family: 'Quicksand', sans-serif;
   position: relative;
+  margin: 0;
+  height: 100%;
+  min-height: 70vh;
+
+  @media all and (min-width: 641px){
+    
+  }
 
   .btn:disabled {
     cursor: not-allowed !important;
@@ -18,14 +30,10 @@ body {
     &.padding-top {
       overflow: hidden;
       padding-top: 125px;
-
-      @media all and (max-width: 991px) {
-        padding-top: 90px;
+      @media all and (max-width: 640px){
+        padding-top: 165px;
       }
-
-      @media all and (max-width: 430px) {
-        padding-top: 60px;
-      }
+     
     }
 
     @media all and (max-width: $md) {
@@ -104,7 +112,7 @@ a {
 }
 
 .red {
-  color: $mainColor !important;
+  color: $localSecondary !important;
 }
 
 // buttons color//
@@ -126,8 +134,8 @@ a {
 }
 
 .btn-primary {
-  background: $btnColor !important;
-  border-color: $btnColor !important;
+  background: $localSecondary !important;
+  border-color: $localSecondary !important;
   color: $white !important;
 }
 
@@ -162,13 +170,13 @@ a {
 
 .scrolled {
   header {
-    background-color: #fbeee8;
+    background-color: #fff;
     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
     z-index: 99999;
     &.inner-header {
       .sign-user{
         a{
-          color: $darkBlueGrey !important;
+          // color: $darkBlueGrey !important;
         }
       }
       .navbar {
@@ -573,16 +581,20 @@ span.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min {
 }
 
 .swal2-styled.swal2-confirm {
-  background-color: $btnColor !important;
-  border: 1px solid $btnColor !important;
+  background-color: $localSecondary !important;
+  border: 1px solid $localSecondary !important;
   outline: none !important;
   box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(229, 144, 105, 0.34) !important;
+}
+.swal2-icon.swal2-warning{
+  border-color: $localSecondary !important;
+  color: $localSecondary !important;
 }
 
 .timepicker-overlay {
   .timepicker {
     &__header {
-      background-color: $btnColor !important;
+      background-color: $localSecondary !important;
     }
 
     &__main-content {
@@ -602,7 +614,7 @@ span.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min {
     &__number {
       span {
         &.active {
-          background-color: $btnColor !important;
+          background-color: $localSecondary !important;
         }
       }
     }
@@ -610,7 +622,7 @@ span.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min {
 }
 
 .timepicker-button {
-  color: $btnColor !important;
+  color: $localSecondary !important;
 }
 
 .timepicker-dial__control {
@@ -622,5 +634,19 @@ span.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min {
 }
 
 .clock-face__clock-hand {
-  background-color: $btnColor !important;
+  background-color: $localSecondary !important;
+}
+.btn-original {
+  background-color: #000 !important;
+  border: 2px solid #000 !important;
+  color: #fff !important;
+  font-size: 20px;
+  font-weight: 500 !important;
+  cursor: pointer;
+
+  &:hover{
+    background-color: $localSecondary !important;
+    color: #000 !important;
+    font-size: 20px;
+  }
 }

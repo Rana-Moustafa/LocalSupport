@@ -8,21 +8,21 @@
           <i class="fa fa-heart"></i>
         </label>
       </div> -->
-      <app-add-to-fav-list 
+      <!-- <app-add-to-fav-list 
       [addToFavId]="singlePlaceData.id" 
       [addToFavStatus]="singlePlaceData.is_favorited"
         *ngIf="singlePlaceData && userStatus.isLoggedIn">
-      </app-add-to-fav-list>
-      <div *ngIf="!singlePlaceParent">
+      </app-add-to-fav-list> -->
+      <div *ngIf="singlePlaceParent && !singlePlaceParent.images">
         <img src="./../assets/images/icon-img-placeholder.svg" class="img-fluid">
       </div>
-      <div *ngIf="singlePlaceParent">
+      <div *ngIf="singlePlaceParent && singlePlaceParent.images">
         <app-slider [singlePlaceSlider]="singlePlaceParent"></app-slider>
       </div>
       <div *ngIf="singlePlaceParent">
         <app-details *ngIf="!showDetailsDesktop" [singlePlaceDetails]="singlePlaceParent"></app-details>
       </div>
-      <app-comments id="reviews"></app-comments>
+      <!-- <app-comments id="reviews"></app-comments> -->
     </div>
     <div class="col-lg-6 single-place__details">
       <div class="alert alert-warning" role="alert" *ngIf="placeNotTranslated">
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="" *ngIf="singlePlaceParent">
+  <!-- <div class="" *ngIf="singlePlaceParent">
     <app-related-places [returnedRelatedPlaces]="singlePlaceParent.related_places"></app-related-places>
-  </div>
+  </div> -->
 </div>

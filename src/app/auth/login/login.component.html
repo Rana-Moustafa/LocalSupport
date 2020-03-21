@@ -18,7 +18,7 @@
         <small class="help-block" *ngIf="password.touched && password.invalid && password.errors.required">{{"field_requird" |translate}}</small>
     </div>
     <div class="btn-wrapper social-buttons-login">
-        <button type="submit" class="btn btn-primary" [disabled]="!lg.valid">{{"signin" |translate}}</button>
+        <button type="submit" class="btn btn-original" [disabled]="!lg.valid">{{"signin" |translate}}</button>
         <app-facebook-login></app-facebook-login>
         <app-google-login></app-google-login>
         

@@ -48,6 +48,7 @@ export class ProfileDetailsComponent implements OnInit {
               private translate: TranslateService) { }
 
   ngOnInit() {
+    console.log(this.selectedUserInfo)
     this.userDataService.currentProfilePicture.subscribe(picture => this.url = picture);
     this.commons.darkHeader = true;
     this.commons.lightHeader = true;
@@ -100,7 +101,7 @@ export class ProfileDetailsComponent implements OnInit {
     this.url = null;
   }
   getSelectedUserProfilePicture(info) {
-    // console.log(info)
+    console.log(info)
     this.selectedUserInfo = info;
     this.url = this.selectedUserInfo.profile_image;
   }

@@ -25,8 +25,7 @@
   color: #fff;
   font-size: 16px;
 }
-.agm-map-container-inner{
- 
+.agm-map-container-inner {
 }
 /*style the link*/
 .gm-style div div div div div div div div a {
@@ -36,28 +35,29 @@
 .fa-star {
   color: $btnColor;
 }
-.pac-container{
-  .pac-item{
+.pac-container {
+  .pac-item {
     cursor: pointer;
-    .pac-icon-marker{
+    .pac-icon-marker {
       display: none;
     }
-    .pac-item-query{
+    .pac-item-query {
       font-size: 16px;
       font-family: "google_sansregular";
       padding: 0;
       color: #f2cfbf;
       height: 25px;
       display: block;
+      color: $localPrimary;
 
-      .pac-matched{
-        color: $btnColor;
+      .pac-matched {
+        color: $localSecondary;
       }
     }
   }
 }
 agm-map {
-  height: 85vh;
+  height: 80vh;
 
   .marker-popup {
     z-index: 999;
@@ -65,13 +65,13 @@ agm-map {
 
   .agm-info-window-content {
     h4 {
-      color: $darkBlueGrey;
+      color: $localPrimary;
       font-size: 16px;
       line-height: 22px;
     }
 
     p {
-      color: $darkBlueGrey;
+      color: $localPrimary;
     }
 
     .rating {
@@ -79,7 +79,12 @@ agm-map {
     }
   }
 }
-
+.gm-style-iw-d + button.gm-ui-hover-effect {
+  background-color: $localPrimary !important;
+  top: 0 !important;
+  right: 0 !important;
+  z-index: 99999 !important;
+}
 agm-marker {
   position: relative;
   z-index: 9999999999999;
@@ -92,10 +97,13 @@ agm-marker {
   }
 }
 
-.map-adjust{
-  height: 90px;
-  @media (max-width: 425px) {
-    height: 65px;
+.map-adjust {
+  height: 85px;
+  @media (max-width: 450px) {
+    height: 86px;
+  }
+  @media all and (max-width: 375px) {
+    height: 73px;
   }
 }
 .map-filters {
@@ -135,7 +143,7 @@ agm-marker {
       padding-right: 215px;
 
       @media all and (max-width: $sm) {
-        padding-right: 113px;
+        padding-right: 160px;
       }
 
       &:focus {
@@ -150,12 +158,14 @@ agm-marker {
       top: 5px;
       right: 65px;
       height: 30px;
-      background-color: $btnColor;
-      color: $white;
+      background-color: #000000;
+      color: #ffffff;
       border: 0;
       padding: 0 15px;
-      opacity: 0.7;
-      border-radius: 3px;
+      opacity: 1;
+      border-radius: 0;
+      font-weight: bold;
+      font-size: 14px;
 
       @media all and (max-width: $sm) {
         right: 45px;
@@ -170,7 +180,7 @@ agm-marker {
       }
     }
 
-    &__action{
+    &__action {
       position: absolute;
       right: 0;
       top: 0;
@@ -189,11 +199,11 @@ agm-marker {
       -ms-transition: all 0.3s ease-in;
       -o-transition: all 0.3s ease-in;
 
-      &:hover{
+      &:hover {
         background-color: $btnColor;
       }
 
-      img{
+      img {
         width: 20px;
       }
     }
@@ -290,13 +300,13 @@ agm-marker {
             &:checked {
               & + span {
                 color: $white;
-                &.place-type-0{
+                &.place-type-0 {
                   background-color: $slate-grey;
                 }
-                &.place-type-1{
+                &.place-type-1 {
                   background-color: $btnColor;
                 }
-                &.place-type-2{
+                &.place-type-2 {
                   background-color: $darkBlue;
                 }
               }
@@ -315,7 +325,7 @@ agm-marker {
       height: 60px;
       width: 20%;
       border-radius: 20px;
-    
+
       @media all and (max-width: 500px) {
         width: 25%;
         margin: 0 3%;

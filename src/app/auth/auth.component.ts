@@ -37,7 +37,7 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.commons.hide();
+     this.commons.hide();
     if (this.router.url == "/signup") {
       // //////console.log('sign up page');
       this.showSignUpForm = true;

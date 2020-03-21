@@ -9,11 +9,11 @@ export class MapsService {
 
   constructor(private http: HttpClient) { }
 
-  getMapLocations(placeId) {
+  getMapLocations() {
     if ( localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?place_type=' + placeId + '&lang=en' );
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?lang=en&skip_cache=1' );
     } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?place_type=' + placeId);
+      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/map_search?skip_cache=1');
     }
   }
 }

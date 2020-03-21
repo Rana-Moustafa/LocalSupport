@@ -37,7 +37,6 @@ export class FilterComponent implements OnInit {
   activities;
   placesCategories;
   category;
-  selectedCategories;
   placeType: any;
   selectedActivities;
   openingHours = '10:00 AM';
@@ -46,10 +45,20 @@ export class FilterComponent implements OnInit {
   maxValue = 1000;
   selectedPlacesize;
   showSubCategories = false;
+  formTypes;
+  formCategories;
+  formDelivery;
+  formPayment;
+  selectedTypes;
+  selectedCategories;
+  selectedDelivery;
+  selectedPayment;
+  types;
+
 
   constructor(private router: Router,
-              private places: PlacesService,
-              private translation: TranslationService) { }
+    private places: PlacesService,
+    private translation: TranslationService) { }
 
   options: Options = {
     floor: 0,
@@ -111,10 +120,10 @@ export class FilterComponent implements OnInit {
     // console.log(name)
     // console.log(event.target.checked)
     if ((name === 'Playground' || name === 'Spielplatz' || name === 'Spielplätze' || name === 'Playgrounds')
-    && event.target.checked === true) {
+      && event.target.checked === true) {
       this.showSubCategories = true;
     } else if ((name === 'Playground' || name === 'Spielplatz' || name === 'Spielplätze' || name === 'Playgrounds')
-     && event.target.checked === false) {
+      && event.target.checked === false) {
       this.showSubCategories = false;
     }
   }
@@ -129,19 +138,12 @@ export class FilterComponent implements OnInit {
   getFormSelectionItems() {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
-
-      // console.log(this.formSelection = data);
       this.formSelection = data;
-      this.accessableBy = this.formSelection.accessible_by;
-      this.accessablity = this.formSelection.accessibility;
-      this.foods = this.formSelection.food;
-      this.features = this.formSelection.features;
-      this.activities = this.formSelection.activities;
-      this.subCategories = this.formSelection.places_kind;
-      this.isLoading = false;
-      this.placesCategories = this.placesCategories;
-      this.selectedCategories = this.selectedCategories;
-      this.placeSize = this.formSelection.size;
+      console.log(this.formSelection);
+      this.formTypes = this.formSelection.type;
+      this.formCategories = this.formSelection.category;
+      this.formDelivery = this.formSelection.delivery;
+      this.formPayment = this.formSelection.payment_methods;
       this.isLoading = false;
       // this.placeType = '';
     }, error => {
@@ -151,28 +153,27 @@ export class FilterComponent implements OnInit {
   }
   getPlacesTypesItems() {
     this.places.getPlacesTypes().subscribe(data => {
-      this.placesCategories = data;
+      // this.placesCategories = data;
 
     }, error => {
       // console.log(error);
     });
   }
 
-  public filterPlaces(form) {
+  public filterPlaces(form: NgForm) {
+    this.sendCheckedCategories();
+    this.types = form.value.subcats.name;
+    console.log(this.types);
     const filterObject = this.constructFiltertObject();
-    console.log(filterObject);
+    //console.log(filterObject);
     this.placesHandlerEvent.emit(filterObject);
-    // this.places.filterPlaces(filterObject).subscribe(data => {
-    //   console.log(data);
-    //   form.reset();
-    //   if (data) {
-    //     this.placesHandlerEvent.emit(data);
-    //   } else {
-    //   }
-    // }, (errorMessage) => {
-    //   // console.log(errorMessage);
-    // });
 
+  }
+
+  sendCheckedCategories() {
+    this.selectedCategories = this.placesCategories ? this.placesCategories.filter((category) => category.checked) : '';
+    this.selectedDelivery = this.accessableBy ? this.accessableBy.filter((access) => access.checked) : '';
+    this.selectedPayment = this.features ? this.features.filter((feature) => feature.checked) : '';
   }
   onItemChange(event, size) {
     this.selectedPlacesize = size;
@@ -180,21 +181,14 @@ export class FilterComponent implements OnInit {
   constructFiltertObject() {
 
     const filterObject = {
-      size: this.placeSize.filter(size => size.checked === true),
-      acescsible_by: this.accessableBy.filter(accessable => accessable.checked === true),
-      // accessablity: this.accessablity.filter(accessablity => accessablity.checked == true).map(obj => obj.name).join(','),
-      accessablity: this.accessablity.filter(accessablity => accessablity.checked === true),
-      // selectedActivities : this.activities.filter((activity) => activity.checked),
-      selectedFeatures: this.features.filter((feature) => feature.checked),
-      selectedFood: this.foods.filter((food) => food.checked),
-      rating_filter: this.rating,
+      selectedPayment: this.formPayment.filter((payment) => payment.checked),
+      selectedDelivery: this.formDelivery.filter((delivery) => delivery.checked),
+      // rating_filter: this.rating,
       distance: this.distanceValue,
-      selectedCategory: this.placesCategories.filter((category) => category.checked),
-
-      // place_type: this.placeType.filter(type => type.checked == true).map(type => type.id).join(','), 
-      minValue: this.minValue,
-      maxValue: this.maxValue
+      selectedCategory: this.formCategories.filter((category) => category.checked),
+      selectedTypes: this.types
     };
+    // console.log(filterObject);
     return filterObject;
   }
 }

@@ -7,22 +7,52 @@
   width: 100%;
   padding: 15px 0;
   border-top: 1px solid #ddd;
-  margin-top: 25px;
 
+  @media all and (min-width: 641px){
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+  }
+  @media all and (max-width: 640px){
+    padding: .5rem 1rem;
+  }
   .row {
     justify-content: space-between;
+    
+    @media all and (max-width: 768px){
+      justify-content: space-evenly;
+    }
   }
   .navbar {
+    padding-left: 0;
+
+    
     .navbar-nav {
       flex-direction: row;
-
+      @media all and (max-width: 640px){
+        flex-wrap: wrap;
+      }
       .nav-item {
         margin-right: 25px;
-        &:first-of-type {
-          margin-right: 150px;
+
+        @media all and (max-width: 450px){
+          margin-right: 10px;
         }
         .nav-link {
-          font-size: 20px;
+          font-size: 16px;
+          color: #000;
+          font-weight: 500;
+          text-transform: uppercase;
+          @media all and (max-width: 640px){
+            font-size: 14px;
+          }
+          @media all and (max-width: 450px){
+            font-size: 12px;
+          }
 
           &:hover {
             color: $localSecondary;
@@ -75,29 +105,36 @@
     color: $slate-grey;
     display: table;
     float: right;
+    margin-top: 10px;
     @media (max-width: $lg) {
       float: none;
     }
     @media (max-width: $sm) {
-      margin: $mr-20 auto;
+      margin: 0;
     }
     a {
-      margin-left: $mr-25;
+      
       &:hover,
       &:focus {
+        color: $localSecondary;
         text-decoration: none;
       }
     }
     i {
       font-size: 16px;
-      color: $pale-grey;
+      color: #000;
       height: 30px;
       width: 30px;
       border-radius: 50%;
       text-align: center;
       display: table-cell;
       vertical-align: middle;
-      background: $slate-grey;
+
+      &:hover,
+      &:focus {
+        color: $localSecondary;
+        text-decoration: none;
+      }
     }
   }
   .copyright {
@@ -105,8 +142,19 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+    color: #000;
+    @media all and (max-width: 640px){
+      margin-right: auto;
+    }
     span {
-      font-size: 20px;
+      font-size: 16px;
+      @media all and (max-width: 640px){
+        font-size: 14px;
+        font-weight: 500;
+      }
+      @media all and (max-width: 450px){
+        font-size: 12px;
+      }
     }
   }
 }

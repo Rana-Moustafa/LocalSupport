@@ -1,20 +1,18 @@
 <div class="account-details">
   <!-- EDIT MOOD -->
-  <div *ngIf="editForm">
+  <!-- <div *ngIf="editForm">
     <app-edit-profile [editUserData]="userDataDisplayParent"></app-edit-profile>
-  </div>
+  </div> -->
   <!-- END -->
   <!-- SHOWED INFO -->
   <div class="account-details__information" *ngIf="!editForm && userDataDisplayParent">
-    <div class="edit-profile" [hidden]="!HideEditAndChangePass">
+    <!-- <div class="edit-profile" [hidden]="!HideEditAndChangePass">
       <button class="btn btn-secondrary" (click)="startEditMode()">{{"Edit_profile" | translate}} </button>
-    </div>
+    </div> -->
     <app-display-profile-details [profileDataChild]="userDataDisplayParent"></app-display-profile-details>
 
     <!-- CHANGE PASSWORD -->
-    <div class="form-group" *ngIf="changePassword">
-      <!-- <label>Password</label> -->
-      <!-- <p class="details">********</p> -->
+    <!-- <div class="form-group" *ngIf="changePassword">
       <div class="btn-wrapper" [hidden]="!HideEditAndChangePass">
         <button class="btn btn-primary" (click)="startpasswordEditMode()">{{"change_password" | translate}}</button>
       </div>
@@ -22,7 +20,7 @@
     <div class="change-password" *ngIf="!changePassword">
       <button  class="btn btn-primary btn-cancel" (click)="EndpasswordEditMode()">{{"cancel" | translate}}</button>
       <app-change-password></app-change-password>
-    </div>
+    </div> -->
     <!-- END -->
   </div>
 </div>

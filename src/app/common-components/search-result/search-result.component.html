@@ -47,7 +47,7 @@
                     <div class="row search-results" infiniteScroll [infiniteScrollDistance]="15"
                         [infiniteScrollThrottle]="50" [immediateCheck]="true"
                         [infiniteScrollDisabled]="isFullListDisplayed" 
-                        (scrolled)="((allPlaces.length > 0) ? getFilterPlaces() : searchQuery(searchWord))">
+                        (scrolled)="((allPlaces.length > 0) ? getFilterPlaces() : searchQuery(searchWord, langURL))">
                         <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]"
                             class="col-lg-3 col-sm-6 col-xs-12 places-results-item"
                             *ngFor="let place of ((allPlaces.length > 0) ? allPlaces : allSearchPlaces)">

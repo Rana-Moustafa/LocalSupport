@@ -41,14 +41,14 @@ export class AddNewPalceComponent implements OnInit {
   showSubCategories = false;
   newplaceFeaturedImage = [];
   placeName;
+  selectedType;
   selectedCategories;
-  selectedAccessableBy;
-  selectedFeatures;
-  selectedFood;
-  selectedSubCategories;
-  selectedAccessability;
-  selectedActivities;
-  selectedSize;
+  selectedDelivery;
+  selectedPaymentMethod;
+  formType;
+  formCategories;
+  formDelivery;
+  formPaymentMethod;
   featuredImageName;
   featuredImageUrl;
   cityName;
@@ -148,17 +148,13 @@ export class AddNewPalceComponent implements OnInit {
   getFormSelectionItems() {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
-
-      // console.log(data);
+      console.log('form selection');
+      console.log(data);
       this.formSelection = data;
-      this.accessableBy = this.formSelection.accessible_by;
-      this.accessablity = this.formSelection.accessibility;
-      this.foods = this.formSelection.food;
-      this.features = this.formSelection.features;
-      this.activities = this.formSelection.activities;
-      this.subCategories = this.formSelection.places_kind;
-      this.placeSize = this.formSelection.size;
-      // console.log(this.placeSize);
+      this.formType = this.formSelection.type;
+      this.formCategories = this.formSelection.category;
+      this.formDelivery  = this.formSelection.delivery;
+      this.formPaymentMethod = this.formSelection.payment_methods;
       this.isLoading = false;
     }, error => {
       this.isLoading = false;
@@ -198,16 +194,10 @@ export class AddNewPalceComponent implements OnInit {
   }
   // sent data
   sendCheckedCategories(): void {
-    this.selectedCategories = this.placesCategories ? this.placesCategories.filter((category) => category.checked) : '';
-    this.selectedAccessableBy = this.accessableBy ? this.accessableBy.filter((access) => access.checked) : '';
-    this.selectedFeatures = this.features ? this.features.filter((feature) => feature.checked) : '';
-    this.selectedFood = this.foods ? this.foods.filter((food) => food.checked) : '';
-    this.selectedAccessability = this.accessablity ? this.accessablity.filter((accessble) => accessble.checked) : '';
-    this.selectedActivities = this.activities ? this.activities.filter((activity) => activity.checked) : '';
-    this.selectedSize = this.placeSize ? this.placeSize.filter((size) => size.checked) : '';
-
-    // you could use an EventEmitter and emit the selected values here, or send them to another API with some service
-
+    this.selectedCategories = this.formCategories ? this.formCategories.filter((category) => category.checked) : '';
+    this.selectedType = this.formType ? this.formType.filter((type) => type.checked) : '';
+    this.selectedDelivery = this.formDelivery ? this.formDelivery.filter((delivery) => delivery.checked) : '';
+    this.selectedPaymentMethod = this.formPaymentMethod ? this.formPaymentMethod.filter((method) => method.checked) : '';
   }
 
 
@@ -255,10 +245,10 @@ export class AddNewPalceComponent implements OnInit {
   }
 
   compressFile() {
-    // console.log(this.addPlaceName.value)
+  // console.log(this.addPlaceName.value);
    if (!this.maxNumber) {
     this.imageCompress.uploadFile().then(({image, orientation}) => {
-        // console.log(image)
+        console.log(image);
         this.imgResultBeforeCompress = image;
         this.featuredImageError = true;
         console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
@@ -269,8 +259,8 @@ export class AddNewPalceComponent implements OnInit {
             this.imagesResultsNames = 'place-name-' + this.addPlaceName.value + '-' + this.imageCompress.byteCount(result);
             this.imagesUrls.push(this.imgResultAfterCompress)
             this.imagesNames.push(this.imagesResultsNames);
-            // console.log(this.imagesUrls)
-            // console.log(this.imagesNames)
+            console.log(this.imagesUrls);
+            console.log(this.imagesNames);
             console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
 
             if (this.imagesUrls.length > 5) {
@@ -288,12 +278,12 @@ export class AddNewPalceComponent implements OnInit {
 }
 
   getFileDetails(event) {
-    // console.log(event)
+    console.log(event);
     if (event.target.files && event.target.files[0]) {
       const filesAmount = event.target.files.length;
 
       for (let i = 0; i < filesAmount; i++) {
-        // console.log(event.target.files[i]);
+        console.log(event.target.files[i]);
         this.imagesNames.push(event.target.files[i].name);
         // this.imagesUrls.push(this.urls);
         var reader = new FileReader();
@@ -377,25 +367,24 @@ export class AddNewPalceComponent implements OnInit {
     this.openTo = this.openTimeTo;
     form.value.openFrom = this.openFrom.time.toLowerCase();
     form.value.openTo = this.openTo.time.toLowerCase();
-
+    console.log('this.selectedType');
+    console.log(this.selectedType);
+    console.log(form.value);
     this.places.addNewPlace(
       form.value,
       this.newplaceFeaturedImage,
       this.addressInfo,
+      this.selectedType,
       this.selectedCategories,
-      this.selectedAccessableBy,
-      this.selectedAccessability,
-      this.selectedFeatures,
-      this.selectedFood,
-      this.selectedActivities,
+      this.selectedDelivery,
+      this.selectedPaymentMethod,
       this.imagesNames,
       this.imagesUrls,
       this.latitude,
       this.longitude,
       this.minValue,
       this.maxValue,
-      )
-      .subscribe(data => {
+      ).subscribe(data => {
         // console.log(data);
         this.isLoading = false;
         this.addPlaceFormError = false;

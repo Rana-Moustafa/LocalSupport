@@ -5,24 +5,25 @@
         <nav class="navbar">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link"> About</a>
+              <a class="nav-link" [routerLink]="['/'+langURL , 'pages','about-us']"> {{"footer_about" | translate}} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"> FAQ</a>
+              <a class="nav-link" [routerLink]="['/'+langURL , 'pages','legal']"> {{"footer_legal" | translate}}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"> Imprint</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"> Disclaimer</a>
+              <a class="nav-link" [routerLink]="['/'+langURL , 'pages','privacy-policy']"> {{"footer_privacy" | translate}}</a>
             </li>
           </ul>
         </nav>
         <div class="copyright">
-          <span><i class="fa fa-copyright" aria-hidden="true"></i>
-            2020
+          <span>
+            {{"footer_rights" | translate}}
           </span>
 
+        </div>
+        <div class="social-links">
+          <a href="https://www.facebook.com/Be-Local-Hero-108364480799731" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          <a href="https://www.instagram.com/belocalhero" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>

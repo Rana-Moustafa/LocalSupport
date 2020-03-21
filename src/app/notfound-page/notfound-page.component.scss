@@ -2,9 +2,9 @@
 @import '../../fonts';
 
 .message-page{
-    background-color: $pageBg;
+    background-color: $localPrimary;
     min-height: 100vh;
-    padding-top:10%;
+    padding-top: 150px;
     text-align: center;
     overflow: hidden;
     @media(max-width:$md){
@@ -22,9 +22,12 @@
             margin-bottom: 15px;
         }
     }
+    h4{
+        color: #000;
+    }
     h2{
         @include text-lg;
-        color: $orange;
+        color: #000;
         font-weight: normal;
     }
     .message-text{

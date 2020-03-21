@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="203" height="74" viewBox="0 0 203 74">
+    <defs>
+        <linearGradient id="a" x1="117.671%" x2="-9.396%" y1="43.961%" y2="55.143%">
+            <stop offset="0%" stop-color="#8BB6D1"/>
+            <stop offset="100%" stop-color="#E59069"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(1)">
+        <path stroke="url(#a)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M0 21.333c15.075-.248 27.846 56.481 51.017 19.945C74.19 4.74 80.436 72.349 88.514 72.47c8.079.12 11.718-22.368 22.795-19.616 11.076 2.752 14.298-32.161 27.312-17.938 13.015 14.223 7.494-12.605 31.925-12.443" style="mix-blend-mode:multiply"/>
+        <ellipse cx="180.57" cy="21.79" stroke="#658897" opacity=".2" rx="20.077" ry="20.864"/>
+        <ellipse cx="180.57" cy="21.79" stroke="#658897" stroke-width="2" opacity=".5" rx="10.024" ry="10.417"/>
+        <ellipse cx="180.57" cy="21.79" fill="#658897" stroke="#FFF" stroke-width="2" rx="5.697" ry="5.92"/>
+    </g>
+</svg>

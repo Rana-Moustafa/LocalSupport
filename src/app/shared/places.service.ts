@@ -33,10 +33,9 @@ export class PlacesService {
   }
   getFormSelections() {
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections?lang=en')
-    }
-    else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections')
+      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/form_selections?lang=en');
+    } else {
+      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/form_selections');
     }
   }
 
@@ -196,56 +195,42 @@ export class PlacesService {
   }
 
   addNewPlace(place,
-              featured,
-              placeName,
-              selectedCategories,
-              selectedAccessableBy,
-              selectedAccessability,
-              selectedFeatures,
-              selectedFood,
-              selectedActivities,
-              imagesNames,
-              imagesUrls,
-              latitude,
-              longitude,
-              minValue,
-              maxValue) {
+    featured,
+    placeName,
+    selectedType,
+    selectedCategories,
+    selectedDelivery,
+    selectedPaymentMethod,
+    imagesNames,
+    imagesUrls,
+    latitude,
+    longitude,
+    minValue,
+    maxValue) {
 
     // //console.log(place)
 
     let address;
     if (placeName.length < 1) {
-      address = place.address
+      address = place.address;
     } else {
-      address = placeName[0]
+      address = placeName[0];
     }
 
     let placeData: FormData = new FormData();
-
-    for (var i = 0; i < selectedCategories.length; i++) {
-      placeData.append('categories[' + i + ']', (selectedCategories[i].id).toString());
-    }
-
     for (var j = 0; j < imagesNames.length; j++) {
       placeData.append('other_images[' + j + '][name]', imagesNames[j].split('.').slice(0, -1).join('.'));
       placeData.append('other_images[' + j + '][image]', imagesUrls[j]);
     }
-    for (var k = 0; k < selectedAccessableBy.length; k++) {
-      placeData.append('accessible_by[]', (selectedAccessableBy[k].name).toString())
+    for (var i = 0; i < selectedCategories.length; i++) {
+      placeData.append('category[' + i + ']', (selectedCategories[i].name).toString());
     }
-    for (var n = 0; n < selectedAccessability.length; n++) {
-      placeData.append('accessibility[]', (selectedAccessability[n].name).toString())
+    for (var n = 0; n < selectedDelivery.length; n++) {
+      placeData.append('delivery[]', (selectedDelivery[n].name).toString())
     }
-    for (var l = 0; l < selectedFeatures.length; l++) {
-      placeData.append('features[]', (selectedFeatures[l].name).toString())
+    for (var l = 0; l < selectedPaymentMethod.length; l++) {
+      placeData.append('payment_methods[]', (selectedPaymentMethod[l].name).toString())
     }
-    for (var m = 0; m < selectedFood.length; m++) {
-      placeData.append('food[]', (selectedFood[m].name).toString())
-    }
-    for (var p = 0; p < selectedActivities.length; p++) {
-      placeData.append('activities[]', (selectedActivities[p].name).toString())
-    }
-
 
 
     placeData.append('token', JSON.parse(localStorage.getItem('token')));
@@ -255,171 +240,103 @@ export class PlacesService {
     placeData.append('name', place.placename);
     placeData.append('address', address);
     placeData.append('number', '');
+    placeData.append('email', (place.placeemail).toString());
     placeData.append('zipcode', (place.zipcode).toString());
     placeData.append('website', (place.website).toString());
     placeData.append('description', place.description);
     placeData.append('phone_number', (place.phone).toString());
+    placeData.append('type', (place.subcats ? place.subcats.name : null));
     placeData.append('hr_from', (place.openFrom).toString());
     placeData.append('hr_to', (place.openTo).toString());
-    placeData.append('place_kind', (place.subcats ? place.subcats.name : null));
-    placeData.append('size', (place.sizes ? place.sizes.name : null));
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
-    placeData.append('price_range_from', minValue);
-    placeData.append('price_range_to', maxValue);
-
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     placeData.forEach((value, key) => {
-      //console.log(key + ' ' + value);
-    })
+      console.log(key + ' ' + value);
+    });
     if (localStorage.getItem('current_lang') === 'en') {
       // return 'english'
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place?lang=en',
-        placeData)
-    }
-    else {
-      //return 'german'
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
-        placeData)
+      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/add_place?lang=en',
+        placeData);
+    } else {
+      // return 'german'
+      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/add_place',
+        placeData);
     }
 
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
     if (localStorage.getItem('current_lang') === 'en') {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&lang=en&page=' + page + '&per_page=' + perpage + '&'+sortBy+'&token='+localStorage.getItem('token'))
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&lang=en&page=' + page + '&per_page=' + perpage + '&'+sortBy+'&token='+JSON.parse(localStorage.getItem('token')))
+      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&lang=en&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + localStorage.getItem('token'))
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&lang=en&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + JSON.parse(localStorage.getItem('token')))
     }
     else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&page=' + page + '&per_page=' + perpage + '&'+sortBy+'&token='+localStorage.getItem('token'))
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&page=' + page + '&per_page=' + perpage + '&'+sortBy+'&token='+JSON.parse(localStorage.getItem('token')))
+      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + localStorage.getItem('token'))
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + JSON.parse(localStorage.getItem('token')))
 
     }
   }
 
   filteredPlaces(filterObj, page, perpage) {
-    let filterAccessible = '';
-    let filterAccessibleBy = '';
-    let filterFood = '';
-    let filterFeature = '';
-    let filterActivities = '';
     let filterCategories = '';
-    let filterRating;
-    let filterMaxvalue;
-    let filterMinvalue;
-    let filterDistance;
-    let filterSize;
+    let filterDelivery = '';
+    let filterPayment = '';
+    let filterTypes = '';
+
     console.log(filterObj);
 
-    // if (filterObj.size && (filterObj.size.length > 0)) {
-    //   for (var i = 0; i < filterObj.size.length; i++) {
-    //     if (filterObj.size) {
-    //       filterSize = filterSize + '&size[' + i + ']=' + filterObj.size[i].name;
-    //     } else {
-    //       filterSize = '';
-    //     }
-    //   }
-    // }
-if (filterObj){
-
-
-
-    if (filterObj && filterObj.acescsible_by.length > 0) {
-      for (var i = 0; i < filterObj.acescsible_by.length; i++) {
-        if (filterObj.acescsible_by) {
-          filterAccessibleBy = filterAccessibleBy + '&accessible_by[' + i + ']=' + filterObj.acescsible_by[i].name;
+    if (filterObj && filterObj.selectedPayment.length > 0) {
+      for (var i = 0; i < filterObj.selectedPayment.length; i++) {
+        if (filterObj.selectedPayment) {
+          filterPayment = filterPayment + '&payment_methods[' + i + ']=' + filterObj.selectedPayment[i].name;
         } else {
-          filterAccessibleBy = '';
-        }
-      }
-    }
-    if (filterObj && filterObj.accessablity.length > 0) {
-      for (var j = 0; j < filterObj.accessablity.length; j++) {
-        if (filterObj.accessablity) {
-          filterAccessible = filterAccessible + '&accessibility[' + j + ']=' + filterObj.accessablity[j].name;
-        } else {
-          filterAccessible = ''
-        }
-      }
-    }
-    if (filterObj && filterObj.selectedFood.length > 0) {
-      for (var l = 0; l < filterObj.selectedFood.length; l++) {
-        if (filterObj.selectedFood) {
-          filterFood = filterFood + '&food[' + l + ']=' + filterObj.selectedFood[l].name;
-        } else {
-          filterFood = '';
-        }
-      }
-    }
-    if (filterObj && filterObj.selectedFeatures.length > 0) {
-      for (var m = 0; m < filterObj.selectedFeatures.length; m++) {
-        if (filterObj.selectedFeatures) {
-          filterFeature = filterFeature + '&features[' + m + ']=' + filterObj.selectedFeatures[m].name;
-        } else {
-          filterFeature = ''
+          filterPayment = '';
         }
       }
     }
 
 
+    if (filterObj  && filterObj.selectedDelivery.length > 0) {
+      for (var i = 0; i < filterObj.selectedDelivery.length; i++) {
+        if (filterObj.selectedDelivery) {
+          filterDelivery = filterDelivery + '&deliver[' + i + ']=' + filterObj.selectedDelivery[i].name;
+        } else {
+          filterDelivery = '';
+        }
+      }
+    }
     if (filterObj && filterObj.selectedCategory.length > 0) {
-
-      for (var o = 0; o < filterObj.selectedCategory.length; o++) {
+      for (var j = 0; j < filterObj.selectedCategory.length; j++) {
         if (filterObj.selectedCategory) {
-          filterCategories = filterCategories + '&place_type[' + o + ']=' + filterObj.selectedCategory[o].id;
+          filterCategories = filterCategories + '&category[' + j + ']=' + filterObj.selectedCategory[j].name;
         } else {
-          filterCategories = '';
+          filterDelivery = '';
         }
-      }
+      } 
     }
-    // if (filterObj.size == undefined) {
-    //   filterSize = filterObj.size = ''
-    // } else {
-    //   filterSize = '&size=' + filterObj.size;
-    // }
-    if (filterObj && filterObj.rating_filter == undefined) {
-      filterRating = '&rating_filter=' + (filterObj.rating_filter = 0);
+
+    if (filterObj && filterObj.selectedTypes) {
+      filterTypes = '&type=' + filterObj.selectedTypes;
     } else {
-      filterRating = '&rating_filter=' + filterObj.rating_filter;
-    }
-    if (filterObj && filterObj.distance == undefined) {
-      filterDistance = filterObj.distance = 0
-    } else {
-      filterDistance = '&distance=' + filterObj.distance;
-    }
-    if (filterObj && filterObj.minValue == undefined) {
-      filterMinvalue = filterObj.minValue = 0
-    } else {
-      filterMinvalue = '&min_price=' + filterObj.minValue;
-    }
-    if (filterObj && filterObj.maxValue == undefined) {
-      filterMaxvalue = filterObj.maxValue = 10000;
-    } else {
-      filterMaxvalue = '&max_price=' + filterObj.maxValue;
+      filterTypes = '';
     }
 
 
-  }
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + 
-        '&skip_cache=1&lang=en&page=' + page + '&per_page=' + perpage);
-    }
-    else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1')
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + 
-        '&skip_cache=1&page=' + page + '&per_page=' + perpage);
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' 
+      + filterPayment + filterDelivery + filterCategories + filterTypes + '&skip_cache=1&lang=en&page=' + page + '&per_page='+ perpage);
+    } else {
+      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' + 
+      filterPayment +filterDelivery + filterCategories + filterTypes  + '&skip_cache=1')
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterPayment +filterDelivery +filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page='+ perpage);
     }
   }
 
   filterPlaces(filterObj) {
-    this.pagee ++;
+    this.pagee++;
     let filterAccessible = '';
     let filterAccessibleBy = '';
     let filterFood = '';
@@ -541,9 +458,92 @@ if (filterObj){
     } else {
       console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + placeId + sortBy + '&skip_cache=1');
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + placeId + sortBy + '&skip_cache=1',
-      {observe: 'response'});
+        { observe: 'response' });
     }
 
+  }
+
+
+  editSelectedPlace(place,
+    placeName,
+    selectedType,
+    selectedCategories,
+    selectedDelivery,
+    selectedPaymentMethod,
+    latitude,
+    longitude,
+    placeId) {
+
+    let address;
+    if (placeName && placeName.length < 1) {
+      address = place.address;
+    } else {
+      address = placeName[0];
+    }
+
+    let placeData: FormData = new FormData();
+
+    if (selectedCategories) {
+      for (var i = 0; i < selectedCategories.length; i++) {
+        placeData.append('category[' + i + ']', (selectedCategories[i].name).toString());
+      }
+    }
+    if (selectedDelivery) {
+      for (var n = 0; n < selectedDelivery.length; n++) {
+        placeData.append('delivery[]', (selectedDelivery[n].name).toString())
+      }
+    }
+    if (selectedPaymentMethod) {
+      for (var l = 0; l < selectedPaymentMethod.length; l++) {
+        placeData.append('payment_methods[]', (selectedPaymentMethod[l].name).toString())
+      }
+    }
+
+
+
+    placeData.append('token', JSON.parse(localStorage.getItem('token')));
+    placeData.append('token_type', JSON.parse(localStorage.getItem('token_type')));
+    placeData.append('name', place.placename);
+    placeData.append('address', address);
+    placeData.append('number', '');
+    placeData.append('email', (place.placeemail).toString());
+    placeData.append('zipcode', (place.zipcode).toString());
+    placeData.append('website', (place.website).toString());
+    placeData.append('description', place.description);
+    placeData.append('phone_number', (place.phone).toString());
+    placeData.append('type', (place.subcats ? place.subcats.name : null));
+    placeData.append('hr_from', (place.openFrom).toString());
+    placeData.append('hr_to', (place.openTo).toString());
+    placeData.append('lat', latitude);
+    placeData.append('lng', longitude);
+    placeData.append('lat', latitude);
+    placeData.append('lng', longitude);
+    placeData.append('place_id', placeId);
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    placeData.forEach((value, key) => {
+      console.log(key + ' ' + value);
+    });
+    if (localStorage.getItem('current_lang') === 'en') {
+      // return 'english'
+      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/edit_place?lang=en',
+        placeData);
+    } else {
+      // return 'german'
+      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/edit_place',
+        placeData);
+    }
+
+  }
+
+  userPlaces() {
+    if (localStorage.getItem('current_lang') === 'en') {
+      // return 'english'
+      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/wp/v2/place/?myplaces&core&lang=en&token=' +
+      JSON.parse(localStorage.getItem('token')));
+    } else {
+      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/wp/v2/place/?myplaces&core&token=' +
+      JSON.parse(localStorage.getItem('token')));
+    }
   }
 }
 

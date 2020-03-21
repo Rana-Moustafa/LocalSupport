@@ -22,11 +22,12 @@ export class DetailsComponent implements OnInit {
   currentLatitude;
   currentLongitude;
   distance;
-
+  langURL = localStorage.getItem('current_lang');
   constructor(private places: PlacesService) {}
 
   ngOnInit() {
-    this.setCurrentLocation()
+    this.setCurrentLocation();
+    console.log('this.singlePlaceDetails');
     console.log(this.singlePlaceDetails);
     this.placeLat = this.singlePlaceDetails.address.lat;
     this.placeLng = this.singlePlaceDetails.address.lng;

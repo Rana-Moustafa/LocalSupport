@@ -1,4 +1,41 @@
-<div class="empty">
-  <img src="../../../assets/images/pin.png" />
-  <p>Comming Soon</p>
+<h1>{{ "page_about_us" | translate }}</h1>
+
+<div class="row">
+  <div class="col-md-6">
+   <p [innerHTML]="aboutContent? aboutContent.left_text: ''">
+  
+   </p>
+   <div class="page_logos">
+     <div class="row">
+     <div class="col-xs-4">
+      <a href="https://modeso.ch/?lang=de" target="_blank">
+        <img src="../../../assets/images/logo1.svg" />
+      </a>
+     </div>
+     <div class="col-xs-4">
+      <a href="https://co-co-co.org/index.html" target="_blank">
+        <img src="../../../assets/images/logo2.svg" />
+      </a>
+     </div>
+     <div class="col-xs-4">
+      <a href="https://cooperativesuisse.ch/" target="_blank">
+        <img src="../../../assets/images/logo3.svg" />
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="col-md-6">
+    <p [innerHTML]="aboutContent? aboutContent.right_text: ''">
+   
+    <div class="page_logos">
+      <div class="row">
+      <div class="col-xs-4">
+       <a href="https://www.brudi.com/de/" target="_blank">
+         <img src="../../../assets/images/logo4.svg" />
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
 </div>

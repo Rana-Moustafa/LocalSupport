@@ -3,17 +3,21 @@
 
 
 .registration-form-section {
-    
+    background-color: $localPrimary;
+    &.padding-top {
+        padding-top: 125px;
+      }
+    .no-padding{
+        background-color: $localPrimary;
+    }
     .auth-form{
         margin-top: 60px;
     }
     .row{
-        height: 100vh;
+        min-height: 100vh;
     }
 
     @media(max-width:$lg) {
-        background-image   : url('../../assets/images/authentication/mobile-registr3x.png');
-        background-size    : cover;
         background-position: center;
         min-height         : 100%;
         display: block;
@@ -22,19 +26,22 @@
     }
 
     &__Background {
-        background-image   : url('../../assets/images/authentication/bg-registr@3x.png');
-        background-size    : cover;
-        background-position: center;
+        background-color: $localPrimary;
         min-height         : 100%;
         padding            : $authenticationPadding;
         display: block;
         position: relative;
         overflow-x: hidden;
 
+        p{
+            line-height: 27px;
+            font-weight: 500;
+        }
+
         @media(max-width:$lg) {
             height          : auto;
             background-image: none;
-            padding         : $padding29;
+            padding         : 85px 30px 30px;
         }
     }
     &__logo-wrapper{
@@ -56,8 +63,8 @@
     }
     &__logo {
         margin-bottom: $mr-30;
-        height       : 65px;
-        width        : 65px;
+        height       : 95px;
+        width        : 215px;
         display      : block;
 
         @media(max-width:$lg) {
@@ -73,12 +80,11 @@
     
 
     &__form {
+        background-color: $localPrimary;
         padding: $authenticationPadding;
-        background-color: $lightGrey;
         min-height: 100vh;
         @media(max-width:$lg) {
             padding: $padding29;
-            background-color: transparent;
         }
 
         .nav-tabs {
@@ -87,9 +93,10 @@
             .nav-link {
                 @include H4-bold();
                 padding: 0;
-                color :$darkBlueGrey;
+                background-color: #000;
+                color : #fff;
                 outline: none;
-                border: 2px solid transparent;
+                border: 2px solid #000;
                 border-radius: 0;
                 padding: 10px;
 
@@ -100,15 +107,21 @@
                 -o-transition: all 0.3s ease-in;
 
                 &:hover{
-                    color: $btnColor;
-                    text-decoration: underline;
-                    border: 2px solid $btnColor;
+                    background-color: $localSecondary;
+                    color:  #000;
+                    border: 2px solid  #000;
                 }
                 &.active {
+                    background-color: #fff;
                     border: 0px;
-                    background: none;
-                    color: $btnColor;
-                    border: 2px solid $btnColor;
+                    color:  #000;
+                    border: 2px solid  #000;
+
+                    &:hover{
+                        background-color: $localSecondary;
+                        color:  #000;
+                        border: 2px solid  #000;
+                    }
                 }
 
                 &:first-child {
@@ -119,15 +132,17 @@
     }
     #resetpass-tab{
         text-align: center;
-        color: $darkBlueGrey;
+        color: $localSecondary;
+        text-decoration: underline;
+        font-weight: bold;
         width: 200px;
         margin: auto;
 
         &:hover{
-            color: $btnColor;
+            color:  $localSecondary;
         }
         @media all and (max-width: 992px){
-            color: #fff;
+           
 
             &:hover{
                 color: $darkBlueGrey;
@@ -136,7 +151,7 @@
     }
 }
 .language_banner {
-    background: #e59069;
+    background: $localSecondary;
     width: 100%;
     position: fixed;
     z-index: 99;

@@ -4,7 +4,7 @@
 .message-page{
     display: flex;
     display: -webkit-flex;
-    background: $pageBg url('../../assets/images/thank-you-bg.svg') no-repeat right bottom;
+    background-color: $localPrimary;
     background-size:  450px;
     @media all and (min-width: $xxl){
         background-size:  contain;
@@ -19,11 +19,11 @@
 
     h1{
         @include text-xl();
-        color: $orange;
+        color: #000;
     }
     h2{
         @include text-lg;
-        color: $orange;
+        color: #000;
         font-weight: normal;
     }
     .message-text{

@@ -1,17 +1,81 @@
 @import "../../../variables";
 @import "../../../fonts";
 @import "../../../mixins";
-.care-link{
+.care-link {
   position: absolute;
-  width: 150px;
-  top: 20px;
+  width: 110px;
+  height: 110px;
+  top: 10px;
   z-index: 9;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
   cursor: pointer;
-  img{
+  border: 4px solid #000;
+  background-color: $localSecondary;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  font-weight: bold;
+
+  &:hover {
+    background-color: #000;
+    a {
+      color: #fff;
+    }
+  }
+
+  &.large {
+    display: flex;
+
+    @media all and (max-width: 640px) {
+      display: none;
+    }
+  }
+
+  &.small {
+    display: none;
+
+    @media all and (max-width: 640px) {
+      display: flex;
+      width: 90px;
+      height: 90px;
+      top: 50px;
+      left: -75px;
+    }
+  }
+
+  a {
+    color: #000;
+    font-weight: bold;
+    font-size: 13px;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  @media all and (max-width: 640px) {
+  }
+  @media all and (max-width: 400px) {
+    width: 85px;
+    height: 85px;
+  }
+  img {
     width: 100%;
   }
 }
 header {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
   &.inner-header {
     .navbar {
       .sign-user {
@@ -27,26 +91,34 @@ header {
         .navbar-brand {
           h1 {
             color: #fff;
+
+            img {
+              height: 40px;
+
+              @media all and (max-width: 375px) {
+                height: 25px;
+              }
+            }
           }
         }
       }
 
       .header-items {
+        .add-place-btn {
+          margin-right: 15px;
+        }
         .language {
           .dropdown-toggle {
-            color: #fff;
           }
 
           .sign-user {
             a {
-              color: #fff;
             }
           }
         }
 
         .dropdown {
           .dropdown-toggle {
-            color: #fff;
           }
         }
 
@@ -64,11 +136,11 @@ header {
     position: relative;
 
     @media all and (max-width: $lg) {
-      padding: $mr-20 0;
+      // padding: $mr-20 0;
     }
 
     @media all and (max-width: 430px) {
-      padding: $mr-10 0;
+      // padding: $mr-10 0;
     }
 
     .side-nav {
@@ -102,9 +174,7 @@ header {
         cursor: pointer;
 
         @media (max-width: $lg) {
-          
         }
-
       }
 
       .sidnav-image {
@@ -258,7 +328,7 @@ header {
     }
 
     .language {
-      margin: 0 $mr-20;
+      margin: 0;
       @include H6-bold();
 
       @media (max-width: $md) {
@@ -319,7 +389,13 @@ header {
 
       .navbar-brand {
         width: 292px;
-
+        img {
+          height: 40px;
+          float: left;
+          @media all and (max-width: 375px) {
+            height: 25px;
+          }
+        }
         @media all and (max-width: 1200px) {
           width: 240px;
         }
@@ -346,7 +422,9 @@ header {
       display: flex !important;
       -ms-flex-preferred-size: auto;
       flex-basis: auto;
-
+      .add-place-btn {
+        margin-right: 15px;
+      }
       .dropdown {
         @media all and (max-width: $lg) {
           margin: 0;
@@ -361,10 +439,10 @@ header {
           font-size: 16px;
           cursor: pointer;
           color: $darkBlueGrey;
-
+          margin-left: 0;
           @media (max-width: 1200px) {
             font-size: 14px;
-            margin-left: $mr-20;
+            margin-left: 0;
           }
 
           @media (max-width: $xs) {
@@ -448,18 +526,17 @@ header {
     }
 
     .add-place-btn {
-
-      &.margin-right{
+      &.margin-right {
         margin-right: 20px;
       }
-      
+
       @media all and (max-width: $lg) {
         display: none;
       }
 
       a {
         @include text-regular();
-        background-color: $btnColor;
+        background-color: $localPrimary;
         color: #fff;
         display: flex;
         justify-content: center;
@@ -578,7 +655,7 @@ header {
         cursor: pointer;
         align-self: center;
         @include text-huge-regular();
-        color: $darkBlueGrey;
+        color: #000;
         font-weight: bold;
         font-size: 14px;
 
@@ -595,15 +672,35 @@ header {
     }
   }
 }
-
+.nav-link {
+  font-weight: bold;
+  color: #000;
+  &:hover {
+    text-decoration: underline;
+  }
+}
 .add-place-btn-mobile {
   position: fixed;
   right: 15px;
-  bottom: 15px;
-  z-index: 99;
+  bottom: 60px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #000;
+  z-index: 999;
   display: none;
+  cursor: pointer;
+  &:hover {
+    background-color: $localSecondary;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+  }
 
   @media all and (max-width: $lg) {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

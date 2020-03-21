@@ -3,9 +3,7 @@
  
   <div class="container">
     <nav class="navbar">
-      <div class="care-link">
-        <img src="../../../assets/images/care.png" />
-      </div>
+     
       <div class="header-logo mr-auto">
         <a class="navbar-brand" [routerLink]="['/'+langURL]">
           <h1><img src="../../../assets/images/local-hero-logo.svg"></h1>
@@ -13,25 +11,10 @@
       </div>
       <div class="header-items ml-auto">
         <div class="ml-auto add-place-btn" [ngClass]="{ 'margin-right': languageSwitcherStatus === true }">
-          <a [routerLink]="['/'+langURL , 'add-new-place']">
-            <img src="../../../assets/images/ic-locationbutton.svg"
-              class="img-thumbnail" /> <span>{{'Add_new_place' | translate}}</span></a>
+          <a [routerLink]="['/'+langURL , 'add-new-place']" class="btn-original">
+             <span>{{'Add_new_place' | translate}}</span></a>
         </div>
-        <div class="dropdown language" [hidden]="languageSwitcherStatus">
-          <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            <span>{{ (translate.currentLang?translate.currentLang: selectedLang) | uppercase }}</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <span class="dropdown-item" *ngFor="let lang of translate.getLangs()" [value]="lang"
-              [selected]="lang === translate.currentLang" #langSelect
-              (click)="translate.use(langSelect.value); getSelectedLang(langSelect.value)">
-
-              {{ (lang != translate.currentLang)? (lang | uppercase) : ''}}
-
-            </span>
-          </div>
-        </div>
+       
         <div class="sign-user">
           <a [routerLink]="'/signin'" [hidden]="this.userStatus.userLoggedIn()">{{'signin' | translate}}</a>
           <div class="dropdown" [hidden]="!this.userStatus.userLoggedIn()">
@@ -49,10 +32,26 @@
           </div>
 
         </div>
-        <div class="search-mobile">
+        <a class="nav-link" [routerLink]="['/']" >To the map</a>
+        <!-- <div class="dropdown language" [hidden]="languageSwitcherStatus">
+          <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <span>{{ (translate.currentLang?translate.currentLang: selectedLang) | uppercase }}</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <span class="dropdown-item" *ngFor="let lang of translate.getLangs()" [value]="lang"
+              [selected]="lang === translate.currentLang" #langSelect
+              (click)="translate.use(langSelect.value); getSelectedLang(langSelect.value)">
+
+              {{ (lang != translate.currentLang)? (lang | uppercase) : ''}}
+
+            </span>
+          </div>
+        </div> -->
+        <!-- <div class="search-mobile">
           <i class="fa fa-search" (click)="toggleSearch()"></i>
-        </div>
-        <div class="search-mobile-form" [ngClass]="{ 'open': mobileSearch === true }">
+        </div> -->
+        <!-- <div class="search-mobile-form" [ngClass]="{ 'open': mobileSearch === true }">
           <form class="form-inline" #resultForm="ngForm" (ngSubmit)="searchResult(resultForm)">
             <input class="form-control mr-sm-2" type="search" [placeholder]="'searchDestination' | translate"
               aria-label="Search" type="text" name="search" ngModel #searchText="ngModel" autocomplete="off">
@@ -63,13 +62,26 @@
           <input class="form-control mr-sm-2" type="search" [placeholder]="'searchDestination' | translate"
             aria-label="Search" type="text" name="search" ngModel #searchText="ngModel">
           <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        </form> -->
+        <div class="care-link large">
+          <a href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
+          target="_blank">
+          Take Care &<br/>
+          stay home!
+         </a> 
+        </div>
+        <div class="care-link small">
+          <a href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
+          target="_blank">
+          Take Care!<br/>
+         </a> 
+        </div>
       </div>
     </nav>
   </div>
 </header>
 <div class="add-place-btn-mobile">
   <a [routerLink]="['/'+langURL , 'add-new-place']">
-    <img src="../../../assets/images/addspot.svg" />
+    <img src="../../../assets/images/plus.svg" />
   </a>
 </div>

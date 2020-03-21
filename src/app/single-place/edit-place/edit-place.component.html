@@ -1,0 +1,174 @@
+<div class="page-content container padding-top">
+    <div class="row">
+        <div class="edit-places">
+            <h1>{{"local_edit_business" | translate }} </h1>
+        </div>
+        <form (ngSubmit)="updatePlace(editPlace)" name="editPlace" #editPlace="ngForm">
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_bussiness_name" | translate}} (*):</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control col-12" [ngModel]="placeData?placeData.title.rendered: ''"
+                        name="placename" #placename="ngModel" required>
+                    <small class="help-block"
+                        *ngIf="!placename.valid && placename.touched && placename.errors.required">{{'field_requird'  | translate }}</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Address" | translate}} (*):</h4>
+                <div class="map-filters__search">
+                    <div class="form-group">
+                        <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
+                            placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off"
+                            spellcheck="off" type="text" #search 
+                            [ngModel]="placeData?placeData.address.address: ''"
+                            name="address" #address="ngModel" required>
+                        <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
+                            {{'field_requird'  | translate }}</p>
+                        <p class="help-block" *ngIf="address.touched && !latitude && !longitude">You must choose the
+                            address from the autocomplete list above!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Phonenumber" |translate}}</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control col-12" [ngModel]="placeData?placeData.phone_number: ''"
+                        name="phone" #phone="ngModel">
+                    <!-- <p class="help-block" *ngIf="!phone.valid && phone.touched && phone.errors.pattern">Please enter a
+                        valid phone number.</p> -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Emailadress" |translate}} (*)</h4>
+                <div class="form-group">
+                    <input type="email" class="form-control col-12" [ngModel]="placeData?placeData.email: ''"
+                        name="placeemail" #placeemail="ngModel" required>
+                    <small class="help-block"
+                        *ngIf="!placeemail.valid && placeemail.touched && placeemail.errors.required">{{'field_requird'  | translate }}</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Website" | translate}}</h4>
+                <div class="form-group">
+                    <input type="url" class="form-control col-12" [ngModel]="placeData?placeData.website: ''"
+                        name="website" #website="ngModel"
+                        pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
+                    <p class="help-block" *ngIf="!website.valid && website.touched && website.errors.pattern">
+                        Please enter a valid url.
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_zip_code" |translate}}</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control col-12" [ngModel]="placeData?placeData.zipcode: ''"
+                        name="zipcode" #zipcode="ngModel" pattern="^[a-zA-Z0-9_]*$">
+                    <p class="help-block" *ngIf="!zipcode.valid && zipcode.touched && zipcode.errors.pattern">Please
+                        enter a
+                        valid zipcode.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Description" |translate}}
+                    <small>({{ "local_Description_2" | translate }})</small> (*)</h4>
+                <div class="form-group">
+
+
+                    <textarea type="text" class="form-control" [ngModel]="placeData?placeData.description: ''"
+                        name="description" #description="ngModel" required></textarea>
+                    <small class="help-block"
+                        *ngIf="!description.valid && description.touched && description.errors.required">{{'field_requird'  | translate }}</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Type" |translate}} (*):</h4>
+                <div class="form_wrapper radio-input">
+                    <p *ngFor='let subCat of formType; let i = index;'>
+            
+                        <input type="radio" [value]="subCat.name" name="subcats"
+                        [(ngModel)]="selected" #subcats="ngModel"
+                        
+                         required>
+                        <label for="cat{{i}}"> {{subCat.name}}</label><br>
+            
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Category" |translate}} :</h4>
+                <div class="checkbox_wrapper">
+                    <div class="form-half-width" *ngFor="let category of formCategories;  let i = index;">
+                        <label class="form-check-label" for="{{category.name}}">
+                            <input class="form-check-input" type="checkbox" name="{{category.name}}"
+                                id="{{category.name}}" ngModel 
+                                
+                                [(ngModel)]="formCategories[i].checked">
+                            <span>{{ category.name }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Delievery" |translate}} (*) :</h4>
+                <div class="checkbox_wrapper">
+                    <div class="form-half-width" *ngFor="let deliver of formDelivery;  let i = index;">
+                        <label class="form-check-label" for="{{deliver.name}}">
+                            <input class="form-check-input" type="checkbox" name="{{deliver.name}}"
+                                id="{{deliver.name}}" ngModel [(ngModel)]="formDelivery[i].checked"
+                                >
+                            <span>{{ deliver.name }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="subtitle">{{"local_Payment_Method" | translate}} :</h4>
+                <div class="checkbox_wrapper">
+                    <div class="form-half-width" *ngFor="let payment of formPaymentMethod;  let i = index;">
+                        <label class="form-check-label" for="{{payment.name}}">
+                            <input class="form-check-input" type="checkbox" name="{{payment.name}}"
+                                id="{{payment.name}}" ngModel [(ngModel)]="formPaymentMethod[i].checked">
+                            <span>{{ payment.name }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group hour ">
+                <h4 class="subtitle">{{"local_Opening_hours" | translate}} :</h4>
+                <div class="form_wrapper">
+                    <div class="form-half-width">
+
+                        <div class="default-time-example">
+                            <label>{{"from" |translate}}</label>
+                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerFrom" [value]="'10:00 am'"
+                                readonly>
+                            <ngx-material-timepicker #toggleTimepickerFrom></ngx-material-timepicker>
+                        </div>
+                    </div>
+                    <div class="form-half-width">
+                        <div class="default-time-example">
+                            <label>{{"to" |translate}}</label>
+                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerTo" [value]="'10:00 pm'"
+                                readonly>
+                            <ngx-material-timepicker #toggleTimepickerTo></ngx-material-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="Addnew-btn" type="submit" class="btn btn-original" [disabled]="!editPlace.valid">
+                {{"local_add_bussiness" | translate}}</button>
+        </form>
+    </div>
+</div>

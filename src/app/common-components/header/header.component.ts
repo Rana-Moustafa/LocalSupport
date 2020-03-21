@@ -5,10 +5,11 @@ import { CommonsService } from '../../shared/commons.service';
 import { AuthenticationService } from '../../shared/auth.service';
 import { UserStatusService } from '../../shared/user-status.service';
 import { SearchResultsService } from '../../shared/search-results.service';
-import { TranslationService } from '../../shared/translation.service';
+
 import { PlacesService } from '../../shared/places.service';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslationService } from '../../shared/translation.service';
 import { Location } from '@angular/common';
 import { UserDataService } from '../../shared/user-data.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -77,7 +78,7 @@ export class HeaderComponent implements OnInit {
       this.placeTypes(this.langURL);
     } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
       this.router.url.replace(this.route.snapshot.params.language, 'en');
-      this.translate.use('en');
+      this.translate.use('de');
       this.placeTypes(this.langURL);
     } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
       this.router.url.replace(this.route.snapshot.params.language, 'de');

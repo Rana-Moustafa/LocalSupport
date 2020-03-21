@@ -1,0 +1,12 @@
+<div class="user-places">
+    <p [hidden]="userPlaces && userPlaces.length > 0">
+      {{"no_business"| translate}}
+    </p>
+    <ul class="list-group">
+        <li class="list-group-item"
+        *ngFor="let place of userPlaces">
+        <a [routerLink]="['/'+langURL, 'edit-place', place.id, place.slug]">{{ place.title.rendered }}</a>
+        </li>
+        
+      </ul>
+</div>

@@ -1,6 +1,6 @@
-@import '../../../variables';
-@import '../../../fonts';
-@import '../../../mixins';
+@import "../../../variables";
+@import "../../../fonts";
+@import "../../../mixins";
 
 .single-place {
   margin-top: 0;
@@ -15,19 +15,19 @@
     }
   }
   .svg-inline--fa {
-    .star-empty{
+    .star-empty {
       opacity: 0.4;
     }
-  } 
+  }
   &__rating {
     .star-empty {
       opacity: 0.4;
     }
     .fa,
     .ng-fa-icon {
-      font-size   : 22px;
+      font-size: 22px;
       margin-right: 5px;
-      color       : $btnColor;
+      color: $btnColor;
 
       &.star-empty {
         opacity: 0.4;
@@ -36,10 +36,10 @@
         }
       }
     }
-    
+
     .stars-count {
       font-size: 20px;
-      color    : $darkBlueGrey;
+      color: $darkBlueGrey;
 
       @media all and (max-width: $lg) {
         font-size: 16px;
@@ -48,8 +48,8 @@
   }
 
   &__title {
-    color      : $darkBlueGrey;
-    font-size  : 33px;
+    color: $darkBlueGrey;
+    font-size: 33px;
     font-weight: bold;
 
     @media all and (max-width: $lg) {
@@ -57,8 +57,8 @@
     }
 
     &__subtitle {
-      color      : $btnColor;
-      font-size  : 24px;
+      color: $localPrimary;
+      font-size: 24px;
       font-weight: bold;
 
       @media all and (max-width: $lg) {
@@ -68,16 +68,16 @@
   }
 
   &__address {
-    display   : flex;
-    display   : -webkit-flex;
+    display: flex;
+    display: -webkit-flex;
     margin-top: 10px;
 
     span {
-      width      : 60%;
-      min-width  : 250px;
+      width: 60%;
+      min-width: 250px;
       margin-left: 10px;
     }
-    a{
+    a {
       cursor: pointer;
     }
   }
@@ -103,16 +103,17 @@
 
     &__website,
     &__phone {
-      width  : 50%;
+      width: 100%;
       display: flex;
       display: -webkit-flex;
-@media(max-width: $sm){
-  width: 100%;
-}
-      &>img {
-        margin-right : 10px;
-        border       : 1px solid #ddd;
-        padding      : 5px;
+      margin-bottom: 20px;
+      @media (max-width: $sm) {
+        width: 100%;
+      }
+      & > img {
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        padding: 5px;
         border-radius: 3px;
         height: 30px;
         width: 30px;
@@ -120,37 +121,37 @@
     }
 
     &__website {
-      float          : left;
+      float: left;
       justify-content: flex-start;
     }
 
     &__phone {
-      float          : right;
-      justify-content: flex-end;
-      @media(max-width: $sm){
-        float          : left;
+      float: left;
+      justify-content: flex-start;
+      @media (max-width: $sm) {
+        float: left;
         justify-content: flex-start;
       }
     }
   }
 
   &__decription {
-    float     : left;
-    width     : 100%;
+    float: left;
+    width: 100%;
     margin-top: 20px;
-    display   : flex;
-    display   : -webkit-flex;
+    display: flex;
+    display: -webkit-flex;
 
     &__list {
       width: 100%;
 
       ul {
-        float  : left;
+        float: left;
         padding: 0;
 
         li {
-          list-style : none;
-          font-size  : 14px;
+          list-style: none;
+          font-size: 14px;
           line-height: 22px;
         }
       }
@@ -158,7 +159,7 @@
 
     &__route {
       width: 30%;
-      a{
+      a {
         cursor: pointer;
       }
 
@@ -170,12 +171,13 @@
   }
 
   &__services {
-    width     : 100%;
-    display   : flex;
-    display   : -webkit-flex;
-    flex-wrap : wrap;
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
     margin-top: 30px;
-    float     : left;
+    float: left;
+    flex-direction: column;
 
     @media all and (max-width: $lg) {
       margin-top: 15px;
@@ -183,33 +185,33 @@
 
     &__blocks {
       background-color: $lightGrey;
-      flex-direction  : column;
-      display         : flex;
-      padding         : 12px 3px;
+      flex-direction: column;
+      display: flex;
+      padding: 12px 3px;
       // flex         : 1 0 17%;
-      width           : 31%;
-      justify-content : space-around;
-      text-align      : center;
-      height          : 90px;
-      margin          : 1%;
-      border-radius   : 5px;
+      width: 31%;
+      justify-content: space-around;
+      text-align: center;
+      height: 90px;
+      margin: 1%;
+      border-radius: 5px;
 
-      @media(max-width:$lg) {
+      @media (max-width: $lg) {
         width: 23%;
       }
 
-      @media(max-width:550px) {
+      @media (max-width: 550px) {
         width: 31%;
       }
-      @media(max-width:400px) {
+      @media (max-width: 400px) {
         width: 48%;
       }
-      &>div {
+      & > div {
         height: 30px;
       }
 
       span {
-        font-size : 12px;
+        font-size: 12px;
         margin-top: 7px;
       }
     }

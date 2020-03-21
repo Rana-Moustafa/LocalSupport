@@ -104,6 +104,10 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { AddToFavListComponent } from './add-to-fav-list/add-to-fav-list.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { EditPlaceComponent } from './single-place/edit-place/edit-place.component';
+import { ProfilePlacesComponent } from './profile-details/profile-places/profile-places.component';
+import { LegalComponent } from './inner-pages/legal/legal.component';
+import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
 
 let config = new AuthServiceConfig([
   {
@@ -188,7 +192,11 @@ export const ngxDropTargetOptions: DropTargetOptions = {
     AboutUsComponent,
     AddToFavListComponent,
     SearchResultComponent,
-    CookieComponent
+    CookieComponent,
+    EditPlaceComponent,
+    ProfilePlacesComponent,
+    LegalComponent,
+    PrivacyComponent
     // CarouselHolderComponent
   ],
   imports: [
@@ -222,9 +230,8 @@ export const ngxDropTargetOptions: DropTargetOptions = {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-      
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [RouterModule],
   schemas: [NO_ERRORS_SCHEMA],

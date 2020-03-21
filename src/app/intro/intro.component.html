@@ -1,50 +1,51 @@
-<div class="care_link large">
-  <a href="#"><strong>Take Care! <br/>
-  Hinweise  </strong></a>
-</div>
-<div class="care_link small">
-  <a href="#"><strong>Take Care!</strong></a>
-</div>
-<div class="intro">
-  <a class="logo-link" [routerLink]="['/'+langURL]">
-    <h1><img src="../../../assets/images/local-hero-logo.svg"></h1>
-  </a>
-  <div class="intro__side">
-    <div class="intro__side__text">
-      <div class="intro__side__text__big">
-        Corona <br />
-        verhindert<br />
-        mein lokales<br />
-        Geschäft
-      </div>
-      <div class="intro__side__text__small">
-        <p>
-          Was ist dein Ziel als Anbierhero <br />
-          khdsalköfdsklafhkdshfldsahfklsdafkdsjfsdöhfajkdhsafkl
-          klsdafkdsjfsdöhfajkdhsafkl<br />
-          needs und probleme von lokalem geschäft. was machst du hier?
-        </p>
-      </div>
-      <a class="intro__side__text__link" href="#">LocalHero</a>
-    </div>
+<div [hidden]="intro">
+  <div class="care_link large">
+    <a href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
+      target="_blank"><strong>Take care & <br />
+        stay home! </strong></a>
+
   </div>
-  <div class="intro__side">
-    <div class="intro__side__text">
-      <div class="intro__side__text__big">
-        Entdecke <br />
-        deine<br />
-        lokalen<br />
-        Geschäfte
+
+  <div class="intro">
+    <a class="logo-link" [routerLink]="['/'+langURL]" (click)="hideIntro()">
+      <h1><img src="../../../assets/images/local-hero-logo.svg"></h1>
+    </a>
+
+    <a class="skip" [routerLink]="['/'+langURL]" (click)="hideIntro()">To the map</a>
+
+
+    <div class="intro__side">
+      <div class="intro__side__text">
+        <div class="intro__side__text__big">
+
+          {{ "local_intro_big_1" | translate }}
+        </div>
+        <div class="intro__side__text__small">
+          <p>
+            {{"local_intro_text_1" | translate}}
+
+          </p>
+        </div>
+
       </div>
-      <div class="intro__side__text__small">
-        <p>
-          Was machst du da als stöber  <br />
-          herohfdksajfkdshfölkaklfdhskja jkdshajkhjksljgfds 
-          klsdafkdsjfsdöhfajkdhsafkl<br />
-          support your local business und kontaktiere stobere entdecke geschäfte gleich um die ecke 
-        </p>
+      <a class="intro__side__text__link" [routerLink]="['/signup']" > {{ "local_intro_link_1" | translate }} </a>
+    </div>
+    <div class="intro__side">
+      <div class="intro__side__text">
+        <div class="intro__side__text__big">
+          {{ "local_intro_big_2" | translate }}
+        </div>
+        <div class="intro__side__text__small">
+          <p>
+            {{"local_intro_text_2_1" | translate}}
+          </p>
+          <p>
+            {{"local_intro_text_2_2" | translate}}
+          </p>
+        </div>
+
       </div>
-      <a class="intro__side__text__link" href="#">Schaufenstershopper</a>
+      <a class="intro__side__text__link" [routerLink]="['/']" (click)="hideIntro()"> {{ "local_intro_link_2" | translate}} </a>
     </div>
   </div>
 </div>

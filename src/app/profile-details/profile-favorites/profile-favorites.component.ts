@@ -26,27 +26,27 @@ export class ProfileFavoritesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.favoritesPlacesservices.updateFavPlacesList.subscribe(place => {
-      this.updatedFavPlace = place;
-      if (this.updatedFavPlace.is_favorited === true) {
-        this.allFavPlaces.unshift(this.updatedFavPlace);
-      } else {
-        for (let i = 0; i < this.allFavPlaces.length; i++) {
-          if (this.allFavPlaces[i].id === this.updatedFavPlace.id) {
-            this.allFavPlaces.splice(i, 1);
-            console.log(this.allFavPlaces);
-            if (this.allFavPlaces.length < 1) {
-              // this.favListEmpty = true;
-            }
-          }
-        }
-      }
-    });
-    this.GetFavoritesList();
+    // this.favoritesPlacesservices.updateFavPlacesList.subscribe(place => {
+    //   this.updatedFavPlace = place;
+    //   if (this.updatedFavPlace.is_favorited === true) {
+    //     this.allFavPlaces.unshift(this.updatedFavPlace);
+    //   } else {
+    //     for (let i = 0; i < this.allFavPlaces.length; i++) {
+    //       if (this.allFavPlaces[i].id === this.updatedFavPlace.id) {
+    //         this.allFavPlaces.splice(i, 1);
+    //         console.log(this.allFavPlaces);
+    //         if (this.allFavPlaces.length < 1) {
+    //           // this.favListEmpty = true;
+    //         }
+    //       }
+    //     }
+    //   }
+    // });
+   //  this.GetFavoritesList();
 
     this.translation.langUpdated.subscribe(
       (lang) => {
-        this.GetFavoritesList();
+      //   this.GetFavoritesList();
       }
     );
   }

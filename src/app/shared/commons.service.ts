@@ -16,6 +16,7 @@ export class CommonsService {
   showLoading = false;
   noTranslation = false;
   addLangApi;
+  showPadding = true;
 
   private scollAnchorSource = new BehaviorSubject('');
   currentscollAnchor = this.scollAnchorSource.asObservable();
@@ -113,9 +114,16 @@ export class CommonsService {
   }
   getIntroData() {
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/slider?lang=en');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/intro?lang=en');
     } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/slider');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/intro');
+    }
+  }
+  getAboutPage(lang) {
+    if (lang === 'en') {
+      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/about?lang=en');
+    } else if (lang === 'de') {
+      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/about');
     }
   }
   getTestimonials(testimonialsIds) {

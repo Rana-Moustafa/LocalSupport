@@ -3,8 +3,19 @@
 @import '../../mixins';
 
 .inner-pages{
-    min-height: 600px;
-    padding: 100px 0;      
+    min-height: 90vh;
+    padding: 150px 0;    
+    background-color: $localPrimary;  
+
+    p, li{
+        font-size: 14px;
+        line-height: 25px;
+        color: #000;
+        a{
+            color: #000;
+            text-decoration: underline;
+        }
+    }
 }
 
 .empty{

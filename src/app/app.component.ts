@@ -10,6 +10,7 @@ import { PlacesService } from './shared/places.service';
 import { TranslationService } from './shared/translation.service';
 import { CommonsService } from './shared/commons.service';
 import { AuthenticationService } from './shared/auth.service';
+import { MapsService } from './shared/maps.service';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ export class AppComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               public translate: TranslateService,
-              private translation: TranslationService) {
+              private translation: TranslationService,
+              private map: MapsService) {
     // translate.addLangs(['de', 'en']);
     // translate.setDefaultLang('de');
 
@@ -61,18 +63,23 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.map.getMapLocations().subscribe( data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    })
     // this.commons.showTranslation();
     console.log(this.commons.noTranslation);
     // this.commons.sendLanguageSwitcherStatus(false);
     this.commons.changeLanguageSwitcherStatus(false);
-    this.placeTypes();
+   // this.placeTypes();
     console.log('app component');
     if (!localStorage.getItem('current_lang')) {
       this.langURL = 'de';
     }
 
     this.authenticationService.autoLogin();
-    this.introItems();
+    // this.introItems();
     window.addEventListener('scroll', this.scroll, true); // third parameter
     this.Coockietext();
 
@@ -101,15 +108,11 @@ export class AppComponent implements OnInit {
 
   introItems() {
     this.commons.getIntroData().subscribe(data => {
-      if (JSON.parse(JSON.stringify(data)).length > 0) {
         console.log('>');
         if (sessionStorage.getItem('active_advertising') !== 'true') {
           sessionStorage.setItem('active_advertising', 'true');
           this.router.navigateByUrl('/' + this.langURL + '/advertising', { state: { intro: data } });
         }
-      } else {
-        console.log('<');
-      }
     }, error => {
       console.log(error);
 

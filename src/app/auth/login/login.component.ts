@@ -12,7 +12,7 @@ import { UserDataService } from 'src/app/shared/user-data.service';
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
-
+  langURL = localStorage.getItem('current_lang');
   @ViewChild('lg', { static: true }) loginForm: NgForm;
 
   formError = false;
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       this.userDataService.changeProfilePicture(this.userData.profile_image);
       localStorage.setItem('id', JSON.stringify(this.userData.id));
       this.loginForm.reset();
-      this.router.navigate(['']);
+      this.router.navigate([this.langURL + '/profile']);
       // this.newProfilePicture = this.userData.profile_image;
       // this.userDataService.changeProfilePicture(this.newProfilePicture);
       // this.authService.autoLogout(this.userData.token_expiration_date)

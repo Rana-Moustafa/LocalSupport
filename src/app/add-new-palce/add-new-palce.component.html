@@ -1,17 +1,19 @@
 <div *ngIf="isLoading" class="loading-spinner">
   <app-loading-spinner></app-loading-spinner>
 </div>
-
-<div class="c_add_place__Header-section">
-</div>
 <div class="c_add_place__content-wrapper">
-  <div class="container">
+  <div class="container padding-top">
     <div class="row">
       <div class="col-12">
         <div class="c_add_place_content">
           <form (ngSubmit)="newPlace(addPlace)" name="addPlace" #addPlace="ngForm">
             <div class="c-activities_section">
-              <h1>Registration Vendor</h1>
+              <h1>{{ "Business_register" | translate }}</h1>
+              <p>
+                {{ "Business_register_text_1" | translate }}
+              </p>
+              <p> {{ "Business_register_text_2" | translate }}: <a href = "mailto: act@belocalhero.com">act@belocalhero.com</a>
+              </p>
               <!-- <div class="c-activities_section__right">
                 <h3>
                   {{"what_you_can_do_here" | translate}}
@@ -34,7 +36,7 @@
                 </div>
               </div> -->
               <div class="c-activities_section_left">
-              
+
                 <!-- <button class="Addnew-btn" type="submit" class="btn btn-primary" >
                   {{"Addplace" | translate}}
                 </button> -->
@@ -43,7 +45,7 @@
             <p class="help-block" *ngIf="addPlaceFormError && addPlace.submitted"> {{ formErrorMsg }} </p>
             <!-- start -->
             <div class="form-group">
-              <h4 class="subtitle">{{"give_it_a_name" | translate}} (*):</h4>
+              <h4 class="subtitle">{{"local_bussiness_name" | translate}} (*):</h4>
               <div class="form-group">
                 <input type="text" class="form-control col-12" ngModel name="placename" #placename="ngModel" required>
                 <small class="help-block"
@@ -53,14 +55,14 @@
             <!-- end -->
             <!-- start -->
             <div class="form-group">
-              <h4 class="subtitle">{{"Address" | translate}} (*):</h4>
+              <h4 class="subtitle">{{"local_Address" | translate}} (*):</h4>
               <div class="map-filters__search">
                 <div class="form-group">
                   <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
                     placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off"
                     type="text" #search ngModel name="address" #address="ngModel" required>
                   <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
-                  {{'field_requird'  | translate }}</p>
+                    {{'field_requird'  | translate }}</p>
                   <p class="help-block" *ngIf="address.touched && !latitude && !longitude">You must choose the
                     address from the autocomplete list above!</p>
                 </div>
@@ -69,7 +71,7 @@
             <!-- end -->
             <!-- start -->
             <div class="form-group">
-              <h4 class="subtitle">{{"phone" |translate}}</h4>
+              <h4 class="subtitle">{{"local_Phonenumber" |translate}}</h4>
               <div class="form-group">
                 <input type="text" class="form-control col-12" ngModel name="phone" #phone="ngModel" pattern="[0-9]+">
                 <p class="help-block" *ngIf="!phone.valid && phone.touched && phone.errors.pattern">Please enter a valid
@@ -77,15 +79,16 @@
               </div>
             </div>
             <div class="form-group">
-              <h4 class="subtitle">{{"Email" |translate}} (*)</h4>
+              <h4 class="subtitle">{{"local_Emailadress" |translate}} (*)</h4>
               <div class="form-group">
-                <input type="email" class="form-control col-12" ngModel name="placeemail" #placeemail="ngModel" required>
+                <input type="email" class="form-control col-12" ngModel name="placeemail" #placeemail="ngModel"
+                  required>
                 <small class="help-block"
                   *ngIf="!placeemail.valid && placeemail.touched && placeemail.errors.required">{{'field_requird'  | translate }}</small>
               </div>
             </div>
             <div class="form-group">
-              <h4 class="subtitle">{{"website" | translate}}</h4>
+              <h4 class="subtitle">{{"local_Website" | translate}}</h4>
               <div class="form-group">
                 <input type="url" class="form-control col-12" ngModel name="website" #website="ngModel"
                   pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
@@ -95,7 +98,7 @@
               </div>
             </div>
             <div class="form-group">
-              <h4 class="subtitle">{{"zipcode" |translate}}</h4>
+              <h4 class="subtitle">{{"local_zip_code" |translate}}</h4>
               <div class="form-group">
                 <input type="text" class="form-control col-12" ngModel name="zipcode" #zipcode="ngModel"
                   pattern="^[a-zA-Z0-9_]*$">
@@ -106,36 +109,24 @@
             <!-- end -->
             <!-- start -->
             <div class="form-group">
-              <h4 class="subtitle">{{"description" |translate}}  (Your Name, Your Product/Offer, etc...) (*)</h4>
+              <h4 class="subtitle">{{"local_Description" |translate}}
+                <small>({{ "local_Description_2" | translate }})</small> (*)</h4>
               <div class="form-group">
-                <textarea type="text" class="form-control col-12" ngModel name="description"
-                  #description="ngModel" required></textarea>
-                  <small class="help-block"
+                <textarea type="text" class="form-control col-12" ngModel name="description" #description="ngModel"
+                  required></textarea>
+                <small class="help-block"
                   *ngIf="!description.valid && description.touched && description.errors.required">{{'field_requird'  | translate }}</small>
               </div>
             </div>
             <!-- end -->
 
             <!-- start -->
-            <div class="form-group">
-              <h4 class="subtitle">{{"type" | translate}} (*): </h4>
-              <div class="checkbox_wrapper">
-                <div class="form-half-width" *ngFor="let type of placesCategories; let i = index;">
-                  <label class="form-check-label" for="category{{type.name}}">
-                      <input class="form-check-input" type="checkbox" id="type{{type.name}}"
-                    [(ngModel)]="placesCategories[i].checked"
-                    name="{{type.name}}" (change)="checkPlayground($event, type.name)">
-                    <span>{{type.name}}</span>  
-                  </label>
-                </div>
-              </div>
-            </div>
             <!-- end -->
             <!-- start -->
-            <div class="form-group" *ngIf="showSubCategories">
-              <h4 class="subtitle">{{"subCategory" |translate}} (*):</h4>
+            <div class="form-group" >
+              <h4 class="subtitle">{{"local_Type" |translate}} (*):</h4>
               <div class="form_wrapper radio-form">
-                <p *ngFor='let subCat of subCategories; let i = index;'>
+                <p *ngFor='let subCat of formType; let i = index;'>
                   <input id="cat{{i}}" type="radio" class="custom-control-input" [value]="subCat" name="subcats" ngModel
                     #subcats="ngModel" required="showSubCategories">
                   <label class="custom-control-label" for="cat{{i}}">
@@ -145,44 +136,44 @@
               </div>
             </div>
             <div class="form-group">
-              <h4 class="subtitle">{{"category" |translate}} :</h4>
+              <h4 class="subtitle">{{"local_Category" |translate}} :</h4>
               <div class="checkbox_wrapper">
-                <div class="form-half-width" *ngFor="let category of foods;  let i = index;">
-                  <label class="form-check-label" for="{{category.name}}"> 
-                   <input class="form-check-input" type="checkbox" name="{{category.name}}" id="{{category.name}}" ngModel
-                   [(ngModel)]="foods[i].checked">
-                   <span>{{ category.name }}</span>
+                <div class="form-half-width" *ngFor="let category of formCategories;  let i = index;">
+                  <label class="form-check-label" for="{{category.name}}">
+                    <input class="form-check-input" type="checkbox" name="{{category.name}}" id="{{category.name}}"
+                      ngModel [(ngModel)]="formCategories[i].checked">
+                    <span>{{ category.name }}</span>
                   </label>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <h4 class="subtitle">{{"delivery" |translate}} (*) :</h4>
+              <h4 class="subtitle">{{"local_Delievery" |translate}} (*) :</h4>
               <div class="checkbox_wrapper">
-                <div class="form-half-width" *ngFor="let delivery of foods;  let i = index;">
-                  <label class="form-check-label" for="{{delivery.name}}"> 
-                   <input class="form-check-input" type="checkbox" name="{{delivery.name}}" id="{{delivery.name}}" ngModel
-                   [(ngModel)]="foods[i].checked">
-                   <span>{{ delivery.name }}</span>
+                <div class="form-half-width" *ngFor="let delivery of formDelivery;  let i = index;">
+                  <label class="form-check-label" for="{{delivery.name}}">
+                    <input class="form-check-input" type="checkbox" name="{{delivery.name}}" id="{{delivery.name}}"
+                      ngModel [(ngModel)]="formDelivery[i].checked">
+                    <span>{{ delivery.name }}</span>
                   </label>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <h4 class="subtitle">{{"payment_method" | translate}} :</h4>
+              <h4 class="subtitle">{{"local_Payment_Method" | translate}} :</h4>
               <div class="checkbox_wrapper">
-                <div class="form-half-width" *ngFor="let payment of foods;  let i = index;">
-                  <label class="form-check-label" for="{{payment.name}}"> 
-                   <input class="form-check-input" type="checkbox" name="{{payment.name}}" id="{{payment.name}}" ngModel
-                   [(ngModel)]="foods[i].checked">
-                   <span>{{ payment.name }}</span>
+                <div class="form-half-width" *ngFor="let payment of formPaymentMethod;  let i = index;">
+                  <label class="form-check-label" for="{{payment.name}}">
+                    <input class="form-check-input" type="checkbox" name="{{payment.name}}" id="{{payment.name}}"
+                      ngModel [(ngModel)]="formPaymentMethod[i].checked">
+                    <span>{{ payment.name }}</span>
                   </label>
                 </div>
               </div>
             </div>
 
             <div class="form-group hour ">
-              <h4 class="subtitle">{{"Opening_hours" | translate}} :</h4>
+              <h4 class="subtitle">{{"local_Opening_hours" | translate}} :</h4>
               <div class="form_wrapper">
                 <div class="form-half-width">
 
@@ -203,9 +194,10 @@
               </div>
             </div>
 
-            <h5 [hidden]="!((featuredImageError && !noImages)|| featuredImageError)">
-              {{"cover_image_select_msg" | translate}} (required):</h5>
-            <small class="help-block" [hidden]="((featuredImageError && !noImages)|| !featuredImageError)">
+
+            <h5 [hidden]="imagesUrls && imagesUrls.length === 0">
+              {{"cover_image_select_msg" | translate}} (*):</h5>
+            <small class="help-block help-block-pink" [hidden]="imagesUrls && imagesUrls.length === 0">
               {{"cover_image_select_msg_error" | translate}}
             </small> 
             <div class="data-text">
@@ -220,6 +212,7 @@
                 <p>{{ imagesNames[i] }}</p>
               </div>
             </div>
+           
             <!--  <button type="submit" class="btn btn-primary" 
             [disabled]="!checkValid()">{{"Addplace" | translate}}</button> -->
             <h4 class="subtitle">{{"upload_images" | translate}} (*): </h4>
@@ -235,7 +228,7 @@
               <div class="input-content">
                 <div class="input-content-wrapper">
                   <div class="img">
-                    <img src="assets/images/camera-icon.svg" alt="">
+                    <img src="assets/images/photo.svg" alt="">
                    
                   </div>
                   <span class="text" [hidden]="maxNumber">
@@ -247,10 +240,21 @@
               </div>
             </a>
             </div>
-
-            <button class="Addnew-btn" type="submit" class="btn btn-primary"
-            [disabled]="!addPlace.valid || (!latitude && !longitude) || (!checkValidImages()) ">
-            {{"Addplace" | translate}}</button>
+            <div class="form-group">
+             
+              <div class="checkbox_wrapper">
+                <div class="form-full-width">
+                  <label class="form-check-label" for="terms">
+                    <input class="form-check-input" type="checkbox" name="terms" id="terms" ngModel
+                    required>
+                    <span>{{ "local_terms" | translate }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-original" type="submit"
+              [disabled]="!addPlace.valid || (!latitude && !longitude) || (!checkValidImages()) ">
+              {{"local_add_bussiness" | translate}}</button>
           </form>
         </div>
       </div>

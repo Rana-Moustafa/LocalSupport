@@ -52,24 +52,24 @@ export class HomepageComponent implements OnInit {
     this.commons.darkHeader = false;
     this.commons.currentscollAnchor.subscribe(message => this.scrollId = message);
     this.commons.show();
-    this.commons.showLoadingSpinner();
-    this.placesTypes();
-    this.getFavoritePlacesSlider();
-    this.getHomepageSections();
+    // this.commons.showLoadingSpinner();
+    // this.placesTypes();
+    // this.getFavoritePlacesSlider();
+    // this.getHomepageSections();
 
     this.translation.langUpdated.subscribe(
       (lang) => {
 
-        this.commons.showLoadingSpinner();
+        
         localStorage.setItem('current_lang', lang);
         const currentLang = localStorage.getItem('current_lang');
         const translatedLang = lang;
         let u = this.router.url;
         u = u.replace(this.route.snapshot.params.language.toString(), lang);
         this.router.navigateByUrl(u);
-        this.placesTypes();
-        this.getFavoritePlacesSlider();
-        this.getHomepageSections();
+       //  this.placesTypes();
+        // this.getFavoritePlacesSlider();
+        // this.getHomepageSections();
       }
     );
   }
@@ -81,36 +81,37 @@ export class HomepageComponent implements OnInit {
     });
   }
   getHomepageSections() {
-    this.commons.getHomePageData().subscribe(data => {
-      this.commons.hideLoadingSpinner();
-      console.log(data);
-      this.homeData = data;
-      for (var i = 0; i < this.homeData.length; i++) {
-        if (this.homeData[i].acf_fc_layout === 'featured_place') {
-          this.FaturedAddItems = this.homeData[i];
-         // console.log(this.FaturedAddItems);
-        }
-        if (this.homeData[i].acf_fc_layout === 'testimonials') {
-          this.testimonialsData = this.homeData[i].chosen_testimonials;
+    
+    // this.commons.getHomePageData().subscribe(data => {
+    //   this.commons.hideLoadingSpinner();
+    //   console.log(data);
+    //   this.homeData = data;
+    //   for (var i = 0; i < this.homeData.length; i++) {
+    //     if (this.homeData[i].acf_fc_layout === 'featured_place') {
+    //       this.FaturedAddItems = this.homeData[i];
+    //      // console.log(this.FaturedAddItems);
+    //     }
+    //     if (this.homeData[i].acf_fc_layout === 'testimonials') {
+    //       this.testimonialsData = this.homeData[i].chosen_testimonials;
 
-        }
-        if (this.homeData[i].acf_fc_layout === 'who_are_we') {
-          this.testWhoWeAre = this.homeData[i];
-        }
+    //     }
+    //     if (this.homeData[i].acf_fc_layout === 'who_are_we') {
+    //       this.testWhoWeAre = this.homeData[i];
+    //     }
 
-      }
-      this.featuredPlacesId = this.FaturedAddItems.featured_place;
-      console.log(this.featuredPlacesId);
-      this.GetFeaturedPlaces(this.featuredPlacesId);
-      this.getTestimonialsData();
-      this.navigateToSection(this.scrollId);
-      if (this.scrollId) {
-        this.navigateToSection(this.scrollId);
-      }
-    }, error => {
-      // console.log(error)
-      this.commons.hideLoadingSpinner();
-    });
+    //   }
+    //   this.featuredPlacesId = this.FaturedAddItems.featured_place;
+    //   console.log(this.featuredPlacesId);
+    //   this.GetFeaturedPlaces(this.featuredPlacesId);
+    //   this.getTestimonialsData();
+    //   this.navigateToSection(this.scrollId);
+    //   if (this.scrollId) {
+    //     this.navigateToSection(this.scrollId);
+    //   }
+    // }, error => {
+    //   // console.log(error)
+    //   this.commons.hideLoadingSpinner();
+    // });
   }
 
   GetFeaturedPlaces(featuredPlacesId) {
