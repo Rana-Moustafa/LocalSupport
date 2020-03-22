@@ -31,7 +31,7 @@
     {
       "name": "posts",
       "urls": [
-        "https://sta-odf.hosting.modeso.ch/wp-json/**"
+        "https://belocalhero.cyon.site/stawp/wp-json/**"
       ],
       "cacheConfig": {
         "maxSize": 20,
