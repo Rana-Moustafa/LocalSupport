@@ -237,8 +237,6 @@ export class MapComponent implements OnInit {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
         position => {
-          console.log('**********');
-          console.log(position);
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
         });
@@ -358,9 +356,6 @@ setCurrentLocation(lat, lng) {
       this.lat = this.latitude;
       this.lng = this.longitude;
       this.zoom = 15;
-      console.log('location');
-      console.log(lat);
-      console.log(lng);
       this.getAddress(this.latitude, this.longitude);
     });
   }
@@ -389,7 +384,7 @@ getAddress(latitude, longitude) {
         window.alert('No results found');
       }
     } else {
-      window.alert('Geocoder failed due to: ' + status);
+      console.log('Geocoder failed due to: ' + status);
     }
 
   });
