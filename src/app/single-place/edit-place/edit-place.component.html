@@ -2,6 +2,8 @@
     <div class="row">
         <div class="edit-places">
             <h1>{{"local_edit_business" | translate }} </h1>
+            <p>{{ "Business_register_text_1" | translate }}</p>
+            <p>{{ "Business_register_text_2" | translate }}: <a href = "mailto: act@belocalhero.com">act@belocalhero.com</a>
         </div>
         <form (ngSubmit)="updatePlace(editPlace)" name="editPlace" #editPlace="ngForm">
             <div class="form-group">

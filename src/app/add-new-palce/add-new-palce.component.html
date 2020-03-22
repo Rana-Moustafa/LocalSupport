@@ -9,10 +9,8 @@
           <form (ngSubmit)="newPlace(addPlace)" name="addPlace" #addPlace="ngForm">
             <div class="c-activities_section">
               <h1>{{ "Business_register" | translate }}</h1>
-              <p>
-                Nimm dir Zeit und fülle das Formular genau aus. So kann dich deine Nachbarschaft am besten finden und kontaktieren. Neben den Angaben ist die Beschreibung zentral. Hier kannst du kurz schreiben, wie du von der aktuellen Situation betroffen bist und was du noch anbieten kannst oder wie du unterstützt werden kannst etc. Hier kannst du auch noch weitere Links zu Webseiten, Online Shops oder Online-Streamings einfügen.
-              </p>
-              <p> Falls du noch Unterstützung brauchst, schreib uns auf: <a href = "mailto: act@belocalhero.com">act@belocalhero.com</a>
+              <p>{{ "Business_register_text_1" | translate }}</p>
+              <p>{{ "Business_register_text_2" | translate }}: <a href = "mailto: act@belocalhero.com">act@belocalhero.com</a>
               </p>
               <!-- <div class="c-activities_section__right">
                 <h3>
