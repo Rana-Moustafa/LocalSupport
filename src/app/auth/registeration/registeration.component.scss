@@ -3,7 +3,43 @@
 
 .registeration-form {
     margin-top: $mr-60;
+    .btn-wrapper{
+        display: flex;
+        align-items: flex-end;
 
+        @media(max-width: $lg){
+            flex-direction: column;
+        }
+
+        &.social-buttons-login{
+            flex-direction: column;
+
+            .btn{
+                padding     : $mr-15 $mr-40;
+                opacity     : 1;
+                color: $white;
+                width: 300px;
+                margin-bottom: $mr-15;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                cursor: pointer;
+            
+                .img{
+                    align-items: center;
+                    display: flex;
+                    margin-right: $mr-15;
+                } 
+            }
+            .btn-blue{
+                color: #fff !important;
+                .img{
+                    width: 8px;
+                }
+            }
+        }
+        
+    }
     .row{
         min-height: 100vh;
     }
@@ -11,13 +47,7 @@
     .help-block {
         color         : $mainColor;
     }
-    .btn-wrapper{
-        display: flex;
-        align-items: center;
-        @media(max-width: $lg){
-            flex-direction: column;
-        }
-    }
+  
     a{
         @include text-regular();
         color:$darkBlueGrey;

@@ -4,6 +4,9 @@
 
 .registration-form-section {
     background-color: $localPrimary;
+    .btn-signup{
+        width: 200px;
+    }
     &.padding-top {
         padding-top: 125px;
       }

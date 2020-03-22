@@ -61,9 +61,11 @@
           {{"password_not_match" | translate}}
         </small>
     </div>
-    <div class="btn-wrapper">
+    <div class="btn-wrapper social-buttons-login">
         <button type="submit" class="btn btn-original" [disabled]="!f.valid">{{ 'Sign_Up' | translate }} </button>
         <!-- <a href="" class="terms-link">{{ 'trems_of_use' | translate }} </a> | <a href="">  {{ 'privacy_policy' | translate }} </a> -->
+        <app-facebook-login></app-facebook-login>
+        <app-google-login></app-google-login>
     </div>
 
 </form>

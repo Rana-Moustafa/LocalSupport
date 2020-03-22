@@ -231,7 +231,7 @@ export const ngxDropTargetOptions: DropTargetOptions = {
         deps: [HttpClient]
       }
     }),
-    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [RouterModule],
   schemas: [NO_ERRORS_SCHEMA],

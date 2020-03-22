@@ -35,7 +35,7 @@
               <app-registeration></app-registeration>
 
               <p style="font-weight: bold; margin-top: 30px; margin-bottom: 10px">{{ 'already_have_account' | translate }}</p>
-              <a class="btn btn-original" id="signin-tab" data-toggle="tab" href="#signin" role="tab"
+              <a class="btn btn-original btn-signup" id="signin-tab" data-toggle="tab" href="#signin" role="tab"
                 aria-controls="signin" aria-selected="false" [ngClass]="{ 'active': showSigninForm === true }"
                 [routerLink]="'/signin'">{{ 'signin' | translate }} </a>
             </div>
@@ -46,13 +46,15 @@
               
               
               <p style="font-weight: bold; margin-top: 30px; margin-bottom: 10px">{{ 'dont_have_account' | translate }}</p>
-              <a class="btn btn-original" id="register-tab" data-toggle="tab" href="#register" role="tab"
+              <a class="btn btn-original btn-signup" id="register-tab" data-toggle="tab" href="#register" role="tab"
                 aria-controls="register" aria-selected="true" [ngClass]="{ 'active': showSignUpForm === true }"
                 [routerLink]="'/signup'">{{ 'Register' | translate }} </a>
             </div>
+            
             <div class="tab-pane fade" id="resetpass" role="tabpanel" aria-labelledby="resetpass-tab"
               [ngClass]="{ 'active show': showResetPasswordForm === true }">
               <app-forgot-password></app-forgot-password>
+              
             </div>
           </div>
         </div>

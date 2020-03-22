@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { CountriesService } from '../../shared/countries.service';
@@ -8,7 +8,8 @@ import { UserDataService } from 'src/app/shared/user-data.service';
 @Component({
   selector: 'app-registeration',
   templateUrl: './registeration.component.html',
-  styleUrls: ['./registeration.component.scss']
+  styleUrls: ['./registeration.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RegisterationComponent implements OnInit {
 
