@@ -366,7 +366,7 @@
       display: -ms-flexbox;
       display: -webkit-flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: flex-start;
 
       .custom-radio {
         width: 20%;
@@ -375,6 +375,8 @@
         position: relative;
         margin-bottom: 20px;
         padding: 0;
+        margin-right: 15px;
+        border: 1px solid #e7e4e4;
 
         @media all and (max-width: 992px) {
           width: 47%;
