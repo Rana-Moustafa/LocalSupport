@@ -1283,7 +1283,7 @@
   "local_intro_text_1": "Kannst du wegen der Coronakrise nicht mehr deiner normalen Geschäftstätigkeit nachgehen oder musstest du sogar dein Geschäft schliessen? Du lässt dich aber nicht unterkriegen und entwickelst neue Ideen und neue Vertriebswege! Ob mit Lieferservice, per Post, mit Geschenkkarten für «nach Corona» oder via Online-Streaming – be (a) local hero.Zeige deiner Nachbarschaft, dass du immer noch für sie da bist – sie werden auch für dich da sein! #Solidarit",
   "local_intro_text_2_1": "Das Coronavirus stellt unsere gesamte Gesellschaft vor grosse Herausforderungen. Besonders lokale Unternehmen und Selbstständige sind stark betroffen. Sie haben fast alle ihre Kunden verloren oder müssen sogar ganz schließen. Vielen fehlen die finanziellen Mittel, um diese Krise zu überstehen. Jetzt sind wir gefragt! ",
   "local_intro_text_2_2": "Zeigt Solidarität. Besucht online euer Lieblings-Kaffee, euer lokalen Blumenladen oder das Yogastudio um die Ecke – be (a) local hero und unterstütze den Erhalt der lokalen Vielfalt in deinem Quartier – natürlich unter Einhaltung der Weisungen des Bundes und Social Distancing.",
-  "local_login_text_1": "Be Local Hero hat sich zur Aufgabe gemacht, lokale Geschäfte und Organisationen in dieser schwierigen Zeit zu unterstützen! Ziel ist die Förderung von Solidarität und die Vernetzung von Anbietern und Kunden – alles kostenlos und Gemeinnützig.",
+  "local_login_text_1": "Be Local Hero hat sich zur Aufgabe gemacht, lokale Geschäfte und Organisationen in dieser schwierigen Zeit zu unterstützen! Ziel ist die Förderung von Solidarität und die Vernetzung von Anbietern und Kunden – alles kostenlos und gemeinnützig.",
   "local_login_text_2": "Zwei einfache Schritte, um dich sichtbar zu machen:",
   "local_login_text_3": "1. Erstelle dein Profil mit deinem Namen und der Emailadresse oder via Facebook (Diese Daten werden nicht veröffentlicht). Mit dem Profil kannst du dann beliebig viele Angebote erstellen und diese auch wieder bearbeiten.",
   "local_login_text_4": "2. Fülle das Formular aus mit allen wichtigen Angaben zu dir, deinem Produkt/Service und was du während Coronakrise noch anbietest oder wie wir dir helfen können (z.B. mit Geschenkkarten etc.)",
@@ -1303,5 +1303,7 @@
   "place_added": "Ihr Angebot wurde hinzugefügt",
   "local_edit_business": "Geschäft bearbeiten",
   "no_business": "Kein Geschäft",
-  "to_map": "Zur Karte"
+  "to_map": "Zur Karte",
+  "already_have_account": "Du hast schon ein Account? Hier gehts zur Anmeldung",
+  "dont_have_account": "Du hast noch keinen Account? Hier gehts zur Registrierung"
 }
