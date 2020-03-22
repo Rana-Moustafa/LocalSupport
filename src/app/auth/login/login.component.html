@@ -2,12 +2,13 @@
     <app-loading-spinner></app-loading-spinner>
 </div>
 <form id="" class="login-form" (ngSubmit)="onUserLogin(lg)" #lg="ngForm">
-     <p class="help-block" *ngIf="formError && lg.submitted"> {{ formErrorMsg }} </p> 
-      <p class="help-block" *ngIf="userStatus.loginError"> "{{"form_Error_msg" | translate}}" </p> 
+    <p class="help-block" *ngIf="formError && lg.submitted"> {{ formErrorMsg }} </p>
+    <p class="help-block" *ngIf="userStatus.loginError"> "{{"form_Error_msg" | translate}}" </p>
     <div class="form-group">
         <label>{{"Email" | translate}} <span class="red">*</span></label>
         <input class="form-control" type="text" ngModel name="username" required #username="ngModel">
-        <small class="help-block" *ngIf="!username.valid && username.touched && username.errors.required">{{"field_requird"| translate}}</small>
+        <small class="help-block"
+            *ngIf="!username.valid && username.touched && username.errors.required">{{"field_requird"| translate}}</small>
     </div>
 
     <div class="form-group">
@@ -15,14 +16,17 @@
         <input class="form-control" type="password" ngModel name="password" required #password="ngModel" minlength="6"
             reverse="true">
 
-        <small class="help-block" *ngIf="password.touched && password.invalid && password.errors.required">{{"field_requird" |translate}}</small>
+        <small class="help-block"
+            *ngIf="password.touched && password.invalid && password.errors.required">{{"field_requird" |translate}}</small>
     </div>
     <div class="btn-wrapper social-buttons-login">
         <button type="submit" class="btn btn-original" [disabled]="!lg.valid">{{"signin" |translate}}</button>
+        <a [routerLink]="'/forgot-password'" class="forget-password"
+            [ngClass]="{ 'active': showResetPasswordForm === true }" class="nav-item nav-link" id="resetpass-tab"
+            data-toggle="tab" href="#resetpass" role="tab" aria-controls="resetpass" aria-selected="true">
+            {{ 'Forget_password' | translate }}? </a>
         <app-facebook-login></app-facebook-login>
         <app-google-login></app-google-login>
-        
-       
     </div>
 
 </form>

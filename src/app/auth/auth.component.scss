@@ -131,23 +131,17 @@
         }
     }
     #resetpass-tab{
-        text-align: center;
-        color: $localSecondary;
+        color: #000;
+        text-align: right;
         text-decoration: underline;
         font-weight: bold;
-        width: 200px;
-        margin: auto;
+        margin-bottom: 15px;
+        font-size: 16px;
 
         &:hover{
             color:  $localSecondary;
         }
-        @media all and (max-width: 992px){
-           
-
-            &:hover{
-                color: $darkBlueGrey;
-            }
-        }
+      
     }
 }
 .language_banner {

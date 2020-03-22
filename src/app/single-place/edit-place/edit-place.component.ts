@@ -94,6 +94,7 @@ export class EditPlaceComponent implements OnInit {
               private commons: CommonsService) { }
 
   ngOnInit() {
+    this.commons.show();
     this.getFormSelectionItems();
     this.getSinglePlace(this.route.snapshot.params.id);
     this.loadMap();

@@ -43,10 +43,7 @@
               [ngClass]="{ 'active show': showSigninForm === true }">
               <h2>{{ 'signin' | translate }}</h2>
               <app-login></app-login>
-              <a [routerLink]="'/forgot-password'" class="forget-password"
-                [ngClass]="{ 'active': showResetPasswordForm === true }" class="nav-item nav-link" id="resetpass-tab"
-                data-toggle="tab" href="#resetpass" role="tab" aria-controls="resetpass" aria-selected="true">
-                {{ 'Forget_password' | translate }}? </a>
+              
               
               <p style="font-weight: bold; margin-top: 30px; margin-bottom: 10px">{{ 'dont_have_account' | translate }}</p>
               <a class="btn btn-original" id="register-tab" data-toggle="tab" href="#register" role="tab"

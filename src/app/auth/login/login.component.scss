@@ -11,7 +11,7 @@
     .btn-wrapper{
         margin-top: $mr-40;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         
         &.social-buttons-login{
             flex-direction: column;
@@ -23,7 +23,7 @@
                 width: 300px;
                 margin-bottom: $mr-15;
                 display: flex;
-                align-self: center;
+                align-items: flex-end;
                 justify-content: center;
                 cursor: pointer;
             
