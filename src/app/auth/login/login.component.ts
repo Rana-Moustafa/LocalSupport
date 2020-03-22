@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
   userData;
   isLoading = false;
   newProfilePicture;
+  showSignUpForm = false;
+  showSigninForm = false;
+  showResetPasswordForm = false;
+
 
   constructor(
     private router: Router,
@@ -29,6 +33,10 @@ export class LoginComponent implements OnInit {
     public userDataService: UserDataService) { }
 
   ngOnInit() {
+
+   if (this.router.url === '/forgot-password') {
+      this.showResetPasswordForm = true;
+    }
   }
 
   onUserLogin(form: NgForm) {
