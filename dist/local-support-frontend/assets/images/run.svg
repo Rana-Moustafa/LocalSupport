@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="36" height="35" viewBox="0 0 36 35">
-    <g fill="none" fill-rule="evenodd" stroke="#5F5D70" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" transform="translate(2 2)">
-        <ellipse cx="26.182" cy="3.089" rx="2.909" ry="3.089"/>
-        <path d="M20.364 9.268l-5.819 6.179c-1.298 1.379-1.084 3.674.444 4.755l4.454 3.154c.71.502.862 1.543.33 2.25L16 30.894"/>
-        <path d="M8.727 7.724l2.523-2.68c1.048-1.112 2.717-1.21 3.874-.227l10.48 8.903c1.157.983 2.825.885 3.874-.228L32 10.812M8.727 21.626L0 30.894"/>
-    </g>
-</svg>

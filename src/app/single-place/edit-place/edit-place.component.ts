@@ -97,8 +97,6 @@ export class EditPlaceComponent implements OnInit {
     this.getFormSelectionItems();
     this.getSinglePlace(this.route.snapshot.params.id);
     this.loadMap();
-    console.log(this.openTimeFrom)
-    console.log(this.route.snapshot.params.id);
   }
 
   getSinglePlace(id) {
@@ -113,37 +111,34 @@ export class EditPlaceComponent implements OnInit {
       // this.resultDelivery = this.placeData.delivery;
       if (this.placeData.delivery && this.placeData.delivery.length > 0) {
         this.placeData.delivery.forEach((element, key) => {
-          console.log(element);
-          console.log(key);
+          // console.log(element);
+          // console.log(key);
           this.resultDelivery.push({ name: element, checked: true });
           if (this.formDelivery && (this.formDelivery[key].name === this.resultDelivery[key].name)) {
-            console.log('lololo');
             this.formDelivery[key].checked = true;
           }
-          console.log(this.resultDelivery);
+          // console.log(this.resultDelivery);
         });
       }
 
       if (this.placeData.payment_methods && this.placeData.payment_methods.length > 0) {
         this.placeData.payment_methods.forEach((element, key) => {
-          console.log(element);
-          console.log(key);
+          // console.log(element);
+          // console.log(key);
           this.resultPayment.push({ name: element, checked: true });
           if (this.formPaymentMethod && (this.formPaymentMethod[key].name === this.resultPayment[key].name)) {
-            console.log('tyty');
             this.formPaymentMethod[key].checked = true;
           }
-          console.log(this.resultPayment);
+          // console.log(this.resultPayment);
         });
       }
 
       if (this.placeData.category && this.placeData.category.length > 0) {
         this.placeData.category.forEach((element, key) => {
-          console.log(element);
-          console.log(key);
+          // console.log(element);
+          // console.log(key);
           this.resultCategory.push({ name: element, checked: true });
           if (this.formCategories && (this.formCategories[key].name === this.resultCategory[key].name)) {
-            console.log('ghgh');
             this.formCategories[key].checked = true;
           }
           console.log(this.resultCategory);
@@ -160,8 +155,6 @@ export class EditPlaceComponent implements OnInit {
   // get form field data
   getFormSelectionItems() {
     this.places.getFormSelections().subscribe(data => {
-      console.log('form selection');
-      console.log(data);
       this.formSelection = data;
       this.openTimeFrom = this.formSelection.hr_from;
       this.openTimeTo = this.formSelection.hr_to;
@@ -198,13 +191,10 @@ export class EditPlaceComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 20;
-          console.log(place);
-          console.log(place.formatted_address);
           this.placeName = place.formatted_address;
           this.cityName = place.address_components[2].long_name;
           this.addressInfo.push(this.placeName);
           this.addressInfo.push(this.cityName);
-          console.log(this.addressInfo);
         });
       });
     });
@@ -217,10 +207,7 @@ export class EditPlaceComponent implements OnInit {
     this.selectedDelivery = this.formDelivery ? this.formDelivery.filter((delivery) => delivery.checked) : '';
     this.selectedPaymentMethod = this.formPaymentMethod ? this.formPaymentMethod.filter((method) => method.checked) : '';
   }
-  send(to){
-    console.log('------');
-    console.log(to)
-  }
+
   updatePlace(form: NgForm) {
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
@@ -228,31 +215,20 @@ export class EditPlaceComponent implements OnInit {
     form.value.openTo = this.openTo.time.toLowerCase();
     this.sendCheckedCategories();
     if (!this.latitude && !this.longitude) {
-      console.log('old');
       this.newLatitude = this.oldLatitude;
       this.newLongitude = this.oldLongitude;
       this.placeName = this.placeData.address.address;
-      console.log(this.placeName);
     } else {
-      console.log('new');
       this.newLatitude = this.latitude;
       this.newLongitude = this.longitude;
-      console.log(this.placeName);
     }
 
 
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
-    // form.value.openFrom = this.openFrom.time.toLowerCase();
-    // form.value.openTo = this.openTo.time.toLowerCase();
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
-    console.log(this.timePickerFrom);
-    console.log('this.selectedCategories');
-    console.log(this.selectedCategories);
-    console.log(form.value);
     this.selectedType = form.value.subcats;
-    console.log(this.selectedType);
     this.places.editSelectedPlace(
       form.value,
       this.addressInfo,
@@ -264,7 +240,6 @@ export class EditPlaceComponent implements OnInit {
       this.newLongitude,
       this.placeData.id
     ).subscribe(data => {
-      console.log('editeedddddddddd');
       console.log(data);
       this.isLoading = false;
       this.addPlaceFormError = false;

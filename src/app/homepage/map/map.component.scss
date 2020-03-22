@@ -79,6 +79,9 @@ agm-map {
     }
   }
 }
+agm-map .agm-info-window-content h4{
+  display: inline-block !important;
+}
 .gm-style-iw-d + button.gm-ui-hover-effect {
   background-color: $localPrimary !important;
   top: 0 !important;
@@ -166,6 +169,7 @@ agm-marker {
       border-radius: 0;
       font-weight: bold;
       font-size: 14px;
+      z-index: 9999;
 
       &:hover{
         background-color: $localSecondary;

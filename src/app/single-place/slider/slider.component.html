@@ -2,14 +2,14 @@
     <img src="./../assets/images/icon-img-placeholder.svg" class="img-fluid">
 
 </div>
-
 <div id="single-place-slider" class="carousel slide carousel-fade" data-ride="carousel"
 *ngIf="singlePlaceSlider.images">
   <!-- main slider carousel items -->
   <div class="carousel-inner">
       <div *ngFor="let place of singlePlaceSlider.images; let i = index; first as isFirst" [class.active]="(isFirst)"
         class="carousel-item">
-        <img src="{{place ?  place : ''}}" class="img-fluid">
+        {{place}}
+        <img [src]="place ?  place : ''" class="img-fluid">
       </div>
   </div>
   <!-- main slider carousel nav controls -->

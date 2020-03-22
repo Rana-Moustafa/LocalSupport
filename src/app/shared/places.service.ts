@@ -474,8 +474,6 @@ export class PlacesService {
                     longitude,
                     placeId) {
 
-    console.log('place');
-    console.log(place);
     let address;
     if (placeName && placeName.length < 1) {
       address = place.address;
@@ -521,7 +519,6 @@ export class PlacesService {
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
     placeData.append('place_id', placeId);
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     placeData.forEach((value, key) => {
       console.log(key + ' ' + value);
     });
