@@ -11,6 +11,7 @@
         <div class="col-lg-4">
 
           <div class="personal-deatils img">
+            <div class="personal-deatils__data">
             <label class="hoverable">
 
               <img [src]="newProfilePicture ?  newProfilePicture : url" alt="" class="img-thumbinal" #profileImage>
@@ -19,7 +20,7 @@
 
               <div class="background"></div> -->
             </label>
-            <br />
+            
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profileImageCropper">
               Choose file
             </button> -->
@@ -65,15 +66,19 @@
                 {{ (selectedUserInfo && selectedUserInfo.country)? selectedUserInfo.country: ''}} </p>
             </div>
           </div>
+            <a class="delete-account" (click)="removeAccountFunction()">{{"Delete_Account" |translate}}</a>
+          </div>
          
-          <button class="btn btn-original" (click)="removeAccountFunction()">{{"Delete_Account" |translate}}</button>
+         
         </div>
         <div class="col-lg-8">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <!-- <a class="nav-link active" id="accountDetails-tab" data-toggle="pill" href="#accountDetails" role="tab"
               aria-controls="accountDetails" aria-selected="true">{{"Account_Details" |translate }}</a> -->
             <a class="nav-link active" id="favourites-tab" data-toggle="pill" href="#favourites" role="tab"
-              aria-controls="favourites" aria-selected="false">{{"local_edit_business"|translate}}</a>
+              aria-controls="favourites" aria-selected="false">
+              {{ "local_edit_business" | translate }}
+            </a>
             <!-- <a class="nav-link" id="reviews-tab" data-toggle="pill" href="#reviews" role="tab" aria-controls="reviews"
               aria-selected="false"> {{"Reviews" |translate}}</a> -->
           </div>

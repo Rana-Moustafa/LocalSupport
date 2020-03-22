@@ -499,7 +499,7 @@ header {
         }
 
         .dropdown-menu {
-          background-color: $darkBlueGrey;
+          background-color: #000;
           padding: 5px 15px;
 
           p {
@@ -519,6 +519,7 @@ header {
             &:hover,
             &:focus {
               background-color: transparent;
+              text-decoration: underline;
             }
           }
         }

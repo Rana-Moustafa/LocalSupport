@@ -209,7 +209,7 @@ export class PlacesService {
     maxValue) {
 
     // //console.log(place)
-
+   
     let address;
     if (placeName.length < 1) {
       address = place.address;
@@ -465,15 +465,17 @@ export class PlacesService {
 
 
   editSelectedPlace(place,
-    placeName,
-    selectedType,
-    selectedCategories,
-    selectedDelivery,
-    selectedPaymentMethod,
-    latitude,
-    longitude,
-    placeId) {
+                    placeName,
+                    selectedType,
+                    selectedCategories,
+                    selectedDelivery,
+                    selectedPaymentMethod,
+                    latitude,
+                    longitude,
+                    placeId) {
 
+    console.log('place');
+    console.log(place);
     let address;
     if (placeName && placeName.length < 1) {
       address = place.address;
@@ -490,12 +492,12 @@ export class PlacesService {
     }
     if (selectedDelivery) {
       for (var n = 0; n < selectedDelivery.length; n++) {
-        placeData.append('delivery[]', (selectedDelivery[n].name).toString())
+        placeData.append('delivery[' + n + ']', (selectedDelivery[n].name).toString());
       }
     }
     if (selectedPaymentMethod) {
       for (var l = 0; l < selectedPaymentMethod.length; l++) {
-        placeData.append('payment_methods[]', (selectedPaymentMethod[l].name).toString())
+        placeData.append('payment_methods[' + l + ']', (selectedPaymentMethod[l].name).toString());
       }
     }
 
@@ -511,9 +513,9 @@ export class PlacesService {
     placeData.append('website', (place.website).toString());
     placeData.append('description', place.description);
     placeData.append('phone_number', (place.phone).toString());
-    placeData.append('type', (place.subcats ? place.subcats.name : null));
-    placeData.append('hr_from', (place.openFrom).toString());
-    placeData.append('hr_to', (place.openTo).toString());
+    placeData.append('type', selectedType);
+    placeData.append('hr_from', (place.openFrom));
+    placeData.append('hr_to', (place.openTo));
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
     placeData.append('lat', latitude);

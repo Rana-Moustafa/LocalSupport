@@ -69,11 +69,17 @@ export class EditPlaceComponent implements OnInit {
   oldLongitude;
   newLatitude;
   newLongitude;
+  resultDelivery = [];
+  resultPayment = [];
+  resultCategory = [];
+  timePickerFrom = '10:00 am';
+  timePickerTo = '7:00 pm';
+
   langURL = localStorage.getItem('current_lang');
 
-  @ViewChild('addPlace', { static: true }) addPlace: NgForm;
-  @ViewChild('toggleTimepickerFrom', { static: true }) openTimeFrom: NgForm;
-  @ViewChild('toggleTimepickerTo', { static: true }) openTimeTo: NgForm;
+  @ViewChild('editPlace', { static: true }) editPlace: NgForm;
+  @ViewChild('toggleTimepickerFrom', { static: false }) openTimeFrom: NgForm;
+  @ViewChild('toggleTimepickerTo', { static: false }) openTimeTo: NgForm;
   @ViewChild('search', { static: false }) public searchElementRef: ElementRef;
   @ViewChild('address', { static: false }) public addressElementRef: ElementRef;
 
@@ -91,16 +97,58 @@ export class EditPlaceComponent implements OnInit {
     this.getFormSelectionItems();
     this.getSinglePlace(this.route.snapshot.params.id);
     this.loadMap();
+    console.log(this.openTimeFrom)
     console.log(this.route.snapshot.params.id);
   }
 
   getSinglePlace(id) {
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.placeData = data;
+      this.timePickerFrom = this.placeData.hr_from;
+      this.timePickerTo = this.placeData.hr_to;
       this.selected = this.placeData.place_type;
       this.oldLatitude = this.placeData.address.lat;
       this.oldLongitude = this.placeData.address.lng;
       console.log(this.placeData);
+      // this.resultDelivery = this.placeData.delivery;
+      if (this.placeData.delivery && this.placeData.delivery.length > 0) {
+        this.placeData.delivery.forEach((element, key) => {
+          console.log(element);
+          console.log(key);
+          this.resultDelivery.push({ name: element, checked: true });
+          if (this.formDelivery && (this.formDelivery[key].name === this.resultDelivery[key].name)) {
+            console.log('lololo');
+            this.formDelivery[key].checked = true;
+          }
+          console.log(this.resultDelivery);
+        });
+      }
+
+      if (this.placeData.payment_methods && this.placeData.payment_methods.length > 0) {
+        this.placeData.payment_methods.forEach((element, key) => {
+          console.log(element);
+          console.log(key);
+          this.resultPayment.push({ name: element, checked: true });
+          if (this.formPaymentMethod && (this.formPaymentMethod[key].name === this.resultPayment[key].name)) {
+            console.log('tyty');
+            this.formPaymentMethod[key].checked = true;
+          }
+          console.log(this.resultPayment);
+        });
+      }
+
+      if (this.placeData.category && this.placeData.category.length > 0) {
+        this.placeData.category.forEach((element, key) => {
+          console.log(element);
+          console.log(key);
+          this.resultCategory.push({ name: element, checked: true });
+          if (this.formCategories && (this.formCategories[key].name === this.resultCategory[key].name)) {
+            console.log('ghgh');
+            this.formCategories[key].checked = true;
+          }
+          console.log(this.resultCategory);
+        });
+      }
     }, error => {
       console.log(error);
     });
@@ -115,6 +163,8 @@ export class EditPlaceComponent implements OnInit {
       console.log('form selection');
       console.log(data);
       this.formSelection = data;
+      this.openTimeFrom = this.formSelection.hr_from;
+      this.openTimeTo = this.formSelection.hr_to;
       this.formType = this.formSelection.type;
       this.formCategories = this.formSelection.category;
       this.formDelivery = this.formSelection.delivery;
@@ -159,27 +209,50 @@ export class EditPlaceComponent implements OnInit {
       });
     });
   }
+
+   // sent data
+   sendCheckedCategories(): void {
+    this.selectedCategories = this.formCategories ? this.formCategories.filter((category) => category.checked) : '';
+    // this.selectedType = this.formType ? this.formType.filter((type) => type.checked) : '';
+    this.selectedDelivery = this.formDelivery ? this.formDelivery.filter((delivery) => delivery.checked) : '';
+    this.selectedPaymentMethod = this.formPaymentMethod ? this.formPaymentMethod.filter((method) => method.checked) : '';
+  }
+  send(to){
+    console.log('------');
+    console.log(to)
+  }
   updatePlace(form: NgForm) {
+    this.openFrom = this.openTimeFrom;
+    this.openTo = this.openTimeTo;
+    form.value.openFrom = this.openFrom.time.toLowerCase();
+    form.value.openTo = this.openTo.time.toLowerCase();
+    this.sendCheckedCategories();
     if (!this.latitude && !this.longitude) {
-      console.log('old')
+      console.log('old');
       this.newLatitude = this.oldLatitude;
       this.newLongitude = this.oldLongitude;
       this.placeName = this.placeData.address.address;
       console.log(this.placeName);
     } else {
-      console.log('new')
+      console.log('new');
       this.newLatitude = this.latitude;
       this.newLongitude = this.longitude;
       console.log(this.placeName);
     }
 
+
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
-    form.value.openFrom = this.openFrom.time.toLowerCase();
-    form.value.openTo = this.openTo.time.toLowerCase();
-    console.log('this.selectedType');
-    console.log(this.selectedType);
+    // form.value.openFrom = this.openFrom.time.toLowerCase();
+    // form.value.openTo = this.openTo.time.toLowerCase();
+    this.openFrom = this.openTimeFrom;
+    this.openTo = this.openTimeTo;
+    console.log(this.timePickerFrom);
+    console.log('this.selectedCategories');
+    console.log(this.selectedCategories);
     console.log(form.value);
+    this.selectedType = form.value.subcats;
+    console.log(this.selectedType);
     this.places.editSelectedPlace(
       form.value,
       this.addressInfo,

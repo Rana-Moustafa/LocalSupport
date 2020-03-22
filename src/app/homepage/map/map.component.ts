@@ -341,6 +341,9 @@ export class MapComponent implements OnInit {
 
   // Get Current Location Coordinates
   setCurrentLocation(lat, lng) {
+    console.log('location');
+    console.log(lat);
+    console.log(lng);
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -363,8 +366,9 @@ export class MapComponent implements OnInit {
 
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      // console.log(results);
-      // console.log(status);
+      console.log(results);
+      console.log(status);
+      console.log(latitude, ' ', longitude);
       if (status === 'OK') {
         if (results[0]) {
           // this.zoom = 10;

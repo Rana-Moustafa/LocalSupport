@@ -65,13 +65,13 @@ agm-map {
 
   .agm-info-window-content {
     h4 {
-      color: $localPrimary;
+      color: $localSecondary;
       font-size: 16px;
       line-height: 22px;
     }
 
     p {
-      color: $localPrimary;
+      color: #000;
     }
 
     .rating {
@@ -167,6 +167,10 @@ agm-marker {
       font-weight: bold;
       font-size: 14px;
 
+      &:hover{
+        background-color: $localSecondary;
+      }
+
       @media all and (max-width: $sm) {
         right: 45px;
         padding: 0 5px;
@@ -200,7 +204,7 @@ agm-marker {
       -o-transition: all 0.3s ease-in;
 
       &:hover {
-        background-color: $btnColor;
+        background-color: $localSecondary;
       }
 
       img {

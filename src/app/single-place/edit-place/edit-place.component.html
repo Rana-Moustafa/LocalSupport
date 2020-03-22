@@ -13,15 +13,13 @@
                         *ngIf="!placename.valid && placename.touched && placename.errors.required">{{'field_requird'  | translate }}</small>
                 </div>
             </div>
-
             <div class="form-group">
                 <h4 class="subtitle">{{"local_Address" | translate}} (*):</h4>
                 <div class="map-filters__search">
                     <div class="form-group">
                         <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
                             placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off"
-                            spellcheck="off" type="text" #search 
-                            [ngModel]="placeData?placeData.address.address: ''"
+                            spellcheck="off" type="text" #search [ngModel]="placeData?placeData.address.address: ''"
                             name="address" #address="ngModel" required>
                         <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
                             {{'field_requird'  | translate }}</p>
@@ -91,13 +89,11 @@
                 <h4 class="subtitle">{{"local_Type" |translate}} (*):</h4>
                 <div class="form_wrapper radio-input">
                     <p *ngFor='let subCat of formType; let i = index;'>
-            
-                        <input type="radio" [value]="subCat.name" name="subcats"
-                        [(ngModel)]="selected" #subcats="ngModel"
-                        
-                         required>
+
+                        <input type="radio" [value]="subCat.name" name="subcats" [(ngModel)]="selected"
+                            #subcats="ngModel" required>
                         <label for="cat{{i}}"> {{subCat.name}}</label><br>
-            
+
                     </p>
                 </div>
             </div>
@@ -105,12 +101,11 @@
             <div class="form-group">
                 <h4 class="subtitle">{{"local_Category" |translate}} :</h4>
                 <div class="checkbox_wrapper">
-                    <div class="form-half-width" *ngFor="let category of formCategories;  let i = index;">
+                    <div class="form-half-width" *ngFor="let category of formCategories;  let i = index;let result of resultCategory">
                         <label class="form-check-label" for="{{category.name}}">
                             <input class="form-check-input" type="checkbox" name="{{category.name}}"
-                                id="{{category.name}}" ngModel 
-                                
-                                [(ngModel)]="formCategories[i].checked">
+                                id="{{category.name}}" ngModel [(ngModel)]="formCategories[i].checked"
+                                [checked]="(resultDelivery && resultCategory[i]) && (resultCategory[i].checked === true)">
                             <span>{{ category.name }}</span>
                         </label>
                     </div>
@@ -120,11 +115,12 @@
             <div class="form-group">
                 <h4 class="subtitle">{{"local_Delievery" |translate}} (*) :</h4>
                 <div class="checkbox_wrapper">
-                    <div class="form-half-width" *ngFor="let deliver of formDelivery;  let i = index;">
+                    <div class="form-half-width"
+                        *ngFor="let deliver of formDelivery;  let i = index; let result of resultDelivery">
                         <label class="form-check-label" for="{{deliver.name}}">
                             <input class="form-check-input" type="checkbox" name="{{deliver.name}}"
                                 id="{{deliver.name}}" ngModel [(ngModel)]="formDelivery[i].checked"
-                                >
+                                [checked]="(resultDelivery && resultDelivery[i]) && (resultDelivery[i].checked ===true)">
                             <span>{{ deliver.name }}</span>
                         </label>
                     </div>
@@ -134,10 +130,11 @@
             <div class="form-group">
                 <h4 class="subtitle">{{"local_Payment_Method" | translate}} :</h4>
                 <div class="checkbox_wrapper">
-                    <div class="form-half-width" *ngFor="let payment of formPaymentMethod;  let i = index;">
+                    <div class="form-half-width" *ngFor="let payment of formPaymentMethod;  let i = index;let result of resultPayment">
                         <label class="form-check-label" for="{{payment.name}}">
                             <input class="form-check-input" type="checkbox" name="{{payment.name}}"
-                                id="{{payment.name}}" ngModel [(ngModel)]="formPaymentMethod[i].checked">
+                                id="{{payment.name}}" ngModel [(ngModel)]="formPaymentMethod[i].checked"
+                                [checked]="(resultDelivery && resultPayment[i]) && (resultPayment[i].checked ===true)">
                             <span>{{ payment.name }}</span>
                         </label>
                     </div>
@@ -151,16 +148,17 @@
 
                         <div class="default-time-example">
                             <label>{{"from" |translate}}</label>
-                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerFrom" [value]="'10:00 am'"
-                                readonly>
+                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerFrom" 
+                            [(value)]="timePickerFrom"
+                            >
                             <ngx-material-timepicker #toggleTimepickerFrom></ngx-material-timepicker>
                         </div>
                     </div>
                     <div class="form-half-width">
                         <div class="default-time-example">
                             <label>{{"to" |translate}}</label>
-                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerTo" [value]="'10:00 pm'"
-                                readonly>
+                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerTo" 
+                            [(value)]="timePickerTo" (change)="send(toggleTimepickerTo.time)">
                             <ngx-material-timepicker #toggleTimepickerTo></ngx-material-timepicker>
                         </div>
                     </div>
