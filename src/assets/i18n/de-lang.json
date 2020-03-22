@@ -1299,8 +1299,9 @@
   "about_text_1": "Wir sind unter act@belocalhero.com erreichbar und freuen uns auf eure Fragen, Inputs und  Rückmeldung.",
   "about_text_2": "Be Local Hero wird unterstützt durch:",
   "page_about_us_text_2": "Be Local Hero ist ein kollaboratives Projekt von Modeso, co-co-co und CooperativeSuisse. Mit der Plattform möchten wir lokale Geschäfte und Selbstständige unterstützen diese schwierige Zeit zu überstehen. Be Local Hero ist für alle kostenlos.",
-  "thank_you": "Dank",
-  "place_added": "Ihr Platz wurde hinzugefügt",
+  "thank_you": "Vielen Dank",
+  "place_added": "Ihr Angebot wurde hinzugefügt",
   "local_edit_business": "Geschäft bearbeiten",
-  "no_business": "Kein Geschäft"
+  "no_business": "Kein Geschäft",
+  "to_map": "Zur Karte"
 }
