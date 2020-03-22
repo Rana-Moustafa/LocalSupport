@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
     }
 
     this.authenticationService.autoLogin();
-    // this.introItems();
+    this.introItems();
     window.addEventListener('scroll', this.scroll, true); // third parameter
     this.Coockietext();
 
@@ -109,9 +109,9 @@ export class AppComponent implements OnInit {
   introItems() {
     this.commons.getIntroData().subscribe(data => {
         console.log('>');
-        if (sessionStorage.getItem('active_advertising') !== 'true') {
-          sessionStorage.setItem('active_advertising', 'true');
-          this.router.navigateByUrl('/' + this.langURL + '/advertising', { state: { intro: data } });
+        if (localStorage.getItem('active_advertising') !== 'true') {
+          localStorage.setItem('active_advertising', 'true');
+          this.router.navigateByUrl('/' + this.langURL + '/intro', { state: { intro: data } });
         }
     }, error => {
       console.log(error);

@@ -234,159 +234,169 @@ export class MapComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        // console.log(lang)
-        this.loadTabs();
-      }
-    );
-
-    this.loadTabs();
-    this.loadMap();
-  }
-
-  loadTabs() {
-    this.selectedCategory();
-    // if (localStorage.getItem('current_lang') === 'en') {
-    //   this.selectedCategory(17, 3);
-    // } else {
-    //   this.selectedCategory(3, 3);
-    // }
-  }
-
-  selectedCategory() {
-
-    if (this.searchElementRef) {
-      if ((this.searchElementRef.nativeElement.value).length < 1) {
-        this.fitBoundsMarkers = true;
-      } else {
-        this.fitBoundsMarkers = false;
-      }
-
-    }
-
-   //  this.selected = e;
-    this.map.getMapLocations().subscribe(data => {
-      console.log('all map places');
-      console.log(data);
-      this.markers = JSON.parse(JSON.stringify(data));
-      // switch (index) {
-      //   case 0: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-gray.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   case 1: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-orange.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   case 2: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-dark-blue.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   default: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-orange.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      // }
-    }, error => {
-      // console.log(error);
-    });
-  }
-
-  loadMap() {
-    this.mapsAPILoader.load().then(() => {
-      // this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
-
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['geocode'],
-        componentRestrictions: { country: ['CH', 'AT', 'DE'] }
-      });
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          // verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          // set latitude, longitude and zoom
-          this.lat = place.geometry.location.lat();
-          this.lng = place.geometry.location.lng();
-          this.zoom = 10;
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          console.log('**********');
+          console.log(position);
+          this.latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
         });
-      });
-    });
-  }
-  clickedMarker(infowindow) {
-    if (this.previous) {
-      this.previous.close();
-    }
-    this.previous = infowindow;
-  }
-
-  // Get Current Location Coordinates
-  setCurrentLocation(lat, lng) {
-    console.log('location');
-    console.log(lat);
-    console.log(lng);
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.lat = this.latitude;
-        this.lng = this.longitude;
-        this.zoom = 15;
-        this.getAddress(this.latitude, this.longitude);
-      });
-    }
-  }
-
-
-  markerDragEnd($event: MouseEvent) {
-    // console.log($event);
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
-    this.getAddress(this.latitude, this.longitude);
-  }
-
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
-      console.log(latitude, ' ', longitude);
-      if (status === 'OK') {
-        if (results[0]) {
-          // this.zoom = 10;
-          this.address = results[0].formatted_address;
-          // console.log(results[0]);
-          this.searchElementRef.nativeElement.value = this.address;
-        } else {
-          window.alert('No results found');
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
       }
+    this.translation.langUpdated.subscribe(
+    (lang) => {
+      // console.log(lang)
+      this.loadTabs();
+    }
+  );
 
+this.loadTabs();
+this.loadMap();
+  }
+
+loadTabs() {
+  this.selectedCategory();
+  // if (localStorage.getItem('current_lang') === 'en') {
+  //   this.selectedCategory(17, 3);
+  // } else {
+  //   this.selectedCategory(3, 3);
+  // }
+}
+
+selectedCategory() {
+
+  if (this.searchElementRef) {
+    if ((this.searchElementRef.nativeElement.value).length < 1) {
+      this.fitBoundsMarkers = true;
+    } else {
+      this.fitBoundsMarkers = false;
+    }
+
+  }
+
+  //  this.selected = e;
+  this.map.getMapLocations().subscribe(data => {
+    console.log('all map places');
+    console.log(data);
+    this.markers = JSON.parse(JSON.stringify(data));
+    // switch (index) {
+    //   case 0: {
+    //     this.markerIcon = {
+    //       url: '../../assets/images/ic-location-gray.svg',
+    //       scaledSize: { height: 30, width: 30 }
+    //     };
+    //     break;
+    //   }
+    //   case 1: {
+    //     this.markerIcon = {
+    //       url: '../../assets/images/ic-location-orange.svg',
+    //       scaledSize: { height: 30, width: 30 }
+    //     };
+    //     break;
+    //   }
+    //   case 2: {
+    //     this.markerIcon = {
+    //       url: '../../assets/images/ic-location-dark-blue.svg',
+    //       scaledSize: { height: 30, width: 30 }
+    //     };
+    //     break;
+    //   }
+    //   default: {
+    //     this.markerIcon = {
+    //       url: '../../assets/images/ic-location-orange.svg',
+    //       scaledSize: { height: 30, width: 30 }
+    //     };
+    //     break;
+    //   }
+    // }
+  }, error => {
+    // console.log(error);
+  });
+}
+
+loadMap() {
+  this.mapsAPILoader.load().then(() => {
+    // this.setCurrentLocation();
+    this.geoCoder = new google.maps.Geocoder;
+
+    let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+      types: ['geocode'],
+      componentRestrictions: { country: ['CH', 'AT', 'DE'] }
+    });
+    autocomplete.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        // get the place result
+        let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+        // verify result
+        if (place.geometry === undefined || place.geometry === null) {
+          return;
+        }
+
+        // set latitude, longitude and zoom
+        this.lat = place.geometry.location.lat();
+        this.lng = place.geometry.location.lng();
+        this.zoom = 10;
+      });
+    });
+  });
+}
+clickedMarker(infowindow) {
+  if (this.previous) {
+    this.previous.close();
+  }
+  this.previous = infowindow;
+}
+
+// Get Current Location Coordinates
+setCurrentLocation(lat, lng) {
+
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.latitude = position.coords.latitude;
+      this.longitude = position.coords.longitude;
+      this.lat = this.latitude;
+      this.lng = this.longitude;
+      this.zoom = 15;
+      console.log('location');
+      console.log(lat);
+      console.log(lng);
+      this.getAddress(this.latitude, this.longitude);
     });
   }
-  searchPlaces(){
-    // this.SearchResultsService.searchQuery(this.searchElementRef.nativeElement.value)
-    this.router.navigate(['/' + this.langURL + '/search-result'],
-    {queryParams: {search: JSON.stringify(this.searchElementRef.nativeElement.value)}});
-  }
+}
+
+
+markerDragEnd($event: MouseEvent) {
+  // console.log($event);
+  this.latitude = $event.coords.lat;
+  this.longitude = $event.coords.lng;
+  this.getAddress(this.latitude, this.longitude);
+}
+
+getAddress(latitude, longitude) {
+  this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+    console.log(results);
+    console.log(status);
+    console.log(latitude, ' ', longitude);
+    if (status === 'OK') {
+      if (results[0]) {
+        // this.zoom = 10;
+        this.address = results[0].formatted_address;
+        // console.log(results[0]);
+        this.searchElementRef.nativeElement.value = this.address;
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+
+  });
+}
+searchPlaces(){
+  // this.SearchResultsService.searchQuery(this.searchElementRef.nativeElement.value)
+  this.router.navigate(['/' + this.langURL + '/search-result'],
+    { queryParams: { search: JSON.stringify(this.searchElementRef.nativeElement.value) } });
+}
 }

@@ -11,6 +11,7 @@ export class ThankYouComponent implements OnInit {
   constructor(private commons: CommonsService) { }
 
   ngOnInit() {
+    this.commons.show();
     this.ThankYouItems();
   }
   ThankYouItems(){

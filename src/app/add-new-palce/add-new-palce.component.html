@@ -10,9 +10,9 @@
             <div class="c-activities_section">
               <h1>{{ "Business_register" | translate }}</h1>
               <p>
-                {{ "Business_register_text_1" | translate }}
+                Nimm dir Zeit und fülle das Formular genau aus. So kann dich deine Nachbarschaft am besten finden und kontaktieren. Neben den Angaben ist die Beschreibung zentral. Hier kannst du kurz schreiben, wie du von der aktuellen Situation betroffen bist und was du noch anbieten kannst oder wie du unterstützt werden kannst etc. Hier kannst du auch noch weitere Links zu Webseiten, Online Shops oder Online-Streamings einfügen.
               </p>
-              <p> {{ "Business_register_text_2" | translate }}: <a href = "mailto: act@belocalhero.com">act@belocalhero.com</a>
+              <p> Falls du noch Unterstützung brauchst, schreib uns auf: <a href = "mailto: act@belocalhero.com">act@belocalhero.com</a>
               </p>
               <!-- <div class="c-activities_section__right">
                 <h3>
@@ -73,9 +73,9 @@
             <div class="form-group">
               <h4 class="subtitle">{{"local_Phonenumber" |translate}}</h4>
               <div class="form-group">
-                <input type="text" class="form-control col-12" ngModel name="phone" #phone="ngModel" pattern="[0-9]+">
-                <p class="help-block" *ngIf="!phone.valid && phone.touched && phone.errors.pattern">Please enter a valid
-                  phone number.</p>
+                <input type="text" class="form-control col-12" ngModel name="phone" #phone="ngModel">
+                <!-- <p class="help-block" *ngIf="!phone.valid && phone.touched && phone.errors.pattern">Please enter a valid
+                  phone number.</p> -->
               </div>
             </div>
             <div class="form-group">
@@ -212,13 +212,14 @@
                 <p>{{ imagesNames[i] }}</p>
               </div>
             </div>
-           
+          
             <!--  <button type="submit" class="btn btn-primary" 
             [disabled]="!checkValid()">{{"Addplace" | translate}}</button> -->
             <h4 class="subtitle">{{"upload_images" | translate}} (*): </h4>
 
             <div class="form-group form-image">
-              <a (click)="compressFile()" [ngClass]="maxNumber? 'upload-disabled': ''" [disabled]="maxNumber">
+              <a data-toggle="modal" data-target="#profileImageCropper"
+               [ngClass]="maxNumber? 'upload-disabled': ''" [disabled]="maxNumber">
               <!-- <input type="file" accept="image/*" #file
               (change)="getFileDetails($event)"
               (click)="file.compressFile()"   
@@ -240,6 +241,35 @@
               </div>
             </a>
             </div>
+            <!-- <div class="hover-text" data-toggle="modal" data-target="#profileImageCropper">
+              {{ 'upload_picture' | translate }} </div> -->
+            <div class="modal fade" id="profileImageCropper" tabindex="-1" role="dialog"
+              aria-labelledby="profileImageCropper" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ 'upload_picture' | translate }} </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                      [aspectRatio]="4 / 4" [resizeToWidth]="500" [roundCropper]="false" [cropper]="cropper" format="png"
+                      (imageCropped)="imageCropped($event)" (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+                    <input id="fileInput" type='file' (change)="fileChangeEvent($event)">
+                    <label for="fileInput"> {{ 'choose_new_picture' | translate }} </label>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateProfilePicture()">
+                      {{ 'save_changes' | translate }}  
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="form-group">
              
               <div class="checkbox_wrapper">
@@ -253,7 +283,7 @@
               </div>
             </div>
             <button class="btn btn-original" type="submit"
-              [disabled]="!addPlace.valid || (!latitude && !longitude) || (!checkValidImages()) ">
+             >
               {{"local_add_bussiness" | translate}}</button>
           </form>
         </div>

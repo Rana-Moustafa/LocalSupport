@@ -47,7 +47,7 @@ const appRoutes: Routes = [
 	{ path: ':language', component: HomepageComponent },
 	{ path: ':language/thank-you', component: ThankYouComponent },
 
-	{ path: ':language/advertising', component: IntroComponent },
+	{ path: ':language/intro', component: IntroComponent },
 	{
 		path: ':language/single-place', component: SinglePlaceComponent,
 		resolve: { location: LocationResloverService }
