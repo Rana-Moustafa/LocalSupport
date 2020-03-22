@@ -21,37 +21,37 @@
          <p>{{"local_login_text_1" | translate }}</p> <br/>
          <p>{{"local_login_text_2" | translate }}</p><br/>
          <p>{{"local_login_text_3" | translate }}</p>
-         <p>{{"local_login_text_5" | translate }}</p>
+         <p>{{"local_login_text_4" | translate }}</p>
          <p>{{"local_login_text_5" | translate }}</p><br/>
          <p>{{"local_login_text_6" | translate }}</p>
         </div>
       </div>
       <div class="col-lg-7 no-padding">
         <div class="registration-form-section__form">
-          <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab"
-                aria-controls="register" aria-selected="true" [ngClass]="{ 'active': showSignUpForm === true }"
-
-                [routerLink]="'/signup'">{{ 'Register' | translate }} </a>
-              <a class="nav-item nav-link" id="signin-tab" data-toggle="tab" href="#signin" role="tab"
-                aria-controls="signin" aria-selected="false" [ngClass]="{ 'active': showSigninForm === true }"
-                [routerLink]="'/signin'">{{ 'signin' | translate }} </a>
-
-            </div>
-          </nav>
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab"
               [ngClass]="{ 'active show': showSignUpForm === true }">
+              <h2>{{ 'Register' | translate }}</h2>
               <app-registeration></app-registeration>
+
+              <p style="font-weight: bold; margin-top: 30px; margin-bottom: 10px">{{ 'already_have_account' | translate }}</p>
+              <a class="btn btn-original" id="signin-tab" data-toggle="tab" href="#signin" role="tab"
+                aria-controls="signin" aria-selected="false" [ngClass]="{ 'active': showSigninForm === true }"
+                [routerLink]="'/signin'">{{ 'signin' | translate }} </a>
             </div>
             <div class="tab-pane fade" id="signin" role="tabpanel" aria-labelledby="signin-tab"
               [ngClass]="{ 'active show': showSigninForm === true }">
+              <h2>{{ 'signin' | translate }}</h2>
               <app-login></app-login>
               <a [routerLink]="'/forgot-password'" class="forget-password"
                 [ngClass]="{ 'active': showResetPasswordForm === true }" class="nav-item nav-link" id="resetpass-tab"
                 data-toggle="tab" href="#resetpass" role="tab" aria-controls="resetpass" aria-selected="true">
                 {{ 'Forget_password' | translate }}? </a>
+              
+              <p style="font-weight: bold; margin-top: 30px; margin-bottom: 10px">{{ 'dont_have_account' | translate }}</p>
+              <a class="btn btn-original" id="register-tab" data-toggle="tab" href="#register" role="tab"
+                aria-controls="register" aria-selected="true" [ngClass]="{ 'active': showSignUpForm === true }"
+                [routerLink]="'/signup'">{{ 'Register' | translate }} </a>
             </div>
             <div class="tab-pane fade" id="resetpass" role="tabpanel" aria-labelledby="resetpass-tab"
               [ngClass]="{ 'active show': showResetPasswordForm === true }">
