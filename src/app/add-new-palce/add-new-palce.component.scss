@@ -227,6 +227,11 @@
       background: $white;
       text-align: center;
       margin: $mr-30 0;
+      cursor: pointer;
+
+      &:hover{
+        border-color: $localSecondary;
+      }
 
       .img{
         img{
@@ -237,7 +242,7 @@
 
       &:focus,
       &:hover {
-        border: 1px dotted $darkBlueGrey;
+        border: 1px dotted $localSecondary;
       }
 
       .input-content {
