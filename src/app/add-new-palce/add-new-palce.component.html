@@ -283,8 +283,8 @@
               </div>
             </div>
             <button class="btn btn-original" type="submit"
-             >
-              {{"local_add_bussiness" | translate}}</button>
+            [disabled]="!addPlace.valid || (!latitude && !longitude) || (!checkValidImages()) ">
+            {{"local_add_bussiness" | translate}}</button>
           </form>
         </div>
       </div>
