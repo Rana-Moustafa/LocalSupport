@@ -46,6 +46,7 @@
     "ng2-img-max": "^2.1.18",
     "ng2-tooltip-directive": "^2.8.17",
     "ng5-slider": "^1.2.4",
+    "ngx-awesome-uploader": "^9.0.4",
     "ngx-image-compress": "^8.0.4",
     "ngx-image-cropper": "^2.0.2",
     "ngx-infinite-scroll": "^8.0.0",
