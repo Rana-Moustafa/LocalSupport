@@ -53,6 +53,7 @@ export class HeaderComponent implements OnInit {
 
     translate.addLangs(['de', 'en']);
     translate.setDefaultLang('de');
+    this.langURL = localStorage.getItem('current_lang');
     // translate.use('de');
   }
 
