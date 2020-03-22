@@ -20,7 +20,8 @@ export class FacebookLoginComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
   facebookUser;
-
+  langURL = localStorage.getItem('current_lang');
+  
   constructor(private authService: AuthService,
               private router: Router,
               private authenticationService: AuthenticationService,
@@ -44,7 +45,7 @@ export class FacebookLoginComponent implements OnInit {
           localStorage.setItem('token_type', '3');
           localStorage.setItem('id',  JSON.stringify(this.facebookUser.id));
           this.userStatus.userLoggedIn();
-          this.router.navigate(['']);
+          this.router.navigate([this.langURL + '/add-new-place']);
           this.authenticationService.autoLogout(this.facebookUser.token_expiration_date);
         }, error => {
           ////// console.log(error);

@@ -31,7 +31,7 @@
     {
       "name": "posts",
       "urls": [
-        "https://belocalhero.cyon.site/stawp/wp-json/**"
+        "https://belocalhero.com/wordpress-api/live/wp-json/**"
       ],
       "cacheConfig": {
         "maxSize": 20,

@@ -16,6 +16,7 @@ import { UserDataService } from 'src/app/shared/user-data.service';
 export class GoogleLoginComponent implements OnInit {
 
   user: any;
+  langURL = localStorage.getItem('current_lang');
   constructor(private authService: AuthService,
               private router: Router,
               private authenticationService: AuthenticationService,
@@ -41,7 +42,7 @@ export class GoogleLoginComponent implements OnInit {
           localStorage.setItem('token_type', '2');
           localStorage.setItem('id',  JSON.stringify(this.user.id));
           this.userStatus.userLoggedIn();
-          this.router.navigate(['']);
+          this.router.navigate([this.langURL + '/add-new-place']);
           // console.log('this.user.token_expiration_date')
           // console.log(this.user.token_expiration_date)
           this.authenticationService.autoLogout(+this.user.token_expiration_date);

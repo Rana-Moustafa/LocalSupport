@@ -47,7 +47,7 @@ export class RegisterationComponent implements OnInit {
       this.signupForm.reset();
       this.router.navigate([this.langURL + '/add-new-place']);
       this.authService.autoLogout(this.userData.token_expiration_date);
-    },(errorMessage) => {
+    }, (errorMessage) => {
       this.formError = true;
       this.formErrorMsg = errorMessage;
       this.isLoading = false;

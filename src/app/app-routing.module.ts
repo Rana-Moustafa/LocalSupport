@@ -40,8 +40,8 @@ const appRoutes: Routes = [
 		path: '',
 		redirectTo: 'de', pathMatch: 'full'
 	},
-	{ path: 'signup', component: AuthComponent },
-	{ path: 'signin', component: AuthComponent },
+	{ path: ':language/signup', component: AuthComponent },
+	{ path: ':language/signin', component: AuthComponent },
 	{ path: ':language/search-result', component: SearchResultComponent },
 	{ path: 'forgot-password', component: AuthComponent },
 	{ path: ':language', component: HomepageComponent },

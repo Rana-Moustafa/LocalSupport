@@ -60,13 +60,13 @@ export class HeaderComponent implements OnInit {
     // this.commons.showTranslation();
     // this.languageSwitcherStatus = this.commons.getLanguageSwitcherStatus();
     this.commons.languageSwitcherStatus.subscribe( status => {
-      console.log(status);
+      // console.log(status);
       this.languageSwitcherStatus = status;
     });
     this.userProfileImage = localStorage.getItem('profile_image');
     this.userProfileImage = (this.sanitizer.bypassSecurityTrustUrl(this.userProfileImage));
     this.userProfileImage = this.userProfileImage.changingThisBreaksApplicationSecurity;
-    this.placeTypes(this.langURL);
+    // this.placeTypes(this.langURL);
     this.userData.currentProfilePicture.subscribe(picture => this.profilePicture = picture);
     this.getUserProfilePicture();
     this.translate.use(this.langURL);
@@ -75,15 +75,15 @@ export class HeaderComponent implements OnInit {
       this.translation.addTranslationLanguage(this.translate.defaultLang);
       this.translate.use('de');
       this.router.url.replace(this.route.snapshot.params.language, this.translate.defaultLang);
-      this.placeTypes(this.langURL);
+      // this.placeTypes(this.langURL);
     } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
       this.router.url.replace(this.route.snapshot.params.language, 'en');
       this.translate.use('de');
-      this.placeTypes(this.langURL);
+      // this.placeTypes(this.langURL);
     } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
       this.router.url.replace(this.route.snapshot.params.language, 'de');
       this.translate.use('de');
-      this.placeTypes(this.langURL);
+      // this.placeTypes(this.langURL);
     }
 
 
@@ -93,7 +93,7 @@ export class HeaderComponent implements OnInit {
         // this.toggleSideNav();
         this.router.url.replace(this.route.snapshot.params.language, lang);
         this.translate.use(lang);
-        this.placeTypes(lang);
+        // this.placeTypes(lang);
         this.langURL = lang;
         this.router.events.filter(e => e instanceof NavigationEnd).subscribe(e => {
         });
@@ -138,7 +138,7 @@ export class HeaderComponent implements OnInit {
     this.userData.getUserDetails().subscribe(data => {
       this.profilePicture = JSON.parse(JSON.stringify(data)).profile_image;
     }, error => {
-      // console.log(error)
+      console.error(error);
     });
   }
 

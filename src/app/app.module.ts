@@ -112,11 +112,11 @@ import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("991459126791-viqq95sbfro14lid79oopn4t6esn729u.apps.googleusercontent.com")
+    provider: new GoogleLoginProvider('311022123453-ut75bomf2alb6pg1rb0b893k2nc6q2n3.apps.googleusercontent.com')
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("646640309135630")
+    provider: new FacebookLoginProvider('1338176049717731')
   }
 ]);
 
@@ -124,9 +124,10 @@ export function provideConfig() {
   return config;
 }
 
-export function HttpLoaderFactory(http: HttpClient) {  
-  return new TranslateHttpLoader(http, "/assets/i18n/", "-lang.json");  
-}  
+export function HttpLoaderFactory(http: HttpClient) {
+  console.log(new TranslateHttpLoader(http, '/assets/i18n/', '-lang.json'));
+  return new TranslateHttpLoader(http, '/assets/i18n/', '-lang.json');
+}
 
 export const ngxDropTargetOptions: DropTargetOptions = {
   color: 'dropZoneColor',

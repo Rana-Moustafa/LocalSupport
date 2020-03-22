@@ -33,9 +33,9 @@ export class PlacesService {
   }
   getFormSelections() {
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/form_selections?lang=en');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections?lang=en');
     } else {
-      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/form_selections');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections');
     }
   }
 
@@ -257,11 +257,11 @@ export class PlacesService {
     });
     if (localStorage.getItem('current_lang') === 'en') {
       // return 'english'
-      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/add_place?lang=en',
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place?lang=en',
         placeData);
     } else {
       // return 'german'
-      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/add_place',
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
         placeData);
     }
 
@@ -523,11 +523,11 @@ export class PlacesService {
     });
     if (localStorage.getItem('current_lang') === 'en') {
       // return 'english'
-      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/edit_place?lang=en',
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place?lang=en',
         placeData);
     } else {
       // return 'german'
-      return this.http.post('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/edit_place',
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
         placeData);
     }
 
@@ -536,10 +536,12 @@ export class PlacesService {
   userPlaces() {
     if (localStorage.getItem('current_lang') === 'en') {
       // return 'english'
-      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/wp/v2/place/?myplaces&core&lang=en&token=' +
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&lang=en&token=' +
       JSON.parse(localStorage.getItem('token')));
     } else {
-      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/wp/v2/place/?myplaces&core&token=' +
+      console.log(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&token=' +
+      JSON.parse(localStorage.getItem('token')));
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&token=' +
       JSON.parse(localStorage.getItem('token')));
     }
   }

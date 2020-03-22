@@ -6,7 +6,8 @@ import { AuthenticationService } from './auth.service';
   providedIn: 'root'
 })
 
-export class AuthGuard implements CanActivate{
+export class AuthGuard implements CanActivate {
+  langURL = localStorage.getItem('current_lang');
  constructor( private auth: AuthenticationService,
               private router: Router) {}
 
@@ -14,7 +15,7 @@ export class AuthGuard implements CanActivate{
     if(this.auth.isLoggedIn()) {
       return true
     } else {
-      this.router.navigate(['/signin'])
+      this.router.navigate(['/' + this.langURL + '/signin']);
       return false
     }
   }

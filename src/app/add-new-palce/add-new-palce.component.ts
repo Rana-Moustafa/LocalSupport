@@ -126,6 +126,7 @@ export class AddNewPalceComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('llsllsls')
     this.commons.darkHeader = true;
     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
 
@@ -133,9 +134,9 @@ export class AddNewPalceComponent implements OnInit {
 
 
     }, error => {
-      // console.log(error);
+      console.log(error);
       if (error.status === 411) {
-        this.router.navigate(['/signin']);
+        
       }
     });
 
@@ -427,7 +428,7 @@ export class AddNewPalceComponent implements OnInit {
         this.isLoading = false;
         this.addPlaceFormError = false;
         form.reset();
-        this.router.navigate([this.langURL + '/thank-you']);
+        this.router.navigate(['/' + this.langURL + '/thank-you']);
       }, error => {
         // console.log(error);
         this.isLoading = false;

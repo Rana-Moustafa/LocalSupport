@@ -35,7 +35,7 @@ export class UserDataService {
     let userAccountDetails: FormData = new FormData();
     userAccountDetails.append('token', JSON.parse(localStorage.getItem('token')));
     userAccountDetails.append('token_type', JSON.parse(localStorage.getItem('token_type')));
-    return this.http.post(environment.baseURL+'/wp-json/outdoorf/v1/profile',
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/profile',
       userAccountDetails);
   }
 
@@ -49,7 +49,7 @@ export class UserDataService {
     userEditDetails.append('name', user.username);
     userEditDetails.append('address', user.address);
 
-    return this.http.post(environment.baseURL+'/wp-json/outdoorf/v1/edit_profile',
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_profile',
       userEditDetails);
   }
 
@@ -61,12 +61,12 @@ export class UserDataService {
     editProfileReview.append('comment_id', id);
     editProfileReview.append('content', comment);
 
-    if(localStorage.getItem('current_lang') === 'en'){
-      return this.http.post(environment.baseURL+'/wp-json/outdoorf/v1/edit_comment?core&lang=en',
+    if(localStorage.getItem('current_lang') === 'en') {
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_comment?core&lang=en',
       editProfileReview);
     }
     else{
-      return this.http.post(environment.baseURL+'/wp-json/outdoorf/v1/edit_comment?core',
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_comment?core',
       editProfileReview);
     }
     
@@ -76,26 +76,24 @@ export class UserDataService {
     let deleteProfileRevieww: FormData = new FormData();
     deleteProfileRevieww.append('token', JSON.parse(localStorage.getItem('token')));
     deleteProfileRevieww.append('token_type', JSON.parse(localStorage.getItem('token_type')));
-    if(localStorage.getItem('current_lang') === 'en'){
-      return this.http.delete(environment.baseURL+'/wp-json/comments/' + id + '?token=' + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) + '&Content-Type=application/x-www-form-urlencoded&lang=en'
+    if(localStorage.getItem('current_lang') === 'en') {
+      return this.http.delete(environment.baseURL + '/wp-json/comments/' + id + '?token=' + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) + '&Content-Type=application/x-www-form-urlencoded&lang=en'
+      );
+    } else {
+      return this.http.delete(environment.baseURL + '/wp-json/comments/' + id + '?token=' + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) + '&Content-Type=application/x-www-form-urlencoded'
       );
     }
-    else{
-      return this.http.delete(environment.baseURL+'/wp-json/comments/' + id + '?token=' + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) + '&Content-Type=application/x-www-form-urlencoded'
-      );
-    }
-    
   }
   removeAccount() {
     let userAccountDetails: FormData = new FormData();
     userAccountDetails.append('token', JSON.parse(localStorage.getItem('token')));
     userAccountDetails.append('token_type', JSON.parse(localStorage.getItem('token_type')));
-    return this.http.post(environment.baseURL+'/wp-json/outdoorf/v1/delete_account',
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/delete_account',
       userAccountDetails);
   }
 
   getAutherData(id){
-    return this.http.get(environment.baseURL+'/wp-json/wp/v2/users/'+id);
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/users/' + id);
   }
 }
 

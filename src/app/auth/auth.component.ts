@@ -18,6 +18,8 @@ export class AuthComponent implements OnInit {
   showResetPasswordForm = false;
   hideLanguageBanner = false;
 
+  langURL = localStorage.getItem('current_lang');
+
   language = [{
     // id: 1,
     lang: 'en'
@@ -26,23 +28,27 @@ export class AuthComponent implements OnInit {
     // id: 1,
     lang: 'de'
   }
-  ]
+  ];
   constructor(private commons: CommonsService,
-    private router: Router, public translate: TranslateService,
-    private translation: TranslationService) {
+              private router: Router, 
+              public translate: TranslateService,
+              private translation: TranslationService) {
 
     translate.addLangs(['de', 'en']);
     translate.setDefaultLang('de');
-    localStorage.setItem('current_lang', this.translate.defaultLang)
+    localStorage.setItem('current_lang', this.translate.defaultLang);
+    this.langURL = localStorage.getItem('current_lang');
   }
 
   ngOnInit() {
     this.commons.hide();
-    if (this.router.url === '/signup') {
+    console.log(this.router.url );
+    if (this.router.url === '/' + this.langURL + '/signup') {
       this.showSignUpForm = true;
-    } else if (this.router.url === '/signin') {
+    } else if (this.router.url === '/' + this.langURL + '/signin') {
+      console.log('_______________');
       this.showSigninForm = true;
-    } else if (this.router.url === '/forgot-password') {
+    } else if (this.router.url === '/' + this.langURL + '/forgot-password') {
       this.showResetPasswordForm = true;
     }
   }

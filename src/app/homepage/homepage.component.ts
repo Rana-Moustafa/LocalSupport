@@ -32,23 +32,23 @@ export class HomepageComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.places.updateFavPlacesList.subscribe(place => {
-      this.updatedFavPlace = place;
-      if (this.updatedFavPlace.is_favorited === true) {
-        this.favoritePlacesSlider.unshift(this.updatedFavPlace);
-      } else {
-        // this.favoritePlacesSlider.pop(this.updatedFavPlace);
-        for (let i = 0; i < this.favoritePlacesSlider.length; i++) {
-          if (this.favoritePlacesSlider[i].id === this.updatedFavPlace.id) {
-            this.favoritePlacesSlider.splice(i, 1);
-            console.log(this.favoritePlacesSlider);
-            if (this.favoritePlacesSlider.length < 1) {
-              // this.favListEmpty = true;
-            }
-          }
-        }
-      }
-    });
+    // this.places.updateFavPlacesList.subscribe(place => {
+    //   this.updatedFavPlace = place;
+    //   if (this.updatedFavPlace.is_favorited === true) {
+    //     this.favoritePlacesSlider.unshift(this.updatedFavPlace);
+    //   } else {
+    //     // this.favoritePlacesSlider.pop(this.updatedFavPlace);
+    //     for (let i = 0; i < this.favoritePlacesSlider.length; i++) {
+    //       if (this.favoritePlacesSlider[i].id === this.updatedFavPlace.id) {
+    //         this.favoritePlacesSlider.splice(i, 1);
+    //         console.log(this.favoritePlacesSlider);
+    //         if (this.favoritePlacesSlider.length < 1) {
+    //           // this.favListEmpty = true;
+    //         }
+    //       }
+    //     }
+    //   }
+    // });
     this.commons.darkHeader = false;
     this.commons.currentscollAnchor.subscribe(message => this.scrollId = message);
     this.commons.show();
@@ -59,15 +59,13 @@ export class HomepageComponent implements OnInit {
 
     this.translation.langUpdated.subscribe(
       (lang) => {
-
-        
         localStorage.setItem('current_lang', lang);
         const currentLang = localStorage.getItem('current_lang');
         const translatedLang = lang;
         let u = this.router.url;
         u = u.replace(this.route.snapshot.params.language.toString(), lang);
         this.router.navigateByUrl(u);
-       //  this.placesTypes();
+        //  this.placesTypes();
         // this.getFavoritePlacesSlider();
         // this.getHomepageSections();
       }
@@ -81,7 +79,6 @@ export class HomepageComponent implements OnInit {
     });
   }
   getHomepageSections() {
-    
     // this.commons.getHomePageData().subscribe(data => {
     //   this.commons.hideLoadingSpinner();
     //   console.log(data);

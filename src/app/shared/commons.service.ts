@@ -121,9 +121,9 @@ export class CommonsService {
   }
   getAboutPage(lang) {
     if (lang === 'en') {
-      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/about?lang=en');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about?lang=en');
     } else if (lang === 'de') {
-      return this.http.get('https://belocalhero.cyon.site/stawp/wp-json/outdoorf/v1/about');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about');
     }
   }
   getTestimonials(testimonialsIds) {

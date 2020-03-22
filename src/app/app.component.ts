@@ -67,9 +67,8 @@ export class AppComponent implements OnInit {
       console.log(data);
     }, error => {
       console.log(error);
-    })
+    });
     // this.commons.showTranslation();
-    console.log(this.commons.noTranslation);
     // this.commons.sendLanguageSwitcherStatus(false);
     this.commons.changeLanguageSwitcherStatus(false);
    // this.placeTypes();
@@ -119,12 +118,4 @@ export class AppComponent implements OnInit {
     });
   }
 
-  placeTypes() {
-    this.places.getPlacesTypes().subscribe(data => {
-      this.categoriesNames = JSON.parse(JSON.stringify(data));
-      console.log(this.categoriesNames);
-    }, error => {
-      // console.log(error)
-    });
-  }
 }

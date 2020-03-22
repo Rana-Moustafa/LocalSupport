@@ -16,7 +16,7 @@ export class AccountDetailsComponent implements OnInit {
 
   @ViewChild('cPass', { static: true }) changePassForm: NgForm;
   @Output() userProfilePicture: EventEmitter<any> =   new EventEmitter();
-
+  langURL = localStorage.getItem('current_lang');
   countriesList = [];
   formError = false;
   formErrorMsg;
@@ -62,7 +62,7 @@ export class AccountDetailsComponent implements OnInit {
     }, error =>{
       //console.log(error);
       if(error.status === 411){
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/' + this.langURL + '/signin']);
       }
     });
 

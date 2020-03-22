@@ -8,19 +8,19 @@ import { TranslateService } from '@ngx-translate/core';
 export class TranslationService {
   lang;
   urlLang;
-  @Output() langUpdated: EventEmitter<any> =   new EventEmitter();
+  @Output() langUpdated: EventEmitter<any> = new EventEmitter();
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              public translate: TranslateService) { }
+    private router: Router,
+    public translate: TranslateService) { }
 
-  addLangToStorage(lang){
+  addLangToStorage(lang) {
     localStorage.setItem('current_lang', lang)
-  }            
+  }
 
-  addTranslationLanguage(lang){
+  addTranslationLanguage(lang) {
     this.lang = lang;
-    
+
     this.langUpdated.emit(this.lang);
     localStorage.setItem('current_lang', lang)
   }
@@ -29,10 +29,9 @@ export class TranslationService {
     return this.lang;
   }
 
-  addRouterLangParam(){
-    //this.router.events.filter(e => e instanceof NavigationEnd).subscribe(e => {
-    //});
-    
+  addRouterLangParam() {
+    // this.router.events.filter(e => e instanceof NavigationEnd).subscribe(e => {
+    // });
   }
 
 }

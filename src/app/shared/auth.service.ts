@@ -19,7 +19,7 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  langURL = localStorage.getItem('current_lang');
   user = new Subject<User>();
   private tokenExpirationTimer: any ;
 
@@ -51,6 +51,7 @@ export class AuthenticationService {
     let loginFormData: FormData = new FormData();
     loginFormData.append('name', userData.username);
     loginFormData.append('password', userData.password);
+    console.log(environment.baseURL + '/wp-json/outdoorf/v1/login');
     return this.http.post<AuthResponseData>(environment.baseURL + '/wp-json/outdoorf/v1/login',
       loginFormData
     ).pipe(catchError(this.handleError), tap(resData => {
@@ -124,13 +125,13 @@ export class AuthenticationService {
         JSON.parse(localStorage.getItem('token_type')) == '3') {
         this.authService.signOut();
         this.userStatus.userLoggedOut()
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/' + this.langURL + '/signin']);
         localStorage.clear()
       }
       //localStorage.removeItem('token');
       //localStorage.removeItem('token_type');
       localStorage.clear()
-      this.router.navigate(['/signin']);
+      this.router.navigate(['/' + this.langURL + '/signin']);
 
       if(this.tokenExpirationTimer){
         clearTimeout(this.tokenExpirationTimer)
