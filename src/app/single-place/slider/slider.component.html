@@ -8,7 +8,6 @@
   <div class="carousel-inner">
       <div *ngFor="let place of singlePlaceSlider.images; let i = index; first as isFirst" [class.active]="(isFirst)"
         class="carousel-item">
-        {{place}}
         <img [src]="place ?  place : ''" class="img-fluid">
       </div>
   </div>

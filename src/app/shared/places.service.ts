@@ -252,7 +252,6 @@ export class PlacesService {
     placeData.append('lng', longitude);
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     placeData.forEach((value, key) => {
       console.log(key + ' ' + value);
     });

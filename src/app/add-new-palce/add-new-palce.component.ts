@@ -8,6 +8,8 @@ import { UserDataService } from '../shared/user-data.service';
 import { Options, LabelType } from 'ng5-slider';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { CommonsService } from '../shared/commons.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+
 
 @Component({
   selector: 'app-add-new-palce',
@@ -73,6 +75,17 @@ export class AddNewPalceComponent implements OnInit {
   showimages = false;
   minValue = 0;
   maxValue = 10000;
+  uploadedImage;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  cropper = {
+    x1: 0,
+    y1: 0,
+    x2: 500,
+    y2: 500
+  };
+
+  imagesCount;
   // minPriceRange;
   // maxPriceRange;
 
@@ -142,8 +155,33 @@ export class AddNewPalceComponent implements OnInit {
     this.loadMap();
 
   }
+  fileChangeEvent(event: any) {
+    this.imageChangedEvent = event;
+    this.uploadedImage = event.target.files[0].name;
+    this.imagesCount = event.target.files.length;
+  }
 
-
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    // this.imagesUrls.push(this.croppedImage);
+    // console.log(this.imagesUrls);
+    // console.log(this.croppedImage);
+  }
+  loadImageFailed() {
+    console.log('error loading image');
+  }
+  updateProfilePicture() {
+    console.log(this.uploadedImage);
+    this.imagesUrls.push(this.croppedImage);
+    this.imagesNames.push(this.uploadedImage);
+    if (this.imagesUrls.length > 5) {
+      this.maxNumber = true;
+    } else if (this.imagesUrls.length < 1) {
+      this.noImages = true;
+    } else {
+      this.noImages = false;
+    }
+  }
   // get form field data
   getFormSelectionItems() {
     this.isLoading = true;
@@ -383,7 +421,7 @@ export class AddNewPalceComponent implements OnInit {
       this.latitude,
       this.longitude,
       this.minValue,
-      this.maxValue,
+      this.maxValue
       ).subscribe(data => {
         // console.log(data);
         this.isLoading = false;
