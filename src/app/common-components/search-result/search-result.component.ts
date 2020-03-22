@@ -50,12 +50,12 @@ export class SearchResultComponent implements OnInit {
     this.isLoading = false;
     // this.searchResult();
     this.searchResultsService._searchResultsRespond.subscribe(message => {
-      this.searchWord = message;
+      this.searchWord = JSON.parse(message);
       this.searchQuery(this.searchWord, localStorage.getItem('current_lang'));
-      // console.log(this.searchWord);
+      console.log(this.searchWord);
     });
     console.log(this.route.snapshot.queryParamMap.get('search'));
-    this.searchWord = this.route.snapshot.queryParamMap.get('search');
+    this.searchWord = JSON.parse(this.route.snapshot.queryParamMap.get('search'));
     this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), localStorage.getItem('current_lang'));
     // this.searchResults = this.route.snapshot.queryParamMap.get('search');
 
