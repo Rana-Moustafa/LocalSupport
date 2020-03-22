@@ -12,15 +12,5 @@ export class ThankYouComponent implements OnInit {
 
   ngOnInit() {
     this.commons.show();
-    this.ThankYouItems();
-  }
-  ThankYouItems(){
-    this.commons.getThankYouData().subscribe(data => {
-        // console.log(data)
-        this.thankYouNames = data;
-        // console.log('thank u',this.thankYouNames);
-     }, error => {
-        // console.log(error);
-    });
   }
 }
