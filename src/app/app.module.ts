@@ -102,7 +102,6 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxUploadModule, MineTypeEnum, DropTargetOptions } from '@wkoza/ngx-upload';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { AddToFavListComponent } from './add-to-fav-list/add-to-fav-list.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { EditPlaceComponent } from './single-place/edit-place/edit-place.component';
 import { ProfilePlacesComponent } from './profile-details/profile-places/profile-places.component';
@@ -125,8 +124,7 @@ export function provideConfig() {
 }
 
 export function HttpLoaderFactory(http: HttpClient) {
-  console.log(new TranslateHttpLoader(http, '/assets/i18n/', '-lang.json'));
-  return new TranslateHttpLoader(http, '/assets/i18n/', '-lang.json');
+  return new TranslateHttpLoader(http, './assets/i18n/');
 }
 
 export const ngxDropTargetOptions: DropTargetOptions = {
@@ -232,7 +230,7 @@ export const ngxDropTargetOptions: DropTargetOptions = {
         deps: [HttpClient]
       }
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [RouterModule],
   schemas: [NO_ERRORS_SCHEMA],

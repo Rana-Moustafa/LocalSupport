@@ -89,7 +89,7 @@
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
-    @media all and (max-width: 1300px){
+    @media all and (max-width: 1300px) {
       height: 110vh;
     }
     @media all and (max-width: 640px) {
@@ -116,7 +116,7 @@
         font-size: 70px;
         font-weight: 900;
         line-height: 77px;
-        @media all and (max-width: 1300px){
+        @media all and (max-width: 1300px) {
           font-size: 60px;
         }
         @media all and (max-width: 992px) {
@@ -136,13 +136,15 @@
       &__small {
         margin-top: 15px;
 
-       
         p {
           line-height: 20px;
           word-break: break-word;
           font-weight: 500;
           @media all and (max-width: 640px) {
             font-size: 14px;
+          }
+          a {
+            color: #000;
           }
         }
       }
@@ -157,7 +159,7 @@
         margin: 25px auto 0;
         font-weight: bold;
         border: 5px solid #000;
-        @media all and (max-width: 1300px){
+        @media all and (max-width: 1300px) {
           font-size: 16px;
         }
         @media all and (max-width: 640px) {

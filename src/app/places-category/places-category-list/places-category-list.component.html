@@ -80,14 +80,14 @@
                   <a [routerLink]="['/'+urlLang, 'single-place', place.id, place.slug]" class="read-more">
                     {{"read_more" | translate}}</a></p>
               </div>
-              <div class="places-results__rating">
+              <!-- <div class="places-results__rating">
                 <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 1.5}"></i>
                 <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 2.5}"></i>
                 <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 3.5}"></i>
                 <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 4.5}"></i>
                 <i class="fa fa-star" [ngClass]="{'star-empty': place.avg_rating < 5}"></i>
-              </div>
-              <p [hidden]="place.avg_rating != null || place.avg_rating === 0 ">{{"Not_rated_yet" | translate}}</p>
+              </div> -->
+              <!-- <p [hidden]="place.avg_rating != null || place.avg_rating === 0 ">{{"Not_rated_yet" | translate}}</p> -->
               <!-- <div class="likes-number">{{place.id}}</div> -->
             </div>
           </div>

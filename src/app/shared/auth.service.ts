@@ -125,13 +125,13 @@ export class AuthenticationService {
         JSON.parse(localStorage.getItem('token_type')) == '3') {
         this.authService.signOut();
         this.userStatus.userLoggedOut()
-        this.router.navigate(['/' + this.langURL + '/signin']);
+        this.router.navigate(['/signin']);
         localStorage.clear()
       }
       //localStorage.removeItem('token');
       //localStorage.removeItem('token_type');
       localStorage.clear()
-      this.router.navigate(['/' + this.langURL + '/signin']);
+      this.router.navigate(['/signin']);
 
       if(this.tokenExpirationTimer){
         clearTimeout(this.tokenExpirationTimer)

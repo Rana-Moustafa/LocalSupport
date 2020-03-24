@@ -32,9 +32,8 @@ export class IntroComponent implements OnInit {
     navSpeed: 700,
     items: 1,
     rewind: false,
-    nav: false,
-    // autoWidth: true,
-  }
+    nav: false
+  };
 
   advertiseData;
   langURL = localStorage.getItem('current_lang');
@@ -43,18 +42,18 @@ export class IntroComponent implements OnInit {
               private router: Router,
               private translation: TranslationService,
               private location: Location,
-              private translate: TranslateService) { 
-
-                
-              }
+              private translate: TranslateService) {}
 
   ngOnInit() {
     if (!localStorage.getItem('current_lang')) {
       this.translate.use('de');
+      localStorage.setItem('current_lang', 'de');
     } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
-      this.translate.use('en');
+      this.translate.use('de');
+      localStorage.setItem('current_lang', 'de');
     } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
       this.translate.use('de');
+      localStorage.setItem('current_lang', 'de');
     }
     console.log(this.location.getState());
     this.commons.showPadding = false;

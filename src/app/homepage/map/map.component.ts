@@ -388,6 +388,7 @@ export class MapComponent implements OnInit {
     });
   }
   searchPlaces() {
+    console.log('*******')
     // this.SearchResultsService.searchQuery(this.searchElementRef.nativeElement.value)
     this.router.navigate(['/' + this.langURL + '/search-result'],
       { queryParams: { search: JSON.stringify(this.searchElementRef.nativeElement.value) } });

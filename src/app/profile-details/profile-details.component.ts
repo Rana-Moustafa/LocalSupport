@@ -110,7 +110,7 @@ export class ProfileDetailsComponent implements OnInit {
   deleteAccount() {
     this.userDataService.removeAccount().subscribe(data => {
       this.removeUserDataFromLocalStorage();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
 
     }, (errorMessage) => {
       this.isLoading = false;

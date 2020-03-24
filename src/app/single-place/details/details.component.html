@@ -43,11 +43,13 @@
     <h4>{{"Contact_details" | translate}}</h4>
     <div class="single-place__contacts__website">
       <img src="./../assets/images/ic-site.svg" />
-      <span>{{ singlePlaceDetails.website?  singlePlaceDetails.website : ('no_website' | translate) }}</span>
+      <a href="https://{{ singlePlaceDetails.website?  singlePlaceDetails.website :''}} " target="_blank">{{ singlePlaceDetails.website?  singlePlaceDetails.website : ('no_website' | translate) }}</a>
     </div>
     <div class="single-place__contacts__website">
       <img src="./../assets/images/ic-site.svg" />
-      <span>{{ singlePlaceDetails.email?  singlePlaceDetails.email : ('no_website' | translate) }}</span>
+      <a href="mailto:{{ singlePlaceDetails.email?  singlePlaceDetails.email : '' }}">
+        {{ singlePlaceDetails.email?  singlePlaceDetails.email : ('no_email' | translate) }}
+      </a>
     </div>
     <div class="single-place__contacts__phone">
       <img src="./../assets/images/ic-phone.svg" /> <span>

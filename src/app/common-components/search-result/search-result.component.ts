@@ -127,7 +127,6 @@ export class SearchResultComponent implements OnInit {
         this.allSearchPlaces.push(this.results[i]);
       }
       if ((this.results && this.results.length === 0) || !this.results) {
-        console.log('no comments');
         this.isFullListDisplayed = true;
         // this.loadingComments = false;
       }

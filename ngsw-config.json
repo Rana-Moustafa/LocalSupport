@@ -5,6 +5,7 @@
     {
       "name": "app",
       "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
@@ -20,24 +21,9 @@
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**",
-          "/i18n/**",
+          "/assets/images/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
-      }
-    }
-  ],
-  "dataGroups": [
-    {
-      "name": "posts",
-      "urls": [
-        "https://belocalhero.com/wordpress-api/live/wp-json/**"
-      ],
-      "cacheConfig": {
-        "maxSize": 20,
-        "maxAge": "1h",
-        "timeout": "10s",
-        "strategy": "freshness"
       }
     }
   ]

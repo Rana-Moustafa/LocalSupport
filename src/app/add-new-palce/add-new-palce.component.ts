@@ -126,7 +126,7 @@ export class AddNewPalceComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('llsllsls')
+    this.commons.show();
     this.commons.darkHeader = true;
     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
 
@@ -136,7 +136,7 @@ export class AddNewPalceComponent implements OnInit {
     }, error => {
       console.log(error);
       if (error.status === 411) {
-        
+        this.router.navigate(['/signin']);
       }
     });
 

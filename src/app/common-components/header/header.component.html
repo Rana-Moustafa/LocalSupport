@@ -5,7 +5,7 @@
     <nav class="navbar">
      
       <div class="header-logo mr-auto">
-        <a class="navbar-brand" [routerLink]="['/'+langURL]">
+        <a class="navbar-brand" [routerLink]="['/'+langURL , 'intro']">
           <h1><img src="../../../assets/images/local-hero-logo.svg"></h1>
         </a>
       </div>
@@ -16,7 +16,7 @@
         </div>
        
         <div class="sign-user">
-          <a [routerLink]="['/'+langURL , 'signin']" [hidden]="this.userStatus.userLoggedIn()">{{'signin' | translate}}</a>
+          <a [routerLink]="['/signin']" [hidden]="this.userStatus.userLoggedIn()">{{'signin' | translate}}</a>
           <div class="dropdown" [hidden]="!this.userStatus.userLoggedIn()">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
           </div>
 
         </div>
-        <a class="nav-link" [routerLink]="['/']" >{{'to_map' | translate}}</a>
+        <a class="nav-link" [routerLink]="['/'+langURL]" >{{'to_map' | translate}}</a>
         <!-- <div class="dropdown language" [hidden]="languageSwitcherStatus">
           <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">

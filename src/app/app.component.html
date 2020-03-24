@@ -1,7 +1,7 @@
 <!--<app-auth></app-auth>-->
 <app-loading-spinner [hidden]="!commons.showLoading"></app-loading-spinner>
 <app-header [ngClass]="{'scrolled': minLength > 10}" [hidden]="!commons.visible"> </app-header>
-<router-outlet  (activate)="onActivate($event)">
+<router-outlet  (activate)="onActivate($event)" [hidden]="!hideRouter">
   <!-- <app-testimonials></app-testimonials> -->
 </router-outlet>
 <app-footer [hidden]="!commons.visible"></app-footer>

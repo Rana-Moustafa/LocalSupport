@@ -8,6 +8,7 @@ import { CommonsService } from './../shared/commons.service';
 })
 export class ThankYouComponent implements OnInit {
   thankYouNames;
+  langURL = localStorage.getItem('current_lang');
   constructor(private commons: CommonsService) { }
 
   ngOnInit() {

@@ -71,7 +71,8 @@
             <div class="form-group">
               <h4 class="subtitle">{{"local_Phonenumber" |translate}}</h4>
               <div class="form-group">
-                <input type="text" class="form-control col-12" ngModel name="phone" #phone="ngModel">
+                <input type="tel" class="form-control col-12" ngModel name="phone" #phone="ngModel">
+              
                 <!-- <p class="help-block" *ngIf="!phone.valid && phone.touched && phone.errors.pattern">Please enter a valid
                   phone number.</p> -->
               </div>
@@ -81,6 +82,9 @@
               <div class="form-group">
                 <input type="email" class="form-control col-12" ngModel name="placeemail" #placeemail="ngModel"
                   required>
+                  <!-- <small class="help-block" *ngIf="!placeemail.valid && placeemail.touched && placeemail.errors.email">
+                   {{"enter_valid_email" | translate}}
+                  </small> -->
                 <small class="help-block"
                   *ngIf="!placeemail.valid && placeemail.touched && placeemail.errors.required">{{'field_requird'  | translate }}</small>
               </div>

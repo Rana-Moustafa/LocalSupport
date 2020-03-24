@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
   scrollId;
   langURL = localStorage.getItem('current_lang');
   categoriesNames;
+  hideRouter = false;
 
   @Output() userCurrentLocationLat: EventEmitter<any> = new EventEmitter();
 
@@ -54,7 +55,9 @@ export class AppComponent implements OnInit {
               private route: ActivatedRoute,
               public translate: TranslateService,
               private translation: TranslationService,
-              private map: MapsService) {
+              private mapService: MapsService) {
+
+                translate.use('de');
     // translate.addLangs(['de', 'en']);
     // translate.setDefaultLang('de');
 
@@ -63,7 +66,7 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.map.getMapLocations().subscribe( data => {
+    this.mapService.getMapLocations().subscribe( data => {
       console.log(data);
     }, error => {
       console.log(error);
@@ -71,16 +74,14 @@ export class AppComponent implements OnInit {
     // this.commons.showTranslation();
     // this.commons.sendLanguageSwitcherStatus(false);
     this.commons.changeLanguageSwitcherStatus(false);
-   // this.placeTypes();
-    console.log('app component');
+    // this.placeTypes();
     if (!localStorage.getItem('current_lang')) {
       this.langURL = 'de';
     }
 
     this.authenticationService.autoLogin();
-    this.introItems();
     window.addEventListener('scroll', this.scroll, true); // third parameter
-    this.Coockietext();
+    // this.Coockietext();
 
   }
 
@@ -107,12 +108,12 @@ export class AppComponent implements OnInit {
 
   introItems() {
     this.commons.getIntroData().subscribe(data => {
-        console.log('>');
         if (localStorage.getItem('active_advertising') !== 'true') {
           localStorage.setItem('active_advertising', 'true');
           this.router.navigateByUrl('/' + this.langURL + '/intro', { state: { intro: data } });
         }
     }, error => {
+      this.hideRouter = true;
       console.log(error);
 
     });
