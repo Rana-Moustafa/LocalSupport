@@ -45,11 +45,11 @@ export class PlacesService {
   }
   getSinglePlaceData(id: number) {
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token=' + JSON.parse(localStorage.getItem('token')) + '&lang=en');
-    }
-    else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token=' + JSON.parse(localStorage.getItem('token')));
-
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
+      + JSON.parse(localStorage.getItem('token')) + '&lang=en&skip_cache=1');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
+       + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1');
     }
   }
   getPlacesItems() {

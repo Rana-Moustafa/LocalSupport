@@ -1,6 +1,6 @@
 <div *ngIf="isLoading" class="loading-spinner">
     <app-loading-spinner></app-loading-spinner>
-  </div>
+</div>
 <div class="container padding-top">
     <section class="places-category__list">
 
@@ -46,7 +46,7 @@
                 *ngFor="let place of PlacesItemsDetails | paginate:{itemsPerPage: 5, currentPage:p}" -->
                     <div class="row search-results" infiniteScroll [infiniteScrollDistance]="15"
                         [infiniteScrollThrottle]="50" [immediateCheck]="true"
-                        [infiniteScrollDisabled]="isFullListDisplayed" 
+                        [infiniteScrollDisabled]="isFullListDisplayed"
                         (scrolled)="((allPlaces.length > 0) ? getFilterPlaces() : searchQuery(searchWord, langURL))">
                         <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]"
                             class="col-lg-3 col-sm-6 col-xs-12 places-results-item"
@@ -58,17 +58,20 @@
                             </div>
                             <div class="places-results__content">
                                 <div class="place-name-link">
-                                    <h6 class="places-results__place-name">
-                                        {{ place.title.rendered? place.title.rendered: ' '}}
+                                    <h6 class="places-results__place-name"
+                                    [innerHTML]="place.title.rendered? place.title.rendered: ' '">
                                     </h6>
                                 </div>
-                                <div class="places-results__price">
-                                    <p class="cost">{{place.price_range_from + '-' ? place.price_range_from: '' }}
-                                        {{place.price_range_to? place.price_range_to : ''}}</p>
-                                </div>
+
                                 <div class="description">
-                                    <p class="text" pattern="[A-Za-z]{10}">{{place.description | slice:0:100}}
-                                        <a [routerLink]="['/single-place', place.id, place.slug]" class="read-more">
+                                    <!-- <p class="text" pattern="[A-Za-z]{10}">
+                                        {{place.description | slice:0:100}}</p> -->
+                                        <div *ngIf="place && place.category; first as isFirst">
+                                            <span *ngFor="let category of place.category" class="badge"> 
+                                              {{category}} 
+                                            </span>
+                                          </div>
+                                      <p>  <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]" class="read-more">
                                             {{"read_more" | translate}}</a></p>
                                 </div>
                                 <!-- <div class="places-results__rating">

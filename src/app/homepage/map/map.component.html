@@ -28,7 +28,7 @@
 
     <agm-info-window [disableAutoPan]="true" #infowindow [maxWidth]="250" class="marker-popup">
       <a [routerLink]="['/'+langURL, 'single-place', m.id, m.slug]" class="place-name-link">
-        <h4 style="z-index: 9999999999; position: relative;">{{m.title}}</h4>
+        <h4 style="z-index: 9999999999; position: relative;" [innerHTML]="m.title"></h4>
       </a>
       <!-- <div class="rating">
         <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 1}"></i>
@@ -37,7 +37,11 @@
         <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 4}"></i>
         <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 5}"></i>
       </div> -->
-      <p>{{m.address}}</p>
+      <div *ngIf="markers && m.categories; first as isFirst">
+        <span *ngFor="let category of m.categories" class="badge"> 
+          {{category}} 
+        </span>
+      </div>
     </agm-info-window>
   </agm-marker>
 </agm-map>

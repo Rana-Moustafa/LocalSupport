@@ -22,8 +22,19 @@
   margin: 0;
   padding: 0;
   top: 0;
-  color: #fff;
+  color: #000;
   font-size: 16px;
+
+}
+.gm-style div div div div div div div div .badge{
+  background-color: #ddd;
+  font-size: 12px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin: 10px 10px 0 0;
+}
+.gm-style .gm-style-iw-t::after{
+  top: -1px;
 }
 .agm-map-container-inner {
 }
@@ -81,9 +92,11 @@ agm-map {
 }
 .gm-style .gm-style-iw-c{
   padding: 15px !important;
+  min-width: 200px;
 }
 agm-map .agm-info-window-content h4{
   display: inline-block !important;
+  padding-right: 5px;
 }
 .gm-style-iw-d + button.gm-ui-hover-effect {
   background-color: $localPrimary !important;

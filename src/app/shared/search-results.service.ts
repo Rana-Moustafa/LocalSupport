@@ -9,29 +9,39 @@ import { environment } from '../../environments/environment';
 })
 export class SearchResultsService implements OnDestroy {
 
-  public _searchResultsRespond= new Subject<any>();
+  public _searchResultsRespond = new Subject<any>();
 
   public getSearchResultSubject(message) {
     this._searchResultsRespond.next(message);
-   // return this._searchResultsRespond;
+    // return this._searchResultsRespond;
   }
 
   constructor(private http: HttpClient) { }
 
+
   GetSearchResults(result, page, perpage, lang) {
+
+    const headers = new HttpHeaders({
+      'Cache-Control': 'no-cache, no-store, must-revalidate, post- check=0, pre-check=0',
+      Pragma: 'no-cache',
+      Expires: '0'
+    });
+
     console.log(result);
     if (lang === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_search=' + result + '&lang=en&page=' +
-      page + '&per_page=' + perpage);
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
+      (result.length > 0 ? result : '') + '&lang=en&page=' +
+        page + '&per_page=' + perpage ,
+        {headers});
     } else if (lang === 'de') {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_search=' + (result.length > 0 ? result : '') + '&page=' +
-      page + '&per_page=' + perpage);
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_search=' + (result.length > 0 ? result : '') + '&page=' +
-      page + '&per_page=' + perpage);
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
+       (result.length > 0 ? result : '') + '&page=' +
+        page + '&per_page=' + perpage,
+        {headers});
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this._searchResultsRespond.unsubscribe();
   }
 }

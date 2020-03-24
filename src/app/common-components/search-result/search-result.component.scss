@@ -215,7 +215,7 @@
       text-decoration: none;
 
       .places-results__place-name {
-        color: $btnColor;
+        color: $localSecondary;
       }
     }
   }
@@ -246,6 +246,14 @@
     .description {
       margin-bottom: $mr-5;
 
+      .badge {
+        color: #000;
+        background-color: #ddd;
+        font-size: 14px;
+        margin: 0 9px 10px 0;
+        padding: 5px 10px;
+      }
+
       p {
         line-height: 1.5;
       }
@@ -274,7 +282,7 @@
     cursor: pointer;
 
     &:hover {
-      color: $btnColor;
+      color: $localSecondary;
     }
   }
 
@@ -308,7 +316,6 @@
   .read-more {
     color: $darkBlueGrey;
     cursor: pointer;
-    margin-left: $mr-5;
   }
 }
 

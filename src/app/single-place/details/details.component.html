@@ -18,9 +18,8 @@
       <small>{{"This_place_has_not_been_rated_yet!" | translate}}</small>
     </span>
   </div> -->
-<!-- <a [routerLink]="['/'+langURL, 'edit-place', singlePlaceDetails.id, singlePlaceDetails.slug]">Edit</a> -->
-  <div class="single-place__title">
-    {{ singlePlaceDetails.title ? singlePlaceDetails.title.rendered : ' '}}
+  <!-- <a [routerLink]="['/'+langURL, 'edit-place', singlePlaceDetails.id, singlePlaceDetails.slug]">Edit</a> -->
+  <div class="single-place__title" [innerHTML]="singlePlaceDetails.title ? singlePlaceDetails.title.rendered : ' '">
     <div class="single-place__title__subtitle">
       <span> {{singlePlaceDetails? singlePlaceDetails.place_type: ''}}</span>
       <!-- <span *ngFor="let place of singlePlaceDetails.place_type; let i = index"> <span *ngIf="i != 0"> / </span>
@@ -43,7 +42,8 @@
     <h4>{{"Contact_details" | translate}}</h4>
     <div class="single-place__contacts__website">
       <img src="./../assets/images/ic-site.svg" />
-      <a href="https://{{ singlePlaceDetails.website?  singlePlaceDetails.website :''}} " target="_blank">{{ singlePlaceDetails.website?  singlePlaceDetails.website : ('no_website' | translate) }}</a>
+      <a href="https://{{ singlePlaceDetails.website?  singlePlaceDetails.website :''}} "
+        target="_blank">{{ singlePlaceDetails.website?  singlePlaceDetails.website : ('no_website' | translate) }}</a>
     </div>
     <div class="single-place__contacts__website">
       <img src="./../assets/images/ic-site.svg" />
@@ -52,18 +52,21 @@
       </a>
     </div>
     <div class="single-place__contacts__phone">
-      <img src="./../assets/images/ic-phone.svg" /> <span>
-        {{ singlePlaceDetails.phone_number?  singlePlaceDetails.phone_number : ('no_phone' | translate) }}</span>
+      <img src="./../assets/images/ic-phone.svg" /> 
+        <a href="tel:{{ singlePlaceDetails.phone_number?  singlePlaceDetails.phone_number: '' }}">
+          {{ singlePlaceDetails.phone_number?  singlePlaceDetails.phone_number : ('no_phone' | translate) }}
+        </a> 
     </div>
   </div>
   <div class="single-place__decription">
     <div class="single-place__decription__list">
-    <ul>
-      <li>
-        - {{"Opening_hours" | translate}}: {{"from"|translate}} {{ singlePlaceDetails.hr_from?  singlePlaceDetails.hr_from : '  () ' }}
-        - {{"to"|translate}} {{ singlePlaceDetails.hr_to?  singlePlaceDetails.hr_to : ' () ' }}
-      </li>
-    </ul>
+      <ul>
+        <li>
+          - {{"Opening_hours" | translate}}: {{"from"|translate}}
+          {{ singlePlaceDetails.hr_from?  singlePlaceDetails.hr_from : '  () ' }}
+          - {{"to"|translate}} {{ singlePlaceDetails.hr_to?  singlePlaceDetails.hr_to : ' () ' }}
+        </li>
+      </ul>
     </div>
     <!-- <div class="single-place__decription__route">
       <span>{{"Find_route?" | translate}}</span>
@@ -89,7 +92,7 @@
         <li *ngFor="let payment of singlePlaceDetails.payment_methods"> {{payment}} </li>
       </ul>
     </div>
-    
+
     <!-- <div class="single-place__services__blocks" *ngFor="let feature of singlePlaceDetails.features; let i = index">
       <div> <img [src]="feature.icon" /></div>
       <span>{{ feature.name }}</span>
