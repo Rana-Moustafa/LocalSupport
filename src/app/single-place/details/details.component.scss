@@ -118,13 +118,8 @@
         height: 30px;
         width: 30px;
       }
-    }
 
-    &__website {
-      float: left;
-      justify-content: flex-start;
-      align-items: center;
-
+      
       a{
         color: #000;
         text-decoration: underline;
@@ -136,9 +131,18 @@
       }
     }
 
+    &__website {
+      float: left;
+      justify-content: flex-start;
+      align-items: center;
+
+    }
+
     &__phone {
       float: left;
       justify-content: flex-start;
+      align-items: center;
+      
       @media (max-width: $sm) {
         float: left;
         justify-content: flex-start;
