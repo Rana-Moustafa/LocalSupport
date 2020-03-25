@@ -235,8 +235,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(
-        position => {
+      navigator.geolocation.getCurrentPosition((position) => {
           console.log('current location');
           console.log(this.latitude);
           console.log(this.latitude);
