@@ -234,19 +234,25 @@ export class MapComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    const uA = navigator.userAgent;
+    const vendor = navigator.vendor;
+    if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
+      alert('Please allow location detection');
+    } 
+
     if ('geolocation' in navigator) {
       console.log('navigator');
       console.log(navigator);
       navigator.geolocation.getCurrentPosition((position) => {
-          console.log('current location');
-          console.log(this.latitude);
-          console.log(this.latitude);
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-        }, error => {
-          console.log('errrrrrorr');
-          console.log(error);
-        });
+        console.log('current location');
+        console.log(this.latitude);
+        console.log(this.latitude);
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+      }, error => {
+        console.log('errrrrrorr');
+        console.log(error);
+      });
     }
     this.translation.langUpdated.subscribe(
       (lang) => {
