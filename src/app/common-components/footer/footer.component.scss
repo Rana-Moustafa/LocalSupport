@@ -26,6 +26,9 @@
     @media all and (max-width: 768px){
       justify-content: space-evenly;
     }
+    @media all and (max-width: 640px){
+      justify-content: flex-start;
+    }
   }
   .navbar {
     padding-left: 0;

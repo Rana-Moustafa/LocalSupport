@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewEncapsulation } from '@angular/core';
 import { CommonsService } from '../../shared/commons.service';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
@@ -6,7 +6,8 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FooterComponent implements OnInit, AfterViewChecked {
 

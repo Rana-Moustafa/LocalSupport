@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 // import { OwlCarousel } from 'ngx-owl-carousel';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Location } from '@angular/common';
@@ -12,7 +12,8 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-intro',
   templateUrl: './intro.component.html',
-  styleUrls: ['./intro.component.scss']
+  styleUrls: ['./intro.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class IntroComponent implements OnInit {
 

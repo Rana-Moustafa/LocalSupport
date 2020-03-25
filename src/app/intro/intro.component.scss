@@ -61,6 +61,8 @@
 .intro {
   display: flex;
   display: -webkit-flex;
+  flex-wrap: wrap;
+  position: relative;
   @media all and (max-width: 640px) {
     flex-direction: column;
   }
@@ -76,13 +78,13 @@
     padding: 95px 0 0;
     float: left;
     color: #000;
-    padding: 100px 7% 40px;
+    padding: 100px 7% 100px;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
     @media all and (max-width: 1300px) {
-      height: 110vh;
+      
     }
     @media all and (max-width: 640px) {
       display: block;
@@ -104,20 +106,17 @@
     &__text {
       width: auto;
 
-     
       &__big {
-        font-size: 70px;
+        font-size: 55px;
         font-weight: 900;
         line-height: 77px;
 
-
-        @media all and (min-width: 992px){
-          min-height: 230px;
-        }
-        @media all and (min-width: 640px) and (max-width: 991px){
+        @media all and (min-width: 992px) {
           min-height: 180px;
         }
-
+        @media all and (min-width: 640px) and (max-width: 991px) {
+          min-height: 105px;
+        }
 
         @media all and (max-width: 1300px) {
           font-size: 55px;
@@ -149,7 +148,6 @@
           font-weight: 500;
           font-size: 16px;
           @media all and (max-width: 640px) {
-            
           }
           a {
             color: #000;
@@ -173,6 +171,52 @@
         @media all and (max-width: 640px) {
           border-width: 3px;
         }
+      }
+    }
+  }
+}
+.b-footer {
+
+  @media all and (min-width: 641px){
+    background: transparent;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+  }
+  .navbar{
+    .navbar-nav {
+      .nav-item {
+        .nav-link{
+          
+          @media all and (max-width: 992px){
+            font-size: 12px;
+          }
+          &:hover{
+            color: #000;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  .copyright{
+    span{
+      font-weight: 500;
+      margin-top: -15px;
+      @media all and (max-width: 992px){
+        font-size: 12px;
+      }
+    }
+  }
+
+  .social-links{
+    a{
+      &:hover{
+        color: #000;
       }
     }
   }
