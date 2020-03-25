@@ -352,8 +352,8 @@ export class MapComponent implements OnInit {
 
   // Get Current Location Coordinates
   setCurrentLocation(lat, lng) {
-
     if ('geolocation' in navigator) {
+      console.log('*************************************************');
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
