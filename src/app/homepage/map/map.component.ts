@@ -236,10 +236,6 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     const uA = navigator.userAgent;
     const vendor = navigator.vendor;
-    if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
-      alert('Please allow location detection');
-    } 
-
     if ('geolocation' in navigator) {
       console.log('navigator');
       console.log(navigator);
@@ -252,6 +248,9 @@ export class MapComponent implements OnInit {
       }, error => {
         console.log('errrrrrorr');
         console.log(error);
+        if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
+          alert('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
+        }
       });
     }
     this.translation.langUpdated.subscribe(
