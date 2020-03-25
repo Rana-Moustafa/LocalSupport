@@ -195,18 +195,18 @@ export class PlacesService {
   }
 
   addNewPlace(place,
-    featured,
-    placeName,
-    selectedType,
-    selectedCategories,
-    selectedDelivery,
-    selectedPaymentMethod,
-    imagesNames,
-    imagesUrls,
-    latitude,
-    longitude,
-    minValue,
-    maxValue) {
+              featured,
+              placeName,
+              selectedType,
+              selectedCategories,
+              selectedDelivery,
+              selectedPaymentMethod,
+              imagesNames,
+              imagesUrls,
+              latitude,
+              longitude,
+              minValue,
+              maxValue) {
 
     // //console.log(place)
    
@@ -235,8 +235,8 @@ export class PlacesService {
 
     placeData.append('token', JSON.parse(localStorage.getItem('token')));
     placeData.append('token_type', JSON.parse(localStorage.getItem('token_type')));
-    placeData.append('feat_image_name', featured[0]);
-    placeData.append('feat_image', featured[1]);
+    placeData.append('feat_image_name', featured[0] ? featured[0] : '');
+    placeData.append('feat_image', featured[1] ? featured[1] : '');
     placeData.append('name', place.placename);
     placeData.append('address', address);
     placeData.append('number', '');

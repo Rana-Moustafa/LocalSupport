@@ -164,6 +164,9 @@ export class AddNewPalceComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
+    this.imagesUrls.push(this.croppedImage);
+    this.imagesNames.push(this.uploadedImage);
+    this.croppedImage = '';
     // this.imagesUrls.push(this.croppedImage);
     // console.log(this.imagesUrls);
     // console.log(this.croppedImage);
@@ -173,8 +176,7 @@ export class AddNewPalceComponent implements OnInit {
   }
   updateProfilePicture() {
     console.log(this.uploadedImage);
-    this.imagesUrls.push(this.croppedImage);
-    this.imagesNames.push(this.uploadedImage);
+   
     if (this.imagesUrls.length > 5) {
       this.maxNumber = true;
     } else if (this.imagesUrls.length < 1) {
