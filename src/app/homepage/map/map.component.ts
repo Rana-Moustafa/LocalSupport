@@ -234,7 +234,7 @@ export class MapComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    if (window.navigator.geolocation) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
           console.log('current location');
           console.log(this.latitude);
