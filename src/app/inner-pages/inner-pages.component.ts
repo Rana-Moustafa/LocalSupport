@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { CommonsService } from '../shared/commons.service';
 
 @Component({
   selector: 'app-inner-pages',
@@ -8,9 +9,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class InnerPagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private commons : CommonsService) { }
 
   ngOnInit() {
+    this.commons.show();
   }
 
 }
