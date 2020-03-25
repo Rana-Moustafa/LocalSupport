@@ -9,6 +9,7 @@ import { Component, OnInit, Input , OnChanges } from '@angular/core';
 export class SliderComponent implements OnInit, OnChanges  {
 
   @Input() singlePlaceSlider;
+  placeImages = [];
   isActive;
   imagesCount;
 
@@ -17,7 +18,11 @@ export class SliderComponent implements OnInit, OnChanges  {
   ngOnInit() {
     this.isActive = 1;
     console.log('singlePlaceSlider');
-    console.log(this.singlePlaceSlider)
+    console.log(this.singlePlaceSlider);
+    // this.singlePlaceSlider.images.push(this.singlePlaceSlider.featured_image);
+    // this.singlePlaceSlider.images.filter((images) => {
+    //   console.log(images)
+    // });
   }
   ngOnChanges() { }
 
