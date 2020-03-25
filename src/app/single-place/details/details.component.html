@@ -30,7 +30,7 @@
   <div class="single-place__address">
     <img src="./../assets/images/location-icon.svg" /> <span>
       <a target="_blank" (click)="findPlaceRoute(singlePlaceDetails.id)">
-        {{ singlePlaceAddress?  singlePlaceAddress : ' ' }}
+        {{ singlePlaceDetails && singlePlaceDetails.address?  singlePlaceDetails.address.address : ' ' }}
       </a></span>
   </div>
 
@@ -38,26 +38,7 @@
     <h4>{{"overview" | translate}}</h4>
     <p>{{ singlePlaceDetails?  singlePlaceDetails.description : ' ' }}</p>
   </div>
-  <div class="single-place__contacts">
-    <h4>{{"Contact_details" | translate}}</h4>
-    <div class="single-place__contacts__website">
-      <img src="./../assets/images/ic-site.svg" />
-      <a href="https://{{ singlePlaceDetails.website?  singlePlaceDetails.website :''}} "
-        target="_blank">{{ singlePlaceDetails.website?  singlePlaceDetails.website : ('no_website' | translate) }}</a>
-    </div>
-    <div class="single-place__contacts__website">
-      <img src="./../assets/images/ic-site.svg" />
-      <a href="mailto:{{ singlePlaceDetails.email?  singlePlaceDetails.email : '' }}">
-        {{ singlePlaceDetails.email?  singlePlaceDetails.email : ('no_email' | translate) }}
-      </a>
-    </div>
-    <div class="single-place__contacts__phone">
-      <img src="./../assets/images/ic-phone.svg" /> 
-        <a href="tel:{{ singlePlaceDetails.phone_number?  singlePlaceDetails.phone_number: '' }}">
-          {{ singlePlaceDetails.phone_number?  singlePlaceDetails.phone_number : ('no_phone' | translate) }}
-        </a> 
-    </div>
-  </div>
+
   <div class="single-place__decription">
     <div class="single-place__decription__list">
       <ul>
@@ -75,19 +56,19 @@
   </div>
   <div class="single-place__services">
     <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.category">
-      <strong> {{ "local_Category" | translate }}</strong>
+      <h4> {{ "local_Category" | translate }}</h4>
       <ul>
         <li *ngFor="let category of singlePlaceDetails.category"> {{category}} </li>
       </ul>
     </div>
     <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.delivery">
-      <strong>{{ "local_Delievery" | translate }}</strong>
+      <h4>{{ "local_Delievery" | translate }}</h4>
       <ul>
         <li *ngFor="let delivery of singlePlaceDetails.delivery"> {{delivery}} </li>
       </ul>
     </div>
     <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.payment_methods">
-      <strong>{{ "local_Payment_Method" | translate }}</strong>
+      <h4>{{ "local_Payment_Method" | translate }}</h4>
       <ul>
         <li *ngFor="let payment of singlePlaceDetails.payment_methods"> {{payment}} </li>
       </ul>
@@ -99,5 +80,29 @@
     </div> -->
 
   </div>
-
+  <div class="single-place__contacts">
+    <h4>{{"Contact_details" | translate}}</h4>
+    <div class="single-place__contacts__website">
+      <img src="./../assets/images/ic-site.svg" />
+      <a href="https://{{ singlePlaceDetails.website?  singlePlaceDetails.website :''}} "
+        target="_blank" *ngIf="singlePlaceDetails.website">{{ singlePlaceDetails.website}}</a>
+      <span *ngIf="!singlePlaceDetails.website">{{'no_website' | translate}}</span>
+      </div>
+    <div class="single-place__contacts__website">
+      <img src="./../assets/images/ic-site.svg" />
+      <a href="mailto:{{ singlePlaceDetails.email?  singlePlaceDetails.email : '' }}"
+      *ngIf="singlePlaceDetails.email">
+        {{singlePlaceDetails.email }}
+      </a>
+      <span *ngIf="!singlePlaceDetails.email">{{'no_email' | translate}}</span>
+    </div>
+    <div class="single-place__contacts__phone">
+      <img src="./../assets/images/ic-phone.svg" /> 
+        <a href="tel:{{ singlePlaceDetails.phone_number?  singlePlaceDetails.phone_number: '' }}"
+        *ngIf="singlePlaceDetails.phone_number && singlePlaceDetails.phone_number !== '0'">
+          {{ singlePlaceDetails.phone_number }}
+        </a> 
+        <span *ngIf="!singlePlaceDetails.phone_number || singlePlaceDetails.phone_number === '0' ">{{'no_phone' | translate}}</span>
+    </div>
+  </div>
 </div>

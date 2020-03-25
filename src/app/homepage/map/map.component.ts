@@ -237,8 +237,12 @@ export class MapComponent implements OnInit {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
         position => {
+          console.log('current location');
+          console.log(this.latitude);
+          console.log(this.latitude);
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
+          this.setCurrentLocation(this.latitude, this.longitude);
         });
     }
     this.translation.langUpdated.subscribe(

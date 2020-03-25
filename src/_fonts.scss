@@ -98,7 +98,7 @@
     letter-spacing: normal;
 
     @media (max-width: $lg) {
-        font-size: 26px;
+        margin-bottom: 25px;
     }
 }
 
@@ -172,15 +172,15 @@
 
 @mixin text-regular {
     font-family   : 'Quicksand', sans-serif;
-    font-size     : 14px;
-    font-weight   : normal;
+    font-size     : 16px;
+    font-weight   : 500;
     font-style    : normal;
     font-stretch  : normal;
-    line-height   : normal;
+    line-height   : 25px;
     letter-spacing: normal;
 
     @media (max-width: $lg) {
-        font-size: 14px;
+        
     }
 }
 

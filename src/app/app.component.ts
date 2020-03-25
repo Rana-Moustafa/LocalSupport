@@ -5,13 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieLawModule } from 'angular2-cookie-law';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Observer, fromEvent, merge } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { PlacesService } from './shared/places.service';
 import { TranslationService } from './shared/translation.service';
 import { CommonsService } from './shared/commons.service';
 import { AuthenticationService } from './shared/auth.service';
 import { MapsService } from './shared/maps.service';
 
+declare var gtag;
 
 @NgModule({
   imports: [
@@ -57,20 +58,28 @@ export class AppComponent implements OnInit {
               private translation: TranslationService,
               private mapService: MapsService) {
 
-                translate.use('de');
+    translate.use('de');
+    localStorage.setItem('current_lang', 'de');
+  
     // translate.addLangs(['de', 'en']);
     // translate.setDefaultLang('de');
 
     // const browserLang = translate.getBrowserLang();
     // translate.use(browserLang.match(/de|en/) ? browserLang : 'en');
 
+    // Connect to Google Analytics
+    const navEndEvents = router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    );
+
+    navEndEvents.subscribe((event: NavigationEnd) => {
+      gtag('config', 'UA-161700458-1', {
+        'page_path': event.urlAfterRedirects
+      });
+    });
+
   }
   ngOnInit() {
-    this.mapService.getMapLocations().subscribe( data => {
-      console.log(data);
-    }, error => {
-      console.log(error);
-    });
     // this.commons.showTranslation();
     // this.commons.sendLanguageSwitcherStatus(false);
     this.commons.changeLanguageSwitcherStatus(false);
@@ -104,19 +113,6 @@ export class AppComponent implements OnInit {
   scroll = (event: any): void => {
 
     this.minLength = document.documentElement.scrollTop;
-  }
-
-  introItems() {
-    this.commons.getIntroData().subscribe(data => {
-        if (localStorage.getItem('active_advertising') !== 'true') {
-          localStorage.setItem('active_advertising', 'true');
-          this.router.navigateByUrl('/' + this.langURL + '/intro', { state: { intro: data } });
-        }
-    }, error => {
-      this.hideRouter = true;
-      console.log(error);
-
-    });
   }
 
 }

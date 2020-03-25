@@ -17,17 +17,16 @@
     <div class="intro__side">
       <div class="intro__side__text">
         <div class="intro__side__text__big">
-
           {{ introItemsNames? introItemsNames.left_title : ''}}
         </div>
         <div class="intro__side__text__small">
           <p [innerHTML]="introItemsNames? introItemsNames.left_text: ''">
           </p>
         </div>
-
       </div>
+      <div>
       <a class="intro__side__text__link" [routerLink]="['/signup']" > 
-        {{ introItemsNames? introItemsNames.left_button: ''}}</a>
+        {{ introItemsNames? introItemsNames.left_button: ''}}</a></div>
     </div>
     <div class="intro__side">
       <div class="intro__side__text">
@@ -38,10 +37,10 @@
           <p [innerHTML]="introItemsNames? introItemsNames.right_text: ''">
           </p>
         </div>
-
       </div>
+      <div>
       <a class="intro__side__text__link"  [routerLink]="['/'+langURL]" (click)="hideIntro()">
-        {{ introItemsNames? introItemsNames.right_button: ''}} </a>
+        {{ introItemsNames? introItemsNames.right_button: ''}} </a></div>
     </div>
   </div>
 </div>

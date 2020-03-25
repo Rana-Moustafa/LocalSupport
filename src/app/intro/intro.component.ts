@@ -4,7 +4,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Location } from '@angular/common';
 import { AutoHeightService } from 'ngx-owl-carousel-o/lib/services/autoheight.service';
 import { CommonsService } from './../shared/commons.service';
-import { Router, ActivationEnd } from '@angular/router';
+import { Router, ActivationEnd, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { TranslationService } from '../shared/translation.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -40,9 +40,14 @@ export class IntroComponent implements OnInit {
 
   constructor(private commons: CommonsService,
               private router: Router,
+              private route: ActivatedRoute,
               private translation: TranslationService,
               private location: Location,
-              private translate: TranslateService) {}
+              private translate: TranslateService) {
+              localStorage.setItem('current_lang', 'de');
+              this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+                'de'));
+  }
 
   ngOnInit() {
     if (!localStorage.getItem('current_lang')) {

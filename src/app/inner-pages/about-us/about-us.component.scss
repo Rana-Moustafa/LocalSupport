@@ -1,6 +1,5 @@
 p{
     font-weight: 500;
-    line-height: 27px;
 
     a{
         color: #000;
@@ -8,7 +7,18 @@ p{
     }
 }
 .page_logos{
-    margin-top: 100px;
+    margin: 50px 0;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+
+    &__logos{
+        width: 33%;
+
+        img{
+            width: 100%;
+        }
+    }
 
     img{
         padding: 15px;

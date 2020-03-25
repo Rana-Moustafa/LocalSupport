@@ -61,16 +61,8 @@
 .intro {
   display: flex;
   display: -webkit-flex;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 99;
-  overflow-y: auto;
   @media all and (max-width: 640px) {
     flex-direction: column;
-    overflow-y: scroll;
   }
 
   .logo-link {
@@ -112,12 +104,23 @@
     &__text {
       width: auto;
 
+     
       &__big {
         font-size: 70px;
         font-weight: 900;
         line-height: 77px;
+
+
+        @media all and (min-width: 992px){
+          min-height: 300px;
+        }
+        @media all and (min-width: 640px) and (max-width: 991px){
+          min-height: 180px;
+        }
+
+
         @media all and (max-width: 1300px) {
-          font-size: 60px;
+          font-size: 55px;
         }
         @media all and (max-width: 992px) {
           font-size: 50px;
@@ -134,14 +137,19 @@
         }
       }
       &__small {
-        margin-top: 15px;
+        margin-top: 0;
+
+        @media all and (max-width: 640px) {
+          margin-top: 20px;
+        }
 
         p {
-          line-height: 20px;
+          line-height: 24px;
           word-break: break-word;
           font-weight: 500;
+          font-size: 16px;
           @media all and (max-width: 640px) {
-            font-size: 14px;
+            
           }
           a {
             color: #000;

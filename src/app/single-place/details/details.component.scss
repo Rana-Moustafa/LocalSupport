@@ -119,7 +119,9 @@
         width: 30px;
       }
 
-      
+      span{
+        font-size: 14px;
+      }
       a{
         color: #000;
         text-decoration: underline;
@@ -142,7 +144,7 @@
       float: left;
       justify-content: flex-start;
       align-items: center;
-      
+
       @media (max-width: $sm) {
         float: left;
         justify-content: flex-start;
@@ -166,8 +168,6 @@
 
         li {
           list-style: none;
-          font-size: 14px;
-          line-height: 22px;
         }
       }
     }
