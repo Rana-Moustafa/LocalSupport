@@ -3,8 +3,7 @@
 @import '../../../mixins';
 
 .category-slider-section{
-
-  margin-top: 25px;
+  margin: 50px 0;
   h3{
     a{
       float: right;
@@ -140,7 +139,7 @@
         color: $btnColor;
         text-decoration: none;
         h6{
-          color: $btnColor;
+          color: $localSecondary;
         }
       }
       h6{

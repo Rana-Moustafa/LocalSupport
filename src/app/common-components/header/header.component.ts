@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
               public sanitizer: DomSanitizer,
               private places: PlacesService) {
 
-
+    console.log('header');
     translate.addLangs(['de', 'en']);
     translate.setDefaultLang('de');
     localStorage.setItem('current_lang', 'de');

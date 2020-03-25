@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
               public translate: TranslateService,
               private translation: TranslationService,
               private mapService: MapsService) {
-
+    console.log('app');
     translate.use('de');
     localStorage.setItem('current_lang', 'de');
     console.log(this.langURL);

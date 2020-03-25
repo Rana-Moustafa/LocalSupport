@@ -19,6 +19,7 @@ export class CategoriesSliderComponent implements OnInit {
   @Input() placesCategoriesChildId;
   @Input() placesCategoriesChildName;
   @Input() favoritePlacesSliderChild;
+  @Input() productsData;
 
   customOptions: OwlOptions = {
     loop: false,
@@ -28,10 +29,11 @@ export class CategoriesSliderComponent implements OnInit {
     dots: false,
     autoplay: false,
     navSpeed: 700,
-    items: 6,
+    items: 5,
     autoWidth: true,
     rewind: false,
     nav: true,
+    lazyLoad: true,
     navText: ['<div class="nav-btn prev-slide"><i class="fa fa-angle-left" aria-hidden="true"></i></div>',
       '<div class="nav-btn next-slide" (click)="getCategoriesSliders()"><i class="fa fa-angle-right" aria-hidden="true"></i></div>'],
     responsive: {
@@ -66,6 +68,7 @@ export class CategoriesSliderComponent implements OnInit {
   page = 0;
   perPage = 100;
   allSliders = [];
+  searchAll = JSON.stringify('');
 
   constructor(private places: PlacesService,
               private translation: TranslationService,
@@ -74,16 +77,17 @@ export class CategoriesSliderComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.productsData)
     this.translation.addRouterLangParam();
     this.translation.langUpdated.subscribe(
       (lang) => {
-        this.placeTypes();
-        this.getCategoriesSliders();
+        // this.placeTypes();
+        // this.getCategoriesSliders();
       }
     );
 
-    this.placeTypes();
-    this.getCategoriesSliders();
+    // this.placeTypes();
+    // this.getCategoriesSliders();
   }
 
   placeTypes() {

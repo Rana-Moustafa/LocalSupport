@@ -73,7 +73,13 @@ body {
     }
   }
 }
-
+.badge{
+  background-color: #ddd;
+  font-size: 12px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin: 10px 10px 0 0;
+}
 h1 {
   @include H1-bold();
 }

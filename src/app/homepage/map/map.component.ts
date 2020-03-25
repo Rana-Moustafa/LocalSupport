@@ -254,7 +254,7 @@ export class MapComponent implements OnInit {
     this.translation.langUpdated.subscribe(
       (lang) => {
         // console.log(lang)
-        this.loadTabs();
+        this.selectedCategory();
       }
     );
 
