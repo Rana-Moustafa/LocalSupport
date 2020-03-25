@@ -28,7 +28,7 @@
                                         <a [stopLink]="isDragging"
                                             [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
                                             class="category-slider__place-name-link">
-                                            <img src="{{categorySlider.featured_image?categorySlider.featured_image: './../assets/images/icon-img-placeholder.svg'}}"
+                                            <img src="{{categorySlider.image?categorySlider.image: './../assets/images/icon-img-placeholder.svg'}}"
                                                 alt="" class="img-thumbnail">
                                         </a>
                                         <!-- <app-add-to-fav-list [addToFavId]="categorySlider.id"
