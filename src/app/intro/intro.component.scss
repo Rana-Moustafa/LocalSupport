@@ -57,6 +57,10 @@
   position: absolute;
   top: 15px;
   right: 15px;
+
+  &:hover{
+    color: #000;
+  }
 }
 .intro {
   display: flex;
@@ -66,7 +70,57 @@
   @media all and (max-width: 640px) {
     flex-direction: column;
   }
+  .b-footer {
 
+    @media all and (min-width: 641px){
+      background: transparent;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      border: 0;
+    }
+    .navbar{
+      .navbar-nav {
+        .nav-item {
+          .nav-link{
+            
+            @media all and (max-width: 992px){
+              font-size: 12px;
+            }
+            &:hover{
+              color: #000;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    .copyright{
+      span{
+        font-weight: 500;
+        margin-top: -15px;
+        @media all and (max-width: 992px){
+          font-size: 12px;
+        }
+      }
+    }
+  
+    .social-links{
+      a{
+        &:hover{
+          color: #000;
+
+          i{
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+  
   .logo-link {
     position: absolute;
     top: 15px;
@@ -171,52 +225,6 @@
         @media all and (max-width: 640px) {
           border-width: 3px;
         }
-      }
-    }
-  }
-}
-.b-footer {
-
-  @media all and (min-width: 641px){
-    background: transparent;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    border: 0;
-  }
-  .navbar{
-    .navbar-nav {
-      .nav-item {
-        .nav-link{
-          
-          @media all and (max-width: 992px){
-            font-size: 12px;
-          }
-          &:hover{
-            color: #000;
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
-  .copyright{
-    span{
-      font-weight: 500;
-      margin-top: -15px;
-      @media all and (max-width: 992px){
-        font-size: 12px;
-      }
-    }
-  }
-
-  .social-links{
-    a{
-      &:hover{
-        color: #000;
       }
     }
   }
