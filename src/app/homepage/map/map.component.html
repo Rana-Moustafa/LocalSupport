@@ -19,24 +19,18 @@
     
   </div>
 </div>
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [styles]="styles" [zoomControlOptions]="zoomControlOptions"
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="10" [styles]="styles" 
   [streetViewControl]="streetViewControl"  [scrollwheel]="false" #AgmMap
   [fitBounds]="fitBoundsMarkers">
   <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="currentMarkerIcon"></agm-marker>
-  <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="markerIcon"
+  <agm-marker-cluster [maxZoom]="100" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+    <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="markerIcon"
     (markerClick)="clickedMarker(infowindow)" [agmFitBounds]="fitBoundsMarkers">
 
     <agm-info-window [disableAutoPan]="true" #infowindow [maxWidth]="250" class="marker-popup">
       <a [routerLink]="['/'+langURL, 'single-place', m.id, m.slug]" class="place-name-link">
         <h4 style="z-index: 9999999999; position: relative;" [innerHTML]="m.title"></h4>
       </a>
-      <!-- <div class="rating">
-        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 1}"></i>
-        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 2}"></i>
-        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 3}"></i>
-        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 4}"></i>
-        <i class="fa fa-star" [ngClass]="{'star-empty': (m.rating | number:'1.0-0') < 5}"></i>
-      </div> -->
       <div *ngIf="markers && m.categories; first as isFirst">
         <span *ngFor="let category of m.categories" class="badge"> 
           {{category}} 
@@ -44,6 +38,8 @@
       </div>
     </agm-info-window>
   </agm-marker>
+  </agm-marker-cluster>
+
 </agm-map>
 <!-- <h5>Address: {{address}}</h5>
 <div>Latitude: {{latitude}}</div>

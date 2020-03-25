@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { AgmCoreModule } from '@agm/core';
-
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AuthComponent } from './auth/auth.component';
@@ -223,6 +223,7 @@ export const ngxDropTargetOptions: DropTargetOptions = {
       apiKey: 'AIzaSyBqh9-nZR40tr7v5DXgabUA3jVn6wRO_rU',
       libraries: ['places']
     }),
+    AgmJsMarkerClustererModule,
     TranslateModule.forRoot({
 
       loader: {
