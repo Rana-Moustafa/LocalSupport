@@ -214,14 +214,8 @@ export class AddNewPalceComponent implements OnInit {
   }
   checkValidImages() {
     // //console.log(this.noFeaturedImage)
-    // //console.log(this.imagesUrls.length)
-    if (!this.noFeaturedImage && this.imagesUrls.length <= 5) {
-      this.noImages = false;
-      this.featuredImageError = true;
-      return true;
-    } else if (this.imagesUrls.length <= 1 ||
-      this.imagesUrls.length >= 5 ||
-      (this.noFeaturedImage)) {
+    if (this.imagesUrls.length < 1 ||
+      this.imagesUrls.length > 5) {
       this.noImages = true;
       // this.featuredImageError = true;
       return false;
