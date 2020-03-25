@@ -540,7 +540,7 @@ header {
       }
 
       a {
-        @include text-regular();
+        font-size: 14px;
         background-color: $localPrimary;
         color: #fff;
         display: flex;
@@ -680,6 +680,7 @@ header {
 .nav-link {
   font-weight: bold;
   color: #000;
+  font-size: 14px;
 
   @media all and (max-width: 400px){
     font-size: 12px;

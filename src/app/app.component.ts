@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
 
     translate.use('de');
     localStorage.setItem('current_lang', 'de');
-  
+    console.log(this.langURL);
     // translate.addLangs(['de', 'en']);
     // translate.setDefaultLang('de');
 
@@ -80,6 +80,8 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
+    localStorage.setItem('current_lang', 'de');
+    console.log(this.langURL);
     // this.commons.showTranslation();
     // this.commons.sendLanguageSwitcherStatus(false);
     this.commons.changeLanguageSwitcherStatus(false);

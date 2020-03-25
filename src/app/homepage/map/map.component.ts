@@ -236,9 +236,8 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     const uA = navigator.userAgent;
     const vendor = navigator.vendor;
+
     if ('geolocation' in navigator) {
-      console.log('navigator');
-      console.log(navigator);
       navigator.geolocation.getCurrentPosition((position) => {
         console.log('current location');
         console.log(this.latitude);
@@ -246,10 +245,9 @@ export class MapComponent implements OnInit {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
       }, error => {
-        console.log('errrrrrorr');
         console.log(error);
         if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
-          alert('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
+          confirm('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
         }
       });
     }

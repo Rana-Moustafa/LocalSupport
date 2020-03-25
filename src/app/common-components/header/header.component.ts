@@ -53,11 +53,12 @@ export class HeaderComponent implements OnInit {
 
     translate.addLangs(['de', 'en']);
     translate.setDefaultLang('de');
-    this.langURL = localStorage.getItem('current_lang');
+    localStorage.setItem('current_lang', 'de');
     // translate.use('de');
   }
 
   ngOnInit() {
+    this.langURL = localStorage.getItem('current_lang');
     // this.commons.showTranslation();
     // this.languageSwitcherStatus = this.commons.getLanguageSwitcherStatus();
     this.commons.languageSwitcherStatus.subscribe( status => {
