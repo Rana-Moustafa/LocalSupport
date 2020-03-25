@@ -23,7 +23,9 @@
   [streetViewControl]="streetViewControl"  [scrollwheel]="false" #AgmMap
   [fitBounds]="fitBoundsMarkers">
   <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="currentMarkerIcon"></agm-marker>
-  <agm-marker-cluster [maxZoom]="100" imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+  <agm-marker-cluster [maxZoom]="100" 
+  [styles]="clusterStyles"
+  imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
     <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="markerIcon"
     (markerClick)="clickedMarker(infowindow)" [agmFitBounds]="fitBoundsMarkers">
 

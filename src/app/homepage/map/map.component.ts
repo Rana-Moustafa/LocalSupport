@@ -6,6 +6,7 @@ import { PlacesService } from '../../shared/places.service';
 import { TranslationService } from '../../shared/translation.service';
 import { SearchResultsService } from '../../shared/search-results.service';
 import { Router } from '@angular/router';
+import { ClusterStyle } from '@agm/js-marker-clusterer/services/google-clusterer-types';
 
 interface Marker {
   address: string;
@@ -212,6 +213,21 @@ export class MapComponent implements OnInit {
       ]
     }
   ];
+
+  clusterStyles: ClusterStyle[] =  [
+    {
+        textColor: '#000',
+        url: '../../assets/clusters/clusters-1.svg',
+        height: 50,
+        width: 50
+    },
+    {
+        textColor: '#000',
+        url: '../../assets/clusters/clusters-2.svg',
+        height: 50,
+        width: 50
+    }
+];
   previous;
   categoryTab;
   langURL = localStorage.getItem('current_lang');
@@ -224,7 +240,7 @@ export class MapComponent implements OnInit {
   selected;
   fitBoundsMarkers = true;
   seachResults;
-
+www = []
   constructor(private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
               private map: MapsService,
@@ -287,6 +303,7 @@ export class MapComponent implements OnInit {
 
       this.markers = JSON.parse(JSON.stringify(data));
       console.log(this.markers);
+     
       // switch (index) {
       //   case 0: {
       //     this.markerIcon = {

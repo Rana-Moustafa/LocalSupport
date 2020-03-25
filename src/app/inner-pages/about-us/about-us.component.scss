@@ -19,6 +19,13 @@ p{
             width: 80%;
             max-width: 250px;
         }
+
+        &__small{
+            width: 16.66666%;
+            img{
+                width: 80%;
+            }
+        }
     }
 
     img{
