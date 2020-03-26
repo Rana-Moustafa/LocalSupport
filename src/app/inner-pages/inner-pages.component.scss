@@ -3,6 +3,15 @@
 @import '../../mixins';
 
 .inner-pages{
+
+    h1{
+        margin: 25px 0;
+    }
+
+    a{
+        color: #000;
+        text-decoration: underline;
+    }
     min-height: 90vh;
     padding: 150px 0;    
     background-color: $localPrimary;  
