@@ -23,22 +23,21 @@ export class SearchResultsService implements OnDestroy {
 
     const headers = new HttpHeaders({
       'Cache-Control': 'no-cache, no-store, must-revalidate, post- check=0, pre-check=0',
-      Pragma: 'no-cache',
-      Expires: '0'
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Origin': '*'
     });
 
     console.log(result);
     if (lang === 'en') {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
       (result.length > 0 ? result : '') + '&lang=en&page=' +
-        page + '&per_page=' + perpage );
+        page + '&per_page=' + perpage,
+        {headers} );
     } else if (lang === 'de') {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
-      (result.length > 0 ? result : '') + '&page=' +
-        page + '&per_page=' + perpage);
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
        (result.length > 0 ? result : '') + '&page=' +
-        page + '&per_page=' + perpage);
+        page + '&per_page=' + perpage,
+        {headers});
     }
   }
 

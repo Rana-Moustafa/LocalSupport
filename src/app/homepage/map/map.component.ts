@@ -262,9 +262,9 @@ www = []
         this.longitude = position.coords.longitude;
       }, error => {
         console.log(error);
-        if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
-          confirm('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
-        }
+        // if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
+        //   confirm('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
+        // }
       });
     }
     this.translation.langUpdated.subscribe(
@@ -376,7 +376,6 @@ www = []
   // Get Current Location Coordinates
   setCurrentLocation(lat, lng) {
     if ('geolocation' in navigator) {
-      console.log('*************************************************');
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;

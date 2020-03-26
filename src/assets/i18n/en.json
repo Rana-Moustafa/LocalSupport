@@ -96,7 +96,7 @@
   "add": "Add",
   "upload_images": "Upload Image",
   "images": "Bilder",
-  "upload_image_msg": "Add Photo or Drag your photo here",
+  "upload_image_msg": "Add Photo",
   "upload_image_error": "You must select 5 images maximum! Please remove the extra images.",
   "cover_image_select_msg_error": "Please make sure to select a cover photo for your place!",
   "cover_image_select_msg": "Please check on one image to select it your new place cover photo?",

@@ -138,5 +138,13 @@ export class CommonsService {
     }
 
   }
+
+  getPrivacyPage() {
+    if (localStorage.getItem('current_lang') === 'en') {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy?lang=en');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy');
+    }
+  }
 }
 

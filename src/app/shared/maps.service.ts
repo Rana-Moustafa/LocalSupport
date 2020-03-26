@@ -13,13 +13,15 @@ export class MapsService {
 
     const headers = new HttpHeaders({
       'Cache-Control': 'no-cache, no-store, must-revalidate, post- check=0, pre-check=0',
-      Pragma: 'no-cache',
-      Expires: '0'
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Origin': '*'
     });
     if ( localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?lang=en&skip_cache=1');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?lang=en&skip_cache=1',
+      {headers});
     } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?skip_cache=1');
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?skip_cache=1',
+      {headers});
     }
   }
 }
