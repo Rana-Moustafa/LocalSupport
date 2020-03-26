@@ -31,13 +31,11 @@ export class SearchResultsService implements OnDestroy {
     if (lang === 'en') {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
       (result.length > 0 ? result : '') + '&lang=en&page=' +
-        page + '&per_page=' + perpage,
-        {headers} );
+        page + '&per_page=' + perpage);
     } else if (lang === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
        (result.length > 0 ? result : '') + '&page=' +
-        page + '&per_page=' + perpage,
-        {headers});
+        page + '&per_page=' + perpage);
     }
   }
 
