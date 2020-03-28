@@ -87,7 +87,7 @@ export class EditPlaceComponent implements OnInit {
     y2: 500
   };
   langURL = localStorage.getItem('current_lang');
-  streetViewControl = true;
+  streetViewControl = false;
 
   @ViewChild('editPlace', { static: true }) editPlace: NgForm;
   @ViewChild('toggleTimepickerFrom', { static: false }) openTimeFrom: NgForm;

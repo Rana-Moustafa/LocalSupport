@@ -91,6 +91,7 @@ export class AddNewPalceComponent implements OnInit {
     lng: 8.5417
   }
   imagesCount;
+  placeaddress;
   // minPriceRange;
   // maxPriceRange;
 
@@ -116,7 +117,7 @@ export class AddNewPalceComponent implements OnInit {
   imgResultAfterCompress;
   imagesResultsNames;
   markers;
-  streetViewControl = true;
+  streetViewControl = false;
   langURL = localStorage.getItem('current_lang');
 
   @ViewChild ('placename', {static: false}) addPlaceName;
@@ -282,8 +283,9 @@ export class AddNewPalceComponent implements OnInit {
       console.log(status);
       if (status === 'OK') {
         if (results[0]) {
-          this.zoom = 12;
-          this.address = results[0].formatted_address;
+          this.zoom = 15;
+          console.log(results[0].formatted_address)
+          this.placeaddress = results[0].formatted_address;
         } else {
           window.alert('No results found');
         }
@@ -298,7 +300,6 @@ export class AddNewPalceComponent implements OnInit {
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
-
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ['address'],
         componentRestrictions: { country: ['CH', 'DE', 'AT' ] }
@@ -316,7 +317,7 @@ export class AddNewPalceComponent implements OnInit {
           // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          this.zoom = 20;
+          this.zoom = 15;
           this.placeName = place.formatted_address;
           this.cityName = place.address_components[2].long_name;
           this.addressInfo.push(this.placeName);
