@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, NgZone, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MapsAPILoader } from '@agm/core';
+import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { PlacesService } from '../shared/places.service';
 import { TranslationService } from '../shared/translation.service';
 import { UserDataService } from '../shared/user-data.service';
@@ -9,6 +9,7 @@ import { Options, LabelType } from 'ng5-slider';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { CommonsService } from '../shared/commons.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { MapsService } from '../shared/maps.service';
 
 
 @Component({
@@ -29,10 +30,10 @@ export class AddNewPalceComponent implements OnInit {
   nameFile;
   filesize;
   fileType;
-  latitude: number = 47.3769;
-  longitude: number = 8.5417;
-  zoom: number;
-  address;
+  latitude: number;
+  longitude: number;
+  zoom = 15;
+  address: string;
   private geoCoder;
   addPlacePage = true;
   imagesUrls = [];
@@ -85,6 +86,10 @@ export class AddNewPalceComponent implements OnInit {
     y2: 500
   };
 
+  marker = {
+    lat: 47.3769,
+    lng: 8.5417
+  }
   imagesCount;
   // minPriceRange;
   // maxPriceRange;
@@ -96,7 +101,7 @@ export class AddNewPalceComponent implements OnInit {
       switch (label) {
         case LabelType.Low:
           return '<b>Min:</b> CHF' + value;
-        // value = this.minPriceRange;
+          // value = this.minPriceRange;
         case LabelType.High:
           return '<b>Max:</b> CHF' + value;
         //  value = this.maxPriceRange;
@@ -110,10 +115,11 @@ export class AddNewPalceComponent implements OnInit {
   imgResultBeforeCompress;
   imgResultAfterCompress;
   imagesResultsNames;
-
+  markers;
+  streetViewControl = true;
   langURL = localStorage.getItem('current_lang');
 
-  @ViewChild('placename', { static: false }) addPlaceName;
+  @ViewChild ('placename', {static: false}) addPlaceName;
   constructor(private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
               private places: PlacesService,
@@ -122,28 +128,20 @@ export class AddNewPalceComponent implements OnInit {
               private userData: UserDataService,
               private route: ActivatedRoute,
               private imageCompress: NgxImageCompressService,
-              private commons: CommonsService) { }
+              private commons: CommonsService,
+              private map: MapsService) { }
 
 
   ngOnInit() {
-
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 15;
-      }, error => {
-        console.log('%%%%%');
-        this.latitude = 47.3769;
-        this.longitude = 8.5417;
-      });
-    }
-   
-    console.log(this.latitude)
     this.commons.show();
     this.commons.darkHeader = true;
     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
-
+    this.map.getMapLocations().subscribe(data => {
+      this.markers = JSON.parse(JSON.stringify(data));
+      // console.log(this.markers);
+    }, error => {
+      // console.log(error);
+    });
     this.userData.getUserDetails().subscribe(data => {
 
 
@@ -167,7 +165,7 @@ export class AddNewPalceComponent implements OnInit {
     );
 
 
-    // this.loadMap();
+    this.loadMap();
 
   }
 
@@ -209,7 +207,7 @@ export class AddNewPalceComponent implements OnInit {
       this.formSelection = data;
       this.formType = this.formSelection.type;
       this.formCategories = this.formSelection.category;
-      this.formDelivery = this.formSelection.delivery;
+      this.formDelivery  = this.formSelection.delivery;
       this.formPaymentMethod = this.formSelection.payment_methods;
       this.isLoading = false;
     }, error => {
@@ -227,7 +225,7 @@ export class AddNewPalceComponent implements OnInit {
   }
   checkValid() {
     return (this.addPlace.valid && this.placesCategories && this.placesCategories.length && this.placesCategories.find(x => x.checked)
-      && this.newplaceFeaturedImage.length);
+    && this.newplaceFeaturedImage.length);
   }
   checkValidImages() {
     // //console.log(this.noFeaturedImage)
@@ -253,45 +251,57 @@ export class AddNewPalceComponent implements OnInit {
 
   checkPlayground(event, name) {
     if ((name === 'Playground' || name === 'Spielplatz' || name === 'Spielplätze' || name === 'Playgrounds')
-      && event.target.checked === true) {
+    && event.target.checked === true) {
       this.showSubCategories = true;
     } else if ((name === 'Playground' || name === 'Spielplatz' || name === 'Spielplätze' || name === 'Playgrounds') &&
-      event.target.checked === false) {
+     event.target.checked === false) {
       this.showSubCategories = false;
     }
   }
-
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = 46.8182;
-        this.longitude = 8.2275;
-        // this.latitude = position.coords.latitude;
-        // this.longitude = position.coords.longitude;
-
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
         this.zoom = 15;
       }, error => {
-        this.latitude = 46.8182;
-        this.longitude = 8.2275;
+        this.latitude = 47.3769;
+        this.longitude = 8.5417;
       });
     }
   }
-  markerDragEnd(event) {
-    console.log(event);
-    this.latitude = event.coords.lat;
-    this.longitude = event.coords.lng;
-    console.log(this.latitude);
-    console.log(this.longitude);
+  markerDragEnd($event: MouseEvent) {
+    console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          this.address = results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+ 
+    });
+  }
+
   loadMap() {
-    console.log('___')
     this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
 
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ['address'],
-        componentRestrictions: { country: ['CH', 'DE', 'AT'] }
+        componentRestrictions: { country: ['CH', 'DE', 'AT' ] }
       });
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
@@ -300,31 +310,26 @@ export class AddNewPalceComponent implements OnInit {
 
           // verify result
           if (place.geometry === undefined || place.geometry === null) {
-            console.log('oooooooooooooooooooooooo')
             return;
           }
 
           // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          console.log('this.latitude');
-          console.log(this.latitude);
-          this.zoom = 15;
+          this.zoom = 20;
           this.placeName = place.formatted_address;
           this.cityName = place.address_components[2].long_name;
           this.addressInfo.push(this.placeName);
           this.addressInfo.push(this.cityName);
-          console.log( this.latitude + ' ' +
-          this.longitude);
         });
       });
     });
   }
 
   compressFile() {
-    // console.log(this.addPlaceName.value);
-    if (!this.maxNumber) {
-      this.imageCompress.uploadFile().then(({ image, orientation }) => {
+  // console.log(this.addPlaceName.value);
+   if (!this.maxNumber) {
+    this.imageCompress.uploadFile().then(({image, orientation}) => {
         console.log(image);
         this.imgResultBeforeCompress = image;
         this.featuredImageError = true;
@@ -350,9 +355,9 @@ export class AddNewPalceComponent implements OnInit {
           }
         );
       });
-      return false;
-    }
-  }
+    return false;
+   }
+}
 
   getFileDetails(event) {
     console.log(event);
@@ -435,25 +440,8 @@ export class AddNewPalceComponent implements OnInit {
     this.featuredImageError = false;
     this.noFeaturedImage = false;
   }
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK') {
-        if (results[0]) {
-          this.zoom = 15;
-          this.placeName = results[0].formatted_address;
-        } else {
-          window.alert('No results found');
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
-      }
 
-    });
-  }
   newPlace(form: NgForm) {
-
     this.isLoading = true;
 
     this.sendCheckedCategories();
@@ -478,17 +466,17 @@ export class AddNewPalceComponent implements OnInit {
       this.longitude,
       this.minValue,
       this.maxValue
-    ).subscribe(data => {
-      // console.log(data);
-      this.isLoading = false;
-      this.addPlaceFormError = false;
-      form.reset();
-      this.router.navigate(['/' + this.langURL + '/thank-you']);
-    }, error => {
-      // console.log(error);
-      this.isLoading = false;
-      this.addPlaceFormError = true;
-      this.formErrorMsg = error.error.message;
-    });
+      ).subscribe(data => {
+        // console.log(data);
+        this.isLoading = false;
+        this.addPlaceFormError = false;
+        form.reset();
+        this.router.navigate(['/' + this.langURL + '/thank-you']);
+      }, error => {
+        // console.log(error);
+        this.isLoading = false;
+        this.addPlaceFormError = true;
+        this.formErrorMsg = error.error.message;
+      });
   }
 }

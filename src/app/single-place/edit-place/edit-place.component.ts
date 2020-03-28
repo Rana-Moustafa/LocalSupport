@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, NgZone, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MapsAPILoader } from '@agm/core';
+import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { PlacesService } from '../../shared/places.service';
 import { TranslationService } from '../../shared/translation.service';
 import { UserDataService } from '../../shared/user-data.service';
@@ -20,7 +20,7 @@ export class EditPlaceComponent implements OnInit {
   private geoCoder;
   latitude;
   longitude;
-  zoom;
+  zoom = 15;
   placeName;
   cityName;
   addressInfo = [];
@@ -87,6 +87,7 @@ export class EditPlaceComponent implements OnInit {
     y2: 500
   };
   langURL = localStorage.getItem('current_lang');
+  streetViewControl = true;
 
   @ViewChild('editPlace', { static: true }) editPlace: NgForm;
   @ViewChild('toggleTimepickerFrom', { static: false }) openTimeFrom: NgForm;
@@ -111,10 +112,44 @@ export class EditPlaceComponent implements OnInit {
     this.loadMap();
   }
 
+  markerDragEnd($event: MouseEvent) {
+    console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    console.log(this.latitude);
+    console.log(this.longitude);
+    this.getAddress(this.latitude, this.longitude);
+  }
+
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          this.placeName = results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+ 
+    });
+  }
+
   getSinglePlace(id) {
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.placeData = data;
       this.selectedFeatureImage = this.placeData.featured_image;
+      this.placeName = this.placeData.address.address;
+      this.latitude = JSON.parse(this.placeData.address.lat);
+      this.longitude = JSON.parse(this.placeData.address.lng);
+      this.oldLatitude = this.placeData.address.lat;
+      this.oldLongitude = this.placeData.address.lng;
+      console.log(this.oldLatitude);
+      console.log(this.oldLongitude);
       this.allPlaceImages.push({ image: this.placeData.featured_image, isFeatured: true });
       if (this.placeData.images.length > 0) {
         this.placeData.images.forEach((element, key) => {
@@ -126,9 +161,6 @@ export class EditPlaceComponent implements OnInit {
       this.timePickerFrom = this.placeData.hr_from;
       this.timePickerTo = this.placeData.hr_to;
       this.selected = this.placeData.place_type;
-      this.oldLatitude = this.placeData.address.lat;
-      this.oldLongitude = this.placeData.address.lng;
-      console.log(this.placeData);
       // this.resultDelivery = this.placeData.delivery;
       if (this.placeData.delivery && this.placeData.delivery.length > 0) {
         this.placeData.delivery.forEach((element, key) => {
@@ -329,19 +361,19 @@ export class EditPlaceComponent implements OnInit {
       this.selectedPaymentMethod,
       this.newLatitude,
       this.newLongitude,
-      this.placeData.id);
-    // ).subscribe(data => {
-    //   console.log(data);
-    //   this.isLoading = false;
-    //   this.addPlaceFormError = false;
-    //   form.reset();
-    //   this.router.navigate([this.langURL + '/thank-you']);
-    // }, error => {
-    //   console.log(error);
-    //   this.isLoading = false;
-    //   this.addPlaceFormError = true;
-    //   this.formErrorMsg = error.error.message;
-    // });
+      this.placeData.id
+    ).subscribe(data => {
+      console.log(data);
+      this.isLoading = false;
+      this.addPlaceFormError = false;
+      form.reset();
+      this.router.navigate([this.langURL + '/thank-you']);
+    }, error => {
+      console.log(error);
+      this.isLoading = false;
+      this.addPlaceFormError = true;
+      this.formErrorMsg = error.error.message;
+    });
   }
 
   selectedFeaturedImage(name, url) {

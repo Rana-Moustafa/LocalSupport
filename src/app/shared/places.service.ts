@@ -523,12 +523,12 @@ export class PlacesService {
     });
     if (localStorage.getItem('current_lang') === 'en') {
       // return 'english'
-      // return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place?lang=en',
-      //   placeData);
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place?lang=en',
+        placeData);
     } else {
       // return 'german'
-      // return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
-      //   placeData);
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
+        placeData);
     }
 
   }

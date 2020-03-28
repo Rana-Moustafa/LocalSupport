@@ -22,17 +22,19 @@
                     <div class="form-group">
                         <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
                             placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off"
-                            spellcheck="off" type="text" #search [ngModel]="placeData?placeData.address.address: ''"
+                            spellcheck="off" type="text" #search [ngModel]="placeName?placeName: ''"
                             name="address" #address="ngModel" required>
                         <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
                             {{'field_requird'  | translate }}</p>
                         <p class="help-block" *ngIf="address.touched && !latitude && !longitude">You must choose the
                             address from the autocomplete list above!</p>
                     </div>
-                </div>{{latitude}}
-                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                </div>
+                <agm-map [streetViewControl]="streetViewControl" [zoom]="zoom" 
+                [latitude]="latitude" [longitude]="longitude"
+                [scrollwheel]="false">
                     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
-                        ></agm-marker>
+                        (dragEnd)="markerDragEnd($event)"></agm-marker>
                 </agm-map>
             </div>
 

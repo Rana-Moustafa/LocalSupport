@@ -253,20 +253,20 @@ www = []
     const uA = navigator.userAgent;
     const vendor = navigator.vendor;
 
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log('current location');
-        console.log(this.latitude);
-        console.log(this.latitude);
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-      }, error => {
-        console.log(error);
-        // if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
-        //   confirm('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
-        // }
-      });
-    }
+    // if ('geolocation' in navigator) {
+    //   navigator.geolocation.getCurrentPosition((position) => {
+    //     console.log('current location');
+    //     console.log(this.latitude);
+    //     console.log(this.latitude);
+    //     // this.latitude = position.coords.latitude;
+    //     // this.longitude = position.coords.longitude;
+    //   }, error => {
+    //     console.log(error);
+    //     // if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
+    //     //   confirm('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
+    //     // }
+    //   });
+    // }
     this.translation.langUpdated.subscribe(
       (lang) => {
         // console.log(lang)
@@ -275,7 +275,7 @@ www = []
     );
 
     this.selectedCategory();
-    this.loadMap();
+    // this.loadMap();
   }
 
   loadTabs() {
@@ -357,7 +357,6 @@ www = []
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-         
           // set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
