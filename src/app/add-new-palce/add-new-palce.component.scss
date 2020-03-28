@@ -4,8 +4,13 @@
 .help-block-pink{
   color: $localSecondary !important;
 }
+.c_add_place_content{
+  agm-map{
+    height: 250px;
+  }
+}
 .c_add_place {
-  
+
   &__Header-section {
     background: $white-grey url("../../assets/images/portfolio-header.jpg");
     -moz-background-size: cover;

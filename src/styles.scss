@@ -649,13 +649,12 @@ span.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min {
   background-color: #000 !important;
   border: 2px solid #000 !important;
   color: #fff !important;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500 !important;
   cursor: pointer;
 
   &:hover{
     background-color: $localSecondary !important;
     color: #000 !important;
-    font-size: 20px;
   }
 }

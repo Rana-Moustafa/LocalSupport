@@ -357,10 +357,12 @@ www = []
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
+         
           // set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
+          console.log(this.lat)
+          console.log(this.lng)
           this.zoom = 10;
         });
       });
@@ -381,7 +383,7 @@ www = []
         this.longitude = position.coords.longitude;
         this.lat = this.latitude;
         this.lng = this.longitude;
-        this.zoom = 15;
+        this.zoom = 10;
         this.getAddress(this.latitude, this.longitude);
       });
     }

@@ -19,13 +19,13 @@ export class SliderComponent implements OnInit, OnChanges  {
     this.isActive = 1;
     console.log('singlePlaceSlider');
     console.log(this.singlePlaceSlider);
+    console.log('this.singlePlaceSlider.images.length')
+    console.log(this.singlePlaceSlider.images.length)
     if (this.singlePlaceSlider.images.length === 0) {
       this.singlePlaceSlider.images.push(this.singlePlaceSlider.featured_image);
     // this.singlePlaceSlider.images.filter((images) => {
     //   console.log(images)
     // });
-    } else if (this.singlePlaceSlider.images.length === 1) {
-
     }
   }
   ngOnChanges() { }

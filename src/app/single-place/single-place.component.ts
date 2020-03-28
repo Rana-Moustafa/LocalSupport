@@ -109,7 +109,8 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
       this.singlePlaceData = data;
       this.commons.hideLoadingSpinner();
       console.log('singlePlaceData');
-      console.log(this.singlePlaceData)
+      console.log(this.singlePlaceData);
+
       this.translatedId = this.singlePlaceData.translated_id;
       this.singlePlaceParent = this.singlePlaceData;
       // console.log(this.translatedId)

@@ -59,13 +59,21 @@
                 <div class="form-group">
                   <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
                     placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off"
-                    type="text" #search ngModel name="address" #address="ngModel" required>
-                  <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
-                    {{'field_requird'  | translate }}</p>
-                  <p class="help-block" *ngIf="address.touched && !latitude && !longitude">You must choose the
-                    address from the autocomplete list above!</p>
+                    type="text" #search [(ngModel)]="placeName" name="address" #address="ngModel" required>
+                  <small class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
+                    {{'field_requird'  | translate }}</small>
+                  <small class="help-block" *ngIf="address.touched && !latitude && !longitude">You must choose the
+                    address from the autocomplete list above!</small>
                 </div>
+
               </div>
+              <agm-map [latitude]="47.3769" [longitude]="8.5417" [zoom]="zoom">
+                <agm-marker [latitude]="47.3769" [longitude]="8.5417" [markerDraggable]="true"
+                  (dragEnd)="markerDragEnd($event)"></agm-marker>
+              </agm-map>
+              <h5>Address: {{placeName}}</h5>
+              <div>Latitude: {{latitude}}</div>
+              <div>Longitude: {{longitude}}</div>
             </div>
             <!-- end -->
             <!-- start -->
@@ -94,10 +102,10 @@
               <h4 class="subtitle">{{"local_Website" | translate}}</h4>
               <div class="form-group">
                 <input type="url" class="form-control col-12" ngModel name="website" #website="ngModel"
-                  pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
-                <p class="help-block" *ngIf="!website.valid && website.touched && website.errors.pattern">
-                  Please enter a valid url.
-                </p>
+                  pattern="^(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
+                <small class="help-block" *ngIf="!website.valid && website.touched && website.errors.pattern">
+                  {{'valid_url'|translate}}
+                </small>
               </div>
             </div>
             <div class="form-group">
@@ -105,8 +113,9 @@
               <div class="form-group">
                 <input type="text" class="form-control col-12" ngModel name="zipcode" #zipcode="ngModel"
                   pattern="^[a-zA-Z0-9_]*$">
-                <p class="help-block" *ngIf="!zipcode.valid && zipcode.touched && zipcode.errors.pattern">Please enter a
-                  valid zipcode.</p>
+                <small class="help-block" *ngIf="!zipcode.valid && zipcode.touched && zipcode.errors.pattern">Please
+                  enter a
+                  valid zipcode.</small>
               </div>
             </div>
             <!-- end -->
@@ -280,8 +289,7 @@
               <div class="checkbox_wrapper">
                 <div class="form-full-width">
                   <label class="form-check-label" for="terms">
-                    <input class="form-check-input" type="checkbox" name="terms" id="terms" ngModel
-                    required>
+                    <input class="form-check-input" type="checkbox" name="terms" id="terms" ngModel required>
                     <span>{{ "local_terms" | translate }}</span>
                   </label>
                 </div>
@@ -290,7 +298,7 @@
             <button class="btn btn-original" type="submit"
               [disabled]="!addPlace.valid || (!latitude && !longitude) || (!checkValidImages()) ">
               {{"local_add_bussiness" | translate}}</button>
-             
+
           </form>
         </div>
       </div>

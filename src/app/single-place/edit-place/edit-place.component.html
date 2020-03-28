@@ -3,7 +3,8 @@
         <div class="edit-places">
             <h1>{{"local_edit_business" | translate }} </h1>
             <p>{{ "Business_register_text_1" | translate }}</p>
-            <p>{{ "Business_register_text_2" | translate }}: <a href = "mailto: act@belocalhero.com">act@belocalhero.com</a>
+            <p>{{ "Business_register_text_2" | translate }}: <a
+                    href="mailto: act@belocalhero.com">act@belocalhero.com</a>
         </div>
         <form (ngSubmit)="updatePlace(editPlace)" name="editPlace" #editPlace="ngForm">
             <div class="form-group">
@@ -28,7 +29,11 @@
                         <p class="help-block" *ngIf="address.touched && !latitude && !longitude">You must choose the
                             address from the autocomplete list above!</p>
                     </div>
-                </div>
+                </div>{{latitude}}
+                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                        (dragEnd)="markerDragEnd($event)"></agm-marker>
+                </agm-map>
             </div>
 
             <div class="form-group">
@@ -103,7 +108,8 @@
             <div class="form-group">
                 <h4 class="subtitle">{{"local_Category" |translate}} :</h4>
                 <div class="checkbox_wrapper">
-                    <div class="form-half-width" *ngFor="let category of formCategories;  let i = index;let result of resultCategory">
+                    <div class="form-half-width"
+                        *ngFor="let category of formCategories;  let i = index;let result of resultCategory">
                         <label class="form-check-label" for="{{category.name}}">
                             <input class="form-check-input" type="checkbox" name="{{category.name}}"
                                 id="{{category.name}}" ngModel [(ngModel)]="formCategories[i].checked"
@@ -132,7 +138,8 @@
             <div class="form-group">
                 <h4 class="subtitle">{{"local_Payment_Method" | translate}} :</h4>
                 <div class="checkbox_wrapper">
-                    <div class="form-half-width" *ngFor="let payment of formPaymentMethod;  let i = index;let result of resultPayment">
+                    <div class="form-half-width"
+                        *ngFor="let payment of formPaymentMethod;  let i = index;let result of resultPayment">
                         <label class="form-check-label" for="{{payment.name}}">
                             <input class="form-check-input" type="checkbox" name="{{payment.name}}"
                                 id="{{payment.name}}" ngModel [(ngModel)]="formPaymentMethod[i].checked"
@@ -150,23 +157,79 @@
 
                         <div class="default-time-example">
                             <label>{{"from" |translate}}</label>
-                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerFrom" 
-                            [(value)]="timePickerFrom"
-                            >
+                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerFrom"
+                                [(value)]="timePickerFrom">
                             <ngx-material-timepicker #toggleTimepickerFrom></ngx-material-timepicker>
                         </div>
                     </div>
                     <div class="form-half-width">
                         <div class="default-time-example">
                             <label>{{"to" |translate}}</label>
-                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerTo" 
-                            [(value)]="timePickerTo">
+                            <input aria-label="default time" [ngxTimepicker]="toggleTimepickerTo"
+                                [(value)]="timePickerTo">
                             <ngx-material-timepicker #toggleTimepickerTo></ngx-material-timepicker>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="data-text" *ngIf="placeData && placeData.images">
+                <div class="custom-control custom-radio radio-form" *ngFor='let url of allPlaceImages; let i = index;'>
+                    <a (click)="removeImage(i)" class="remove-image"><i class="fa fa-trash"></i></a>
+                    <input id="image{{i}}" type="radio" class="custom-control-input" [value]="url.image"
+                        name="placesimages" [(ngModel)]="selectedFeatureImage" #placesimages="ngModel"
+                        (change)="selectedFeaturedImage(imagesNames[i], url.image)">
+                    <label class="custom-control-label" for="image{{i}}">
+                        <img [src]="url.image" />
+                    </label>
+                    <p>{{ imagesNames[i] }}</p>
+                </div>
+            </div>
+            <div class="form-group form-image">
+                <a data-toggle="modal" data-target="#profileImageCropper" [ngClass]="maxNumber? 'upload-disabled': ''"
+                    [disabled]="maxNumber">
+                    <div class="input-content">
+                        <div class="input-content-wrapper">
+                            <div class="img">
+                                <img src="assets/images/photo.svg" alt="">
+
+                            </div>
+                            <span class="text" [hidden]="maxNumber">
+                                {{"upload_image_msg" | translate}}
+                                <!-- <a (click)="compressFile($event)">{{maxNumber}}  Upload and compress Image</a> -->
+                            </span>
+                            <span class="text" [hidden]="!maxNumber">{{"upload_image_error" | translate}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="modal fade" id="profileImageCropper" tabindex="-1" role="dialog"
+                aria-labelledby="profileImageCropper" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{ 'upload_picture' | translate }} </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                                [aspectRatio]="4 / 4" [resizeToWidth]="500" [roundCropper]="false" [cropper]="cropper"
+                                format="png" (loadImageFailed)="loadImageFailed()">
+                            </image-cropper>
+                            <input id="fileInput" type='file' (change)="fileChangeEvent($event)">
+                            <label for="fileInput"> {{ 'choose_new_picture' | translate }} </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-original" data-dismiss="modal"
+                                (click)="updateProfilePicture()">
+                                {{ 'save_changes' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button class="Addnew-btn" type="submit" class="btn btn-original" [disabled]="!editPlace.valid">
                 {{"local_add_bussiness" | translate}}</button>
         </form>

@@ -29,16 +29,16 @@ export class SearchResultComponent implements OnInit {
   langURL = localStorage.getItem('current_lang');
   sideNav = false;
   constructor(public searchResultsService: SearchResultsService,
-              private route: ActivatedRoute,
-              private placesService: PlacesService,
-              public translate: TranslateService,
-              private translation: TranslationService) { }
+    private route: ActivatedRoute,
+    private placesService: PlacesService,
+    public translate: TranslateService,
+    private translation: TranslationService) { }
   result;
   searchResults;
   results;
   searchWord;
   page = 0;
-  perPage = 8;
+  perPage = 16;
   placesResults;
   allPlaces = [];
   allSearchPlaces = [];
@@ -86,59 +86,63 @@ export class SearchResultComponent implements OnInit {
     this.getFilterPlaces();
   }
   getFilterPlaces() {
-    this.isLoading = true;
-    this.page++;
-    this.placesService.filteredPlaces(this.filterComponent, this.page, this.perPage).subscribe(data => {
-      console.log('filtered places');
-      console.log(data);
-      this.isLoading = false;
-      this.sideNav = false;
-      this.placesResults = JSON.parse(JSON.stringify(data));
-      for (var i = 0; i < this.placesResults.length; i++) {
-        this.allPlaces.push(this.placesResults[i]);
-      }
-      if ((this.placesResults && this.placesResults.length === 0) || !this.placesResults) {
-        console.log('no comments');
+    if (!this.isFullListDisplayed) {
+      this.isLoading = true;
+      this.page++;
+      this.placesService.filteredPlaces(this.filterComponent, this.page, this.perPage).subscribe(data => {
+        console.log('filtered places');
+        console.log(data);
+        this.isLoading = false;
+        this.sideNav = false;
+        this.placesResults = JSON.parse(JSON.stringify(data));
+        for (var i = 0; i < this.placesResults.length; i++) {
+          this.allPlaces.push(this.placesResults[i]);
+        }
+        if ((this.placesResults && this.placesResults.length === 0) || !this.placesResults) {
+          console.log('no comments');
+          this.isFullListDisplayed = true;
+          // this.loadingComments = false;
+        }
+        if (this.allPlaces.length === 0) {
+          this.notfound = true;
+        } else {
+          this.notfound = false;
+        }
+      }, (errorMessage) => {
+        console.log(errorMessage);
+        this.isLoading = false;
         this.isFullListDisplayed = true;
-        // this.loadingComments = false;
-      }
-      if ( this.allPlaces.length === 0){
-        this.notfound = true;
-      } else {
-        this.notfound = false;
-      }
-    }, (errorMessage) => {
-      console.log(errorMessage);
-      this.isLoading = false;
-      this.isFullListDisplayed = true;
-      if (errorMessage.status === 400 ) {
-        this.isFullListDisplayed = true;
-      }
-    });
+        if (errorMessage.status === 400) {
+          this.isFullListDisplayed = true;
+        }
+      });
+    }
   }
   searchQuery(search, lang) {
-    this.isLoading = true;
-    this.page++;
-    this.searchResultsService.GetSearchResults(search, this.page, this.perPage, lang).subscribe(data => {
-      console.log(data);
-      this.isLoading = false;
-      this.results = data;
-      for (var i = 0; i < this.results.length; i++) {
-        this.allSearchPlaces.push(this.results[i]);
-      }
-      if ((this.results && this.results.length === 0) || !this.results) {
-        this.isFullListDisplayed = true;
-        // this.loadingComments = false;
-      }
-      if (this.allSearchPlaces.length === 0) {
-        this.notfound = true;
-      } else {
-        this.notfound = false;
-      }
-      // this.SearchResultsService.getSearchResultSubject().next(data)
-    }, error => {
-      console.log(error);
-      this.isLoading = false;
-    });
+    if (!this.isFullListDisplayed) {
+      this.isLoading = true;
+      this.page++;
+      this.searchResultsService.GetSearchResults(search, this.page, this.perPage, lang).subscribe(data => {
+        console.log(data);
+        this.isLoading = false;
+        this.results = data;
+        for (var i = 0; i < this.results.length; i++) {
+          this.allSearchPlaces.push(this.results[i]);
+        }
+        if ((this.results && this.results.length === 0) || !this.results) {
+          this.isFullListDisplayed = true;
+          // this.loadingComments = false;
+        }
+        if (this.allSearchPlaces.length === 0) {
+          this.notfound = true;
+        } else {
+          this.notfound = false;
+        }
+        // this.SearchResultsService.getSearchResultSubject().next(data)
+      }, error => {
+        console.log(error);
+        this.isLoading = false;
+      });
+    }
   }
 }

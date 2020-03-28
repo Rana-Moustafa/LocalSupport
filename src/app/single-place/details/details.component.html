@@ -84,7 +84,7 @@
     <h4>{{"Contact_details" | translate}}</h4>
     <div class="single-place__contacts__website">
       <img src="./../assets/images/ic-site.svg" />
-      <a href="https://{{ singlePlaceDetails.website?  singlePlaceDetails.website :''}} "
+      <a href="//{{ singlePlaceDetails.website?  singlePlaceDetails.website :''}} "
         target="_blank" *ngIf="singlePlaceDetails.website">{{ singlePlaceDetails.website}}</a>
       <span *ngIf="!singlePlaceDetails.website">{{'no_website' | translate}}</span>
       </div>

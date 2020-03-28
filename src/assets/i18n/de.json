@@ -301,6 +301,7 @@
   "archive": "Sie können keine Daten von Archive wiederherstellen",
   "must_choose_address" : "Bitte wähle eine Adresse",
   "field_requird": "Pflichtfeld",
+  "valid_url": "Bitte geben Sie eine gültige URL ohne http oder https ein",
   "detect_near_place" : "**Deine Adresse hilft uns deine nächsten Orte anzuzeigen",
   "reset_pass_msg":"Wir schicken dir eine E-Mail wie man das Passwort zurücksetzt. Schau bitte in dein Postfach.",
  

@@ -19,11 +19,11 @@
     
   </div>
 </div>
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="10" [styles]="styles" 
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [styles]="styles" 
   [streetViewControl]="streetViewControl"  [scrollwheel]="false" #AgmMap
   [fitBounds]="fitBoundsMarkers">
   <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="currentMarkerIcon"></agm-marker>
-  <agm-marker-cluster [maxZoom]="100" 
+  <agm-marker-cluster [maxZoom]="100" [minimumClusterSize]="3"
   [styles]="clusterStyles"
   imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
     <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="markerIcon"
@@ -42,6 +42,11 @@
   </agm-marker>
   </agm-marker-cluster>
 
+</agm-map>
+
+<agm-map [latitude]="47.3769" [longitude]="8.5417" [zoom]="zoom">
+  <agm-marker [latitude]="47.3769" [longitude]="8.5417" [markerDraggable]="true"
+    (dragEnd)="markerDragEnd($event)"></agm-marker>
 </agm-map>
 <!-- <h5>Address: {{address}}</h5>
 <div>Latitude: {{latitude}}</div>

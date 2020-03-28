@@ -8,7 +8,7 @@ import { UserDataService } from '../../shared/user-data.service';
 import { Options, LabelType } from 'ng5-slider';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { CommonsService } from '../../shared/commons.service';
-
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-edit-place',
@@ -74,7 +74,18 @@ export class EditPlaceComponent implements OnInit {
   resultCategory = [];
   timePickerFrom = '10:00 am';
   timePickerTo = '7:00 pm';
-
+  allPlaceImages = [];
+  selectedFeatureImage;
+  uploadedImage;
+  imagesCount;
+  croppedImage;
+  imageChangedEvent: any = '';
+  cropper = {
+    x1: 0,
+    y1: 0,
+    x2: 500,
+    y2: 500
+  };
   langURL = localStorage.getItem('current_lang');
 
   @ViewChild('editPlace', { static: true }) editPlace: NgForm;
@@ -103,6 +114,15 @@ export class EditPlaceComponent implements OnInit {
   getSinglePlace(id) {
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.placeData = data;
+      this.selectedFeatureImage = this.placeData.featured_image;
+      this.allPlaceImages.push({ image: this.placeData.featured_image, isFeatured: true });
+      if (this.placeData.images.length > 0) {
+        this.placeData.images.forEach((element, key) => {
+          this.allPlaceImages.push({ image: element, isFeatured: false });
+        });
+      }
+
+      console.log(this.allPlaceImages);
       this.timePickerFrom = this.placeData.hr_from;
       this.timePickerTo = this.placeData.hr_to;
       this.selected = this.placeData.place_type;
@@ -201,15 +221,85 @@ export class EditPlaceComponent implements OnInit {
     });
   }
 
-   // sent data
-   sendCheckedCategories(): void {
+  // sent data
+  sendCheckedCategories(): void {
     this.selectedCategories = this.formCategories ? this.formCategories.filter((category) => category.checked) : '';
     // this.selectedType = this.formType ? this.formType.filter((type) => type.checked) : '';
     this.selectedDelivery = this.formDelivery ? this.formDelivery.filter((delivery) => delivery.checked) : '';
     this.selectedPaymentMethod = this.formPaymentMethod ? this.formPaymentMethod.filter((method) => method.checked) : '';
   }
 
+
+
+  fileChangeEvent(event: any) {
+    console.log(event);
+    this.imageChangedEvent = event;
+    this.uploadedImage = event.target.files[0].name;
+    this.imagesCount = event.target.files.length;
+   // console.log(this.uploadedImage);
+   // console.log(this.imagesCount);
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage =  {};
+    console.log(event);
+    this.croppedImage = event.base64;
+    // this.imagesUrls.push(event.base64);
+    // this.imagesNames.push(this.uploadedImage);
+    // console.log(this.imagesUrls);
+    // console.log(this.imagesNames);
+  }
+
+  loadImageFailed() {
+    console.log('error loading image');
+  }
+  updateProfilePicture() {
+    console.log(this.croppedImage);
+    console.log(this.placeData.images);
+    this.placeData.images.push(this.croppedImage);
+    this.allPlaceImages.push({image: this.croppedImage, isFeatured: false});
+    console.log(this.placeData.images);
+    if (this.allPlaceImages.length > 6) {
+      this.maxNumber = true;
+    } else if (this.imagesUrls.length < 1) {
+      this.noImages = true;
+    } else {
+      this.noImages = false;
+    }
+  }
+  removeImage(index) {
+    // console.log(this.imagesNames[index])
+    // console.log(this.featuredImageName)
+    if (this.featuredImageName === this.imagesNames[index]) {
+      this.featuredImageName = undefined;
+      this.noFeaturedImage = true;
+      this.newplaceFeaturedImage = [];
+
+      this.allPlaceImages.splice(index, 1);
+      this.imagesNames.splice(index, 1);
+      if (this.allPlaceImages.length > 0) {
+        this.noImages = false;
+        this.featuredImageError = true;
+      } else if (this.imagesUrls.length === 0) {
+        this.featuredImageError = false;
+      }
+    } else if (this.imagesUrls.length === 0) {
+      this.featuredImageError = false;
+    } else {
+      this.allPlaceImages.splice(index, 1);
+      this.imagesNames.splice(index, 1);
+    }
+    if (this.allPlaceImages.length <= 5) {
+      this.maxNumber = false;
+    } else if (this.allPlaceImages.length === 0) {
+      this.featuredImageError = false;
+    }
+    // this.checkValidImages();
+  }
+
+  
   updatePlace(form: NgForm) {
+    console.log(this.allPlaceImages);
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
     form.value.openFrom = this.openFrom.time.toLowerCase();
@@ -239,18 +329,28 @@ export class EditPlaceComponent implements OnInit {
       this.selectedPaymentMethod,
       this.newLatitude,
       this.newLongitude,
-      this.placeData.id
-    ).subscribe(data => {
-      console.log(data);
-      this.isLoading = false;
-      this.addPlaceFormError = false;
-      form.reset();
-      this.router.navigate([this.langURL + '/thank-you']);
-    }, error => {
-      console.log(error);
-      this.isLoading = false;
-      this.addPlaceFormError = true;
-      this.formErrorMsg = error.error.message;
-    });
+      this.placeData.id);
+    // ).subscribe(data => {
+    //   console.log(data);
+    //   this.isLoading = false;
+    //   this.addPlaceFormError = false;
+    //   form.reset();
+    //   this.router.navigate([this.langURL + '/thank-you']);
+    // }, error => {
+    //   console.log(error);
+    //   this.isLoading = false;
+    //   this.addPlaceFormError = true;
+    //   this.formErrorMsg = error.error.message;
+    // });
+  }
+
+  selectedFeaturedImage(name, url) {
+    this.featuredImageName = name;
+    this.featuredImageUrl = url;
+    this.newplaceFeaturedImage.push({ imageName: this.featuredImageName, imageUrl: this.featuredImageUrl });
+    // this.newplaceFeaturedImage.push(this.featuredImageUrl);
+    // this.checkValidImages();
+    this.featuredImageError = false;
+    this.noFeaturedImage = false;
   }
 }
