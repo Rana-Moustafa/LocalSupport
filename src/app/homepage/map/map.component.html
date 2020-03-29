@@ -44,11 +44,4 @@
 
 </agm-map>
 
-<agm-map [latitude]="47.3769" [longitude]="8.5417" [zoom]="zoom">
-  <agm-marker [latitude]="47.3769" [longitude]="8.5417" [markerDraggable]="true"
-    (dragEnd)="markerDragEnd($event)"></agm-marker>
-</agm-map>
-<!-- <h5>Address: {{address}}</h5>
-<div>Latitude: {{latitude}}</div>
-<div>Longitude: {{longitude}}</div> -->
 <app-categories-slider [productsData]="markers" *ngIf="markers.length > 0"></app-categories-slider>

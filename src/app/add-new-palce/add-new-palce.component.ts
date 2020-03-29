@@ -385,26 +385,11 @@ export class AddNewPalceComponent implements OnInit {
         reader.readAsDataURL(event.target.files[i]);
       }
     }
-    // for (var i = 0; i < event.target.files.length; i++) {
-    //   var name = event.target.files[i].name;
-    //   var type = event.target.files[i].type;
-    //   var size = event.target.files[i].size;
-    //   var modifiedDate = event.target.files[i].lastModifiedDate;
-    //   this.nameFile = 'File Name: ' + name + "\n";
-    //   this.filesize = 'Size: ' + Math.round(size / 1024) + " KB";
-    //   this.fileType = 'Type: ' + type + "\n";
-    //   ////console.log('Name: ' + name + "\n" +
-    //     'Type: ' + type + "\n" +
-    //     'Last-Modified-Date: ' + modifiedDate + "\n" +
-    //     'Size: ' + Math.round(size / 1024) + " KB");
-    // }
   }
 
 
 
   removeImage(index) {
-    // console.log(this.imagesNames[index])
-    // console.log(this.featuredImageName)
     if (this.featuredImageName === this.imagesNames[index]) {
       this.featuredImageName = undefined;
       this.noFeaturedImage = true;
