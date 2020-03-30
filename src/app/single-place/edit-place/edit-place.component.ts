@@ -40,7 +40,7 @@ export class EditPlaceComponent implements OnInit {
   imagesUrls = [];
   imagesNames = [];
   maxNumber = false;
-  noImages = true;
+  noImages = false;
   placesCategories;
   showSubCategories = false;
   newplaceFeaturedImage = [];
@@ -142,18 +142,20 @@ export class EditPlaceComponent implements OnInit {
   getSinglePlace(id) {
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.placeData = data;
-      this.selectedFeatureImage = this.placeData.featured_image;
+      console.log(data)
+      this.newplaceFeaturedImage = this.placeData.featured_image;
       this.placeName = this.placeData.address.address;
-      this.latitude = JSON.parse(this.placeData.address.lat);
-      this.longitude = JSON.parse(this.placeData.address.lng);
+      // this.latitude = JSON.parse(this.placeData.address.lat);
+      // this.longitude = JSON.parse(this.placeData.address.lng);
       this.oldLatitude = this.placeData.address.lat;
       this.oldLongitude = this.placeData.address.lng;
       console.log(this.oldLatitude);
       console.log(this.oldLongitude);
-      this.allPlaceImages.push({ image: this.placeData.featured_image, isFeatured: true });
+      this.allPlaceImages.push({ image: this.placeData.featured_image.url, 
+        name:this.placeData.featured_image.name , isFeatured: true });
       if (this.placeData.images.length > 0) {
         this.placeData.images.forEach((element, key) => {
-          this.allPlaceImages.push({ image: element, isFeatured: false });
+          this.allPlaceImages.push({ image: element.url, name: element.name, isFeatured: false });
         });
       }
 
@@ -161,35 +163,26 @@ export class EditPlaceComponent implements OnInit {
       this.timePickerFrom = this.placeData.hr_from;
       this.timePickerTo = this.placeData.hr_to;
       this.selected = this.placeData.place_type;
-      // this.resultDelivery = this.placeData.delivery;
       if (this.placeData.delivery && this.placeData.delivery.length > 0) {
         this.placeData.delivery.forEach((element, key) => {
-          // console.log(element);
-          // console.log(key);
           this.resultDelivery.push({ name: element, checked: true });
           if (this.formDelivery && (this.formDelivery[key].name === this.resultDelivery[key].name)) {
             this.formDelivery[key].checked = true;
           }
-          // console.log(this.resultDelivery);
         });
       }
 
       if (this.placeData.payment_methods && this.placeData.payment_methods.length > 0) {
         this.placeData.payment_methods.forEach((element, key) => {
-          // console.log(element);
-          // console.log(key);
           this.resultPayment.push({ name: element, checked: true });
           if (this.formPaymentMethod && (this.formPaymentMethod[key].name === this.resultPayment[key].name)) {
             this.formPaymentMethod[key].checked = true;
           }
-          // console.log(this.resultPayment);
         });
       }
 
       if (this.placeData.category && this.placeData.category.length > 0) {
         this.placeData.category.forEach((element, key) => {
-          // console.log(element);
-          // console.log(key);
           this.resultCategory.push({ name: element, checked: true });
           if (this.formCategories && (this.formCategories[key].name === this.resultCategory[key].name)) {
             this.formCategories[key].checked = true;
@@ -268,18 +261,12 @@ export class EditPlaceComponent implements OnInit {
     this.imageChangedEvent = event;
     this.uploadedImage = event.target.files[0].name;
     this.imagesCount = event.target.files.length;
-   // console.log(this.uploadedImage);
-   // console.log(this.imagesCount);
   }
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage =  {};
     console.log(event);
     this.croppedImage = event.base64;
-    // this.imagesUrls.push(event.base64);
-    // this.imagesNames.push(this.uploadedImage);
-    // console.log(this.imagesUrls);
-    // console.log(this.imagesNames);
   }
 
   loadImageFailed() {
@@ -288,45 +275,22 @@ export class EditPlaceComponent implements OnInit {
   updateProfilePicture() {
     console.log(this.croppedImage);
     console.log(this.placeData.images);
-    this.placeData.images.push(this.croppedImage);
-    this.allPlaceImages.push({image: this.croppedImage, isFeatured: false});
-    console.log(this.placeData.images);
+    // this.placeData.images.push(this.croppedImage);
+    this.allPlaceImages.push({image: this.croppedImage, name: this.uploadedImage, isFeatured: false});
+    console.log(this.allPlaceImages);
     if (this.allPlaceImages.length > 6) {
       this.maxNumber = true;
-    } else if (this.imagesUrls.length < 1) {
+    } else if (this.allPlaceImages.length < 1) {
       this.noImages = true;
-    } else {
-      this.noImages = false;
-    }
+    } 
   }
   removeImage(index) {
-    // console.log(this.imagesNames[index])
-    // console.log(this.featuredImageName)
-    if (this.featuredImageName === this.imagesNames[index]) {
-      this.featuredImageName = undefined;
-      this.noFeaturedImage = true;
-      this.newplaceFeaturedImage = [];
+   this.allPlaceImages.splice(index, 1);
 
-      this.allPlaceImages.splice(index, 1);
-      this.imagesNames.splice(index, 1);
-      if (this.allPlaceImages.length > 0) {
-        this.noImages = false;
-        this.featuredImageError = true;
-      } else if (this.imagesUrls.length === 0) {
-        this.featuredImageError = false;
-      }
-    } else if (this.imagesUrls.length === 0) {
-      this.featuredImageError = false;
-    } else {
-      this.allPlaceImages.splice(index, 1);
-      this.imagesNames.splice(index, 1);
+    if (this.allPlaceImages.length === 0) {
+      this.noImages = true;
     }
-    if (this.allPlaceImages.length <= 5) {
-      this.maxNumber = false;
-    } else if (this.allPlaceImages.length === 0) {
-      this.featuredImageError = false;
-    }
-    // this.checkValidImages();
+
   }
 
   
@@ -354,6 +318,8 @@ export class EditPlaceComponent implements OnInit {
     this.selectedType = form.value.subcats;
     this.places.editSelectedPlace(
       form.value,
+      this.allPlaceImages,
+      this.newplaceFeaturedImage,
       this.addressInfo,
       this.selectedType,
       this.selectedCategories,
@@ -377,9 +343,10 @@ export class EditPlaceComponent implements OnInit {
   }
 
   selectedFeaturedImage(name, url) {
+    this.newplaceFeaturedImage = [];
     this.featuredImageName = name;
     this.featuredImageUrl = url;
-    this.newplaceFeaturedImage.push({ imageName: this.featuredImageName, imageUrl: this.featuredImageUrl });
+    this.newplaceFeaturedImage.push({ name: this.featuredImageName, image: this.featuredImageUrl, isFeatured: true});
     // this.newplaceFeaturedImage.push(this.featuredImageUrl);
     // this.checkValidImages();
     this.featuredImageError = false;

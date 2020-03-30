@@ -174,13 +174,14 @@
                     </div>
                 </div>
             </div>
-
+            <h5> {{"cover_image_select_msg" | translate}} (*):</h5>
+            <small [hidden]="!noImages">Please add a least one image</small>
             <div class="data-text" *ngIf="placeData && placeData.images">
                 <div class="custom-control custom-radio radio-form" *ngFor='let url of allPlaceImages; let i = index;'>
                     <a (click)="removeImage(i)" class="remove-image"><i class="fa fa-trash"></i></a>
                     <input id="image{{i}}" type="radio" class="custom-control-input" [value]="url.image"
-                        name="placesimages" [(ngModel)]="selectedFeatureImage" #placesimages="ngModel"
-                        (change)="selectedFeaturedImage(imagesNames[i], url.image)">
+                        name="placesimages" [(ngModel)]="newplaceFeaturedImage.url" #placesimages="ngModel"
+                        (change)="selectedFeaturedImage(newplaceFeaturedImage.name, url.image)">
                     <label class="custom-control-label" for="image{{i}}">
                         <img [src]="url.image" />
                     </label>
@@ -218,7 +219,7 @@
                         <div class="modal-body">
                             <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
                                 [aspectRatio]="4 / 4" [resizeToWidth]="500" [roundCropper]="false" [cropper]="cropper"
-                                format="png" (loadImageFailed)="loadImageFailed()">
+                                format="png" (imageCropped)="imageCropped($event)" (loadImageFailed)="loadImageFailed()">
                             </image-cropper>
                             <input id="fileInput" type='file' (change)="fileChangeEvent($event)">
                             <label for="fileInput"> {{ 'choose_new_picture' | translate }} </label>
@@ -232,7 +233,8 @@
                     </div>
                 </div>
             </div>
-            <button class="Addnew-btn" type="submit" class="btn btn-original" [disabled]="!editPlace.valid">
+            <button class="Addnew-btn" type="submit" class="btn btn-original" 
+            [disabled]="!editPlace.valid || (allPlaceImages.length === 0)">
                 {{"local_add_bussiness" | translate}}</button>
         </form>
     </div>

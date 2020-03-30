@@ -53,7 +53,7 @@
                             *ngFor="let place of ((allPlaces.length > 0) ? allPlaces : allSearchPlaces)">
 
                             <div class="places-results__img">
-                                <img [src]="place.featured_image?place.featured_image: '../../../assets/images/icon-img-placeholder.svg'"
+                                <img [src]="place.featured_image?place.featured_image.url: '../../../assets/images/icon-img-placeholder.svg'"
                                     alt="" class="img-thumbnail">
                             </div>
                             <div class="places-results__content">
@@ -64,8 +64,8 @@
                                 </div>
 
                                 <div class="description">
-                                    <!-- <p class="text" pattern="[A-Za-z]{10}">
-                                        {{place.description | slice:0:100}}</p> -->
+                                    <p class="text" pattern="[A-Za-z]{10}">
+                                        {{place.description | slice:0:100}}</p>
                                         <div *ngIf="place && place.category; first as isFirst">
                                             <span *ngFor="let category of place.category" class="badge"> 
                                               {{category}} 

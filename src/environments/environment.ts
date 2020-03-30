@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  // baseURL: 'https://belocalhero.com/wordpress-api/staging',
-  // liveURL: 'https://belocalhero.com/frontend-staging'
-  baseURL: 'https://belocalhero.com/wordpress-api/live',
-  liveURL: 'https://belocalhero.com'
+  baseURL: 'https://belocalhero.com/wordpress-api/staging',
+  liveURL: 'https://belocalhero.com/frontend-staging'
+  // baseURL: 'https://belocalhero.com/wordpress-api/live',
+  // liveURL: 'https://belocalhero.com'
 };
 
 /*
