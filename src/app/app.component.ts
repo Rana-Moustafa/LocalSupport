@@ -29,7 +29,7 @@ declare var gtag;
 export class AppComponent implements OnInit {
   minLength = 0;
   innerHeader;
-  title = 'outdoor-family-frontend';
+  title = 'local-support-frontend';
   latitude: number;
   longitude: number;
   zoom: number;

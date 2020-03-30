@@ -5,12 +5,10 @@
     {
       "name": "app",
       "installMode": "prefetch",
-      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html",
-          "/manifest.webmanifest",
           "/*.css",
           "/*.js"
         ]
@@ -21,7 +19,7 @@
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/images/**",
+          "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }

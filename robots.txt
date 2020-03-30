@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://belocalhero.com/</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/de/</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/de/add-new-place</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/de/pages/about-us</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/de/pages/legal</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/de/pages/privacy-policy</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/de/intro</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/de/profile</loc><priority>0.5</priority></url>
+<url><loc>https://belocalhero.com/signin</loc><priority>0.5</priority></url>
+</urlset>
