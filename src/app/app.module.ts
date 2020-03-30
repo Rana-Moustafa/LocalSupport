@@ -103,7 +103,6 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxUploadModule, MineTypeEnum, DropTargetOptions } from '@wkoza/ngx-upload';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { AddToFavListComponent } from './add-to-fav-list/add-to-fav-list.component';
-import { TooltipModule } from 'ng2-tooltip-directive';
 import { EditPlaceComponent } from './single-place/edit-place/edit-place.component';
 import { ProfilePlacesComponent } from './profile-details/profile-places/profile-places.component';
 import { LegalComponent } from './inner-pages/legal/legal.component';
@@ -216,7 +215,6 @@ export const ngxDropTargetOptions: DropTargetOptions = {
     ShareModule,
     CarouselModule,
     ImageCropperModule,
-    TooltipModule,
     NgxUploadModule.forRoot(ngxDropTargetOptions),
     // Swal.forRoot(),
     AgmCoreModule.forRoot({
