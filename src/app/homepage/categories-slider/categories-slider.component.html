@@ -20,7 +20,7 @@
                     <owl-carousel-o [options]="customOptions" class="owl-slider-section">
 
                         <ng-container
-                            *ngFor="let categorySlider of productsData; let i = index">
+                            *ngFor="let categorySlider of categorySliderDetails; let i = index">
                             <ng-template class="item" carouselSlide [id]="categorySlider.id" [width]="250">
 
                                 <div class="category-slider__item" data-length="{{categorySlider.length}}">
@@ -28,7 +28,7 @@
                                         <a [stopLink]="isDragging"
                                             [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
                                             class="category-slider__place-name-link">
-                                            <img src="{{categorySlider.image?categorySlider.image: './../assets/images/icon-img-placeholder.svg'}}"
+                                            <img src="{{categorySlider.featured_image?categorySlider.featured_image.url : './../assets/images/icon-img-placeholder.svg'}}"
                                                 alt="" class="img-thumbnail">
                                         </a>
                                         <!-- <app-add-to-fav-list [addToFavId]="categorySlider.id"
@@ -38,32 +38,15 @@
                                         </app-add-to-fav-list> -->
 
                                     </div>
-                                   
-                                    <!-- <div class="category-slider__rating">
-
-                                        <i class="fa fa-star"
-                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 1}"></i>
-                                        <i class="fa fa-star"
-                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 2}"></i>
-                                        <i class="fa fa-star"
-                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 3}"></i>
-                                        <i class="fa fa-star"
-                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 4}"></i>
-                                        <i class="fa fa-star"
-                                            [ngClass]="{'star-empty': (categorySlider.avg_rating | number:'1.0-0')< 5}"></i>
-
-                                        <p [hidden]="categorySlider.avg_rating != null">
-                                            {{"Not_rated_yet" | translate}}
-                                        </p>
-
-                                    </div> -->
+                                
                                     <a class="category-slider__place-name" [stopLink]="isDragging"
                                         [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
                                         class="category-slider__place-name-link">
-                                        <h6 [innerHTML]="categorySlider.title">
+                                        <h6 [innerHTML]="categorySlider.title.rendered">
                                         </h6>
                                     </a>
-                                    <span class="badge" *ngFor="let category of categorySlider.categories">
+                                    <p>{{categorySlider? categorySlider.description: '' }}</p>
+                                    <span class="badge" *ngFor="let category of categorySlider.category">
                                         {{category}}
                                     </span>
                                 </div>

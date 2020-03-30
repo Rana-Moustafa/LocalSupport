@@ -5,7 +5,7 @@
 .filter_wrapper {
   padding: $mr-30;
 
-  .btn-primary {
+  .btn-original {
     padding: 8px $mr-20;
     display: block;
     width: 100%;
@@ -32,6 +32,7 @@
         line-height: 20px;
         text-align: left;
         font-size: 12px;
+        word-break: break-word;
 
         &::before {
           content: "";
@@ -71,11 +72,11 @@
       input[type="checkbox"]:checked + span::after {
         // font-family: "FontAwesome";
         content: "";
-        background-color: $firePlace;
+        background-color: $localPrimary;
         width: 5px;
         position: absolute;
         height: 10px;
-        background-color: $firePlace;
+        background-color: $localPrimary;
         border: solid #ffffff;
         border-width: 0 2px 2px 0;
         transition: all 0.2s ease;
@@ -87,7 +88,7 @@
         opacity: 1;
       }
       input[type="checkbox"]:checked + span::before {
-        background-color: $firePlace;
+        background-color: $localPrimary;
       }
     }
     .radio-form {
@@ -137,8 +138,8 @@
     //       display           : inline-block;
     //       height            : 20px;
     //       width             : 20px;
-    //       background-color  : $firePlace;
-    //       border            : 1px solid $firePlace;
+    //       background-color  : $localPrimary;
+    //       border            : 1px solid $localPrimary;
     //       -webkit-transition: all 0.2s ease;
     //       transition        : all 0.2s ease;
     //     }
@@ -148,7 +149,7 @@
     //       width            : 5px;
     //       position         : absolute;
     //       height           : 10px;
-    //       background-color : $firePlace;
+    //       background-color : $localPrimary;
     //       border           : solid #ffffff;
     //       border-width     : 0 2px 2px 0;
     //       transition       : all 0.2s ease;
@@ -341,7 +342,7 @@
       content: "";
       width: 10px;
       height: 10px;
-      background: $firePlace;
+      background: $localPrimary;
       position: absolute;
       top: 4px;
       left: 4px;
@@ -406,7 +407,7 @@
           &:checked {
             & ~ label {
               .fa {
-                color: $btnColor;
+                color: $localPrimary;
               }
             }
           }
@@ -419,16 +420,16 @@
     &:checked {
       & ~ label {
         .fa {
-          color: $firePlace;
+          color: $localPrimary;
         }
 
         &:hover {
           .fa {
-            color: $btnColor;
+            color: $localPrimary;
           }
 
           & ~ label {
-            color: $btnColor;
+            color: $localPrimary;
           }
         }
       }

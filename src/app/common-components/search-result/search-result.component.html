@@ -18,7 +18,7 @@
             </h4>
             <div class="btn-filter">
                 <button class="btn btn-secondary" type="button" (click)="toggleSideNav()">
-                    <img src="../../../assets/images/filter-icons/filter-results-button.svg" alt=""
+                    <img src="../../../assets/images/filter.svg" alt=""
                         class="img-thumbnail">
                     {{"filter" | translate}}
                 </button>
@@ -37,15 +37,7 @@
                             </p>
                         </div>
                     </div>
-                    <!-- <div class="search-results" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="30"
-                (scrolled)="onScroll()"></div> -->
-
-                    <!-- start -->
-                    <!-- <div class="col-lg-3 col-sm-6 col-xs-12 places-results-item "
-                *ngFor="let place of PlacesItemsDetails "
-                *ngFor="let place of PlacesItemsDetails | paginate:{itemsPerPage: 5, currentPage:p}" -->
-                    <div class="row search-results" infiniteScroll [infiniteScrollDistance]="150"
-                        [infiniteScrollThrottle]="150" [immediateCheck]="true"
+                    <div class="row search-results" infiniteScroll  [immediateCheck]="true"
                         [infiniteScrollDisabled]="isFullListDisplayed"
                         (scrolled)="((allPlaces.length > 0) ? getFilterPlaces() : searchQuery(searchWord, langURL))">
                         <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]"

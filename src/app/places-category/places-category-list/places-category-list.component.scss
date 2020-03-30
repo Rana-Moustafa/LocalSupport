@@ -147,14 +147,14 @@ padding-bottom: 20px;
             margin-left: auto;
 
             .btn {
-                color           : $btnColor;
-                background-color: $orange-04;
-                border          : 1px solid $orange-04;
+                color           : #000;
+                background-color: $localSecondary;
+                border          : 1px solid $localSecondary;
 
                 &:focus {
-                    color           : $btnColor;
-                    background-color: $orange-04;
-                    border          : 1px solid $orange-04;
+                    color           : #000;
+                    background-color: $localSecondary;
+                    border          : 1px solid $localSecondary;
                     box-shadow      : 0 0 0 0rem rgba(130, 138, 145, .5);
                 }
             }
