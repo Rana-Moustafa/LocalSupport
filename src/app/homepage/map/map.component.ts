@@ -303,37 +303,6 @@ www = []
 
       this.markers = JSON.parse(JSON.stringify(data));
       console.log(this.markers);
-     
-      // switch (index) {
-      //   case 0: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-gray.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   case 1: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-orange.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   case 2: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-dark-blue.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   default: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-orange.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      // }
     }, error => {
       // console.log(error);
     });
@@ -345,7 +314,7 @@ www = []
       this.geoCoder = new google.maps.Geocoder;
 
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['address'],
+        types: ['geocode'],
         componentRestrictions: { country: ['CH', 'AT', 'DE'] }
       });
       autocomplete.addListener('place_changed', () => {

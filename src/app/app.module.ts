@@ -72,16 +72,13 @@ import { WhoWeAreComponent } from './homepage/who-we-are/who-we-are.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MapComponent } from './homepage/map/map.component';
 import { CookieLawModule } from 'angular2-cookie-law';
-
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { CategoriesSliderComponent } from './homepage/categories-slider/categories-slider.component';
 import { SingleBlogComponent } from './single-blog/single-blog.component';
 import { BlogComponent } from './blog/blog.component';
 import { SearchResultComponent } from './common-components/search-result/search-result.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-
 import { CookieComponent } from './cookie/cookie.component';
-
 import { NewsletterComponent } from './homepage/newsletter/newsletter.component';
 import { TranslationComponent } from './translation/translation.component';
 // import { BlogListComponent } from './blog-list/blog-list.component';
@@ -97,6 +94,7 @@ import { QuestionsAndAnswersComponent } from './inner-pages/questions-and-answer
 import { AdvertisingComponent } from './inner-pages/advertising/advertising.component';
 import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { AboutUsComponent } from './inner-pages/about-us/about-us.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 // import Swal from 'sweetalert2';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
@@ -230,7 +228,7 @@ export const ngxDropTargetOptions: DropTargetOptions = {
         deps: [HttpClient]
       }
     }),
-    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [RouterModule],
   schemas: [NO_ERRORS_SCHEMA],
