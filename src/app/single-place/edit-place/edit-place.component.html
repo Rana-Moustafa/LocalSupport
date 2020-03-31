@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
                             placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off"
-                            spellcheck="off" type="text" #search [ngModel]="placeName?placeName: ''"
+                            spellcheck="off" type="text" #search ngModel
                             name="address" #address="ngModel" required>
                         <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
                             {{'field_requird'  | translate }}</p>
