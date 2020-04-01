@@ -63,11 +63,12 @@
                                 </div>
 
                                 <div class="description">
-                                    <!-- <p class="text" pattern="[A-Za-z]{10}">
-                                        {{place.description | slice:0:100}}</p> -->
+                                    <p class="text"
+                                    [innerHTML]="place.description | slice:0:100">
+                                    </p>
                                         <div *ngIf="place && place.category; first as isFirst">
-                                            <span *ngFor="let category of place.category" class="badge"> 
-                                              {{category}} 
+                                            <span *ngFor="let category of place.category" class="badge"
+                                            [innerHTML]="category"> 
                                             </span>
                                           </div>
                                       <p>  <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]" class="read-more">

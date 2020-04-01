@@ -59,7 +59,10 @@
   align-items    : center;
   justify-content: center;
 }
-
+.read-more {
+  color: $darkBlueGrey;
+  cursor: pointer;
+}
   .category-slider {
     &__item {
       flex     : 0 0 100% !important;
@@ -88,7 +91,7 @@
         object-fit     : cover;
         object-position: center;
       }
-
+    
       .btn-fav {
             position           : absolute;
             right              : 0.5rem;

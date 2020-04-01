@@ -87,7 +87,7 @@ export class CategoriesSliderComponent implements OnInit {
     );
 
     // this.placeTypes();
-    // this.getCategoriesSliders();
+    this.getCategoriesSliders();
   }
 
   placeTypes() {
@@ -99,8 +99,7 @@ export class CategoriesSliderComponent implements OnInit {
   }
   getCategoriesSliders() {
 
-    this.page++;
-    this.places.getPlacesCategories(this.placesCategoriesChildId, 'sort_latest', this.page, this.perPage).subscribe(data => {
+    this.places.getPlacesCategories(this.placesCategoriesChildId, 'sort_latest', 1, 20).subscribe(data => {
       console.log(data);
       this.categorySliderDetails = JSON.parse(JSON.stringify(data));
       if (this.categorySliderDetails.length === 0) {

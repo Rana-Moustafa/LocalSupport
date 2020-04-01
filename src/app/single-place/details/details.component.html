@@ -58,19 +58,19 @@
     <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.category">
       <h4> {{ "local_Category" | translate }}</h4>
       <ul>
-        <li *ngFor="let category of singlePlaceDetails.category"> {{category}} </li>
+        <li *ngFor="let category of singlePlaceDetails.category" [innerHTML]="category"></li>
       </ul>
     </div>
     <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.delivery">
       <h4>{{ "local_Delievery" | translate }}</h4>
       <ul>
-        <li *ngFor="let delivery of singlePlaceDetails.delivery"> {{delivery}} </li>
+        <li *ngFor="let delivery of singlePlaceDetails.delivery" [innerHTML]="delivery"> </li>
       </ul>
     </div>
     <div class="d-block" *ngIf="singlePlaceDetails && singlePlaceDetails.payment_methods">
       <h4>{{ "local_Payment_Method" | translate }}</h4>
       <ul>
-        <li *ngFor="let payment of singlePlaceDetails.payment_methods"> {{payment}} </li>
+        <li *ngFor="let payment of singlePlaceDetails.payment_methods" [innerHTML]="payment">  </li>
       </ul>
     </div>
 
