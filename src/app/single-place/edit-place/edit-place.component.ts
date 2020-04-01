@@ -96,14 +96,14 @@ export class EditPlaceComponent implements OnInit {
   @ViewChild('address', { static: false }) public addressElementRef: ElementRef;
 
   constructor(private places: PlacesService,
-              private route: ActivatedRoute,
-              private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone,
-              private router: Router,
-              private translation: TranslationService,
-              private userData: UserDataService,
-              private imageCompress: NgxImageCompressService,
-              private commons: CommonsService) { }
+    private route: ActivatedRoute,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private router: Router,
+    private translation: TranslationService,
+    private userData: UserDataService,
+    private imageCompress: NgxImageCompressService,
+    private commons: CommonsService) { }
 
   ngOnInit() {
     this.commons.show();
@@ -135,15 +135,16 @@ export class EditPlaceComponent implements OnInit {
       } else {
         window.alert('Geocoder failed due to: ' + status);
       }
- 
+
     });
   }
 
   getSinglePlace(id) {
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.placeData = data;
-      console.log(data)
-      this.newplaceFeaturedImage = this.placeData.featured_image;
+      console.log(data);
+      this.newplaceFeaturedImage.push(this.placeData.featured_image);
+      this.newplaceFeaturedImage.push({ isFeatured: true });
       this.placeName = this.placeData.address.address;
       // this.latitude = JSON.parse(this.placeData.address.lat);
       // this.longitude = JSON.parse(this.placeData.address.lng);
@@ -151,11 +152,14 @@ export class EditPlaceComponent implements OnInit {
       this.oldLongitude = this.placeData.address.lng;
       console.log(this.oldLatitude);
       console.log(this.oldLongitude);
-      this.allPlaceImages.push({ image: this.placeData.featured_image.url, 
-        name:this.placeData.featured_image.name , isFeatured: true });
+      this.allPlaceImages.push({
+        url: this.placeData.featured_image.url,
+        name: this.placeData.featured_image.name,
+        isFeatured: true
+      });
       if (this.placeData.images.length > 0) {
         this.placeData.images.forEach((element, key) => {
-          this.allPlaceImages.push({ image: element.url, name: element.name, isFeatured: false });
+          this.allPlaceImages.push({ url: element.url, name: element.name, isFeatured: false });
         });
       }
 
@@ -264,7 +268,7 @@ export class EditPlaceComponent implements OnInit {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage =  {};
+    this.croppedImage = {};
     console.log(event);
     this.croppedImage = event.base64;
   }
@@ -276,25 +280,31 @@ export class EditPlaceComponent implements OnInit {
     console.log(this.croppedImage);
     console.log(this.placeData.images);
     // this.placeData.images.push(this.croppedImage);
-    this.allPlaceImages.push({image: this.croppedImage, name: this.uploadedImage, isFeatured: false});
+    this.allPlaceImages.push({ url: this.croppedImage, name: this.uploadedImage, isFeatured: false });
     console.log(this.allPlaceImages);
     if (this.allPlaceImages.length > 6) {
       this.maxNumber = true;
     } else if (this.allPlaceImages.length < 1) {
       this.noImages = true;
-    } 
+    }
   }
-  removeImage(index) {
-   this.allPlaceImages.splice(index, 1);
-
+  removeImage(index, imageUrl) {
+    if (imageUrl === this.newplaceFeaturedImage[0].url) {
+      this.newplaceFeaturedImage[0].url = '';
+      this.newplaceFeaturedImage[0].name = '';
+      this.allPlaceImages.splice(index, 1);
+    } else {
+      this.allPlaceImages.splice(index, 1);
+    }
     if (this.allPlaceImages.length === 0) {
       this.noImages = true;
     }
 
   }
 
-  
+
   updatePlace(form: NgForm) {
+    this.allPlaceImages = this.allPlaceImages.filter((image) => image.url !== this.newplaceFeaturedImage[0].url);
     console.log(this.allPlaceImages);
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
@@ -343,13 +353,17 @@ export class EditPlaceComponent implements OnInit {
   }
 
   selectedFeaturedImage(name, url) {
-    this.newplaceFeaturedImage = [];
+    console.log(name, url);
+    // this.newplaceFeaturedImage = [];
     this.featuredImageName = name;
     this.featuredImageUrl = url;
-    this.newplaceFeaturedImage.push({ name: this.featuredImageName, image: this.featuredImageUrl, isFeatured: true});
+    this.newplaceFeaturedImage[0].name = this.featuredImageName;
+    this.newplaceFeaturedImage[0].url = this.featuredImageUrl;
+    // this.newplaceFeaturedImage.push({ name: this.featuredImageName, url: this.featuredImageUrl, isFeatured: true});
     // this.newplaceFeaturedImage.push(this.featuredImageUrl);
     // this.checkValidImages();
     this.featuredImageError = false;
     this.noFeaturedImage = false;
+
   }
 }

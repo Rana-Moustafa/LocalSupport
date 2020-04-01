@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control search-btn" (keydown.enter)="$event.preventDefault()"
                             placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off"
-                            spellcheck="off" type="text" #search ngModel
+                            spellcheck="off" type="text" #search [(ngModel)]="placeName"
                             name="address" #address="ngModel" required>
                         <p class="help-block" *ngIf="!address.valid && address.touched && address.errors.required">
                             {{'field_requird'  | translate }}</p>
@@ -177,13 +177,13 @@
             <h5> {{"cover_image_select_msg" | translate}} (*):</h5>
             <small [hidden]="!noImages">Please add a least one image</small>
             <div class="data-text" *ngIf="placeData && placeData.images">
-                <div class="custom-control custom-radio radio-form" *ngFor='let url of allPlaceImages; let i = index;'>
-                    <a (click)="removeImage(i)" class="remove-image"><i class="fa fa-trash"></i></a>
-                    <input id="image{{i}}" type="radio" class="custom-control-input" [value]="url.image"
-                        name="placesimages" [(ngModel)]="newplaceFeaturedImage.url" #placesimages="ngModel"
-                        (change)="selectedFeaturedImage(newplaceFeaturedImage.name, url.image)">
+                <div class="custom-control custom-radio radio-form" *ngFor='let imageUrl of allPlaceImages; let i = index;'>
+                    <a (click)="removeImage(i, imageUrl.url)" class="remove-image"><i class="fa fa-trash"></i></a>
+                    <input id="image{{i}}" type="radio" class="custom-control-input" [value]="imageUrl.url"
+                        name="placesimages" [(ngModel)]="newplaceFeaturedImage[0].url" #placesimages="ngModel"
+                        (change)="selectedFeaturedImage(imageUrl.name, imageUrl.url)">
                     <label class="custom-control-label" for="image{{i}}">
-                        <img [src]="url.image" />
+                        <img [src]="imageUrl.url" />
                     </label>
                     <p>{{ imagesNames[i] }}</p>
                 </div>
@@ -233,8 +233,10 @@
                     </div>
                 </div>
             </div>
-            <button class="Addnew-btn" type="submit" class="btn btn-original" 
+            <!-- <button class="Addnew-btn" type="submit" class="btn btn-original" 
             [disabled]="!editPlace.valid || (allPlaceImages.length === 0)">
+                {{"local_add_bussiness" | translate}}</button> -->
+                <button class="Addnew-btn" type="submit" class="btn btn-original">
                 {{"local_add_bussiness" | translate}}</button>
         </form>
     </div>

@@ -464,17 +464,17 @@ export class PlacesService {
 
 
   editSelectedPlace(place,
-                    placeImages,
-                    placeFeaturedImage,
-                    placeName,
-                    selectedType,
-                    selectedCategories,
-                    selectedDelivery,
-                    selectedPaymentMethod,
-                    latitude,
-                    longitude,
-                    placeId) {
-    console.log(placeImages);
+    placeImages,
+    placeFeaturedImage,
+    placeName,
+    selectedType,
+    selectedCategories,
+    selectedDelivery,
+    selectedPaymentMethod,
+    latitude,
+    longitude,
+    placeId) {
+    
     console.log(placeFeaturedImage);
 
     let address;
@@ -487,8 +487,8 @@ export class PlacesService {
     let placeData: FormData = new FormData();
 
     for (var j = 0; j < placeImages.length; j++) {
-      placeData.append('other_images[' + j + '][name]', placeImages[j].name);
-      placeData.append('other_images[' + j + '][image]', placeImages[j].image);
+        placeData.append('other_images[' + j + '][name]', placeImages[j].name);
+        placeData.append('other_images[' + j + '][image]', placeImages[j].url);
     }
 
     if (selectedCategories) {
@@ -507,11 +507,11 @@ export class PlacesService {
       }
     }
 
-    if (placeFeaturedImage && placeFeaturedImage.name && placeFeaturedImage.name.length > 0) {
-      placeData.append('feat_image_name', placeFeaturedImage.name);
-      placeData.append('feat_image', placeFeaturedImage.url);
+    if (placeFeaturedImage && placeFeaturedImage[0].url && placeFeaturedImage[0].url.length > 0) {
+      placeData.append('feat_image_name', placeFeaturedImage[0].name);
+      placeData.append('feat_image', placeFeaturedImage[0].url);
     } else {
-      console.log(placeFeaturedImage.length)
+      console.log(placeFeaturedImage.length);
     }
 
     placeData.append('token', JSON.parse(localStorage.getItem('token')));
@@ -532,6 +532,7 @@ export class PlacesService {
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
     placeData.append('place_id', placeId);
+    placeData.append('edit_image', 'true');
     placeData.forEach((value, key) => {
       console.log(key + ' ' + value);
     });
