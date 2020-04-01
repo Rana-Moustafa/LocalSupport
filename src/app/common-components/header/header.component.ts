@@ -38,22 +38,22 @@ export class HeaderComponent implements OnInit {
   languageSwitcherStatus = false;
 
   constructor(public commons: CommonsService,
-              private authenticationService: AuthenticationService,
-              private router: Router,
-              private route: ActivatedRoute,
-              public userStatus: UserStatusService,
-              public translate: TranslateService,
-              private translation: TranslationService,
-              private location: Location,
-              public userData: UserDataService,
-              public searchResultsService: SearchResultsService,
-              public sanitizer: DomSanitizer,
-              private places: PlacesService) {
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    public userStatus: UserStatusService,
+    public translate: TranslateService,
+    private translation: TranslationService,
+    private location: Location,
+    public userData: UserDataService,
+    public searchResultsService: SearchResultsService,
+    public sanitizer: DomSanitizer,
+    private places: PlacesService) {
 
     console.log('header');
-    translate.addLangs(['de', 'en']);
-    translate.setDefaultLang('de');
-    localStorage.setItem('current_lang', 'de');
+    // translate.addLangs(['de', 'en']);
+    // translate.setDefaultLang('de');
+    // localStorage.setItem('current_lang', 'de');
     // translate.use('de');
   }
 
@@ -61,40 +61,41 @@ export class HeaderComponent implements OnInit {
     this.langURL = localStorage.getItem('current_lang');
     // this.commons.showTranslation();
     // this.languageSwitcherStatus = this.commons.getLanguageSwitcherStatus();
-    this.commons.languageSwitcherStatus.subscribe( status => {
-      // console.log(status);
-      this.languageSwitcherStatus = status;
-    });
+    // this.commons.languageSwitcherStatus.subscribe( status => {
+    //   // console.log(status);
+    //   this.languageSwitcherStatus = status;
+    // });
     this.userProfileImage = localStorage.getItem('profile_image');
     this.userProfileImage = (this.sanitizer.bypassSecurityTrustUrl(this.userProfileImage));
     this.userProfileImage = this.userProfileImage.changingThisBreaksApplicationSecurity;
     // this.placeTypes(this.langURL);
     this.userData.currentProfilePicture.subscribe(picture => this.profilePicture = picture);
     this.getUserProfilePicture();
-    this.translate.use(this.langURL);
-    if (!localStorage.getItem('current_lang')) {
-      this.translation.addTranslationLanguage('de');
-      this.translation.addTranslationLanguage(this.translate.defaultLang);
-      this.translate.use('de');
-      this.router.url.replace(this.route.snapshot.params.language, this.translate.defaultLang);
-      // this.placeTypes(this.langURL);
-    } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
-      this.router.url.replace(this.route.snapshot.params.language, 'en');
-      this.translate.use('de');
-      // this.placeTypes(this.langURL);
-    } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
-      this.router.url.replace(this.route.snapshot.params.language, 'de');
-      this.translate.use('de');
-      // this.placeTypes(this.langURL);
-    }
+    // this.translate.use(this.langURL);
+    // if (!localStorage.getItem('current_lang')) {
+    //   this.translation.addTranslationLanguage('de');
+    //   this.translation.addTranslationLanguage(this.translate.defaultLang);
+    //   this.translate.use('de');
+    //   this.router.url.replace(this.route.snapshot.params.language, this.translate.defaultLang);
+    //   // this.placeTypes(this.langURL);
+    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
+    //   this.router.url.replace(this.route.snapshot.params.language, 'en');
+    //   this.translate.use('de');
+    //   // this.placeTypes(this.langURL);
+    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
+    //   this.router.url.replace(this.route.snapshot.params.language, 'de');
+    //   this.translate.use('de');
+    //   // this.placeTypes(this.langURL);
+    // }
 
 
     this.translation.langUpdated.subscribe(
       (lang) => {
         console.log(lang);
         // this.toggleSideNav();
-        this.router.url.replace(this.route.snapshot.params.language, lang);
-        this.translate.use(lang);
+        // this.router.url.replace(this.route.snapshot.params.language, lang);
+        this.translation.useLanguage(lang);
+        // this.translate.use(lang);
         // this.placeTypes(lang);
         this.langURL = lang;
         this.router.events.filter(e => e instanceof NavigationEnd).subscribe(e => {

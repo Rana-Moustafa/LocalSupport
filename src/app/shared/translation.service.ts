@@ -10,19 +10,33 @@ export class TranslationService {
   urlLang;
   @Output() langUpdated: EventEmitter<any> = new EventEmitter();
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private router: Router,
-    public translate: TranslateService) { }
+    public translate: TranslateService) {
 
+    // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang('de');
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    translate.use('de');
+  }
+
+  useLanguage(language: string) {
+    console.log('8888');
+    this.langUpdated.emit(language);
+    this.translate.use(language);
+    localStorage.setItem('current_lang', language);
+    this.router.url.replace(this.route.snapshot.params.language, language);
+  }
   addLangToStorage(lang) {
-    localStorage.setItem('current_lang', lang)
+    localStorage.setItem('current_lang', lang);
   }
 
   addTranslationLanguage(lang) {
     this.lang = lang;
 
     this.langUpdated.emit(this.lang);
-    localStorage.setItem('current_lang', lang)
+    localStorage.setItem('current_lang', lang);
   }
 
   getLang() {

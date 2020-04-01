@@ -49,18 +49,24 @@ export class AppComponent implements OnInit {
 
   @Output() userCurrentLocationLat: EventEmitter<any> = new EventEmitter();
 
-  constructor(public commons: CommonsService,
-              private places: PlacesService,
-              private authenticationService: AuthenticationService,
-              private router: Router,
-              private route: ActivatedRoute,
-              public translate: TranslateService,
-              private translation: TranslationService,
-              private mapService: MapsService) {
-    console.log('app');
-    translate.use('de');
-    localStorage.setItem('current_lang', 'de');
-    console.log(this.langURL);
+  constructor(
+    public commons: CommonsService,
+    private places: PlacesService,
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    public translate: TranslateService,
+    private translation: TranslationService,
+    private mapService: MapsService) {
+
+    translate.addLangs(['de', 'en', 'fr']);
+    // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang('de');
+
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    // translate.use('de');
+    // localStorage.setItem('current_lang', 'de');
+    // console.log(this.langURL);
     // translate.addLangs(['de', 'en']);
     // translate.setDefaultLang('de');
 

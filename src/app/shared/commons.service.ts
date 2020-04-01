@@ -34,6 +34,7 @@ export class CommonsService {
     }
   }
   changeLanguageSwitcherStatus(message: boolean) {
+    console.log(message)
     this.languageSwitcherStatus.next(message);
   }
 

@@ -33,7 +33,7 @@
 
         </div>
         <a class="nav-link" [routerLink]="['/'+langURL]" >{{'to_map' | translate}}</a>
-        <!-- <div class="dropdown language" [hidden]="languageSwitcherStatus">
+        <div class="dropdown language" [hidden]="languageSwitcherStatus">
           <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <span>{{ (translate.currentLang?translate.currentLang: selectedLang) | uppercase }}</span>
@@ -41,13 +41,13 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <span class="dropdown-item" *ngFor="let lang of translate.getLangs()" [value]="lang"
               [selected]="lang === translate.currentLang" #langSelect
-              (click)="translate.use(langSelect.value); getSelectedLang(langSelect.value)">
+              (click)="translation.useLanguage(langSelect.value); getSelectedLang(langSelect.value)">
 
               {{ (lang != translate.currentLang)? (lang | uppercase) : ''}}
 
             </span>
           </div>
-        </div> -->
+        </div>
         <!-- <div class="search-mobile">
           <i class="fa fa-search" (click)="toggleSearch()"></i>
         </div> -->
