@@ -68,6 +68,10 @@
       flex     : 0 0 100% !important;
       max-width: 100% !important;
       margin   : $mr-10 !important;
+
+      p{
+        margin-bottom: 15px;
+      }
     }
 
     &__img {

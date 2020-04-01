@@ -201,7 +201,7 @@
   }
 
   p {
-    word-break: break-all;
+    
   }
 
   &-item {
@@ -247,6 +247,7 @@
       margin-bottom: $mr-5;
       p{
         margin-bottom: 15px;
+        color: #000;
       }
       .badge {
         color: #000;

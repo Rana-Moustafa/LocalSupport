@@ -36,7 +36,7 @@
 
   <div class="single-place__overview">
     <h4>{{"overview" | translate}}</h4>
-    <p>{{ singlePlaceDetails?  singlePlaceDetails.description : ' ' }}</p>
+    <p [innerHTML]="singlePlaceDetails?  singlePlaceDetails.description : ' '"></p>
   </div>
 
   <div class="single-place__decription">
