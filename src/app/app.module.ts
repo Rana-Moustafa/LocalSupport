@@ -107,6 +107,7 @@ import { EditPlaceComponent } from './single-place/edit-place/edit-place.compone
 import { ProfilePlacesComponent } from './profile-details/profile-places/profile-places.component';
 import { LegalComponent } from './inner-pages/legal/legal.component';
 import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 let config = new AuthServiceConfig([
   {
@@ -215,6 +216,7 @@ export const ngxDropTargetOptions: DropTargetOptions = {
     ShareModule,
     CarouselModule,
     ImageCropperModule,
+    CKEditorModule,
     NgxUploadModule.forRoot(ngxDropTargetOptions),
     // Swal.forRoot(),
     AgmCoreModule.forRoot({

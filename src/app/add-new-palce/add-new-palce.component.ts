@@ -10,6 +10,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { CommonsService } from '../shared/commons.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { MapsService } from '../shared/maps.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class AddNewPalceComponent implements OnInit {
   @ViewChild('toggleTimepickerFrom', { static: true }) openTimeFrom: NgForm;
   @ViewChild('toggleTimepickerTo', { static: true }) openTimeTo: NgForm;
   @ViewChild('search', { static: false }) public searchElementRef: ElementRef;
-
+  public Editor = ClassicEditor;
   placeImagesurl = '';
   result: string;
   nameFile;
