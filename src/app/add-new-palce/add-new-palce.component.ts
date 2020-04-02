@@ -137,7 +137,7 @@ export class AddNewPalceComponent implements OnInit {
   ngOnInit() {
     this.commons.show();
     this.commons.darkHeader = true;
-    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
+    // this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
     this.map.getMapLocations().subscribe(data => {
       this.markers = JSON.parse(JSON.stringify(data));
       // console.log(this.markers);

@@ -16,10 +16,6 @@ export class MapsService {
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Origin': '*'
     });
-    if ( localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?lang=en&skip_cache=1');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?skip_cache=1');
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?skip_cache=1');
   }
 }

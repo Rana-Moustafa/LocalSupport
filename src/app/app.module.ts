@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { AgmCoreModule } from '@agm/core';
-import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AuthComponent } from './auth/auth.component';
@@ -103,11 +103,11 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxUploadModule, MineTypeEnum, DropTargetOptions } from '@wkoza/ngx-upload';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { AddToFavListComponent } from './add-to-fav-list/add-to-fav-list.component';
+import { TooltipModule } from 'ng2-tooltip-directive';
 import { EditPlaceComponent } from './single-place/edit-place/edit-place.component';
 import { ProfilePlacesComponent } from './profile-details/profile-places/profile-places.component';
 import { LegalComponent } from './inner-pages/legal/legal.component';
 import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 let config = new AuthServiceConfig([
   {
@@ -216,14 +216,13 @@ export const ngxDropTargetOptions: DropTargetOptions = {
     ShareModule,
     CarouselModule,
     ImageCropperModule,
-    CKEditorModule,
+    TooltipModule,
     NgxUploadModule.forRoot(ngxDropTargetOptions),
     // Swal.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAyWxJuiFnfiMbs4WR1iablJIro0n8M-FE',
+      apiKey: 'AIzaSyBqh9-nZR40tr7v5DXgabUA3jVn6wRO_rU',
       libraries: ['places']
     }),
-    AgmJsMarkerClustererModule,
     TranslateModule.forRoot({
 
       loader: {

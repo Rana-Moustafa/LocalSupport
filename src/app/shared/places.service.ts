@@ -268,15 +268,8 @@ export class PlacesService {
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
-    if (localStorage.getItem('current_lang') === 'en') {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&lang=en&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + localStorage.getItem('token'))
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&lang=en&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + JSON.parse(localStorage.getItem('token')))
-    }
-    else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + localStorage.getItem('token'))
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id + '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&token=' + JSON.parse(localStorage.getItem('token')))
-
-    }
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+      '&page=' + page + '&per_page=' + perpage + '&' + sortBy);
   }
 
   filteredPlaces(filterObj, page, perpage) {
@@ -436,19 +429,12 @@ export class PlacesService {
 
 
 
-    if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1&lang=en&page=' + '1' + '&per_page=100');
-    }
-    else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1')
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1&page=' + '1' + '&per_page=100');
-    }
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' + filterSize +
+      filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
+      filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1')
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
+      filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
+      filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1&page=' + '1' + '&per_page=100');
   }
 
   sortPlaces(sortBy, placeId) {
@@ -474,7 +460,7 @@ export class PlacesService {
     latitude,
     longitude,
     placeId) {
-    
+
     console.log(placeFeaturedImage);
 
     let address;
@@ -487,8 +473,8 @@ export class PlacesService {
     let placeData: FormData = new FormData();
 
     for (var j = 0; j < placeImages.length; j++) {
-        placeData.append('other_images[' + j + '][name]', placeImages[j].name);
-        placeData.append('other_images[' + j + '][image]', placeImages[j].url);
+      placeData.append('other_images[' + j + '][name]', placeImages[j].name);
+      placeData.append('other_images[' + j + '][image]', placeImages[j].url);
     }
 
     if (selectedCategories) {
