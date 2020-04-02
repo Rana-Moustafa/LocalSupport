@@ -26,7 +26,7 @@
                                         <a [stopLink]="isDragging"
                                             [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
                                             class="category-slider__place-name-link">
-                                            <img src="{{categorySlider.featured_image?categorySlider.featured_image: './../assets/images/icon-img-placeholder.svg'}}"
+                                            <img src="{{categorySlider.featured_image?categorySlider.featured_image.url: './../assets/images/icon-img-placeholder.svg'}}"
                                                 alt="" class="img-thumbnail">
                                         </a>
                                         <!-- <app-add-to-fav-list [addToFavId]="categorySlider.id"
@@ -46,16 +46,15 @@
                                     </p>
                                     <div>
                                         <span class="badge" *ngFor="let category of categorySlider.category"
-                                            [innerHTML]="category">
+                                            [innerHTML]="category.name">
                                         </span>
-
                                     </div>
-
-                                    <p> <a [routerLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
+                                    <p>
+                                        <a [routerLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
                                             class="read-more">
-                                            {{"read_more" | translate}}</a></p>
+                                            {{"read_more" | translate}}</a>
+                                    </p>
                                 </div>
-
                             </ng-template>
                         </ng-container>
 

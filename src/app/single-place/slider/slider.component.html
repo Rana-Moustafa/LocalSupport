@@ -8,7 +8,7 @@
   <div class="carousel-inner">
       <div *ngFor="let place of singlePlaceSlider.images; let i = index; first as isFirst" [class.active]="(isFirst)"
         class="carousel-item">
-        <img [src]="place ?  place : ''" class="img-fluid">
+        <img [src]="place ?  place.url : ''" class="img-fluid">
       </div>
   </div>
   <!-- main slider carousel nav controls -->
@@ -26,7 +26,7 @@
     
     class="list-inline-item" >
       <a  id="carousel-selector-{{n}}" [attr.data-slide-to]="n" [class.selected]="(isFirst)" data-target="#single-place-slider" >
-        <img src="{{thumb}}" class="img-fluid">
+        <img src="{{thumb.url}}" class="img-fluid">
       </a>
     </li>
   </ul>

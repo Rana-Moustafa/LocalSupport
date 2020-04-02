@@ -1,24 +1,7 @@
 <div class="filter_wrapper">
   <div class="filter_wrapper_content">
     <form #filterForm="ngForm" (ngSubmit)="filterPlaces(filterForm)">
-      <!-- start -->
-      <!-- <div class="form-group">
-        <h4 class="subtitle">{{ 'size' | translate }}</h4>
-        <div class="checkbox_wrapper">
-          <div class="form-half-width" *ngFor="let size of placeSize;  let i = index;">
-      
-              <label class="form-check-label" for="size{{i}}">
-               
-              <input class="form-check-input" id="size{{i}}" type="checkbox" name="{{size.name}}" ngModel
-              [(ngModel)]="placeSize[i].checked"
-              name="size" value="{{i}}" [checked]="true" (change)="onItemChange($event,size.name)" />
-            <span> {{size.name}}</span>
-            </label>
-          </div>
-        </div>
-      </div> -->
-      <!-- end -->
-      <!-- start -->
+    
       <div class="form-group">
         <h4 class="subtitle">{{"local_Category" | translate}}</h4>
         <div class="checkbox_wrapper">
@@ -26,7 +9,7 @@
             <label class="form-check-label" for="{{category.name}}">     
               <input class="form-check-input" type="checkbox" name="{{category.name}}" ngModel
               [(ngModel)]="formCategories[i].checked">
-              <span>{{category.name}}</span>
+              <span [innerHTML]="category.name"></span>
             </label>
           </div>
         </div>
@@ -37,8 +20,8 @@
             <p *ngFor='let subCat of formTypes; let i = index;'>
               <input id="cat{{i}}" type="radio" class="custom-control-input" [value]="subCat" name="subcats" ngModel
                 #subcats="ngModel">
-              <label class="custom-control-label" for="cat{{i}}">
-                {{subCat.name}}
+              <label class="custom-control-label" for="cat{{i}}"
+              [innerHTML]="subCat.name">
               </label>
             </p>
 
@@ -52,7 +35,7 @@
             <label class="form-check-label" for="delivery{{i}}">
               <input class="form-check-input" type="checkbox" name="{{ delivery.name }}" id="delivery{{i}}" ngModel
               [(ngModel)]="formDelivery[i].checked">
-              <span> {{ delivery.name }}</span>
+              <span [innerHTML]="delivery.name"> </span>
             </label>
           </div>
         </div>
@@ -65,89 +48,12 @@
             <label class="form-check-label" for="payment{{i}}">
               <input class="form-check-input" type="checkbox" name="{{payment.name}}" id="payment{{i}}" ngModel
               [(ngModel)]="formPayment[i].checked">
-              <span>  {{ payment.name }}</span>
+              <span [innerHTML]="payment.name">  </span>
             </label>
           </div>
         </div>
       </div>
-      <!-- end -->
-      <!-- start -->
- 
-      <!-- end -->
-
-      <!-- start -->
-    
-      <!-- end -->
-      <!-- start -->
-      <!-- <div class="form-group hour ">
-        <h4 class="subtitle">{{"Opening_hours" | translate}} :</h4>
-        <div class="form_wrapper">
-          <div class="form-half-width">
-            <div class="default-time-example">
-              <label>{{"from" |translate}}</label>
-              <input aria-label="default time" [ngxTimepicker]="toggleTimepickerFrom" [(value)]="openingHours" readonly>
-              <ngx-material-timepicker #toggleTimepickerFrom></ngx-material-timepicker>
-            </div>
-          </div>
-          <div class="form-half-width">
-
-            <div class="default-time-example">
-              <label>{{"to" |translate}}</label>
-              <input aria-label="default time" [ngxTimepicker]="toggleTimepickerTo" [(value)]="closingHours" readonly>
-              <ngx-material-timepicker #toggleTimepickerTo></ngx-material-timepicker>
-            </div>
-
-          </div>
-        </div>
-      </div> -->
-      <!-- end -->
-
-      <!-- start -->
-      <!-- <div class="form-group">
-        <h4 class="subtitle"> {{"How_far_from_you" | translate}}:</h4>
-        <div class="form_wrapper distance-slider">
-       
-          <ng5-slider [(value)]="distanceValue" [options]="distanceOptions"></ng5-slider>
-        </div>
-      </div> -->
-      <!-- end -->
-
-
-      <!-- start -->
-      <!-- <div class="form-group">
-        <h4 class="subtitle">{{"cost_range" | translate}}:</h4>
-        <div class="form_wrapper">
-          <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
-        </div>
-      </div> -->
-      <!-- end -->
-      <!-- start -->
-      <!-- <div class="form-group">
-        <h4 class="subtitle">{{"minimum_recommend_rate" | translate }}</h4>
-        <fieldset class="filter__rating">
-          <input type="radio" [name]="inputName" value="5" [checked]="rating===5" />
-          <label title="Rocks!" (click)='onClick(5)'> <i class="fa fa-star"></i></label>
-
-          <input type="radio" [name]="inputName" value="4" [checked]="rating===4" />
-          <label title="Pretty good" (click)='onClick(4)'> <i class="fa fa-star"></i></label>
-
-          <input type="radio" [name]="inputName" value="3" [checked]="rating===3" />
-          <label title="Meh" (click)='onClick(3)'> <i class="fa fa-star"></i></label>
-
-          <input type="radio" [name]="inputName" value="2" [checked]="rating===2" />
-          <label title="Kinda bad" (click)='onClick(2)'> <i class="fa fa-star"></i></label>
-
-          <input type="radio" [name]="inputName" value="1" [checked]="rating===1" />
-          <label title="Sucks big time" (click)='onClick(1)'> <i class="fa fa-star"></i></label>
-        </fieldset>
-        <div class="rating-result">
-          <span class="rating-number">
-            {{rating}}
-          </span>/ 5  {{ 'stars' | translate }}
-        </div>
-      </div> -->
-      <!-- end -->
-
+     
       <div class="form-group text-center">
         <button type="submit" class="btn btn-primary">submit</button>
       </div>
