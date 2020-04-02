@@ -160,7 +160,7 @@
                   <label class="form-check-label" for="{{category.name}}">
                     <input class="form-check-input" type="checkbox" name="{{category.name}}" id="{{category.name}}"
                       ngModel [(ngModel)]="formCategories[i].checked">
-                    <span>{{ category.name }}</span>
+                    <span [innerHTML]="category.name "></span>
                   </label>
                 </div>
               </div>
@@ -172,7 +172,7 @@
                   <label class="form-check-label" for="{{delivery.name}}">
                     <input class="form-check-input" type="checkbox" name="{{delivery.name}}" id="{{delivery.name}}"
                       ngModel [(ngModel)]="formDelivery[i].checked">
-                    <span>{{ delivery.name }}</span>
+                    <span [innerHTML]="delivery.name"></span>
                   </label>
                 </div>
               </div>
@@ -184,7 +184,7 @@
                   <label class="form-check-label" for="{{payment.name}}">
                     <input class="form-check-input" type="checkbox" name="{{payment.name}}" id="{{payment.name}}"
                       ngModel [(ngModel)]="formPaymentMethod[i].checked">
-                    <span>{{ payment.name }}</span>
+                    <span [innerHTML]="payment.name"></span>
                   </label>
                 </div>
               </div>

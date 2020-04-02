@@ -60,7 +60,7 @@
                                     </p>
                                         <div *ngIf="place && place.category; first as isFirst">
                                             <span *ngFor="let category of place.category" class="badge"
-                                            [innerHTML]="category"> 
+                                            [innerHTML]="category.name"> 
                                             </span>
                                           </div>
                                       <p>  <a [routerLink]="['/'+langURL, 'single-place', place.id, place.slug]" class="read-more">
