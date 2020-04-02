@@ -1,3 +1,6 @@
+<div *ngIf="isLoading" class="loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 <div class="page-content container padding-top">
     <div class="row">
         <div class="edit-places">
@@ -233,11 +236,10 @@
                     </div>
                 </div>
             </div>
-            <!-- <button class="Addnew-btn" type="submit" class="btn btn-original" 
+            <button class="Addnew-btn" type="submit" class="btn btn-original" 
             [disabled]="!editPlace.valid || (allPlaceImages.length === 0)">
-                {{"local_add_bussiness" | translate}}</button> -->
-                <button class="Addnew-btn" type="submit" class="btn btn-original">
                 {{"local_add_bussiness" | translate}}</button>
+               
         </form>
     </div>
 </div>

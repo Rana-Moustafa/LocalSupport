@@ -95,7 +95,8 @@ export class EditPlaceComponent implements OnInit {
   @ViewChild('search', { static: false }) public searchElementRef: ElementRef;
   @ViewChild('address', { static: false }) public addressElementRef: ElementRef;
 
-  constructor(private places: PlacesService,
+  constructor(
+    private places: PlacesService,
     private route: ActivatedRoute,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
@@ -106,6 +107,7 @@ export class EditPlaceComponent implements OnInit {
     private commons: CommonsService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.commons.show();
     this.getFormSelectionItems();
     this.getSinglePlace(this.route.snapshot.params.id);
@@ -141,6 +143,7 @@ export class EditPlaceComponent implements OnInit {
 
   getSinglePlace(id) {
     this.places.getSinglePlaceData(id).subscribe(data => {
+      this.isLoading = false;
       this.placeData = data;
       console.log(data);
       this.newplaceFeaturedImage.push(this.placeData.featured_image);
@@ -196,6 +199,7 @@ export class EditPlaceComponent implements OnInit {
       }
     }, error => {
       console.log(error);
+      this.isLoading = false;
     });
   }
 
