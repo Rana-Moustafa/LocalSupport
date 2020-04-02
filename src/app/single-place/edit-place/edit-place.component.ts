@@ -55,7 +55,7 @@ export class EditPlaceComponent implements OnInit {
   noImagesUploaded;
   addPlaceFormError = false;
   formErrorMsg;
-  isLoading = false;
+  isLoading = true;
   placeSize;
   accessableBy;
   accessablity;
@@ -80,6 +80,7 @@ export class EditPlaceComponent implements OnInit {
   imagesCount;
   croppedImage;
   imageChangedEvent: any = '';
+  updatedImages = [];
   cropper = {
     x1: 0,
     y1: 0,
@@ -107,7 +108,7 @@ export class EditPlaceComponent implements OnInit {
     private commons: CommonsService) { }
 
   ngOnInit() {
-    this.isLoading = true;
+    this.isLoading = false;
     this.commons.show();
     this.getFormSelectionItems();
     this.getSinglePlace(this.route.snapshot.params.id);
@@ -142,6 +143,7 @@ export class EditPlaceComponent implements OnInit {
   }
 
   getSinglePlace(id) {
+    this.isLoading = true;
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.isLoading = false;
       this.placeData = data;
@@ -308,8 +310,9 @@ export class EditPlaceComponent implements OnInit {
 
 
   updatePlace(form: NgForm) {
-    this.allPlaceImages = this.allPlaceImages.filter((image) => image.url !== this.newplaceFeaturedImage[0].url);
-    console.log(this.allPlaceImages);
+    this.updatedImages = this.allPlaceImages;
+    this.updatedImages = this.updatedImages.filter((image) => image.url !== this.newplaceFeaturedImage[0].url);
+    console.log(this.updatedImages);
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
     form.value.openFrom = this.openFrom.time.toLowerCase();
@@ -332,7 +335,7 @@ export class EditPlaceComponent implements OnInit {
     this.selectedType = form.value.subcats;
     this.places.editSelectedPlace(
       form.value,
-      this.allPlaceImages,
+      this.updatedImages,
       this.newplaceFeaturedImage,
       this.addressInfo,
       this.selectedType,
