@@ -45,9 +45,9 @@
                                         <h6 [innerHTML]="categorySlider.title.rendered">
                                         </h6>
                                     </a>
-                                    <p>{{categorySlider? categorySlider.description: '' }}</p>
-                                    <span class="badge" *ngFor="let category of categorySlider.category">
-                                        {{category}}
+                                    <p [innerHTML]="categorySlider? (categorySlider.description | slice:0:100)+'...' : '' "></p>
+                                    <span class="badge" *ngFor="let category of categorySlider.category"
+                                    [innerHTML]="category">
                                     </span>
                                 </div>
 

@@ -1,3 +1,6 @@
+<div *ngIf="isLoading" class="loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 <div class="page-content container padding-top">
     <div class="row">
         <div class="edit-places">
@@ -114,8 +117,8 @@
                         *ngFor="let category of formCategories;  let i = index;let result of resultCategory">
                         <label class="form-check-label" for="{{category.name}}">
                             <input class="form-check-input" type="checkbox" name="{{category.name}}"
-                                id="{{category.name}}" ngModel [(ngModel)]="formCategories[i].checked"
-                                [checked]="(resultDelivery && resultCategory[i]) && (resultCategory[i].checked === true)">
+                                id="{{category.name}}" [(ngModel)]="formCategories[i].checked"
+                                [checked]="formCategories[i].checked">
                             <span>{{ category.name }}</span>
                         </label>
                     </div>
@@ -130,7 +133,7 @@
                         <label class="form-check-label" for="{{deliver.name}}">
                             <input class="form-check-input" type="checkbox" name="{{deliver.name}}"
                                 id="{{deliver.name}}" ngModel [(ngModel)]="formDelivery[i].checked"
-                                [checked]="(resultDelivery && resultDelivery[i]) && (resultDelivery[i].checked ===true)">
+                                [checked]="formDelivery[i].checked">
                             <span>{{ deliver.name }}</span>
                         </label>
                     </div>
@@ -145,7 +148,7 @@
                         <label class="form-check-label" for="{{payment.name}}">
                             <input class="form-check-input" type="checkbox" name="{{payment.name}}"
                                 id="{{payment.name}}" ngModel [(ngModel)]="formPaymentMethod[i].checked"
-                                [checked]="(resultDelivery && resultPayment[i]) && (resultPayment[i].checked ===true)">
+                                [checked]="formPaymentMethod[i].checked">
                             <span>{{ payment.name }}</span>
                         </label>
                     </div>
@@ -233,11 +236,10 @@
                     </div>
                 </div>
             </div>
-            <!-- <button class="Addnew-btn" type="submit" class="btn btn-original" 
+            <button class="Addnew-btn" type="submit" class="btn btn-original" 
             [disabled]="!editPlace.valid || (allPlaceImages.length === 0)">
-                {{"local_add_bussiness" | translate}}</button> -->
-                <button class="Addnew-btn" type="submit" class="btn btn-original">
                 {{"local_add_bussiness" | translate}}</button>
+               
         </form>
     </div>
 </div>

@@ -1,25 +1,6 @@
 <div class="single-place padding-top">
-  <!-- <div class="single-place__rating">
-
-    <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 1}"></i>
-    <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 2}"></i>
-    <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 3}"></i>
-    <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 4}"></i>
-    <i class="fa fa-star" [ngClass]="{'star-empty': starRating < 5}"></i>
-
-    <span class="stars-count" *ngIf="starRating > 0">
-    
-      <small> {{singlePlaceDetails? singlePlaceDetails.comments_number_rated: ''}}
-        person<span [hidden]="singlePlaceDetails && singlePlaceDetails.comments_number_rated < 2">s</span> rated this
-        place</small>
-    
-    </span>
-    <span class="stars-count" *ngIf="starRating === 0">
-      <small>{{"This_place_has_not_been_rated_yet!" | translate}}</small>
-    </span>
-  </div> -->
-  <!-- <a [routerLink]="['/'+langURL, 'edit-place', singlePlaceDetails.id, singlePlaceDetails.slug]">Edit</a> -->
-  <div class="single-place__title" [innerHTML]="singlePlaceDetails.title ? singlePlaceDetails.title.rendered : ' '">
+  <div class="single-place__title" >
+    <h1 [innerHTML]="singlePlaceDetails.title ? singlePlaceDetails.title.rendered : ' '"></h1>
     <div class="single-place__title__subtitle">
       <span> {{singlePlaceDetails? singlePlaceDetails.place_type: ''}}</span>
       <!-- <span *ngFor="let place of singlePlaceDetails.place_type; let i = index"> <span *ngIf="i != 0"> / </span>
