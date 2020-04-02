@@ -111,7 +111,7 @@ export class EditPlaceComponent implements OnInit {
     this.isLoading = false;
     this.commons.show();
     this.getFormSelectionItems();
-    this.getSinglePlace(this.route.snapshot.params.id);
+   
     this.loadMap();
   }
 
@@ -147,6 +147,7 @@ export class EditPlaceComponent implements OnInit {
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.isLoading = false;
       this.placeData = data;
+      this.resultCategory = this.placeData.category;
       console.log(data);
       this.newplaceFeaturedImage.push(this.placeData.featured_image);
       this.newplaceFeaturedImage.push({ isFeatured: true });
@@ -173,31 +174,28 @@ export class EditPlaceComponent implements OnInit {
       this.timePickerTo = this.placeData.hr_to;
       this.selected = this.placeData.place_type;
       if (this.placeData.delivery && this.placeData.delivery.length > 0) {
-        this.placeData.delivery.forEach((element, key) => {
-          this.resultDelivery.push({ name: element, checked: true });
-          if (this.formDelivery && (this.formDelivery[key].name === this.resultDelivery[key].name)) {
-            this.formDelivery[key].checked = true;
-          }
+        this.formDelivery.forEach(category => {
+          const retreivedDelivery = this.placeData.delivery.find(x => x.name == category.name);
+          category.checked = retreivedDelivery ? retreivedDelivery.checked : false;
         });
+        console.log(this.formDelivery);
       }
 
       if (this.placeData.payment_methods && this.placeData.payment_methods.length > 0) {
-        this.placeData.payment_methods.forEach((element, key) => {
-          this.resultPayment.push({ name: element, checked: true });
-          if (this.formPaymentMethod && (this.formPaymentMethod[key].name === this.resultPayment[key].name)) {
-            this.formPaymentMethod[key].checked = true;
-          }
+        this.formPaymentMethod.forEach(category => {
+          const retreivedPaymentMethod = this.placeData.payment_methods.find(x => x.name == category.name);
+          category.checked = retreivedPaymentMethod ? retreivedPaymentMethod.checked : false;
         });
+        console.log(this.formPaymentMethod);
       }
 
       if (this.placeData.category && this.placeData.category.length > 0) {
-        this.placeData.category.forEach((element, key) => {
-          this.resultCategory.push({ name: element, checked: true });
-          if (this.formCategories && (this.formCategories[key].name === this.resultCategory[key].name)) {
-            this.formCategories[key].checked = true;
-          }
-          console.log(this.resultCategory);
+        console.log(this.placeData.category);
+        this.formCategories.forEach(category => {
+          const retreivedCatgory = this.placeData.category.find(x => x.name == category.name);
+          category.checked = retreivedCatgory ? retreivedCatgory.checked : false;
         });
+        console.log(this.formCategories);
       }
     }, error => {
       console.log(error);
@@ -210,15 +208,18 @@ export class EditPlaceComponent implements OnInit {
   }
   // get form field data
   getFormSelectionItems() {
+    this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
       this.openTimeFrom = this.formSelection.hr_from;
       this.openTimeTo = this.formSelection.hr_to;
       this.formType = this.formSelection.type;
       this.formCategories = this.formSelection.category;
+      console.log(this.formCategories);
       this.formDelivery = this.formSelection.delivery;
       this.formPaymentMethod = this.formSelection.payment_methods;
       // this.isLoading = false;
+      this.getSinglePlace(this.route.snapshot.params.id);
     }, error => {
       // this.isLoading = false;
     });

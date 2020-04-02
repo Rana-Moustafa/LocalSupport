@@ -52,6 +52,10 @@
     font-size: 33px;
     font-weight: bold;
 
+    h1{
+      font-size: 33px;
+    }
+
     @media all and (max-width: $lg) {
       font-size: 28px;
     }
