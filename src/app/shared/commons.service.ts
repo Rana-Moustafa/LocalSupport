@@ -121,10 +121,10 @@ export class CommonsService {
     }
   }
   getAboutPage(lang) {
-    if (lang === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about?lang=en');
-    } else if (lang === 'de') {
+    if (lang === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about');
+    } else  {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about?lang=' + lang);
     }
   }
   getTestimonials(testimonialsIds) {
@@ -141,10 +141,10 @@ export class CommonsService {
   }
 
   getPrivacyPage() {
-    if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy?lang=en');
-    } else {
+    if (localStorage.getItem('current_lang') === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy?lang=' + localStorage.getItem('current_lang'));
     }
   }
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonsService } from '../shared/commons.service';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslationService } from '../shared/translation.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-inner-pages',
@@ -9,10 +12,22 @@ import { CommonsService } from '../shared/commons.service';
 })
 export class InnerPagesComponent implements OnInit {
 
-  constructor(private commons : CommonsService) { }
+  constructor(private commons: CommonsService,
+              public translate: TranslateService,
+              private translation: TranslationService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.commons.show();
+
+    this.translation.langUpdated.subscribe(
+      (lang) => {
+        console.log(this.route.snapshot.params.language);
+        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+          lang));
+      }
+    );
   }
 
 }

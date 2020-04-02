@@ -1,4 +1,4 @@
-<h1>{{ "page_about_us" | translate }}</h1>
+<h1 [innerHTML]="aboutContent? aboutContent.title: ''"></h1>
 <div class="col-xs-6">
   <p [innerHTML]="aboutContent? aboutContent.left_text: ''">
 

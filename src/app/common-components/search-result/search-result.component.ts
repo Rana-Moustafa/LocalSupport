@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SearchResultsService } from '../../shared/search-results.service';
 import { PlacesService } from 'src/app/shared/places.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,11 +28,13 @@ export class SearchResultComponent implements OnInit {
   notfound = false;
   langURL = localStorage.getItem('current_lang');
   sideNav = false;
-  constructor(public searchResultsService: SearchResultsService,
+  constructor(
+    public searchResultsService: SearchResultsService,
     private route: ActivatedRoute,
     private placesService: PlacesService,
     public translate: TranslateService,
-    private translation: TranslationService) { }
+    private translation: TranslationService,
+    private router: Router) { }
   result;
   searchResults;
   results;
@@ -61,15 +63,16 @@ export class SearchResultComponent implements OnInit {
 
     this.translation.langUpdated.subscribe(
       (lang) => {
-        this.page = 0;
-        this.allPlaces = [];
-        this.allSearchPlaces = [];
-        localStorage.setItem('current_land', lang);
-        this.isLoading = true;
-        console.log(lang);
-        // this.toggleSideNav();
-        this.translate.use(lang);
-        this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), lang);
+        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
+        // this.page = 0;
+        // this.allPlaces = [];
+        // this.allSearchPlaces = [];
+        // localStorage.setItem('current_land', lang);
+        // this.isLoading = true;
+        // console.log(lang);
+        // // this.toggleSideNav();
+        // this.translate.use(lang);
+        // this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), lang);
       }
     );
   }

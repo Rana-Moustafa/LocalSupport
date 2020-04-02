@@ -47,7 +47,7 @@
                                     </a>
                                     <p [innerHTML]="categorySlider? (categorySlider.description | slice:0:100)+'...' : '' "></p>
                                     <span class="badge" *ngFor="let category of categorySlider.category"
-                                    [innerHTML]="category">
+                                    [innerHTML]="category.name">
                                     </span>
                                 </div>
 
