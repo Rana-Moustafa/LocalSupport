@@ -12,9 +12,25 @@
     </a>
 
     <a class="skip" [routerLink]="['/'+langURL]" (click)="hideIntro()">{{'to_map' | translate}}</a>
+    <div class="language language_banner">
 
+      <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      <span>{{ (translate.currentLang?translate.currentLang: selectedLang) | uppercase }}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <span class="dropdown-item" *ngFor="let language of languages" [value]="language.lang"
+        [selected]="language.lang === translate.currentLang" #langSelect
+        (click)="translation.useLanguage(langSelect.value); getSelectedLang(langSelect.value)">
 
-    <div class="intro__side">
+        {{ (language.lang != translate.currentLang)? (language.lang | uppercase) : ''}}
+
+      </span>
+    </div>
+
+    </div>
+
+    <div class="intro__side left">
       <div class="intro__side__text">
         <div class="intro__side__text__big">
           {{ introItemsNames? introItemsNames.left_title : ''}}
@@ -25,10 +41,10 @@
         </div>
       </div>
       <div>
-      <a class="intro__side__text__link" [routerLink]="['/signup']" > 
-        {{ introItemsNames? introItemsNames.left_button: ''}}</a></div>
+        <a class="intro__side__text__link" [routerLink]="['/signup']">
+          {{ introItemsNames? introItemsNames.left_button: ''}}</a></div>
     </div>
-    <div class="intro__side">
+    <div class="intro__side right">
       <div class="intro__side__text">
         <div class="intro__side__text__big">
           {{ introItemsNames? introItemsNames.right_title: ''}}
@@ -39,10 +55,10 @@
         </div>
       </div>
       <div>
-      <a class="intro__side__text__link"  [routerLink]="['/'+langURL]" (click)="hideIntro()">
-        {{ introItemsNames? introItemsNames.right_button: ''}} </a></div>
+        <a class="intro__side__text__link" [routerLink]="['/'+langURL]" (click)="hideIntro()">
+          {{ introItemsNames? introItemsNames.right_button: ''}} </a></div>
     </div>
     <app-footer></app-footer>
   </div>
- 
+
 </div>

@@ -35,31 +35,45 @@ export class IntroComponent implements OnInit {
     rewind: false,
     nav: false
   };
-
+  selectedLang;
+  languages = [
+    {
+      fullName: 'English',
+      lang: 'en'
+    },
+    {
+      fullName: 'Deutsch',
+      lang: 'de'
+    },
+    {
+      fullName: 'Francais',
+      lang: 'fr'
+    },
+    {
+      fullName: 'Italiano',
+      lang: 'it'
+    },
+    {
+      fullName: 'Rumantsch',
+      lang: 'rm'
+    }
+  ];
   advertiseData;
   langURL = localStorage.getItem('current_lang');
 
-  constructor(private commons: CommonsService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private translation: TranslationService,
-              private location: Location,
-              private translate: TranslateService) {
+  constructor(
+    private commons: CommonsService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private translation: TranslationService,
+    private location: Location,
+    private translate: TranslateService) {
   }
 
   ngOnInit() {
-     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-          localStorage.getItem('current_lang')));
-    // if (!localStorage.getItem('current_lang')) {
-    //   this.translate.use('de');
-    //   localStorage.setItem('current_lang', 'de');
-    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
-    //   this.translate.use('de');
-    //   localStorage.setItem('current_lang', 'de');
-    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
-    //   this.translate.use('de');
-    //   localStorage.setItem('current_lang', 'de');
-    // }
+    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+      localStorage.getItem('current_lang')));
+    console.log(this.translate.currentLang);
     console.log(this.location.getState());
     this.commons.showPadding = false;
     this.advertiseData = this.location.getState();
@@ -69,13 +83,18 @@ export class IntroComponent implements OnInit {
     this.translation.langUpdated.subscribe(
       (lang) => {
         localStorage.setItem('current_lang', lang);
-        // this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-        //   lang));
+        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+          lang));
         this.introItems();
       }
     );
   }
+  getSelectedLang(lang) {
+    console.log(lang);
+    this.selectedLang = lang;
+    this.translation.addTranslationLanguage(lang);
 
+  }
   introItems() {
 
     console.log(this.introItemsNames);

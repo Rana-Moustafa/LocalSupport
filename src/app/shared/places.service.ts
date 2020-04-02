@@ -32,10 +32,10 @@ export class PlacesService {
     return this.addRemoveFromFavList;
   }
   getFormSelections() {
-    if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections?lang=en');
-    } else {
+    if (localStorage.getItem('current_lang') === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections?lang=' + localStorage.getItem('current_lang'));
     }
   }
 
@@ -61,20 +61,18 @@ export class PlacesService {
     }
   }
   getPlacesTypess(lang) {
-    if (lang === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=en');
-    }
-    else {
+    if (lang === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=' + lang);
     }
   }
 
   getPlacesTypes() {
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=en');
-    }
-    else {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=' + localStorage.getItem('current_lang'));
     }
   }
 
@@ -194,7 +192,8 @@ export class PlacesService {
 
   }
 
-  addNewPlace(place,
+  addNewPlace(
+    place,
     featured,
     placeName,
     selectedType,
@@ -207,8 +206,6 @@ export class PlacesService {
     longitude,
     minValue,
     maxValue) {
-
-    // //console.log(place)
 
     let address;
     if (placeName.length < 1) {
@@ -255,16 +252,9 @@ export class PlacesService {
     placeData.forEach((value, key) => {
       console.log(key + ' ' + value);
     });
-    if (localStorage.getItem('current_lang') === 'en') {
-      // return 'english'
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place?lang=en',
-        placeData);
-    } else {
-      // return 'german'
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
-        placeData);
-    }
 
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
+      placeData);
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
@@ -316,15 +306,10 @@ export class PlacesService {
       filterTypes = '';
     }
 
-
-    if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&'
-        + filterPayment + filterDelivery + filterCategories + filterTypes + '&skip_cache=1&lang=en&page=' + page + '&per_page=' + perpage);
-    } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' +
-        filterPayment + filterDelivery + filterCategories + filterTypes + '&skip_cache=1')
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterPayment + filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage);
-    }
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' +
+      filterPayment + filterDelivery + filterCategories + filterTypes + '&skip_cache=1');
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterPayment +
+      filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage);
   }
 
   filterPlaces(filterObj) {
@@ -449,7 +434,8 @@ export class PlacesService {
   }
 
 
-  editSelectedPlace(place,
+  editSelectedPlace(
+    place,
     placeImages,
     placeFeaturedImage,
     placeName,
@@ -522,16 +508,9 @@ export class PlacesService {
     placeData.forEach((value, key) => {
       console.log(key + ' ' + value);
     });
-    if (localStorage.getItem('current_lang') === 'en') {
-      // return 'english'
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place?lang=en',
-        placeData);
-    } else {
-      // return 'german'
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
-        placeData);
-    }
 
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
+      placeData);
   }
 
   userPlaces() {

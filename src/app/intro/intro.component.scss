@@ -2,6 +2,7 @@
 @import "../../fonts";
 @import "../../mixins";
 
+
 .care_link {
   position: absolute;
   top: 10px;
@@ -58,7 +59,7 @@
   top: 15px;
   right: 15px;
 
-  &:hover{
+  &:hover {
     color: #000;
   }
 }
@@ -70,9 +71,22 @@
   @media all and (max-width: 640px) {
     flex-direction: column;
   }
-  .b-footer {
 
-    @media all and (min-width: 641px){
+  .language {
+    position: absolute;
+    right: 150px;
+    top: 25px;
+    .dropdown-toggle{
+      cursor: pointer;
+    }
+    .dropdown-menu{
+      cursor: pointer;
+      min-width: 70px;
+      left: -20px !important;
+    }
+  }
+  .b-footer {
+    @media all and (min-width: 641px) {
       background: transparent;
       position: absolute;
       bottom: 0;
@@ -82,15 +96,14 @@
       margin-right: auto;
       border: 0;
     }
-    .navbar{
+    .navbar {
       .navbar-nav {
         .nav-item {
-          .nav-link{
-            
-            @media all and (max-width: 992px){
+          .nav-link {
+            @media all and (max-width: 992px) {
               font-size: 12px;
             }
-            &:hover{
+            &:hover {
               color: #000;
               text-decoration: underline;
             }
@@ -98,29 +111,29 @@
         }
       }
     }
-    .copyright{
-      span{
+    .copyright {
+      span {
         font-weight: 500;
         margin-top: -15px;
-        @media all and (max-width: 992px){
+        @media all and (max-width: 992px) {
           font-size: 12px;
         }
       }
     }
-  
-    .social-links{
-      a{
-        &:hover{
+
+    .social-links {
+      a {
+        &:hover {
           color: #000;
 
-          i{
+          i {
             color: #000;
           }
         }
       }
     }
   }
-  
+
   .logo-link {
     position: absolute;
     top: 15px;
@@ -138,7 +151,6 @@
     flex-direction: column;
     justify-content: space-between;
     @media all and (max-width: 1300px) {
-      
     }
     @media all and (max-width: 640px) {
       display: block;
@@ -148,13 +160,13 @@
       padding: 30px 7% 40px;
     }
 
-    &:nth-of-type(1) {
+    &.left {
       background-color: $localPrimary;
       @media all and (max-width: 640px) {
         padding-top: 100px;
       }
     }
-    &:nth-of-type(2) {
+    &.right {
       background-color: $localSecondary;
     }
     &__text {
@@ -220,7 +232,7 @@
         font-weight: bold;
         border: 5px solid #000;
 
-        &:hover{
+        &:hover {
           color: #000;
         }
         @media all and (max-width: 1300px) {
