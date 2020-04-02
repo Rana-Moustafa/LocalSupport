@@ -35,9 +35,10 @@ export class HeaderComponent implements OnInit {
   langURL = localStorage.getItem('current_lang');
   currentPicture = JSON.stringify(localStorage.getItem('profile_image'));
   categoriesNames;
-  languageSwitcherStatus = false;
+  languageSwitcherStatus = true;
 
-  constructor(public commons: CommonsService,
+  constructor(
+    public commons: CommonsService,
     private authenticationService: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute,
@@ -92,14 +93,15 @@ export class HeaderComponent implements OnInit {
     this.translation.langUpdated.subscribe(
       (lang) => {
         console.log(lang);
+        localStorage.setItem('current_lang', lang);
+        // this.translation.useLanguage(lang);
         // this.toggleSideNav();
+        // console.log(this.route.snapshot.params.language);
         // this.router.url.replace(this.route.snapshot.params.language, lang);
-        this.translation.useLanguage(lang);
+        // this.translation.useLanguage(lang);
         // this.translate.use(lang);
         // this.placeTypes(lang);
         this.langURL = lang;
-        this.router.events.filter(e => e instanceof NavigationEnd).subscribe(e => {
-        });
       }
     );
   }

@@ -52,7 +52,7 @@ export class ProfileDetailsComponent implements OnInit {
     this.userDataService.currentProfilePicture.subscribe(picture => this.url = picture);
     this.commons.darkHeader = true;
     this.commons.lightHeader = true;
-    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
+    // this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
     this.translation.langUpdated.subscribe(
       (lang) => {
         localStorage.setItem('current_lang', lang);

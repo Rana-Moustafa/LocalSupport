@@ -9,7 +9,7 @@
   border-top: 1px solid #ddd;
   position: static;
 
-  @media all and (min-width: 641px){
+  @media all and (min-width: 641px) {
     position: relative;
     bottom: 0;
     left: 0;
@@ -18,43 +18,43 @@
     margin-right: auto;
     height: 80px;
   }
-  @media all and (max-width: 640px){
-    padding: .5rem 1rem;
+  @media all and (max-width: 640px) {
+    padding: 0.5rem 1rem;
   }
   .row {
     justify-content: space-between;
-    
-    @media all and (max-width: 768px){
+
+    @media all and (max-width: 768px) {
       justify-content: space-evenly;
     }
-    @media all and (max-width: 640px){
+    @media all and (max-width: 640px) {
       justify-content: flex-start;
     }
   }
   .navbar {
     padding-left: 0;
 
-    
     .navbar-nav {
       flex-direction: row;
-      @media all and (max-width: 640px){
+      @media all and (max-width: 640px) {
         flex-wrap: wrap;
       }
       .nav-item {
         margin-right: 25px;
+        margin-bottom: 0;
 
-        @media all and (max-width: 450px){
+        @media all and (max-width: 450px) {
           margin-right: 10px;
         }
         .nav-link {
-          font-size: 16px;
+          font-size: 14px;
           color: #000;
           font-weight: 500;
           text-transform: uppercase;
-          @media all and (max-width: 640px){
+          @media all and (max-width: 640px) {
             font-size: 14px;
           }
-          @media all and (max-width: 450px){
+          @media all and (max-width: 450px) {
             font-size: 12px;
           }
 
@@ -117,7 +117,6 @@
       margin: 0;
     }
     a {
-      
       &:hover,
       &:focus {
         color: $localSecondary;
@@ -147,17 +146,16 @@
     text-align: center;
     align-items: center;
     color: #000;
-    @media all and (max-width: 640px){
+    @media all and (max-width: 640px) {
       margin-right: auto;
     }
     span {
-      font-size: 16px;
-      @media all and (max-width: 640px){
-        font-size: 14px;
-        font-weight: 500;
-      }
-      @media all and (max-width: 450px){
+      font-size: 14px;
+      color: #000;
+      font-weight: 500;
+      @media all and (max-width: 640px) {
         font-size: 12px;
+        font-weight: 500;
       }
     }
   }

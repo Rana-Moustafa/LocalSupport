@@ -33,7 +33,7 @@
 
         </div>
         <a class="nav-link" [routerLink]="['/'+langURL]" >{{'to_map' | translate}}</a>
-        <div class="dropdown language" [hidden]="languageSwitcherStatus">
+        <div class="dropdown language">
           <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <span>{{ (translate.currentLang?translate.currentLang: selectedLang) | uppercase }}</span>
@@ -66,8 +66,7 @@
         <div class="care-link">
           <a href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
           target="_blank">
-          Take care &<br/>
-          stay home!
+          {{'take_care' | translate}}
          </a> 
         </div>
       </div>

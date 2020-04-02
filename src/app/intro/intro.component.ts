@@ -45,22 +45,21 @@ export class IntroComponent implements OnInit {
               private translation: TranslationService,
               private location: Location,
               private translate: TranslateService) {
-              localStorage.setItem('current_lang', 'de');
-              this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-                'de'));
   }
 
   ngOnInit() {
-    if (!localStorage.getItem('current_lang')) {
-      this.translate.use('de');
-      localStorage.setItem('current_lang', 'de');
-    } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
-      this.translate.use('de');
-      localStorage.setItem('current_lang', 'de');
-    } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
-      this.translate.use('de');
-      localStorage.setItem('current_lang', 'de');
-    }
+     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+          localStorage.getItem('current_lang')));
+    // if (!localStorage.getItem('current_lang')) {
+    //   this.translate.use('de');
+    //   localStorage.setItem('current_lang', 'de');
+    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
+    //   this.translate.use('de');
+    //   localStorage.setItem('current_lang', 'de');
+    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
+    //   this.translate.use('de');
+    //   localStorage.setItem('current_lang', 'de');
+    // }
     console.log(this.location.getState());
     this.commons.showPadding = false;
     this.advertiseData = this.location.getState();

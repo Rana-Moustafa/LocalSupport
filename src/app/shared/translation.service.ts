@@ -16,9 +16,9 @@ export class TranslationService {
     public translate: TranslateService) {
 
     // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang('de');
+   
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('de');
+    // translate.use('de');
   }
 
   useLanguage(language: string) {
@@ -26,7 +26,6 @@ export class TranslationService {
     this.langUpdated.emit(language);
     this.translate.use(language);
     localStorage.setItem('current_lang', language);
-    this.router.url.replace(this.route.snapshot.params.language, language);
   }
   addLangToStorage(lang) {
     localStorage.setItem('current_lang', lang);
