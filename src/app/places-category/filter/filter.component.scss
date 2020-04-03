@@ -165,7 +165,7 @@
 
     label {
       display: inline-block;
-      @include text-regular();
+      font-size: 12px;
       line-height: 19px;
       margin-top: 7px;
       margin-left: $mr-10;
@@ -389,7 +389,7 @@
       overflow: hidden;
       white-space: nowrap;
       cursor: pointer;
-      @include text-huge-regular();
+      font-size: 12px;
       line-height: 1.2;
       color: $warm-grey;
       margin: 0;

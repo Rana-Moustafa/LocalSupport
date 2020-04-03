@@ -6,7 +6,7 @@
      
       <div class="form-group">
         <input type="text" class="form-control" (keydown.enter)="searchPlaces()"
-          [placeholder]="'Search_nearest_location'| translate" autocorrect="on" autocapitalize="off" spellcheck="on"
+          [placeholder]="'Search_nearest_location'| translate"
           type="text" #search>
         <button (click)="setCurrentLocation(latitude,longitude)"
           class="map-filters__search__near">{{"Near_me" | translate}}</button>

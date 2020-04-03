@@ -10,7 +10,7 @@ import { PlacesService } from '../../shared/places.service';
 export class DetailsComponent implements OnInit {
 
   @Input() singlePlaceDetails;
-  singlePlaceAddress;
+  singlePlaceWebsite;
   singlePlaceName;
   // faCoffee = faCoffee;
   // faStarHalfAlt = faStarHalfAlt;
@@ -29,17 +29,9 @@ export class DetailsComponent implements OnInit {
     this.setCurrentLocation();
     console.log('this.singlePlaceDetails');
     console.log(this.singlePlaceDetails);
+    this.singlePlaceWebsite = this.singlePlaceDetails.website.replace(/(^\w+:|^)\/\//, '');
     this.placeLat = this.singlePlaceDetails.address.lat;
     this.placeLng = this.singlePlaceDetails.address.lng;
-    // console.log(this.placeLat   ,  this.placeLng)
-
-    this.singlePlaceAddress = this.singlePlaceDetails.address.address + ', ' + this.singlePlaceDetails.city;
-    if (this.singlePlaceDetails.avg_rating) {
-      this.starRating = Math.round(this.singlePlaceDetails.avg_rating);
-    } else {
-      this.starRating = 0;
-    }
-
     this.setCurrentLocation();
   }
 

@@ -1,12 +1,22 @@
 {
-  "name": "outdoor-family-frontend",
-  "short_name": "outdoor-family-frontend",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Be Local Hero",
+  "short_name": "Be Local Hero",
+  "theme_color": "#EE0CF2",
+  "background_color": "#19F7CB",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "icons": [
+    {
+      "src": "assets/icons/icon-36x36.png",
+      "sizes": "36x36",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
     {
       "src": "assets/icons/icon-72x72.png",
       "sizes": "72x72",
@@ -18,8 +28,33 @@
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon-128x128.png",
-      "sizes": "128x128",
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-57x57.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-60x60.png",
+      "sizes": "60x60",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-76x76.png",
+      "sizes": "76x76",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-114x114.png",
+      "sizes": "114x114",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-120x120.png",
+      "sizes": "120x120",
       "type": "image/png"
     },
     {
@@ -33,18 +68,33 @@
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon-192x192.png",
-      "sizes": "192x192",
+      "src": "assets/icons/icon-180x180.png",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon-384x384.png",
-      "sizes": "384x384",
+      "src": "assets/icons/icon-180x180.png",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon-512x512.png",
-      "sizes": "512x512",
+      "src": "assets/icons/icon-70x70.png",
+      "sizes": "70x70",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-150x150.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-310x310.png",
+      "sizes": "310x310",
       "type": "image/png"
     }
   ]

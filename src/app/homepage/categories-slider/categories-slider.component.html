@@ -5,11 +5,10 @@
                 <h3>
                     {{'our_products' | translate}}
                     <a [routerLink]="['/'+langURL, 'search-result' ]"
-                    [queryParams]='{search: searchAll }'>{{'show_more' | translate}}</a>
+                        [queryParams]='{search: searchAll }'>{{'show_more' | translate}}</a>
                 </h3>
 
-                <div class="category-slider-section__empty"
-                    *ngIf="(productsData && productsData.length == 0) ">
+                <div class="category-slider-section__empty" *ngIf="(productsData && productsData.length == 0) ">
                     <img src="./assets/images/slider.svg" />
                     <p> {{ "no_places" | translate }}
                         {{'yet' |translate}}!
@@ -19,8 +18,7 @@
                 <div class="slider-wrapper">
                     <owl-carousel-o [options]="customOptions" class="owl-slider-section">
 
-                        <ng-container
-                            *ngFor="let categorySlider of categorySliderDetails; let i = index">
+                        <ng-container *ngFor="let categorySlider of categorySliderDetails; let i = index">
                             <ng-template class="item" carouselSlide [id]="categorySlider.id" [width]="250">
 
                                 <div class="category-slider__item" data-length="{{categorySlider.length}}">
@@ -28,7 +26,7 @@
                                         <a [stopLink]="isDragging"
                                             [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
                                             class="category-slider__place-name-link">
-                                            <img src="{{categorySlider.featured_image?categorySlider.featured_image.url : './../assets/images/icon-img-placeholder.svg'}}"
+                                            <img src="{{categorySlider.featured_image?categorySlider.featured_image.url: './../assets/images/icon-img-placeholder.svg'}}"
                                                 alt="" class="img-thumbnail">
                                         </a>
                                         <!-- <app-add-to-fav-list [addToFavId]="categorySlider.id"
@@ -38,19 +36,25 @@
                                         </app-add-to-fav-list> -->
 
                                     </div>
-                                
                                     <a class="category-slider__place-name" [stopLink]="isDragging"
                                         [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
                                         class="category-slider__place-name-link">
                                         <h6 [innerHTML]="categorySlider.title.rendered">
                                         </h6>
                                     </a>
-                                    <p [innerHTML]="categorySlider? (categorySlider.description | slice:0:100)+'...' : '' "></p>
-                                    <span class="badge" *ngFor="let category of categorySlider.category"
-                                    [innerHTML]="category.name">
-                                    </span>
+                                    <p class="text" [innerHTML]="(categorySlider.description | slice:0:100)+'...'">
+                                    </p>
+                                    <div>
+                                        <span class="badge" *ngFor="let category of categorySlider.category"
+                                            [innerHTML]="category.name">
+                                        </span>
+                                    </div>
+                                    <p>
+                                        <a [routerLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
+                                            class="read-more">
+                                            {{"read_more" | translate}}</a>
+                                    </p>
                                 </div>
-
                             </ng-template>
                         </ng-container>
 
