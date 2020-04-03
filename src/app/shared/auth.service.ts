@@ -29,8 +29,16 @@ export class AuthenticationService {
     private authService: AuthService,
     private userStatus: UserStatusService) { }
 
+  getCurrentLanguage() {
+    return localStorage.getItem('current_lang');
+  }
+
   getSignupText() {
-    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register?lang=' + localStorage.getItem('current_lang'));
+    if (localStorage.getItem('current_lang') === 'de') {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register?lang=' + this.getCurrentLanguage());
+    }
   }
 
   userRegisteration(userData) {
