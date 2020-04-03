@@ -34,7 +34,7 @@ export class CommonsService {
     }
   }
   changeLanguageSwitcherStatus(message: boolean) {
-    console.log(message)
+    console.log(message);
     this.languageSwitcherStatus.next(message);
   }
 
@@ -57,10 +57,6 @@ export class CommonsService {
     if (this.router.navigate(['/profile'])) {
       this.visible = true;
     }
-  }
-
-  getCurrentLanguage() {
-    return localStorage.getItem('current_lang');
   }
 
   hideTranslation() {
@@ -104,32 +100,16 @@ export class CommonsService {
     }
   }
   getThankYouData() {
-    if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/thank_you?lang=en');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/thank_you');
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/thank_you?lang=' + localStorage.getItem('current_lang'));
   }
   getNotFound() {
-    if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/404');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/404?lang=' + this.getCurrentLanguage());
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/404?lang=' + localStorage.getItem('current_lang'));
   }
   getIntroData() {
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/intro');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/intro?lang=' + this.getCurrentLanguage());
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/intro?lang=' + localStorage.getItem('current_lang'));
   }
   getAboutPage(lang) {
-    if (lang === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about');
-    } else  {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about?lang=' + lang);
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about?lang=' + lang);
   }
   getTestimonials(testimonialsIds) {
     const token = localStorage.getItem('token');
@@ -145,11 +125,7 @@ export class CommonsService {
   }
 
   getPrivacyPage() {
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy?lang=' + this.getCurrentLanguage());
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/policy?lang=' + localStorage.getItem('current_lang'));
   }
 }
 
