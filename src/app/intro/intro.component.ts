@@ -67,7 +67,7 @@ export class IntroComponent implements OnInit {
     private route: ActivatedRoute,
     private translation: TranslationService,
     private location: Location,
-    private translate: TranslateService) {
+    public translate: TranslateService) {
   }
 
   ngOnInit() {
