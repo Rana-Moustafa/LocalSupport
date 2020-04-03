@@ -16,6 +16,6 @@ export class MapsService {
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Origin': '*'
     });
-    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?skip_cache=1');
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/map_search?skip_cache=1?lang=' + localStorage.getItem('current_lang'));
   }
 }

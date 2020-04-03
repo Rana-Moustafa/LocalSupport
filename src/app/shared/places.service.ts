@@ -44,13 +44,10 @@ export class PlacesService {
     this.currentUserLongitude = longitude;
   }
   getSinglePlaceData(id: number) {
-    if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
-        + JSON.parse(localStorage.getItem('token')) + '&lang=en&skip_cache=1');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
-        + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1');
-    }
+    console.log(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
+    + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1&lang=' + localStorage.getItem('current_lang'));
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
+      + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1&lang=' + localStorage.getItem('current_lang'));
   }
   getPlacesItems() {
     if (localStorage.getItem('current_lang') === 'en') {
@@ -258,8 +255,10 @@ export class PlacesService {
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+    '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'))
     return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-      '&page=' + page + '&per_page=' + perpage + '&' + sortBy);
+      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
   }
 
   filteredPlaces(filterObj, page, perpage) {
@@ -309,7 +308,8 @@ export class PlacesService {
     console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' +
       filterPayment + filterDelivery + filterCategories + filterTypes + '&skip_cache=1');
     return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterPayment +
-      filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage);
+      filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
+      '&lang=' + localStorage.getItem('current_lang'));
   }
 
   filterPlaces(filterObj) {
@@ -419,7 +419,8 @@ export class PlacesService {
       filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1')
     return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
       filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-      filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1&page=' + '1' + '&per_page=100');
+      filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1&page=' + '1' +
+     '&per_page=100&lang=' + localStorage.getItem('current_lang'));
   }
 
   sortPlaces(sortBy, placeId) {

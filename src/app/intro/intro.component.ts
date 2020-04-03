@@ -55,7 +55,7 @@ export class IntroComponent implements OnInit {
     },
     {
       fullName: 'Rumantsch',
-      lang: 'rm'
+      lang: 'sv'
     }
   ];
   advertiseData;
@@ -96,8 +96,6 @@ export class IntroComponent implements OnInit {
 
   }
   introItems() {
-
-    console.log(this.introItemsNames);
     this.commons.getIntroData().subscribe(data => {
       this.introItemsNames = data;
       console.log(this.introItemsNames);

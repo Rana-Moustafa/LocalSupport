@@ -59,10 +59,10 @@ export class AppComponent implements OnInit {
     private translation: TranslationService,
     private mapService: MapsService) {
 
-    translate.addLangs(['de', 'en', 'fr', 'it', 'rm']);
+    translate.addLangs(['de', 'en', 'fr', 'it', 'sv']);
     const browserLang = translate.getBrowserLang();
     console.log(browserLang);
-    translate.use(browserLang.match(/de|en|fr|it|rm/) ? browserLang : 'de');
+    translate.use(browserLang.match(/de|en|fr|it|sv/) ? browserLang : 'de');
     localStorage.setItem('current_lang', browserLang);
     
     // this.router.url.replace(this.route.snapshot.params.language,

@@ -278,15 +278,6 @@ www = []
     // this.loadMap();
   }
 
-  loadTabs() {
-    this.selectedCategory();
-    // if (localStorage.getItem('current_lang') === 'en') {
-    //   this.selectedCategory(17, 3);
-    // } else {
-    //   this.selectedCategory(3, 3);
-    // }
-  }
-
   selectedCategory() {
 
     if (this.searchElementRef) {
@@ -303,37 +294,6 @@ www = []
 
       this.markers = JSON.parse(JSON.stringify(data));
       console.log(this.markers);
-     
-      // switch (index) {
-      //   case 0: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-gray.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   case 1: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-orange.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   case 2: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-dark-blue.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      //   default: {
-      //     this.markerIcon = {
-      //       url: '../../assets/images/ic-location-orange.svg',
-      //       scaledSize: { height: 30, width: 30 }
-      //     };
-      //     break;
-      //   }
-      // }
     }, error => {
       // console.log(error);
     });

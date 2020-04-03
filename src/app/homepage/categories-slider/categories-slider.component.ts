@@ -81,12 +81,10 @@ export class CategoriesSliderComponent implements OnInit {
     this.translation.addRouterLangParam();
     this.translation.langUpdated.subscribe(
       (lang) => {
-        // this.placeTypes();
-        // this.getCategoriesSliders();
+       this.getCategoriesSliders();
       }
     );
 
-    // this.placeTypes();
     this.getCategoriesSliders();
   }
 

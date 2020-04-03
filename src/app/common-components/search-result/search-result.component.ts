@@ -64,15 +64,14 @@ export class SearchResultComponent implements OnInit {
     this.translation.langUpdated.subscribe(
       (lang) => {
         this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
-        // this.page = 0;
-        // this.allPlaces = [];
-        // this.allSearchPlaces = [];
-        // localStorage.setItem('current_land', lang);
-        // this.isLoading = true;
+        this.page = 0;
+        this.allPlaces = [];
+        this.allSearchPlaces = [];
+        this.isLoading = true;
         // console.log(lang);
         // // this.toggleSideNav();
         // this.translate.use(lang);
-        // this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), lang);
+        this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), lang);
       }
     );
   }
