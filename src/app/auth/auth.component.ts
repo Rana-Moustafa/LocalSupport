@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslationService } from './../shared/translation.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +18,7 @@ export class AuthComponent implements OnInit {
   showSigninForm = false;
   showResetPasswordForm = false;
   hideLanguageBanner = false;
-
+  signText;
   langURL = localStorage.getItem('current_lang');
 
   language = [{
@@ -30,9 +31,10 @@ export class AuthComponent implements OnInit {
   }
   ];
   constructor(private commons: CommonsService,
-              private router: Router, 
+              private router: Router,
               public translate: TranslateService,
-              private translation: TranslationService) {
+              private translation: TranslationService,
+              private authService: AuthenticationService) {
 
     translate.addLangs(['de', 'en']);
     translate.setDefaultLang('de');
@@ -42,11 +44,11 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.commons.hide();
+    this.signupText();
     console.log(this.router.url );
     if (this.router.url === '/signup') {
       this.showSignUpForm = true;
     } else if (this.router.url ===  '/signin') {
-      console.log('_______________');
       this.showSigninForm = true;
     } else if (this.router.url ===  '/forgot-password') {
       this.showResetPasswordForm = true;
@@ -58,6 +60,15 @@ export class AuthComponent implements OnInit {
   }
   useLanguage(language: string) {
     this.translate.use(language);
+  }
+
+  signupText() {
+    this.authService.getSignupText().subscribe( data => {
+      // console.log(data);
+      this.signText = data;
+    }, error => {
+      console.log(error);
+    });
   }
 
 }

@@ -21,12 +21,17 @@ export interface AuthResponseData {
 export class AuthenticationService {
   langURL = localStorage.getItem('current_lang');
   user = new Subject<User>();
-  private tokenExpirationTimer: any ;
+  private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private router: Router,
     private authService: AuthService,
     private userStatus: UserStatusService) { }
+
+  getSignupText() {
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register?lang=' + localStorage.getItem('current_lang'));
+  }
 
   userRegisteration(userData) {
     let registerationFormData: FormData = new FormData();
@@ -121,38 +126,34 @@ export class AuthenticationService {
   }
   userLogout() {
     if (localStorage.getItem('token')) {
-      if (JSON.parse(localStorage.getItem('token_type')) == '2' ||
-        JSON.parse(localStorage.getItem('token_type')) == '3') {
-        this.authService.signOut();
-        this.userStatus.userLoggedOut()
-        this.router.navigate(['/signin']);
-        localStorage.clear()
-      }
-      //localStorage.removeItem('token');
-      //localStorage.removeItem('token_type');
-      localStorage.clear()
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('token_type');
+      this.authService.signOut();
+      this.userStatus.userLoggedOut()
       this.router.navigate(['/signin']);
+      localStorage.clear();
 
-      if(this.tokenExpirationTimer){
-        clearTimeout(this.tokenExpirationTimer)
+      if (this.tokenExpirationTimer) {
+        clearTimeout(this.tokenExpirationTimer);
       }
       this.tokenExpirationTimer = null;
     }
   }
 
   autoLogout(expirationDuration) {
-   
-    let now = new Date()
-    let expiredAfter = (new Date(expirationDuration*1000).getTime()) - ((new Date()).getTime());   
-  
+
+    let now = new Date();
+    let expiredAfter = (new Date(expirationDuration * 1000).getTime()) - ((new Date()).getTime());
+
     setTimeout(() => {
-      //console.log('this.tokenExpirationTimer')
-      //console.log(this.tokenExpirationTimer)
+      // console.log('this.tokenExpirationTimer');
+      // console.log(this.tokenExpirationTimer);
       this.userLogout();
     }, +expiredAfter)
   }
 
   isLoggedIn() {
-    return !!localStorage.getItem('token')
+    return !!localStorage.getItem('token');
   }
+
 }

@@ -16,38 +16,9 @@
 
       <div class="col-lg-5 no-padding">
         <div class="registration-form-section__Background">
-          <h1>{{"local_login_header" | translate }}</h1>
-          <!-- <p>{{"local_login_text_1" | translate }}</p> 
-         <p>{{"local_login_text_2" | translate }}</p>
-         <p>{{"local_login_text_3" | translate }}</p>
-         <p>{{"local_login_text_4" | translate }}</p>
-         <p>{{"local_login_text_5" | translate }}</p>
-         <p>{{"local_login_text_6" | translate }}</p> -->
-          <p>Be Local Hero hat sich zur Aufgabe gemacht, lokale Geschäfte und Organisationen in dieser schwierigen Zeit
-            zu unterstützen!
-            Ziel ist die Förderung der Solidarität und die Vernetzung von Anbietern und Kunden – kostenlos und
-            gemeinnützig.</p>
-          <h6>Zwei einfache Schritte, um dich sichtbar zu machen: </h6>
-          <p>1. Erstelle dein Profil mit deinem Namen und deiner E-Mail-Adresse oder via Facebook (diese Daten werden
-            nicht veröffentlicht). Mit dem Profil kannst du dann beliebig viele Angebote erstellen, bearbeiten oder auch
-            wieder löschen.</p>
-          <p>2. Fülle das Formular mit allen wichtigen Angaben aus – zu dir, deinem Produkt/Service und mit dem was du
-            während der Coronakrise noch anbietest. Sollten wir dich in irgendeiner Weise unterstützen können (z.B. mit
-            Geschenkkarten etc.), melde dich bitte auf
-            <a href="mailto:act@belocalhero.com">act@belocalhero.com</a></p>
-          <p>3. Hurra! Nun du bist auf Be Local Hero sichtbar und deine Nachbarschaft wird auf dich aufmerksam! Und
-            vergiss nicht den Link zu deinem Angebot auch direkt in deinem Netzwerk zu teilen – be (a) local hero :)</p>
-          <p>Sag uns auf Instagram oder Facebook, dass du dabei bist. Gemeinsam erreichen wir noch viel mehr lokale
-            Helden.</p>
-          <p>Hier findest du uns:</p>
-          <p><a
-              href="https://www.facebook.com/Be-Local-Hero-108364480799731" target="_blank">www.facebook.com/Be-Local-Hero-108364480799731</a>
-          </p>
-          <p> <a href="https://www.instagram.com/belocalhero" target="_blank">www.instagram.com/belocalhero</a></p>
-          <p>Wichtig: Be Local Hero ist eine Vernetzungsplattform. Die Lieferung und den Zahlungsverkehr musst du selber
-            organisieren. Falls du Unterstützung brauchst, schreib uns auf:
-            <a href="mailto:act@belocalhero.com">act@belocalhero.com</a>
-          </p>
+          <h1 [innerHTML]="signText? signText.title: ''"></h1>
+          <p [innerHTML]="signText? signText.content: ''"></p>
+       
         </div>
       </div>
       <div class="col-lg-7 no-padding">
