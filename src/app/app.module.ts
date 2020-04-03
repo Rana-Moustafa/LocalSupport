@@ -220,7 +220,7 @@ export const ngxDropTargetOptions: DropTargetOptions = {
     NgxUploadModule.forRoot(ngxDropTargetOptions),
     // Swal.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBqh9-nZR40tr7v5DXgabUA3jVn6wRO_rU',
+      apiKey: 'AIzaSyAXg7VGWJvd074v8VGCoQNpjBb-DnPMp9o',
       libraries: ['places']
     }),
     TranslateModule.forRoot({
