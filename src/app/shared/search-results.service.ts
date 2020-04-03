@@ -18,6 +18,9 @@ export class SearchResultsService implements OnDestroy {
 
   constructor(private http: HttpClient) { }
 
+  getCurrentLanguage() {
+    return localStorage.getItem('current_lang');
+  }
 
   GetSearchResults(result, page, perpage, lang) {
 
@@ -28,9 +31,16 @@ export class SearchResultsService implements OnDestroy {
     });
 
     console.log(result);
-    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
-    (result.length > 0 ? result : '') + '&page=' +
-     page + '&per_page=' + perpage + '&lang=' + localStorage.getItem('current_lang'));
+
+    if (localStorage.getItem('current_lang') === 'de'){
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
+      (result.length > 0 ? result : '') + '&page=' +
+       page + '&per_page=' + perpage);
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
+      (result.length > 0 ? result : '') + '&page=' +
+       page + '&per_page=' + perpage + '&lang=' + this.getCurrentLanguage());
+    }
   }
 
   ngOnDestroy() {
