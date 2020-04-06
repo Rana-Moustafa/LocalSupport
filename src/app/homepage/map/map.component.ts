@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
   longitude: number;
   zoom: number;
   address: string;
-  private geoCoder;
+  geoCoder;
   markerIcon = {
     url: '../../assets/images/ic-location-dark-blue.svg',
     scaledSize: { height: 30, width: 30 }
@@ -214,20 +214,20 @@ export class MapComponent implements OnInit {
     }
   ];
 
-  clusterStyles: ClusterStyle[] =  [
+  clusterStyles: ClusterStyle[] = [
     {
-        textColor: '#000',
-        url: '../../assets/clusters/clusters-1.svg',
-        height: 50,
-        width: 50
+      textColor: '#000',
+      url: '../../assets/clusters/clusters-1.svg',
+      height: 50,
+      width: 50
     },
     {
-        textColor: '#000',
-        url: '../../assets/clusters/clusters-2.svg',
-        height: 50,
-        width: 50
+      textColor: '#000',
+      url: '../../assets/clusters/clusters-2.svg',
+      height: 50,
+      width: 50
     }
-];
+  ];
   previous;
   categoryTab;
   langURL = localStorage.getItem('current_lang');
@@ -240,19 +240,18 @@ export class MapComponent implements OnInit {
   selected;
   fitBoundsMarkers = true;
   seachResults;
-www = []
+  www = []
   constructor(private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone,
-              private map: MapsService,
-              private places: PlacesService,
-              private translation: TranslationService,
-              public searchResultsService: SearchResultsService,
-              private router: Router) { }
+    private ngZone: NgZone,
+    private map: MapsService,
+    private places: PlacesService,
+    private translation: TranslationService,
+    public searchResultsService: SearchResultsService,
+    private router: Router) { }
 
   ngOnInit() {
     const uA = navigator.userAgent;
     const vendor = navigator.vendor;
-
     // if ('geolocation' in navigator) {
     //   navigator.geolocation.getCurrentPosition((position) => {
     //     console.log('current location');
@@ -293,7 +292,7 @@ www = []
     this.map.getMapLocations().subscribe(data => {
 
       this.markers = JSON.parse(JSON.stringify(data));
-      console.log(this.markers);
+      // console.log(this.markers);
     }, error => {
       // console.log(error);
     });
@@ -302,7 +301,7 @@ www = []
   loadMap() {
     this.mapsAPILoader.load().then(() => {
       // this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
+      this.geoCoder = new google.maps.Geocoder();
 
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ['geocode'],
@@ -343,6 +342,8 @@ www = []
         this.lat = this.latitude;
         this.lng = this.longitude;
         this.zoom = 10;
+        console.log(this.latitude);
+        console.log(this.longitude);
         this.getAddress(this.latitude, this.longitude);
       });
     }
@@ -357,7 +358,9 @@ www = []
   }
 
   getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+    console.log(latitude, ' ', longitude);
+    const geoCoder = new google.maps.Geocoder();
+    geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
 
       console.log(latitude, ' ', longitude);
       if (status === 'OK') {
