@@ -272,10 +272,15 @@ export class PlacesService {
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
-    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
-    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
+    if (localStorage.getItem('current_lang') === 'de') {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+        '&page=' + page + '&per_page=' + perpage + '&' + sortBy);
+    } else {
+      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+        '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+        '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
+    }
   }
 
   filteredPlaces(filterObj, page, perpage) {
@@ -534,10 +539,10 @@ export class PlacesService {
 
     if (localStorage.getItem('current_lang') === 'de') {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
-      placeData);
+        placeData);
     } else {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
-      placeData + '&lang=' + this.getCurrentLanguage());
+        placeData + '&lang=' + this.getCurrentLanguage());
     }
   }
 

@@ -20,7 +20,8 @@ export class InnerPagesComponent implements OnInit {
 
   ngOnInit() {
     this.commons.show();
-
+    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+      localStorage.getItem('current_lang')));
     this.translation.langUpdated.subscribe(
       (lang) => {
         console.log(this.route.snapshot.params.language);

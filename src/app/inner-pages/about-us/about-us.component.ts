@@ -12,16 +12,17 @@ export class AboutUsComponent implements OnInit {
   aboutContent;
   langURL = localStorage.getItem('current_lang');
 
-  constructor(private commons: CommonsService,
-              public translate: TranslateService,
-              private translation: TranslationService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private commons: CommonsService,
+    public translate: TranslateService,
+    private translation: TranslationService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getAbout(this.langURL);
-    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-      this.langURL));
+    // this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+    //   this.langURL));
 
     this.translation.langUpdated.subscribe(
       (lang) => {
@@ -35,7 +36,7 @@ export class AboutUsComponent implements OnInit {
   }
 
   getAbout(lang) {
-    this.commons.getAboutPage(lang).subscribe( data => {
+    this.commons.getAboutPage(lang).subscribe(data => {
       console.log(data);
       this.aboutContent = data;
     }, error => {
