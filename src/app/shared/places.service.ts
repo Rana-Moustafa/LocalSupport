@@ -229,13 +229,13 @@ export class PlacesService {
       placeData.append('other_images[' + j + '][image]', imagesUrls[j]);
     }
     for (var i = 0; i < selectedCategories.length; i++) {
-      placeData.append('category[' + i + ']', (selectedCategories[i].key) );
+      placeData.append('category[' + i + ']', (selectedCategories[i].key).toString() );
     }
     for (var n = 0; n < selectedDelivery.length; n++) {
-      placeData.append('delivery[' + n + ']', (selectedDelivery[n].key) );
+      placeData.append('delivery[' + n + ']', (selectedDelivery[n].key).toString() );
     }
     for (var l = 0; l < selectedPaymentMethod.length; l++) {
-      placeData.append('payment_methods[' + l + ']', (selectedPaymentMethod[l].key));
+      placeData.append('payment_methods[' + l + ']', (selectedPaymentMethod[l].key).toString() );
     }
 
 
@@ -250,7 +250,7 @@ export class PlacesService {
     placeData.append('website', (place.website).toString());
     placeData.append('description', place.description);
     placeData.append('phone_number', (place.phone).toString());
-    placeData.append('type', place.subcats.key );
+    placeData.append('type', (place.subcats.key).toString() );
     placeData.append('hr_from', (place.openFrom).toString());
     placeData.append('hr_to', (place.openTo).toString());
     placeData.append('lat', latitude);
@@ -263,8 +263,10 @@ export class PlacesService {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
         placeData);
     } else {
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
-        placeData + '&lang=' + this.getCurrentLanguage());
+      console.log(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
+      placeData + '&lang=' + this.getCurrentLanguage())
+      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place?lang=' + this.getCurrentLanguage(),
+        placeData );
     }
   }
 

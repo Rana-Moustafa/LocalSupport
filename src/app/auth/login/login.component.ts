@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('profile_image', this.userData.profile_image);
       this.userDataService.changeProfilePicture(this.userData.profile_image);
       localStorage.setItem('id', JSON.stringify(this.userData.id));
+      this.authService.autoLogout(this.userData.token_expiration_date);
       this.loginForm.reset();
       this.router.navigate([this.langURL + '/profile']);
       // this.newProfilePicture = this.userData.profile_image;

@@ -152,7 +152,7 @@ export class AuthenticationService {
 
     let now = new Date();
     let expiredAfter = (new Date(expirationDuration * 1000).getTime()) - ((new Date()).getTime());
-
+    console.log(expiredAfter)
     setTimeout(() => {
       // console.log('this.tokenExpirationTimer');
       // console.log(this.tokenExpirationTimer);
