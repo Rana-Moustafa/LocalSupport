@@ -250,7 +250,7 @@ export class PlacesService {
     placeData.append('website', (place.website).toString());
     placeData.append('description', place.description);
     placeData.append('phone_number', (place.phone).toString());
-    placeData.append('type', (place.subcats.key).toString() );
+    placeData.append('type', place.subcats.key );
     placeData.append('hr_from', (place.openFrom).toString());
     placeData.append('hr_to', (place.openTo).toString());
     placeData.append('lat', latitude);
@@ -263,8 +263,7 @@ export class PlacesService {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
         placeData);
     } else {
-      console.log(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
-      placeData + '&lang=' + this.getCurrentLanguage())
+    
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place?lang=' + this.getCurrentLanguage(),
         placeData );
     }
