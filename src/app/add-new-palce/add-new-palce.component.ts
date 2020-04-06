@@ -459,7 +459,7 @@ export class AddNewPalceComponent implements OnInit {
         form.reset();
         this.router.navigate(['/' + this.langURL + '/thank-you']);
       }, error => {
-        // console.log(error);
+        console.log(error);
         this.isLoading = false;
         this.addPlaceFormError = true;
         this.formErrorMsg = error.error.message;
