@@ -451,18 +451,18 @@ export class AddNewPalceComponent implements OnInit {
       this.latitude,
       this.longitude,
       this.minValue,
-      this.maxValue);
-      // ).subscribe(data => {
-      //   // console.log(data);
-      //   this.isLoading = false;
-      //   this.addPlaceFormError = false;
-      //   form.reset();
-      //   this.router.navigate(['/' + this.langURL + '/thank-you']);
-      // }, error => {
-      //   // console.log(error);
-      //   this.isLoading = false;
-      //   this.addPlaceFormError = true;
-      //   this.formErrorMsg = error.error.message;
-      // });
+      this.maxValue
+      ).subscribe(data => {
+        // console.log(data);
+        this.isLoading = false;
+        this.addPlaceFormError = false;
+        form.reset();
+        this.router.navigate(['/' + this.langURL + '/thank-you']);
+      }, error => {
+        // console.log(error);
+        this.isLoading = false;
+        this.addPlaceFormError = true;
+        this.formErrorMsg = error.error.message;
+      });
   }
 }
