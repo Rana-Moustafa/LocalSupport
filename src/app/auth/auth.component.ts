@@ -53,6 +53,14 @@ export class AuthComponent implements OnInit {
     } else if (this.router.url ===  '/forgot-password') {
       this.showResetPasswordForm = true;
     }
+
+
+    this.translation.langUpdated.subscribe(
+      (lang) => {
+        localStorage.setItem('current_lang', lang);
+        this.signupText();
+      }
+    );
   }
 
   hideBanner() {

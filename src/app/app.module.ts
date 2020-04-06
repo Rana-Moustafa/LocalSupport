@@ -252,4 +252,4 @@ export const ngxDropTargetOptions: DropTargetOptions = {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
