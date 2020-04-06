@@ -211,6 +211,7 @@ export class EditPlaceComponent implements OnInit {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
+      console.log(data)
       this.openTimeFrom = this.formSelection.hr_from;
       this.openTimeTo = this.formSelection.hr_to;
       this.formType = this.formSelection.type;

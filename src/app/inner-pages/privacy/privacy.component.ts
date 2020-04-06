@@ -17,11 +17,13 @@ export class PrivacyComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.translation.getLang());
+    this.router.url.replace(this.route.snapshot.params.language,
+      this.translation.getLang());
     this.translation.langUpdated.subscribe(
       (lang) => {
         localStorage.setItem('current_lang', lang);
-        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-          lang));
+        this.privacyData();
       }
     );
 

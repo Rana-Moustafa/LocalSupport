@@ -37,7 +37,7 @@ export class TranslationService {
   }
 
   getLang() {
-    return this.lang;
+    return localStorage.getItem('current_lang');
   }
 
   addRouterLangParam() {

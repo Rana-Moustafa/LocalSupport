@@ -109,8 +109,9 @@ export class AppComponent implements OnInit {
     const navEndEvents = router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     );
-
+      console.log(navEndEvents)
     navEndEvents.subscribe((event: NavigationEnd) => {
+      console.log(event)
       gtag('config', 'UA-161700458-1', {
         'page_path': event.urlAfterRedirects
       });
@@ -118,13 +119,7 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
-    // this.translation.useLanguage(localStorage.getItem('current_lang'));
-    // localStorage.setItem('current_lang', 'de');
 
-    // this.commons.showTranslation();
-    // this.commons.sendLanguageSwitcherStatus(false);
-    // this.commons.changeLanguageSwitcherStatus(false);
-    // this.placeTypes();
     if (!localStorage.getItem('current_lang')) {
       this.langURL = 'de';
     }

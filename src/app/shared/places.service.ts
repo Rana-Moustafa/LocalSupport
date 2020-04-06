@@ -232,10 +232,10 @@ export class PlacesService {
       placeData.append('category[' + i + ']', (selectedCategories[i].name).toString());
     }
     for (var n = 0; n < selectedDelivery.length; n++) {
-      placeData.append('delivery[]', (selectedDelivery[n].name).toString())
+      placeData.append('delivery['+n+']', (selectedDelivery[n].name).toString())
     }
     for (var l = 0; l < selectedPaymentMethod.length; l++) {
-      placeData.append('payment_methods[]', (selectedPaymentMethod[l].name).toString())
+      placeData.append('payment_methods['+l+']', (selectedPaymentMethod[l].name).toString())
     }
 
 
@@ -256,8 +256,6 @@ export class PlacesService {
     placeData.append('hr_to', (place.openTo).toString());
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
-    placeData.append('lat', latitude);
-    placeData.append('lng', longitude);
     placeData.forEach((value, key) => {
       console.log(key + ' ' + value);
     });
@@ -272,15 +270,10 @@ export class PlacesService {
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-        '&page=' + page + '&per_page=' + perpage + '&' + sortBy);
-    } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-        '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-        '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
-    }
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
   }
 
   filteredPlaces(filterObj, page, perpage) {
@@ -539,10 +532,10 @@ export class PlacesService {
 
     if (localStorage.getItem('current_lang') === 'de') {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
-        placeData);
+      placeData);
     } else {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
-        placeData + '&lang=' + this.getCurrentLanguage());
+      placeData + '&lang=' + this.getCurrentLanguage());
     }
   }
 

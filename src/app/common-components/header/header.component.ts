@@ -95,6 +95,7 @@ export class HeaderComponent implements OnInit {
         console.log(lang);
         localStorage.setItem('current_lang', lang);
         // this.translation.useLanguage(lang);
+        
         // this.toggleSideNav();
         // console.log(this.route.snapshot.params.language);
         // this.router.url.replace(this.route.snapshot.params.language, lang);

@@ -78,7 +78,7 @@ const appRoutes: Routes = [
 		]
 	},
 	{
-		path: '**',component: NotfoundPageComponent 
+		path: '**', component: NotfoundPageComponent
 	},
 
 ];
