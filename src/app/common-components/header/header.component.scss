@@ -1,6 +1,7 @@
 @import "../../../variables";
 @import "../../../fonts";
 @import "../../../mixins";
+
 .care-link {
   position: absolute;
   width: 110px;
@@ -27,13 +28,19 @@
   -ms-transform: rotate(-45deg);
   font-weight: bold;
 
-  @media all and (max-width: 450px){
-    width: 100px;
-    height: 100px;
+  @media all and (max-width: 640px) {
+    width: 90px;
+    height: 90px;
+    padding: 5px;
+    border: 2px solid #000;
+
+    a {
+      font-size: 10px;
+    }
   }
 
-  @media all and (max-width: 414px){
-    top: 45px;
+  @media all and (max-width: 414px) {
+    top: 20px;
   }
 
   &:hover {
@@ -67,12 +74,14 @@
     color: #000;
     font-weight: bold;
     font-size: 13px;
+    @media all and (max-width: 640px) {
+      font-size: 10px;
+    }
     &:hover {
       color: #fff;
     }
   }
 
- 
   img {
     width: 100%;
   }
@@ -143,8 +152,8 @@ header {
       // padding: $mr-20 0;
     }
 
-    @media all and (max-width: 430px) {
-      // padding: $mr-10 0;
+    @media all and (max-width: 640px) {
+      padding: $mr-5 0;
     }
 
     .side-nav {
@@ -333,10 +342,42 @@ header {
 
     .language {
       margin: 0;
+
       @include H6-bold();
 
       @media (max-width: $md) {
         margin: 0;
+      }
+
+      @media all and (max-width: 640px) {
+        position: fixed;
+        right: 20px;
+        bottom: 115px;
+        background-color: $localSecondary;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+
+        .dropdown-toggle {
+          span {
+            color: #fff;
+          }
+
+          &:after {
+            position: absolute;
+            top: 4px;
+            left: 0;
+            right: 0;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 10px;
+            color: #fff;
+          }
+        }
+        .dropdown-menu {
+          top: 40px;
+          right: -8px;
+        }
       }
 
       span {
@@ -448,12 +489,9 @@ header {
             font-size: 14px;
             margin-left: 0;
           }
-
-          @media (max-width: $xs) {
-            font-size: 12px;
-            margin-left: $mr-15;
+          @media (max-width: 640px) {
+           width: 100%;
           }
-
           &::after {
             align-self: center;
           }
@@ -466,9 +504,15 @@ header {
             // border: 1px solid $border-color;
             box-shadow: 0 1px 6px 0 rgba(40, 40, 60, 0.2);
           }
-
+          &::after {
+          
+            @media (max-width: 640px) {
+              color: #fff;
+              display: none;
+            }
+          }
           span {
-            width: 40px;
+            width: 30px;
             height: 40px;
             overflow: hidden;
             border-radius: 50%;
@@ -481,16 +525,10 @@ header {
               width: auto;
               height: 100%;
             }
-
-            @media all and (max-width: 450px) {
-              width: 30px;
-              height: 30px;
-            }
-
-            @media all and (max-width: 340px) {
-              width: 20px;
-              height: 20px;
-            }
+            @media (max-width: 640px) {
+              width: auto;
+             }
+           
           }
         }
 
@@ -505,6 +543,11 @@ header {
         .dropdown-menu {
           background-color: #000;
           padding: 5px 15px;
+          top: 35px;
+
+          @media all and (max-width: 640px){
+            top: 40px;
+          }
 
           p {
             &.dropdown-item {
@@ -669,7 +712,7 @@ header {
           margin-left: $mr-20;
         }
 
-        @media (max-width: $xs) {
+        @media (max-width: 640px) {
           font-size: 12px;
           margin-left: $mr-15;
         }
@@ -682,7 +725,7 @@ header {
   color: #000;
   font-size: 14px;
 
-  @media all and (max-width: 400px){
+  @media all and (max-width: 640px) {
     font-size: 12px;
   }
   &:hover {
@@ -701,7 +744,7 @@ header {
   display: none;
   cursor: pointer;
 
-  a{
+  a {
     display: flex;
     width: 100%;
     height: 100%;

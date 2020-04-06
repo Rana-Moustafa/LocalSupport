@@ -118,11 +118,11 @@ agm-marker {
 
 .map-adjust {
   height: 85px;
-  @media (max-width: 450px) {
-    height: 86px;
+  @media (max-width: 640px) {
+    height: 67px;
   }
   @media all and (max-width: 375px) {
-    height: 73px;
+    height: 52px;
   }
 }
 .map-filters {
