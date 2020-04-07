@@ -37,6 +37,8 @@ export class AuthenticationService {
     if (localStorage.getItem('current_lang') === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register');
     } else {
+      console.log('^^^^^^^^^^^');
+      console.log(this.getCurrentLanguage());
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register?lang=' + this.getCurrentLanguage());
     }
   }

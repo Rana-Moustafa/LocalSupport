@@ -55,7 +55,7 @@ export class EditPlaceComponent implements OnInit {
   noImagesUploaded;
   addPlaceFormError = false;
   formErrorMsg;
-  isLoading = true;
+  isLoading;
   placeSize;
   accessableBy;
   accessablity;
@@ -108,11 +108,24 @@ export class EditPlaceComponent implements OnInit {
     private commons: CommonsService) { }
 
   ngOnInit() {
-    this.isLoading = false;
+    this.isLoading = true;
+    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, this.commons.getCurrentLanguage()));
+
     this.commons.show();
     this.getFormSelectionItems();
    
     this.loadMap();
+
+    this.translation.langUpdated.subscribe(
+      (lang) => {
+        this.isLoading = true;
+        localStorage.setItem('current_lang', lang);
+        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
+        this.getFormSelectionItems();
+        // this.getPlacesTypesItems();
+      }
+    );
+
   }
 
   markerDragEnd($event: MouseEvent) {
@@ -143,7 +156,6 @@ export class EditPlaceComponent implements OnInit {
   }
 
   getSinglePlace(id) {
-    this.isLoading = true;
     this.places.getSinglePlaceData(id).subscribe(data => {
       this.isLoading = false;
       this.placeData = data;
@@ -172,7 +184,7 @@ export class EditPlaceComponent implements OnInit {
       console.log(this.allPlaceImages);
       this.timePickerFrom = this.placeData.hr_from;
       this.timePickerTo = this.placeData.hr_to;
-      this.selected = this.placeData.place_type;
+      this.selected = this.placeData.place_type.key;
       if (this.placeData.delivery && this.placeData.delivery.length > 0) {
         this.formDelivery.forEach(category => {
           const retreivedDelivery = this.placeData.delivery.find(x => x.name == category.name);
@@ -208,10 +220,9 @@ export class EditPlaceComponent implements OnInit {
   }
   // get form field data
   getFormSelectionItems() {
-    this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
-      console.log(data)
+      console.log(data);
       this.openTimeFrom = this.formSelection.hr_from;
       this.openTimeTo = this.formSelection.hr_to;
       this.formType = this.formSelection.type;
@@ -312,6 +323,7 @@ export class EditPlaceComponent implements OnInit {
 
 
   updatePlace(form: NgForm) {
+    this.isLoading = true;
     this.updatedImages = this.allPlaceImages;
     this.updatedImages = this.updatedImages.filter((image) => image.url !== this.newplaceFeaturedImage[0].url);
     console.log(this.updatedImages);

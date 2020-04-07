@@ -34,16 +34,11 @@ export class AuthComponent implements OnInit {
               private router: Router,
               public translate: TranslateService,
               private translation: TranslationService,
-              private authService: AuthenticationService) {
-
-    translate.addLangs(['de', 'en']);
-    translate.setDefaultLang('de');
-    localStorage.setItem('current_lang', this.translate.defaultLang);
-    this.langURL = localStorage.getItem('current_lang');
-  }
+              private authService: AuthenticationService) {}
 
   ngOnInit() {
     this.commons.hide();
+    console.log('***')
     this.signupText();
     console.log(this.router.url );
     if (this.router.url === '/signup') {
@@ -57,7 +52,6 @@ export class AuthComponent implements OnInit {
 
     this.translation.langUpdated.subscribe(
       (lang) => {
-        localStorage.setItem('current_lang', lang);
         this.signupText();
       }
     );

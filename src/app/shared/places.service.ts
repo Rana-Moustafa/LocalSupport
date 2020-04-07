@@ -229,13 +229,13 @@ export class PlacesService {
       placeData.append('other_images[' + j + '][image]', imagesUrls[j]);
     }
     for (var i = 0; i < selectedCategories.length; i++) {
-      placeData.append('category[' + i + ']', (selectedCategories[i].key).toString() );
+      placeData.append('category[' + i + ']', (selectedCategories[i].key).toString());
     }
     for (var n = 0; n < selectedDelivery.length; n++) {
-      placeData.append('delivery[' + n + ']', (selectedDelivery[n].key).toString() );
+      placeData.append('delivery[' + n + ']', (selectedDelivery[n].key).toString());
     }
     for (var l = 0; l < selectedPaymentMethod.length; l++) {
-      placeData.append('payment_methods[' + l + ']', (selectedPaymentMethod[l].key).toString() );
+      placeData.append('payment_methods[' + l + ']', (selectedPaymentMethod[l].key).toString());
     }
 
 
@@ -250,7 +250,7 @@ export class PlacesService {
     placeData.append('website', (place.website).toString());
     placeData.append('description', place.description);
     placeData.append('phone_number', (place.phone).toString());
-    placeData.append('type', place.subcats.key );
+    placeData.append('type', place.subcats.key);
     placeData.append('hr_from', (place.openFrom).toString());
     placeData.append('hr_to', (place.openTo).toString());
     placeData.append('lat', latitude);
@@ -259,14 +259,10 @@ export class PlacesService {
       console.log(key + ' ' + value);
     });
 
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
-        placeData);
-    } else {
-    
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place?lang=' + this.getCurrentLanguage(),
-        placeData );
-    }
+
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
+      placeData);
+
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
@@ -486,17 +482,17 @@ export class PlacesService {
 
     if (selectedCategories) {
       for (var i = 0; i < selectedCategories.length; i++) {
-        placeData.append('category[' + i + ']', (selectedCategories[i].name).toString());
+        placeData.append('category[' + i + ']', selectedCategories[i].key);
       }
     }
     if (selectedDelivery) {
       for (var n = 0; n < selectedDelivery.length; n++) {
-        placeData.append('delivery[' + n + ']', (selectedDelivery[n].name).toString());
+        placeData.append('delivery[' + n + ']', selectedDelivery[n].key);
       }
     }
     if (selectedPaymentMethod) {
       for (var l = 0; l < selectedPaymentMethod.length; l++) {
-        placeData.append('payment_methods[' + l + ']', (selectedPaymentMethod[l].name).toString());
+        placeData.append('payment_methods[' + l + ']', selectedPaymentMethod[l].key);
       }
     }
 
@@ -508,7 +504,6 @@ export class PlacesService {
     }
 
     placeData.append('token', JSON.parse(localStorage.getItem('token')));
-    placeData.append('token_type', JSON.parse(localStorage.getItem('token_type')));
     placeData.append('name', place.placename);
     placeData.append('address', address);
     placeData.append('number', '');
@@ -530,13 +525,8 @@ export class PlacesService {
       console.log(key + ' ' + value);
     });
 
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
       placeData);
-    } else {
-      return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
-      placeData + '&lang=' + this.getCurrentLanguage());
-    }
   }
 
   userPlaces() {
