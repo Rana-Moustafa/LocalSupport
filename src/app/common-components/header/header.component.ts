@@ -51,67 +51,30 @@ export class HeaderComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private places: PlacesService) {
 
-    console.log('header');
-    // translate.addLangs(['de', 'en']);
-    // translate.setDefaultLang('de');
-    // localStorage.setItem('current_lang', 'de');
-    // translate.use('de');
   }
 
   ngOnInit() {
     this.langURL = localStorage.getItem('current_lang');
-    // this.commons.showTranslation();
-    // this.languageSwitcherStatus = this.commons.getLanguageSwitcherStatus();
-    // this.commons.languageSwitcherStatus.subscribe( status => {
-    //   // console.log(status);
-    //   this.languageSwitcherStatus = status;
-    // });
     this.userProfileImage = localStorage.getItem('profile_image');
     this.userProfileImage = (this.sanitizer.bypassSecurityTrustUrl(this.userProfileImage));
     this.userProfileImage = this.userProfileImage.changingThisBreaksApplicationSecurity;
     // this.placeTypes(this.langURL);
     this.userData.currentProfilePicture.subscribe(picture => this.profilePicture = picture);
     this.getUserProfilePicture();
-    // this.translate.use(this.langURL);
-    // if (!localStorage.getItem('current_lang')) {
-    //   this.translation.addTranslationLanguage('de');
-    //   this.translation.addTranslationLanguage(this.translate.defaultLang);
-    //   this.translate.use('de');
-    //   this.router.url.replace(this.route.snapshot.params.language, this.translate.defaultLang);
-    //   // this.placeTypes(this.langURL);
-    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
-    //   this.router.url.replace(this.route.snapshot.params.language, 'en');
-    //   this.translate.use('de');
-    //   // this.placeTypes(this.langURL);
-    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'de') {
-    //   this.router.url.replace(this.route.snapshot.params.language, 'de');
-    //   this.translate.use('de');
-    //   // this.placeTypes(this.langURL);
-    // }
-
-
     this.translation.langUpdated.subscribe(
       (lang) => {
         console.log(lang);
         localStorage.setItem('current_lang', lang);
-        // this.translation.useLanguage(lang);
-        
-        // this.toggleSideNav();
-        // console.log(this.route.snapshot.params.language);
-        // this.router.url.replace(this.route.snapshot.params.language, lang);
-        // this.translation.useLanguage(lang);
-        // this.translate.use(lang);
-        // this.placeTypes(lang);
         this.langURL = lang;
       }
     );
   }
-  getSelectedLang(lang) {
 
+  getSelectedLang(lang) {
     this.selectedLang = lang;
     this.translation.addTranslationLanguage(lang);
-
   }
+
   toggleSideNav() {
     this.sideNav = !this.sideNav;
   }

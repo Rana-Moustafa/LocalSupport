@@ -1,2 +1,9 @@
-<div [innerHTML]="privacyContent? privacyContent.content: ''">
+<div *ngIf="isLoading" class="loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+<div class="inner-pages">
+    <div class="container">
+        <div [innerHTML]="privacyContent? privacyContent.content: ''">
+        </div>
+    </div>
 </div>

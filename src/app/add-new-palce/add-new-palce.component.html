@@ -13,32 +13,8 @@
               <p>{{ "Business_register_text_2" | translate }}: <a
                   href="mailto: act@belocalhero.com">act@belocalhero.com</a>
               </p>
-              <!-- <div class="c-activities_section__right">
-                <h3>
-                  {{"what_you_can_do_here" | translate}}
-                </h3>
-                <div class="c-activities_section__icons">
-                  <ul class="radio-images">
-                    <li *ngFor="let activity of activities;  let i = index;">
-                      <div class="form-group">
-                        <label class="{{activity.name}}-checkbox">
-                          <input type="checkbox" value="{{i}}">
-                          <span>
-                            <img [src]="activity.in_active_icon" alt="" class="img-thumbnail icon_inactive">
-                            <img [src]="activity.active_icon" alt="" class="img-thumbnail icon_active">
-                          </span>
-                        </label>
-                      </div>
-                      <small>{{activity.name}}</small>
-                    </li>
-                  </ul>
-                </div>
-              </div> -->
-              <div class="c-activities_section_left">
 
-                <!-- <button class="Addnew-btn" type="submit" class="btn btn-primary" >
-                  {{"Addplace" | translate}}
-                </button> -->
+              <div class="c-activities_section_left">
               </div>
             </div>
             <p class="help-block" *ngIf="addPlaceFormError && addPlace.submitted"> {{ formErrorMsg }} </p>
@@ -136,11 +112,7 @@
                   *ngIf="!description.valid && description.touched && description.errors.required">{{'field_requird'  | translate }}</small>
               </div>
             </div>
-            <!-- end -->
 
-            <!-- start -->
-            <!-- end -->
-            <!-- start -->
             <div class="form-group">
               <h4 class="subtitle">{{"local_Type" |translate}} (*):</h4>
               <div class="form_wrapper radio-form">
@@ -301,20 +273,12 @@
                 </div>
               </div>
             </div>
-            <!-- <button class="btn btn-original" type="submit"
+            <button class="btn btn-original" type="submit"
               [disabled]="!addPlace.valid || (!latitude && !longitude) || (!checkValidImages()) ">
-              {{"local_add_bussiness" | translate}}</button> -->
-
-              <button class="btn btn-original" type="submit"
-              >
               {{"local_add_bussiness" | translate}}</button>
-
           </form>
         </div>
       </div>
-      <!-- <input #fileUpload type="file" (click)="fileUpload.value = null" (change)="getFileDetails($event)" style="display:none"
-      accept="image/*">
-       -->
     </div>
   </div>
 </div>

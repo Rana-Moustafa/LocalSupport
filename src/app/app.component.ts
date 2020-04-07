@@ -64,9 +64,7 @@ export class AppComponent implements OnInit {
     console.log(browserLang);
     translate.use(browserLang.match(/de|en|fr|it|sv/) ? browserLang : 'de');
     localStorage.setItem('current_lang', browserLang);
-    
-    // this.router.url.replace(this.route.snapshot.params.language,
-    //   localStorage.getItem('current_lang'));
+
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang(translate.getBrowserLang());
     if (!localStorage.getItem('current_lang')) {
@@ -76,42 +74,13 @@ export class AppComponent implements OnInit {
       localStorage.setItem('current_lang', browserLang);
       this.router.url.replace(this.route.snapshot.params.language,
         localStorage.getItem('current_lang'));
-    } 
-    // else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
-    //   this.translate.use('en');
-    //   localStorage.setItem('current_lang', 'en');
-    //   this.router.url.replace(this.route.snapshot.params.language,
-    //     localStorage.getItem('current_lang'));
-    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'fr') {
-    //   this.translate.use('fr');
-    //   localStorage.setItem('current_lang', 'fr');
-    //   this.router.url.replace(this.route.snapshot.params.language,
-    //     localStorage.getItem('current_lang'));
-    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'it') {
-    //   this.translate.use('it');
-    //   localStorage.setItem('current_lang', 'it');
-    //   this.router.url.replace(this.route.snapshot.params.language,
-    //     localStorage.getItem('current_lang'));
-    // } else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'rm') {
-    //   this.translate.use('rm');
-    //   localStorage.setItem('current_lang', 'rm');
-    //   this.router.url.replace(this.route.snapshot.params.language,
-    //     localStorage.getItem('current_lang'));
-    // }
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    // translate.use(translate.getBrowserLang());
-    // console.log(this.langURL);
-    // translate.addLangs(['de', 'en']);
-    // translate.setDefaultLang('de');
-
+    }
 
     // Connect to Google Analytics
     const navEndEvents = router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     );
-      console.log(navEndEvents)
     navEndEvents.subscribe((event: NavigationEnd) => {
-      console.log(event)
       gtag('config', 'UA-161700458-1', {
         'page_path': event.urlAfterRedirects
       });

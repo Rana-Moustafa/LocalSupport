@@ -65,16 +65,16 @@ const appRoutes: Routes = [
 	{ path: ':language/edit-place/:id/:slug', component: EditPlaceComponent },
 	{ path: ':language/not-found', component: NotfoundPageComponent },
 	{ path: ':language/advertising', component: AdvertisingComponent },
+	{ path: ':language/pages/about-us', component: AboutUsComponent },
+	{ path: ':language/pages/legal', component: LegalComponent },
+	{ path: ':language/pages/privacy-policy', component: PrivacyComponent },
 	{
 		path: ':language/pages', component: InnerPagesComponent, children: [
-			{ path: 'about-us', component: AboutUsComponent },
 			{ path: 'contact-us', component: ContactUsComponent },
 			{ path: 'press', component: PressComponent },
 			{ path: 'impressum', component: ImpressumComponent },
 			{ path: 'q&a', component: QuestionsAndAnswersComponent },
 			{ path: 'advertising', component: AdvertisingComponent },
-			{ path: 'legal', component: LegalComponent },
-			{ path: 'privacy-policy', component: PrivacyComponent }
 		]
 	},
 	{
@@ -85,7 +85,7 @@ const appRoutes: Routes = [
 
 @NgModule({
 	imports: [RouterModule.forRoot(appRoutes, {
-		onSameUrlNavigation: 'reload',
+		
 		anchorScrolling: 'enabled',
 		scrollPositionRestoration: 'enabled',
 		scrollOffset: [0, 64]

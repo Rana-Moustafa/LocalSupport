@@ -364,14 +364,7 @@ header {
           }
 
           &:after {
-            position: absolute;
-            top: 4px;
-            left: 0;
-            right: 0;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            width: 10px;
-            color: #fff;
+           display: none;
           }
         }
         .dropdown-menu {
@@ -504,15 +497,9 @@ header {
             // border: 1px solid $border-color;
             box-shadow: 0 1px 6px 0 rgba(40, 40, 60, 0.2);
           }
-          &::after {
-          
-            @media (max-width: 640px) {
-              color: #fff;
-              display: none;
-            }
-          }
+         
           span {
-            width: 30px;
+            width: 40px;
             height: 40px;
             overflow: hidden;
             border-radius: 50%;

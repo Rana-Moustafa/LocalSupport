@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PrivacyComponent implements OnInit {
   privacyContent;
+  isLoading;
   constructor(
     private commons: CommonsService,
     private translation: TranslationService,
@@ -17,24 +18,32 @@ export class PrivacyComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.translation.getLang());
-    this.router.url.replace(this.route.snapshot.params.language,
-      this.translation.getLang());
+   
+    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+      this.translation.getLang()));
+
+    this.privacyData();
     this.translation.langUpdated.subscribe(
       (lang) => {
         localStorage.setItem('current_lang', lang);
-        this.privacyData();
+       // this.privacyData();
+        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+          lang));
       }
     );
 
-    this.privacyData();
+
   }
 
   privacyData() {
-    this.commons.getPrivacyPage().subscribe( data => {
+    this.isLoading = true;
+    this.commons.getPrivacyPage().subscribe(data => {
       this.privacyContent = data;
+      this.isLoading = false;
+      console.log(data);
     }, error => {
       console.log(error);
+      this.isLoading = false;
     });
   }
 }

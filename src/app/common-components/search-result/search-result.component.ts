@@ -63,6 +63,7 @@ export class SearchResultComponent implements OnInit {
 
     this.translation.langUpdated.subscribe(
       (lang) => {
+        this.isLoading = true;
         this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
         this.page = 0;
         this.allPlaces = [];

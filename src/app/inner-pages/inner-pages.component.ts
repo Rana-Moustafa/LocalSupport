@@ -20,16 +20,6 @@ export class InnerPagesComponent implements OnInit {
 
   ngOnInit() {
     this.commons.show();
-    console.log(this.translation.getLang());
-    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-      this.translation.getLang()));
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        console.log(this.route.snapshot.params.language);
-        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-          lang));
-      }
-    );
   }
 
 }
