@@ -30,6 +30,7 @@ import { SearchResultComponent } from './common-components/search-result/search-
 import { EditPlaceComponent } from './single-place/edit-place/edit-place.component';
 import { LegalComponent } from './inner-pages/legal/legal.component';
 import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
+import { AppComponent } from './app.component';
 
 let ll = localStorage.getItem('current_lang');
 // let ll = 'de'
@@ -38,16 +39,23 @@ const appRoutes: Routes = [
 
 	{
 		path: '',
-		redirectTo: 'de/intro', pathMatch: 'full'
+		redirectTo: 'de', pathMatch: 'full'
+	},
+
+	{
+		path: ':language', component: AppComponent, children: [
+			{ path: '', component: HomepageComponent },
+			{ path: 'intro', component: IntroComponent },
+			{ path: 'search-result', component: SearchResultComponent, pathMatch: 'full' },
+		]
 	},
 	{ path: 'signup', component: AuthComponent },
 	{ path: 'signin', component: AuthComponent },
-	{ path: ':language/search-result', component: SearchResultComponent },
+
 	{ path: 'forgot-password', component: AuthComponent },
 	{ path: ':language', component: HomepageComponent },
 	{ path: ':language/thank-you', component: ThankYouComponent },
 
-	{ path: ':language/intro', component: IntroComponent },
 	{
 		path: ':language/single-place', component: SinglePlaceComponent,
 		resolve: { location: LocationResloverService }

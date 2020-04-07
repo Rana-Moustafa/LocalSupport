@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
     console.log(browserLang);
     translate.use(browserLang.match(/de|en|fr|it|sv/) ? browserLang : 'de');
     localStorage.setItem('current_lang', browserLang);
-    
+
     // this.router.url.replace(this.route.snapshot.params.language,
     //   localStorage.getItem('current_lang'));
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem('current_lang', browserLang);
       this.router.url.replace(this.route.snapshot.params.language,
         localStorage.getItem('current_lang'));
-    } 
+    }
     // else if (localStorage.getItem('current_lang') && localStorage.getItem('current_lang') === 'en') {
     //   this.translate.use('en');
     //   localStorage.setItem('current_lang', 'en');
@@ -109,9 +109,7 @@ export class AppComponent implements OnInit {
     const navEndEvents = router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     );
-      console.log(navEndEvents)
     navEndEvents.subscribe((event: NavigationEnd) => {
-      console.log(event)
       gtag('config', 'UA-161700458-1', {
         'page_path': event.urlAfterRedirects
       });
@@ -119,7 +117,15 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
-
+    console.log(localStorage.getItem('current_lang'));
+    this.translation.langUpdated.subscribe(
+      (lang) => {
+        localStorage.setItem('current_lang', lang);
+        let u = this.router.url;
+        u = u.replace(this.route.snapshot.params.language.toString(), lang);
+        this.router.navigateByUrl(u);
+      }
+    );
     if (!localStorage.getItem('current_lang')) {
       this.langURL = 'de';
     }

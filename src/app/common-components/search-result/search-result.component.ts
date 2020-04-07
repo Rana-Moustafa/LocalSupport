@@ -50,6 +50,9 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = false;
+    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+      localStorage.getItem('current_lang')));
+   
     // this.searchResult();
     this.searchResultsService._searchResultsRespond.subscribe(message => {
       this.searchWord = JSON.parse(message);
@@ -63,7 +66,7 @@ export class SearchResultComponent implements OnInit {
 
     this.translation.langUpdated.subscribe(
       (lang) => {
-        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
+        // this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
         this.page = 0;
         this.allPlaces = [];
         this.allSearchPlaces = [];
