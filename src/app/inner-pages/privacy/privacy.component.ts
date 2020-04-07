@@ -18,7 +18,7 @@ export class PrivacyComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-   
+    this.commons.show();
     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
       this.translation.getLang()));
 

@@ -19,7 +19,6 @@ export class InnerPagesComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.commons.show();
   }
 
 }
