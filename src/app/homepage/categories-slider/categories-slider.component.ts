@@ -77,7 +77,7 @@ export class CategoriesSliderComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.productsData)
+    // console.log(this.productsData);
     this.translation.addRouterLangParam();
     this.translation.langUpdated.subscribe(
       (lang) => {
@@ -98,7 +98,7 @@ export class CategoriesSliderComponent implements OnInit {
   getCategoriesSliders() {
 
     this.places.getPlacesCategories(this.placesCategoriesChildId, 'sort_latest', 1, 15).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.categorySliderDetails = JSON.parse(JSON.stringify(data));
       if (this.categorySliderDetails.length === 0) {
         this.categoryEmpty = true;
@@ -111,19 +111,19 @@ export class CategoriesSliderComponent implements OnInit {
     });
   }
   showMorePlaces(cateId, catName) {
-    console.log(cateId);
-    console.log(catName);
+    // console.log(cateId);
+    // console.log(catName);
     this.router.navigateByUrl('/' + this.langURL + '/places-category', { state: { id: cateId, name: catName } });
   }
 
   updateFavList($event) {
     this.placeData = $event;
-    console.log($event);
-    console.log(this.favoritePlacesSliderData);
+    // console.log($event);
+    // console.log(this.favoritePlacesSliderData);
 
     if (this.placeData.is_favorited) {
       this.favoritePlacesSliderData.push($event);
-      console.log(this.favoritePlacesSliderData);
+      // console.log(this.favoritePlacesSliderData);
     } else {
 
     }

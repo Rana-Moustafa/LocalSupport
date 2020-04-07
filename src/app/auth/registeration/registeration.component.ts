@@ -21,7 +21,8 @@ export class RegisterationComponent implements OnInit {
   userData;
   isLoading = false;
 
-  constructor(private countries: CountriesService,
+  constructor(
+    private countries: CountriesService,
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
@@ -36,8 +37,6 @@ export class RegisterationComponent implements OnInit {
 
     this.authService.userRegisteration(this.signupForm.value).subscribe(data => {
       this.isLoading = false;
-      console.log('registeration')
-      console.log(data)
       this.userData = data;
       localStorage.setItem('token', JSON.stringify(this.userData.token));
       localStorage.setItem('profile_image', JSON.stringify(this.userData.profile_image));

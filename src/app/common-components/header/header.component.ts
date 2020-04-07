@@ -58,7 +58,6 @@ export class HeaderComponent implements OnInit {
     this.userProfileImage = localStorage.getItem('profile_image');
     this.userProfileImage = (this.sanitizer.bypassSecurityTrustUrl(this.userProfileImage));
     this.userProfileImage = this.userProfileImage.changingThisBreaksApplicationSecurity;
-    // this.placeTypes(this.langURL);
     this.userData.currentProfilePicture.subscribe(picture => this.profilePicture = picture);
     this.getUserProfilePicture();
     this.translation.langUpdated.subscribe(
@@ -95,7 +94,7 @@ export class HeaderComponent implements OnInit {
   }
   searchResult(resultForm: NgForm) {
     this.searchResultsService.getSearchResultSubject(resultForm.value.search);
-    console.log(resultForm.value.search);
+    // console.log(resultForm.value.search);
     this.router.navigate(['/' + this.langURL + '/search-result'], { queryParams: { search: JSON.stringify(resultForm.value.search) } });
     if (this.mobileSearch) {
       this.toggleSearch();

@@ -190,7 +190,7 @@ export class AddNewPalceComponent implements OnInit {
   updateProfilePicture() {
     this.imagesUrls.push(this.croppedImage);
     this.imagesNames.push(this.uploadedImage);
-    console.log(this.imagesUrls);
+    // console.log(this.imagesUrls);
     if (this.imagesUrls.length > 5) {
       this.maxNumber = true;
     } else if (this.imagesUrls.length < 1) {
@@ -203,8 +203,8 @@ export class AddNewPalceComponent implements OnInit {
   getFormSelectionItems() {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
-      console.log('form selection');
-      console.log(data);
+      // console.log('form selection');
+      // console.log(data);
       this.formSelection = data;
       this.formType = this.formSelection.type;
       this.formCategories = this.formSelection.category;
@@ -229,7 +229,6 @@ export class AddNewPalceComponent implements OnInit {
     && this.newplaceFeaturedImage.length);
   }
   checkValidImages() {
-    // //console.log(this.noFeaturedImage)
     if (this.imagesUrls.length < 1 ||
       this.imagesUrls.length > 5) {
       this.noImages = true;
@@ -271,19 +270,19 @@ export class AddNewPalceComponent implements OnInit {
     }
   }
   markerDragEnd($event: MouseEvent) {
-    console.log($event);
+    // console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
+     // console.log(results);
+     // console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 15;
-          console.log(results[0].formatted_address)
+          // console.log(results[0].formatted_address);
           this.placeaddress = results[0].formatted_address;
         } else {
           window.alert('No results found');
@@ -291,7 +290,6 @@ export class AddNewPalceComponent implements OnInit {
       } else {
         window.alert('Geocoder failed due to: ' + status);
       }
- 
     });
   }
 
@@ -330,7 +328,7 @@ export class AddNewPalceComponent implements OnInit {
   // console.log(this.addPlaceName.value);
    if (!this.maxNumber) {
     this.imageCompress.uploadFile().then(({image, orientation}) => {
-        console.log(image);
+        // console.log(image);
         this.imgResultBeforeCompress = image;
         this.featuredImageError = true;
         console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
@@ -341,8 +339,6 @@ export class AddNewPalceComponent implements OnInit {
             this.imagesResultsNames = 'place-name-' + this.addPlaceName.value + '-' + this.imageCompress.byteCount(result);
             this.imagesUrls.push(this.imgResultAfterCompress)
             this.imagesNames.push(this.imagesResultsNames);
-            console.log(this.imagesUrls);
-            console.log(this.imagesNames);
             console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
 
             if (this.imagesUrls.length > 5) {
@@ -360,12 +356,12 @@ export class AddNewPalceComponent implements OnInit {
 }
 
   getFileDetails(event) {
-    console.log(event);
+   // console.log(event);
     if (event.target.files && event.target.files[0]) {
       const filesAmount = event.target.files.length;
 
       for (let i = 0; i < filesAmount; i++) {
-        console.log(event.target.files[i]);
+        // console.log(event.target.files[i]);
         this.imagesNames.push(event.target.files[i].name);
         // this.imagesUrls.push(this.urls);
         var reader = new FileReader();
@@ -434,9 +430,6 @@ export class AddNewPalceComponent implements OnInit {
     this.openTo = this.openTimeTo;
     form.value.openFrom = this.openFrom.time.toLowerCase();
     form.value.openTo = this.openTo.time.toLowerCase();
-    console.log('this.selectedType');
-    console.log(this.selectedType);
-    console.log(form.value);
     this.places.addNewPlace(
       form.value,
       this.newplaceFeaturedImage,

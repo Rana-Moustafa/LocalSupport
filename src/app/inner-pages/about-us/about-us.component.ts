@@ -36,7 +36,7 @@ export class AboutUsComponent implements OnInit {
   getAbout(lang) {
     this.isLoading = true;
     this.commons.getAboutPage(lang).subscribe( data => {
-      console.log(data);
+      // console.log(data);
       this.isLoading = false;
       this.aboutContent = data;
     }, error => {

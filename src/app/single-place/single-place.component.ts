@@ -79,7 +79,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
 
   addToFav(id) {
     this.places.addToFavPlaces(id).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     }, error => {
       console.log(error);
     });

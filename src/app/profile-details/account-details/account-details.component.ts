@@ -37,30 +37,24 @@ export class AccountDetailsComponent implements OnInit {
     this.userDataService.confirmPassStatus.subscribe((status) => this.changePassword = !status );
 
   }
- 
-  ngOnInit() {
- 
-  
 
+  ngOnInit() {
     this.activeRoute.queryParams
       .subscribe((params) => {
-        //console.log(params.third_party_reset)
+        // console.log(params.third_party_reset)
         if(params.third_party_reset != undefined){
           this.changePassword = false;
         }
     });
 
     this.countriesList = this.countries.countriesData;
-    
-
     this.userDataService.getUserDetails().subscribe(data => {
-     
       this.userDataDisplayParent = data;
-      //console.log(this.userDataDisplayParent)
+      // console.log(this.userDataDisplayParent)
       this.sendProfilePicture()
 
-    }, error =>{
-      //console.log(error);
+    }, error => {
+      // console.log(error);
       if(error.status === 411){
         this.router.navigate(['/' + this.langURL + '/signin']);
       }
@@ -69,11 +63,9 @@ export class AccountDetailsComponent implements OnInit {
     this.userDataService.profileDataUpdated.subscribe((updated) => {
       this.userDataDisplayParent = updated;
       this.userProfilePicture.emit(this.userDataDisplayParent)
-    }, error =>{
-      //console.log('error')
+    }, error => {
+      // console.log('error')
     });
-      
-   
   }
   sendProfilePicture() {
     this.userProfilePicture.emit(this.userDataDisplayParent)
@@ -90,16 +82,15 @@ export class AccountDetailsComponent implements OnInit {
     this.closeForm = !this.closeForm;
 
   }
-  startpasswordEditMode(){
-    this.HideEditAndChangePass= false;
+  startpasswordEditMode() {
+    this.HideEditAndChangePass = false;
     this.changePassword = true;
-    
-    this.changePassword = !this.changePassword
+    this.changePassword = !this.changePassword;
   }
 
-  EndpasswordEditMode(){
+  EndpasswordEditMode() {
     this.changePassword = !this.changePassword;
-    this.HideEditAndChangePass= true;
+    this.HideEditAndChangePass = true;
   }
 
 }

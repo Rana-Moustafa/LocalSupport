@@ -240,8 +240,8 @@ export class MapComponent implements OnInit {
   selected;
   fitBoundsMarkers = true;
   seachResults;
-  www = []
-  constructor(private mapsAPILoader: MapsAPILoader,
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private map: MapsService,
     private places: PlacesService,
@@ -252,20 +252,6 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     const uA = navigator.userAgent;
     const vendor = navigator.vendor;
-    // if ('geolocation' in navigator) {
-    //   navigator.geolocation.getCurrentPosition((position) => {
-    //     console.log('current location');
-    //     console.log(this.latitude);
-    //     console.log(this.latitude);
-    //     // this.latitude = position.coords.latitude;
-    //     // this.longitude = position.coords.longitude;
-    //   }, error => {
-    //     console.log(error);
-    //     // if (/Safari/i.test(uA) && /Apple Computer/.test(vendor) && !/Mobi|Android/i.test(uA)) {
-    //     //   confirm('Please allow location detection from : System Preferences->Security & Privacy-> Privacy ');
-    //     // }
-    //   });
-    // }
     this.translation.langUpdated.subscribe(
       (lang) => {
         // console.log(lang)
@@ -319,8 +305,8 @@ export class MapComponent implements OnInit {
           // set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
-          console.log(this.lat)
-          console.log(this.lng)
+          // console.log(this.lat);
+          // console.log(this.lng);
           this.zoom = 10;
         });
       });
@@ -342,8 +328,8 @@ export class MapComponent implements OnInit {
         this.lat = this.latitude;
         this.lng = this.longitude;
         this.zoom = 10;
-        console.log(this.latitude);
-        console.log(this.longitude);
+        // console.log(this.latitude);
+        // console.log(this.longitude);
         this.getAddress(this.latitude, this.longitude);
       });
     }
@@ -358,7 +344,7 @@ export class MapComponent implements OnInit {
   }
 
   getAddress(latitude, longitude) {
-    console.log(latitude, ' ', longitude);
+    // console.log(latitude, ' ', longitude);
     const geoCoder = new google.maps.Geocoder();
     geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
 

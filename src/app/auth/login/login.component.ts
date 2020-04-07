@@ -51,9 +51,6 @@ export class LoginComponent implements OnInit {
       this.authService.autoLogout(this.userData.token_expiration_date);
       this.loginForm.reset();
       this.router.navigate([this.langURL + '/profile']);
-      // this.newProfilePicture = this.userData.profile_image;
-      // this.userDataService.changeProfilePicture(this.newProfilePicture);
-      // this.authService.autoLogout(this.userData.token_expiration_date)
     }, (errorMessage) => {
       this.formError = true;
       this.formErrorMsg = errorMessage;

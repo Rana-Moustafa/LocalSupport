@@ -39,8 +39,6 @@ export class HomepageComponent implements OnInit {
     this.translation.langUpdated.subscribe(
       (lang) => {
         localStorage.setItem('current_lang', lang);
-        const currentLang = localStorage.getItem('current_lang');
-        const translatedLang = lang;
         let u = this.router.url;
         u = u.replace(this.route.snapshot.params.language.toString(), lang);
         this.router.navigateByUrl(u);

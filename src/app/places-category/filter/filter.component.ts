@@ -56,7 +56,8 @@ export class FilterComponent implements OnInit {
   types;
 
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private places: PlacesService,
     private translation: TranslationService) { }
 
@@ -139,7 +140,7 @@ export class FilterComponent implements OnInit {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
-      console.log(this.formSelection);
+      // console.log(this.formSelection);
       this.formTypes = this.formSelection.type;
       this.formCategories = this.formSelection.category;
       this.formDelivery = this.formSelection.delivery;
@@ -163,9 +164,9 @@ export class FilterComponent implements OnInit {
   public filterPlaces(form: NgForm) {
     this.sendCheckedCategories();
     this.types = form.value.subcats.name;
-    console.log(this.types);
+    // console.log(this.types);
     const filterObject = this.constructFiltertObject();
-    //console.log(filterObject);
+    // console.log(filterObject);
     this.placesHandlerEvent.emit(filterObject);
 
   }

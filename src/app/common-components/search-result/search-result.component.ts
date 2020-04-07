@@ -50,13 +50,12 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = false;
-    // this.searchResult();
     this.searchResultsService._searchResultsRespond.subscribe(message => {
       this.searchWord = JSON.parse(message);
       this.searchQuery(this.searchWord, localStorage.getItem('current_lang'));
-      console.log(this.searchWord);
+      // console.log(this.searchWord);
     });
-    console.log(this.route.snapshot.queryParamMap.get('search'));
+    // console.log(this.route.snapshot.queryParamMap.get('search'));
     this.searchWord = JSON.parse(this.route.snapshot.queryParamMap.get('search'));
     this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), localStorage.getItem('current_lang'));
     // this.searchResults = this.route.snapshot.queryParamMap.get('search');
@@ -69,9 +68,6 @@ export class SearchResultComponent implements OnInit {
         this.allPlaces = [];
         this.allSearchPlaces = [];
         this.isLoading = true;
-        // console.log(lang);
-        // // this.toggleSideNav();
-        // this.translate.use(lang);
         this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), lang);
       }
     );
@@ -93,8 +89,8 @@ export class SearchResultComponent implements OnInit {
       this.isLoading = true;
       this.page++;
       this.placesService.filteredPlaces(this.filterComponent, this.page, this.perPage).subscribe(data => {
-        console.log('filtered places');
-        console.log(data);
+        // console.log('filtered places');
+        // console.log(data);
         this.isLoading = false;
         this.sideNav = false;
         this.placesResults = JSON.parse(JSON.stringify(data));
@@ -102,9 +98,7 @@ export class SearchResultComponent implements OnInit {
           this.allPlaces.push(this.placesResults[i]);
         }
         if ((this.placesResults && this.placesResults.length === 0) || !this.placesResults) {
-          console.log('no comments');
           this.isFullListDisplayed = true;
-          // this.loadingComments = false;
         }
         if (this.allPlaces.length === 0) {
           this.notfound = true;
@@ -126,7 +120,7 @@ export class SearchResultComponent implements OnInit {
       this.isLoading = true;
       this.page++;
       this.searchResultsService.GetSearchResults(search, this.page, this.perPage, lang).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.isLoading = false;
         this.results = data;
         for (var i = 0; i < this.results.length; i++) {
@@ -134,14 +128,12 @@ export class SearchResultComponent implements OnInit {
         }
         if ((this.results && this.results.length === 0) || !this.results) {
           this.isFullListDisplayed = true;
-          // this.loadingComments = false;
         }
         if (this.allSearchPlaces.length === 0) {
           this.notfound = true;
         } else {
           this.notfound = false;
         }
-        // this.SearchResultsService.getSearchResultSubject().next(data)
       }, error => {
         console.log(error);
         this.isLoading = false;
