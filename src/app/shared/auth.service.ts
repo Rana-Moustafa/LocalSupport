@@ -37,8 +37,6 @@ export class AuthenticationService {
     if (localStorage.getItem('current_lang') === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register');
     } else {
-      console.log('^^^^^^^^^^^');
-      console.log(this.getCurrentLanguage());
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/register?lang=' + this.getCurrentLanguage());
     }
   }
@@ -154,12 +152,12 @@ export class AuthenticationService {
 
     let now = new Date();
     let expiredAfter = (new Date(expirationDuration * 1000).getTime()) - ((new Date()).getTime());
-    console.log(expiredAfter)
+    // console.log(expiredAfter)
     setTimeout(() => {
       // console.log('this.tokenExpirationTimer');
       // console.log(this.tokenExpirationTimer);
       this.userLogout();
-    }, +expiredAfter)
+    }, +expiredAfter);
   }
 
   isLoggedIn() {

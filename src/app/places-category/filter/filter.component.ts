@@ -99,11 +99,9 @@ export class FilterComponent implements OnInit {
   ngOnInit() {
     this.inputName = this.itemId + '_rating';
     this.getFormSelectionItems();
-    this.getPlacesTypesItems();
     this.translation.langUpdated.subscribe(
       (lang) => {
         this.getFormSelectionItems();
-        this.getPlacesTypesItems();
       }
     );
   }
@@ -140,7 +138,8 @@ export class FilterComponent implements OnInit {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
-      // console.log(this.formSelection);
+      console.log('filter this.formSelection');
+      console.log(this.formSelection);
       this.formTypes = this.formSelection.type;
       this.formCategories = this.formSelection.category;
       this.formDelivery = this.formSelection.delivery;
@@ -163,7 +162,7 @@ export class FilterComponent implements OnInit {
 
   public filterPlaces(form: NgForm) {
     this.sendCheckedCategories();
-    this.types = form.value.subcats.name;
+    this.types = form.value.subcats.key;
     // console.log(this.types);
     const filterObject = this.constructFiltertObject();
     // console.log(filterObject);

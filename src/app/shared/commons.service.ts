@@ -111,7 +111,7 @@ export class CommonsService {
     }
   }
   getNotFound() {
-    if (localStorage.getItem('current_lang') === 'en') {
+    if (localStorage.getItem('current_lang') === 'de') {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/404');
     } else {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/404?lang=' + this.getCurrentLanguage());

@@ -2,7 +2,7 @@
   <div class="single-place__title" >
     <h1 [innerHTML]="singlePlaceDetails.title ? singlePlaceDetails.title.rendered : ' '"></h1>
     <div class="single-place__title__subtitle">
-      <span> {{singlePlaceDetails? singlePlaceDetails.place_type: ''}}</span>
+      <span> {{singlePlaceDetails? singlePlaceDetails.place_type.name: ''}}</span>
       <!-- <span *ngFor="let place of singlePlaceDetails.place_type; let i = index"> <span *ngIf="i != 0"> / </span>
         {{ singlePlaceAddress?  place.name : ' ' }} </span> -->
 

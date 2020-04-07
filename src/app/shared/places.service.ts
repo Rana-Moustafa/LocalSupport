@@ -54,8 +54,6 @@ export class PlacesService {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
         + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1');
     } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
-        + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1&lang=' + this.getCurrentLanguage());
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
         + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1&lang=' + this.getCurrentLanguage());
     }
@@ -63,8 +61,7 @@ export class PlacesService {
   getPlacesItems() {
     if (localStorage.getItem('current_lang') === 'en') {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?lang=en');
-    }
-    else {
+    } else {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place');
     }
   }
@@ -91,7 +88,6 @@ export class PlacesService {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 15;
-        //////console.log(this.latitude + '' + this.longitude)
       });
     }
   }
@@ -111,13 +107,10 @@ export class PlacesService {
 
     if (localStorage.getItem('current_lang') === 'en') {
       return this.http.post(environment.baseURL + '/wp-json/wp/v2/comments?core&lang=en',
-        commentData
-      )
-    }
-    else {
+        commentData );
+    } else {
       return this.http.post(environment.baseURL + '/wp-json/wp/v2/comments?core',
-        commentData
-      )
+        commentData );
     }
 
   }
@@ -125,50 +118,45 @@ export class PlacesService {
   getPlaceParentComments(postId, page, sum) {
     const token = localStorage.getItem('token');
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?parent=0&post=' + postId + '&per_page=' + sum + '&page=' + page + '&token=' + JSON.parse(localStorage.getItem('token')) + '&lang=en');
-    }
-    else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?parent=0&post=' + postId + '&per_page=' + sum + '&page=' + page + '&token=' + JSON.parse(localStorage.getItem('token')));
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?parent=0&post=' + postId
+      + '&per_page=' + sum + '&page=' + page + '&token=' + JSON.parse(localStorage.getItem('token')) + '&lang=en');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?parent=0&post=' + postId
+      + '&per_page=' + sum + '&page=' + page + '&token=' + JSON.parse(localStorage.getItem('token')));
     }
   }
 
   getPlaceReplies(postId, parentId) {
     if (localStorage.getItem('current_lang') === 'en') {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?parent=' + parentId + '&post=' + postId + '&lang=en');
-    }
-    else {
+    } else {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?parent=' + parentId + '&post=' + postId);
     }
-
   }
 
   getFavoritePlaces(page, perpage) {
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lang=en&favorite&skip_cache=1' + '&token=' + JSON.parse(localStorage.getItem('token')) + '&page=' + page + '&per_page=' + perpage)
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lang=en&favorite&skip_cache=1' +
+      '&token=' + JSON.parse(localStorage.getItem('token')) + '&page=' + page + '&per_page=' + perpage );
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&favorite&skip_cache=1' +
+      '&token=' + JSON.parse(localStorage.getItem('token')) + '&page=' + page + '&per_page=' + perpage );
     }
-    else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&favorite&skip_cache=1' + '&token=' + JSON.parse(localStorage.getItem('token')) + '&page=' + page + '&per_page=' + perpage)
-
-    }
-
   }
 
   getUserComments() {
-
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?author=' + localStorage.getItem('id') + '&lang=en')
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?author=' + localStorage.getItem('id') + '&lang=en');
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?author=' + localStorage.getItem('id'));
     }
-    else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/comments?author=' + localStorage.getItem('id'))
-    }
-
   }
 
   getUserFavoritePlaces() {
     if (localStorage.getItem('current_lang') === 'en') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lang=en&favorite&author=' + JSON.parse(localStorage.getItem('id')))
-    }
-    else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lang=en&favorite&author=' +
+      JSON.parse(localStorage.getItem('id')));
+    } else {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&favorite&author=' + JSON.parse(localStorage.getItem('id')))
     }
   }
@@ -176,8 +164,7 @@ export class PlacesService {
 
     if (localStorage.getItem('current_lang') === 'en') {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core' + placeId + '&lang=en');
-    }
-    else {
+    } else {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core' + placeId);
     }
 
@@ -191,12 +178,11 @@ export class PlacesService {
     if (localStorage.getItem('current_lang') === 'en') {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/favorite?lang=en',
         favPlacesData
-      )
-    }
-    else {
+      );
+    } else {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/favorite',
         favPlacesData
-      )
+      );
     }
 
   }
@@ -255,21 +241,24 @@ export class PlacesService {
     placeData.append('hr_to', (place.openTo).toString());
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
-    placeData.forEach((value, key) => {
-      console.log(key + ' ' + value);
-    });
-
-
+    // placeData.forEach((value, key) => {
+    //   console.log(key + ' ' + value);
+    // });
     return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
       placeData);
 
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
-    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+    // console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+    //   '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
+    if (localStorage.getItem('current_lang') === 'de') {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+      '&page=' + page + '&per_page=' + perpage + '&' + sortBy);
+    } else {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
       '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
-    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
+    }
   }
 
   filteredPlaces(filterObj, page, perpage) {
@@ -278,12 +267,12 @@ export class PlacesService {
     let filterPayment = '';
     let filterTypes = '';
 
-    console.log(filterObj);
+    // console.log(filterObj);
 
     if (filterObj && filterObj.selectedPayment.length > 0) {
       for (var i = 0; i < filterObj.selectedPayment.length; i++) {
         if (filterObj.selectedPayment) {
-          filterPayment = filterPayment + '&payment_methods[' + i + ']=' + filterObj.selectedPayment[i].name;
+          filterPayment = filterPayment + '&payment_methods[' + i + ']=' + filterObj.selectedPayment[i].key;
         } else {
           filterPayment = '';
         }
@@ -294,7 +283,7 @@ export class PlacesService {
     if (filterObj && filterObj.selectedDelivery.length > 0) {
       for (var i = 0; i < filterObj.selectedDelivery.length; i++) {
         if (filterObj.selectedDelivery) {
-          filterDelivery = filterDelivery + '&deliver[' + i + ']=' + filterObj.selectedDelivery[i].name;
+          filterDelivery = filterDelivery + '&deliver[' + i + ']=' + filterObj.selectedDelivery[i].key;
         } else {
           filterDelivery = '';
         }
@@ -303,147 +292,34 @@ export class PlacesService {
     if (filterObj && filterObj.selectedCategory.length > 0) {
       for (var j = 0; j < filterObj.selectedCategory.length; j++) {
         if (filterObj.selectedCategory) {
-          filterCategories = filterCategories + '&category[' + j + ']=' + filterObj.selectedCategory[j].name;
+          filterCategories = filterCategories + '&category[' + j + ']=' + filterObj.selectedCategory[j].key;
         } else {
           filterDelivery = '';
         }
       }
     }
-
-    if (filterObj && filterObj.selectedTypes) {
+    console.log('____________');
+    console.log(filterObj.selectedTypes);
+    console.log(JSON.stringify(filterObj.selectedTypes).length )
+    if (filterObj && JSON.stringify(filterObj.selectedTypes).length > 0) {
+     
       filterTypes = '&type=' + filterObj.selectedTypes;
     } else {
       filterTypes = '';
     }
 
-    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' +
-      filterPayment + filterDelivery + filterCategories + filterTypes + '&skip_cache=1');
-    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterPayment +
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
+    filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
+    '&lang=' + localStorage.getItem('current_lang'));
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
       filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
       '&lang=' + localStorage.getItem('current_lang'));
-  }
-
-  filterPlaces(filterObj) {
-    this.pagee++;
-    let filterAccessible = '';
-    let filterAccessibleBy = '';
-    let filterFood = '';
-    let filterFeature = '';
-    let filterActivities = '';
-    let filterCategories = '';
-    let filterRating;
-    let filterMaxvalue;
-    let filterMinvalue;
-    let filterDistance;
-    let filterSize;
-    console.log(filterObj);
-
-    if (filterObj.size.length > 0) {
-      for (var i = 0; i < filterObj.size.length; i++) {
-        if (filterObj.size) {
-          filterSize = filterSize + '&size[' + i + ']=' + filterObj.size[i].name;
-        } else {
-          filterSize = '';
-        }
-      }
-    }
-
-
-    if (filterObj.acescsible_by.length > 0) {
-      for (var i = 0; i < filterObj.acescsible_by.length; i++) {
-        if (filterObj.acescsible_by) {
-          filterAccessibleBy = filterAccessibleBy + '&accessible_by[' + i + ']=' + filterObj.acescsible_by[i].name;
-        } else {
-          filterAccessibleBy = '';
-        }
-      }
-    }
-    if (filterObj.accessablity.length > 0) {
-      for (var j = 0; j < filterObj.accessablity.length; j++) {
-        if (filterObj.accessablity) {
-          filterAccessible = filterAccessible + '&accessibility[' + j + ']=' + filterObj.accessablity[j].name;
-        } else {
-          filterAccessible = ''
-        }
-      }
-    }
-    if (filterObj.selectedFood.length > 0) {
-      for (var l = 0; l < filterObj.selectedFood.length; l++) {
-        if (filterObj.selectedFood) {
-          filterFood = filterFood + '&food[' + l + ']=' + filterObj.selectedFood[l].name;
-        } else {
-          filterFood = '';
-        }
-      }
-    }
-    if (filterObj.selectedFeatures.length > 0) {
-      for (var m = 0; m < filterObj.selectedFeatures.length; m++) {
-        if (filterObj.selectedFeatures) {
-          filterFeature = filterFeature + '&features[' + m + ']=' + filterObj.selectedFeatures[m].name;
-        } else {
-          filterFeature = ''
-        }
-      }
-    }
-
-
-    if (filterObj.selectedCategory.length > 0) {
-
-      for (var o = 0; o < filterObj.selectedCategory.length; o++) {
-        if (filterObj.selectedCategory) {
-          filterCategories = filterCategories + '&place_type[' + o + ']=' + filterObj.selectedCategory[o].id;
-        } else {
-          filterCategories = '';
-        }
-      }
-    }
-    // if (filterObj.size == undefined) {
-    //   filterSize = filterObj.size = ''
-    // } else {
-    //   filterSize = '&size=' + filterObj.size;
-    // }
-    if (filterObj && filterObj.rating_filter == undefined) {
-      filterRating = '&rating_filter=' + (filterObj.rating_filter = 0);
-    } else {
-      filterRating = '&rating_filter=' + filterObj.rating_filter;
-    }
-    if (filterObj && filterObj.distance == undefined) {
-      filterDistance = filterObj.distance = 0
-    } else {
-      filterDistance = '&distance=' + filterObj.distance;
-    }
-    if (filterObj && filterObj.minValue == undefined) {
-      filterMinvalue = filterObj.minValue = 0
-    } else {
-      filterMinvalue = '&min_price=' + filterObj.minValue;
-    }
-    if (filterObj.maxValue == undefined) {
-      filterMaxvalue = filterObj.maxValue = 10000;
-    } else {
-      filterMaxvalue = '&max_price=' + filterObj.maxValue;
-    }
-
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1&page=' + '1' +
-        '&per_page=100');
-    } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1')
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&lat&lng&' + filterSize +
-        filterAccessibleBy + filterAccessible + filterFood + filterFeature + filterActivities +
-        filterDistance + filterRating + filterCategories + filterMinvalue + filterMaxvalue + '&skip_cache=1&page=' + '1' +
-        '&per_page=100&lang=' + this.getCurrentLanguage());
-    }
   }
 
   sortPlaces(sortBy, placeId) {
     if (localStorage.getItem('current_lang') === 'en') {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + placeId + sortBy + '&skip_cache=1&lang=en')
     } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + placeId + sortBy + '&skip_cache=1');
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + placeId + sortBy + '&skip_cache=1',
         { observe: 'response' });
     }
@@ -463,8 +339,6 @@ export class PlacesService {
     latitude,
     longitude,
     placeId) {
-
-    console.log(placeFeaturedImage);
 
     let address;
     if (placeName && placeName.length < 1) {
@@ -500,7 +374,7 @@ export class PlacesService {
       placeData.append('feat_image_name', placeFeaturedImage[0].name);
       placeData.append('feat_image', placeFeaturedImage[0].url);
     } else {
-      console.log(placeFeaturedImage.length);
+      // console.log(placeFeaturedImage.length);
     }
 
     placeData.append('token', JSON.parse(localStorage.getItem('token')));
@@ -521,9 +395,9 @@ export class PlacesService {
     placeData.append('lng', longitude);
     placeData.append('place_id', placeId);
     placeData.append('edit_image', 'true');
-    placeData.forEach((value, key) => {
-      console.log(key + ' ' + value);
-    });
+    // placeData.forEach((value, key) => {
+    //   console.log(key + ' ' + value);
+    // });
 
     return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
       placeData);
@@ -531,12 +405,9 @@ export class PlacesService {
 
   userPlaces() {
     if (localStorage.getItem('current_lang') === 'en') {
-      // return 'english'
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&lang=en&token=' +
         JSON.parse(localStorage.getItem('token')));
     } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&token=' +
-        JSON.parse(localStorage.getItem('token')));
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&token=' +
         JSON.parse(localStorage.getItem('token')));
     }

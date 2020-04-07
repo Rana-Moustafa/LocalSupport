@@ -4,6 +4,7 @@ import { SearchResultsService } from '../../shared/search-results.service';
 import { PlacesService } from 'src/app/shared/places.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationService } from '../../shared/translation.service';
+import { CommonsService } from 'src/app/shared/commons.service';
 
 @Component({
   selector: 'app-search-result',
@@ -34,7 +35,8 @@ export class SearchResultComponent implements OnInit {
     private placesService: PlacesService,
     public translate: TranslateService,
     private translation: TranslationService,
-    private router: Router) { }
+    private router: Router,
+    private commons: CommonsService) { }
   result;
   searchResults;
   results;
@@ -50,6 +52,7 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = false;
+    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, this.commons.getCurrentLanguage()));
     this.searchResultsService._searchResultsRespond.subscribe(message => {
       this.searchWord = JSON.parse(message);
       this.searchQuery(this.searchWord, localStorage.getItem('current_lang'));
@@ -120,7 +123,7 @@ export class SearchResultComponent implements OnInit {
       this.isLoading = true;
       this.page++;
       this.searchResultsService.GetSearchResults(search, this.page, this.perPage, lang).subscribe(data => {
-        // console.log(data);
+        console.log(data);
         this.isLoading = false;
         this.results = data;
         for (var i = 0; i < this.results.length; i++) {

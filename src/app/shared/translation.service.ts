@@ -13,12 +13,7 @@ export class TranslationService {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public translate: TranslateService) {
-
-    // this language will be used as a fallback when a translation isn't found in the current language
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    // translate.use('de');
-  }
+    public translate: TranslateService) {}
 
   useLanguage(language: string) {
     this.langUpdated.emit(language);
@@ -31,7 +26,6 @@ export class TranslationService {
 
   addTranslationLanguage(lang) {
     this.lang = lang;
-
     this.langUpdated.emit(this.lang);
     localStorage.setItem('current_lang', lang);
   }

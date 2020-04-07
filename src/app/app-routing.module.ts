@@ -31,67 +31,48 @@ import { EditPlaceComponent } from './single-place/edit-place/edit-place.compone
 import { LegalComponent } from './inner-pages/legal/legal.component';
 import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
 
-let ll = localStorage.getItem('current_lang');
-// let ll = 'de'
-
 const appRoutes: Routes = [
 
-	{
-		path: '',
-		redirectTo: 'de/intro', pathMatch: 'full'
-	},
-	{ path: 'signup', component: AuthComponent },
-	{ path: 'signin', component: AuthComponent },
-	{ path: ':language/search-result', component: SearchResultComponent },
-	{ path: 'forgot-password', component: AuthComponent },
-	{ path: ':language', component: HomepageComponent },
-	{ path: ':language/thank-you', component: ThankYouComponent },
-
-	{ path: ':language/intro', component: IntroComponent },
-	{
-		path: ':language/single-place', component: SinglePlaceComponent,
-		resolve: { location: LocationResloverService }
-	},
-	{ path: ':language/profile', component: ProfileDetailsComponent, canActivate: [AuthGuard] },
-	{
-		path: ':language/single-place/:id/:slug', component: SinglePlaceComponent,
-		resolve: { location: LocationResloverService }
-	},
-	{ path: ':language/places-category', component: PlacesCategoryComponent },
-	{ path: ':language/add-new-place', component: AddNewPalceComponent, canActivate: [AuthGuard] },
-	{ path: ':language/reset-password', component: ResetPasswordComponent },
-	{ path: ':language/single-blog/:id/:slug', component: SingleBlogComponent },
-	{ path: ':language/blogs', component: BlogComponent },
-	{ path: ':language/edit-place/:id/:slug', component: EditPlaceComponent },
-	{ path: ':language/not-found', component: NotfoundPageComponent },
-	{ path: ':language/advertising', component: AdvertisingComponent },
-	{ path: ':language/pages/about-us', component: AboutUsComponent },
-	{ path: ':language/pages/legal', component: LegalComponent },
-	{ path: ':language/pages/privacy-policy', component: PrivacyComponent },
-	{
-		path: ':language/pages', component: InnerPagesComponent, children: [
-			{ path: 'contact-us', component: ContactUsComponent },
-			{ path: 'press', component: PressComponent },
-			{ path: 'impressum', component: ImpressumComponent },
-			{ path: 'q&a', component: QuestionsAndAnswersComponent },
-			{ path: 'advertising', component: AdvertisingComponent },
+{path: '', redirectTo: 'de/intro', pathMatch: 'full' },
+{ path: 'signup', component: AuthComponent },
+{ path: 'signin', component: AuthComponent },
+{ path: ':language/search-result', component: SearchResultComponent },
+{ path: 'forgot-password', component: AuthComponent },
+{ path: ':language', component: HomepageComponent },
+{ path: ':language/thank-you', component: ThankYouComponent },
+{ path: ':language/intro', component: IntroComponent },
+{ path: ':language/single-place', component: SinglePlaceComponent, resolve: { location: LocationResloverService } },
+{ path: ':language/profile', component: ProfileDetailsComponent, canActivate: [AuthGuard] },
+{ path: ':language/single-place/:id/:slug', component: SinglePlaceComponent, resolve: { location: LocationResloverService } },
+{ path: ':language/places-category', component: PlacesCategoryComponent },
+{ path: ':language/add-new-place', component: AddNewPalceComponent, canActivate: [AuthGuard] },
+{ path: ':language/reset-password', component: ResetPasswordComponent },
+{ path: ':language/single-blog/:id/:slug', component: SingleBlogComponent },
+{ path: ':language/blogs', component: BlogComponent },
+{ path: ':language/edit-place/:id/:slug', component: EditPlaceComponent },
+{ path: ':language/not-found', component: NotfoundPageComponent },
+{ path: ':language/advertising', component: AdvertisingComponent },
+{ path: ':language/pages/about-us', component: AboutUsComponent },
+{ path: ':language/pages/legal', component: LegalComponent },
+{ path: ':language/pages/privacy-policy', component: PrivacyComponent },
+{ path: ':language/pages', component: InnerPagesComponent, children: [
+	{ path: 'contact-us', component: ContactUsComponent },
+	{ path: 'press', component: PressComponent },
+	{ path: 'impressum', component: ImpressumComponent },
+	{ path: 'q&a', component: QuestionsAndAnswersComponent },
+	{ path: 'advertising', component: AdvertisingComponent },
 		]
 	},
-	{
-		path: '**', component: NotfoundPageComponent
-	},
-
+{ path: '**', component: NotfoundPageComponent },
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(appRoutes, {
-		
-		anchorScrolling: 'enabled',
-		scrollPositionRestoration: 'enabled',
-		scrollOffset: [0, 64]
-	})],
-	exports: [RouterModule]
+imports: [RouterModule.forRoot(appRoutes, {
+anchorScrolling: 'enabled',
+scrollPositionRestoration: 'enabled',
+scrollOffset: [0, 64]
+})],
+exports: [RouterModule]
 })
 export class AppRoutingModule {
-
 }

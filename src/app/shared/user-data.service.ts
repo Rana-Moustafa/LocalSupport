@@ -23,8 +23,8 @@ export class UserDataService {
     profileImageUrlDetails.append('token_type', JSON.parse(localStorage.getItem('token_type')));
     profileImageUrlDetails.append('profile_image', profileImageUrl);
     profileImageUrlDetails.append('profile_image_name', profileImageName);
-    
-    return this.http.post(environment.baseURL+'/wp-json/outdoorf/v1/change_image',
+
+    return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/change_image',
       profileImageUrlDetails);
   }
 
@@ -69,18 +69,21 @@ export class UserDataService {
       return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_comment?core',
       editProfileReview);
     }
-    
   }
 
   DeleteProfileReview(id, comment_type) {
     let deleteProfileRevieww: FormData = new FormData();
     deleteProfileRevieww.append('token', JSON.parse(localStorage.getItem('token')));
     deleteProfileRevieww.append('token_type', JSON.parse(localStorage.getItem('token_type')));
-    if(localStorage.getItem('current_lang') === 'en') {
-      return this.http.delete(environment.baseURL + '/wp-json/comments/' + id + '?token=' + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) + '&Content-Type=application/x-www-form-urlencoded&lang=en'
+    if ( localStorage.getItem('current_lang') === 'en') {
+      return this.http.delete(environment.baseURL + '/wp-json/comments/' + id + '?token='
+      + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) +
+      '&Content-Type=application/x-www-form-urlencoded&lang=en'
       );
     } else {
-      return this.http.delete(environment.baseURL + '/wp-json/comments/' + id + '?token=' + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) + '&Content-Type=application/x-www-form-urlencoded'
+      return this.http.delete(environment.baseURL + '/wp-json/comments/' + id + '?token='
+      + JSON.parse(localStorage.getItem('token')) + '&token_type=' + JSON.parse(localStorage.getItem('token_type')) +
+       '&Content-Type=application/x-www-form-urlencoded'
       );
     }
   }
