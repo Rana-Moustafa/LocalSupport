@@ -2,7 +2,7 @@
   <div class="filter_wrapper_content">
     <form #filterForm="ngForm" (ngSubmit)="filterPlaces(filterForm)">
       <div class="form-group">
-        <h4 class="subtitle">{{"local_Category" | translate}}</h4>
+        <h4 class="subtitle">{{"local_Category" | translate}}:</h4>
         <div class="checkbox_wrapper">
           <div class="form-half-width" *ngFor="let category of formCategories; let i = index;">
             <label class="form-check-label" for="{{category.name}}">     
@@ -16,7 +16,7 @@
       <div class="form-group">
           <h4 class="subtitle">{{"local_Type" |translate}}:</h4>
           <div class="form_wrapper radio-form">
-            <p *ngFor='let subCat of formTypes; let i = index;'> {{subCat.key}}
+            <p *ngFor='let subCat of formTypes; let i = index;'> 
               <input id="cat{{i}}" type="radio" class="custom-control-input" [value]="subCat" name="subcats" ngModel
                 #subcats="ngModel">
               <label class="custom-control-label" for="cat{{i}}"

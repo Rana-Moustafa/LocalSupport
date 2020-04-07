@@ -26,7 +26,6 @@ export class FilterComponent implements OnInit {
   commentsCount;
   isLiked;
   formErrorMsg;
-  isLoading = false;
   formSelection;
   placeSize;
   accessableBy;
@@ -135,7 +134,6 @@ export class FilterComponent implements OnInit {
     this.sliderControl.reset(100);
   }
   getFormSelectionItems() {
-    this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
       console.log('filter this.formSelection');
@@ -144,11 +142,9 @@ export class FilterComponent implements OnInit {
       this.formCategories = this.formSelection.category;
       this.formDelivery = this.formSelection.delivery;
       this.formPayment = this.formSelection.payment_methods;
-      this.isLoading = false;
       // this.placeType = '';
     }, error => {
       // console.log(error)
-      this.isLoading = false;
     });
   }
   getPlacesTypesItems() {

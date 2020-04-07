@@ -298,22 +298,21 @@ export class PlacesService {
         }
       }
     }
-    console.log('____________');
-    console.log(filterObj.selectedTypes);
-    console.log(JSON.stringify(filterObj.selectedTypes).length )
+
     if (filterObj && JSON.stringify(filterObj.selectedTypes).length > 0) {
-     
       filterTypes = '&type=' + filterObj.selectedTypes;
     } else {
       filterTypes = '';
     }
 
-    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
-    filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
-    '&lang=' + localStorage.getItem('current_lang'));
-    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
+    if (localStorage.getItem('current_lang') === 'de') {
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
+      filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage);
+    } else {
+      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
       filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
       '&lang=' + localStorage.getItem('current_lang'));
+    }
   }
 
   sortPlaces(sortBy, placeId) {

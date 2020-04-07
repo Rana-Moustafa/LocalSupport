@@ -70,7 +70,6 @@ export class SearchResultComponent implements OnInit {
         this.page = 0;
         this.allPlaces = [];
         this.allSearchPlaces = [];
-        this.isLoading = true;
         this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), lang);
       }
     );
