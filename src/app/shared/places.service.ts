@@ -267,7 +267,7 @@ export class PlacesService {
     let filterPayment = '';
     let filterTypes = '';
 
-    // console.log(filterObj);
+    console.log(filterObj);
 
     if (filterObj && filterObj.selectedPayment.length > 0) {
       for (var i = 0; i < filterObj.selectedPayment.length; i++) {
@@ -310,6 +310,9 @@ export class PlacesService {
       filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage);
     } else {
       console.log(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
+      filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
+      '&lang=' + localStorage.getItem('current_lang'));
+      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
       filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
       '&lang=' + localStorage.getItem('current_lang'));
     }

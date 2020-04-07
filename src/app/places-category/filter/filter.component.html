@@ -2,7 +2,7 @@
   <div class="filter_wrapper_content">
     <form #filterForm="ngForm" (ngSubmit)="filterPlaces(filterForm)">
       <div class="form-group">
-        <h4 class="subtitle">{{"local_Category" | translate}}:</h4>
+        <h4 class="subtitle">{{"local_Category" | translate}}</h4>
         <div class="checkbox_wrapper">
           <div class="form-half-width" *ngFor="let category of formCategories; let i = index;">
             <label class="form-check-label" for="{{category.name}}">     
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="form-group">
-          <h4 class="subtitle">{{"local_Type" |translate}}:</h4>
+          <h4 class="subtitle">{{"local_Type" |translate}}</h4>
           <div class="form_wrapper radio-form">
             <p *ngFor='let subCat of formTypes; let i = index;'> 
               <input id="cat{{i}}" type="radio" class="custom-control-input" [value]="subCat" name="subcats" ngModel
@@ -28,7 +28,7 @@
         </div>
       <!-- end -->
       <div class="form-group">
-        <h4 class="subtitle">{{"local_Delievery" |translate}} :</h4>
+        <h4 class="subtitle">{{"local_Delievery" |translate}} </h4>
         <div class="checkbox_wrapper">
           <div class="form-half-width" *ngFor="let delivery of formDelivery;  let i = index;">
             <label class="form-check-label" for="delivery{{i}}">
@@ -41,7 +41,7 @@
       </div>
       <!-- start -->
       <div class="form-group">
-        <h4 class="subtitle">{{"local_Payment_Method" |translate}} :</h4>
+        <h4 class="subtitle">{{"local_Payment_Method" |translate}} </h4>
         <div class="checkbox_wrapper">
           <div class="form-half-width" *ngFor="let payment of formPayment;  let i = index;">
             <label class="form-check-label" for="payment{{i}}">
