@@ -38,11 +38,7 @@ export class PlacesService {
     return this.addRemoveFromFavList;
   }
   getFormSelections() {
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections?lang=' + this.getCurrentLanguage());
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/form_selections?lang=' + this.getCurrentLanguage());
   }
 
   getCurrentUserLocation(latitude, longitude) {
@@ -50,13 +46,8 @@ export class PlacesService {
     this.currentUserLongitude = longitude;
   }
   getSinglePlaceData(id: number) {
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
-        + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/' + id + '?token='
         + JSON.parse(localStorage.getItem('token')) + '&skip_cache=1&lang=' + this.getCurrentLanguage());
-    }
   }
   getPlacesItems() {
     if (localStorage.getItem('current_lang') === 'en') {
@@ -66,19 +57,11 @@ export class PlacesService {
     }
   }
   getPlacesTypess(lang) {
-    if (lang === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=' + lang);
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=' + lang);
   }
 
   getPlacesTypes() {
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types');
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=' + this.getCurrentLanguage());
-    }
+    return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/place_types?lang=' + this.getCurrentLanguage());
   }
 
   // Get Current Location Coordinates
@@ -250,15 +233,8 @@ export class PlacesService {
   }
 
   getPlacesCategories(id, sortBy, page, perpage) {
-    // console.log(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-    //   '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-      '&page=' + page + '&per_page=' + perpage + '&' + sortBy);
-    } else {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
-      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + localStorage.getItem('current_lang'));
-    }
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&place_type=' + id +
+      '&page=' + page + '&per_page=' + perpage + '&' + sortBy + '&lang=' + this.getCurrentLanguage());
   }
 
   filteredPlaces(filterObj, page, perpage) {
@@ -305,17 +281,12 @@ export class PlacesService {
       filterTypes = '';
     }
 
-    if (localStorage.getItem('current_lang') === 'de') {
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
-      filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage);
-    } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
       filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
-      '&lang=' + localStorage.getItem('current_lang'));
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
+      '&lang=' + this.getCurrentLanguage());
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
       filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
-      '&lang=' + localStorage.getItem('current_lang'));
-    }
+      '&lang=' + this.getCurrentLanguage());
   }
 
   sortPlaces(sortBy, placeId) {
@@ -411,7 +382,7 @@ export class PlacesService {
         JSON.parse(localStorage.getItem('token')));
     } else {
       return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&token=' +
-        JSON.parse(localStorage.getItem('token')));
+      this.getCurrentLanguage());
     }
   }
 }

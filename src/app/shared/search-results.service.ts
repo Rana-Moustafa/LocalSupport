@@ -31,19 +31,12 @@ export class SearchResultsService implements OnDestroy {
     });
 
     console.log(result);
-
-    if (localStorage.getItem('current_lang') === 'de'){
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
-      (result.length > 0 ? result : '') + '&page=' +
-       page + '&per_page=' + perpage);
-    } else {
-      console.log(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
       (result.length > 0 ? result : '') + '&page=' +
        page + '&per_page=' + perpage + '&lang=' + this.getCurrentLanguage());
-      return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
       (result.length > 0 ? result : '') + '&page=' +
        page + '&per_page=' + perpage + '&lang=' + this.getCurrentLanguage());
-    }
   }
 
   ngOnDestroy() {

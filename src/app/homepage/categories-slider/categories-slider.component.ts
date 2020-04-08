@@ -98,7 +98,7 @@ export class CategoriesSliderComponent implements OnInit {
   getCategoriesSliders() {
 
     this.places.getPlacesCategories(this.placesCategoriesChildId, 'sort_latest', 1, 15).subscribe(data => {
-      // console.log(data);
+      console.log(data);
       this.categorySliderDetails = JSON.parse(JSON.stringify(data));
       if (this.categorySliderDetails.length === 0) {
         this.categoryEmpty = true;

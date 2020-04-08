@@ -62,8 +62,6 @@ export class HeaderComponent implements OnInit {
     this.getUserProfilePicture();
     this.translation.langUpdated.subscribe(
       (lang) => {
-        console.log(lang);
-        localStorage.setItem('current_lang', lang);
         this.langURL = lang;
       }
     );

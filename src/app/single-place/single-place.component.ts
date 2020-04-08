@@ -26,6 +26,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
   translatedId;
   placeNotTranslated;
   oldLanguage;
+  singlePlaceImages;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -36,7 +37,8 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
   trigger() {
     window.dispatchEvent(new Event('resize'));
   }
-  constructor(private places: PlacesService,
+  constructor(
+    private places: PlacesService,
     private route: ActivatedRoute,
     private router: Router,
     private translation: TranslationService,
@@ -45,7 +47,14 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
     this.innerWidth = window.innerWidth;
 
     this.checkWindowWidth();
-
+    this.translation.langUpdated.subscribe(
+      (lang) => {
+        this.commons.showLoadingSpinner();
+        this.getSinglePlace(this.route.snapshot.params['id']);
+        this.router.url.replace(this.route.snapshot.params.language, lang);
+        this.placeNotTranslated = false;
+      }
+    );
 
   }
   checkWindowWidth() {
@@ -60,21 +69,9 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
     this.commons.darkHeader = false;
     this.commons.showLoadingSpinner();
     // this.oldLanguage = this.route.snapshot.params.language;
-    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
-
     // this.places.getCurrentLocation();
     // this.translation.addRouterLangParam();
     this.getSinglePlace(this.route.snapshot.params['id']);
-
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        this.commons.showLoadingSpinner();
-        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
-        this.getSinglePlace(this.route.snapshot.params['id']);
-        this.placeNotTranslated = false;
-      }
-    );
-
   }
 
   addToFav(id) {
@@ -87,13 +84,15 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
 
 
   getSinglePlace(placeid) {
+    this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang'));
     this.places.getSinglePlaceData(placeid).subscribe(data => {
+      this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
 
       this.singlePlaceData = data;
       this.commons.hideLoadingSpinner();
-      console.log('singlePlaceData');
-      console.log(this.singlePlaceData);
-
+      if (this.singlePlaceData.images.length === 0) {
+        this.singlePlaceData.images.push(this.singlePlaceData.featured_image);
+      }
       this.translatedId = this.singlePlaceData.translated_id;
       this.singlePlaceParent = this.singlePlaceData;
       // console.log(this.translatedId)

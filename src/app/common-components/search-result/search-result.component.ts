@@ -60,12 +60,14 @@ export class SearchResultComponent implements OnInit {
     });
     // console.log(this.route.snapshot.queryParamMap.get('search'));
     this.searchWord = JSON.parse(this.route.snapshot.queryParamMap.get('search'));
-    this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), localStorage.getItem('current_lang'));
+    if (this.route.snapshot.queryParamMap.get('search')) {
+      this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), localStorage.getItem('current_lang'));
+    }
+
     // this.searchResults = this.route.snapshot.queryParamMap.get('search');
 
     this.translation.langUpdated.subscribe(
       (lang) => {
-        this.isLoading = true;
         this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
         this.page = 0;
         this.allPlaces = [];
@@ -133,6 +135,7 @@ export class SearchResultComponent implements OnInit {
         }
         if (this.allSearchPlaces.length === 0) {
           this.notfound = true;
+          this.isLoading = false;
         } else {
           this.notfound = false;
         }

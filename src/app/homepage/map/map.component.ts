@@ -278,7 +278,7 @@ export class MapComponent implements OnInit {
     this.map.getMapLocations().subscribe(data => {
 
       this.markers = JSON.parse(JSON.stringify(data));
-      // console.log(this.markers);
+      console.log(this.markers);
     }, error => {
       // console.log(error);
     });

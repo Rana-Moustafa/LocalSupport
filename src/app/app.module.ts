@@ -216,12 +216,11 @@ export const ngxDropTargetOptions: DropTargetOptions = {
     NgxUploadModule.forRoot(ngxDropTargetOptions),
     // Swal.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAyWxJuiFnfiMbs4WR1iablJIro0n8M-FE',
+      apiKey: 'AIzaSyA3wukOzjOzk-WHer4jJ83B-p2rcSBih7s',
       libraries: ['places']
     }),
     AgmJsMarkerClustererModule,
     TranslateModule.forRoot({
-
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
