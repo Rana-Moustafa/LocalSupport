@@ -41,7 +41,7 @@ export class AccountDetailsComponent implements OnInit {
   ngOnInit() {
     this.activeRoute.queryParams
       .subscribe((params) => {
-        // console.log(params.third_party_reset)
+        //  (params.third_party_reset)
         if(params.third_party_reset != undefined){
           this.changePassword = false;
         }
@@ -50,11 +50,11 @@ export class AccountDetailsComponent implements OnInit {
     this.countriesList = this.countries.countriesData;
     this.userDataService.getUserDetails().subscribe(data => {
       this.userDataDisplayParent = data;
-      // console.log(this.userDataDisplayParent)
+      //  (this.userDataDisplayParent)
       this.sendProfilePicture()
 
     }, error => {
-      // console.log(error);
+      //  (error);
       if(error.status === 411){
         this.router.navigate(['/' + this.langURL + '/signin']);
       }
@@ -64,7 +64,7 @@ export class AccountDetailsComponent implements OnInit {
       this.userDataDisplayParent = updated;
       this.userProfilePicture.emit(this.userDataDisplayParent)
     }, error => {
-      // console.log('error')
+      //  ('error')
     });
   }
   sendProfilePicture() {

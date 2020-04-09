@@ -27,8 +27,8 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.setCurrentLocation();
-    console.log('this.singlePlaceDetails');
-    console.log(this.singlePlaceDetails);
+     ('this.singlePlaceDetails');
+     (this.singlePlaceDetails);
     this.singlePlaceWebsite = this.singlePlaceDetails.website.replace(/(^\w+:|^)\/\//, '');
     this.placeLat = this.singlePlaceDetails.address.lat;
     this.placeLng = this.singlePlaceDetails.address.lng;
@@ -51,7 +51,7 @@ export class DetailsComponent implements OnInit {
         result = (3958.8 * METRES_IN_MILE) * Math.acos(Math.sin(lt1) * Math.sin(lt2) + Math.cos(lt1) * Math.cos(lt2) * Math.cos(lg2 - lg1));
       }
       this.distance = Math.round(result * 1.609344);
-      // console.log(Math.round(result * 1.609344));
+      //  (Math.round(result * 1.609344));
       // return result;
   }
 
@@ -61,7 +61,7 @@ export class DetailsComponent implements OnInit {
       // window.location.href = this.placeMap;
       window.open(this.placeMap, 'blank');
     }, error => {
-      // console.log(error);
+      //  (error);
     });
   }
 

@@ -29,12 +29,12 @@ export class ChangePasswordComponent implements OnInit {
       // this.userDataService.confirmPassStatus.emit(true)
       this.emailDone = false;
       this.emailEror = true;
-      // console.log("changed");
+      //  ("changed");
     }, error => {
       this.emailEror = true;
       this.changePassForm.reset();
       this.changePassErrorMsg = error.error.message;
-      // console.log("not changed");
+      //  ("not changed");
       this.emailDone = true;
       this.emailEror = false;
     });

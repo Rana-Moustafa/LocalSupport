@@ -57,7 +57,7 @@ export class HomepageComponent implements OnInit {
     this.places.getSinglePlaceData(featuredPlacesId).subscribe(data => {
       this.getPlaceId = data;
     }, error => {
-      console.log(error);
+       (error);
     });
   }
   getTestimonialsData() {
@@ -67,7 +67,7 @@ export class HomepageComponent implements OnInit {
     this.commons.getTestimonials(this.testimonialsIds).subscribe(data => {
       this.GetTestimonialsItem = data;
     }, error => {
-      // console.log(error)
+      //  (error)
     });
   }
 
@@ -76,9 +76,9 @@ export class HomepageComponent implements OnInit {
       this.placesCategories = data;
       this.placesCategories = this.placesCategories.reverse();
 
-      console.log(this.placesCategories);
+       (this.placesCategories);
     }, error => {
-      // console.log(error)
+      //  (error)
     });
   }
   getFavoritePlacesSlider() {
@@ -86,7 +86,7 @@ export class HomepageComponent implements OnInit {
       this.places.getFavoritePlaces(1, 100).subscribe(data => {
         this.favoritePlacesSlider = JSON.parse(JSON.stringify(data));
       }, error => {
-        // console.log(error)
+        //  (error)
       });
     }
 

@@ -101,7 +101,7 @@
                 <h4 class="subtitle">{{"local_Type" |translate}} (*):</h4>
                 <div class="form_wrapper radio-input">
                     <p *ngFor='let subCat of formType; let i = index;'>
-                        <input type="radio" [value]="subCat.key" name="subcats" [(ngModel)]="selected"
+                        <input type="radio" [value]="subCat.name" name="subcats" [(ngModel)]="selected"
                             #subcats="ngModel" required>
                         <label for="cat{{i}}"> {{subCat.name}}</label><br>
                     </p>
@@ -234,9 +234,12 @@
                     </div>
                 </div>
             </div>
-            <button class="Addnew-btn" type="submit" class="btn btn-original" 
+            <!-- <button class="Addnew-btn" type="submit" class="btn btn-original" 
             [disabled]="!editPlace.valid || (allPlaceImages.length === 0)">
-                {{"local_add_bussiness" | translate}}</button>
+                {{"local_add_bussiness" | translate}}</button> -->
+                <button class="Addnew-btn" type="submit" class="btn btn-original" 
+                >
+                    {{"local_add_bussiness" | translate}}</button>
                
         </form>
     </div>

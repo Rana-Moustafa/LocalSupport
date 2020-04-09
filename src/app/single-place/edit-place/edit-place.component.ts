@@ -127,18 +127,18 @@ export class EditPlaceComponent implements OnInit {
   }
 
   markerDragEnd($event: MouseEvent) {
-    // console.log($event);
+    //  ($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
-    // console.log(this.latitude);
-    // console.log(this.longitude);
+    //  (this.latitude);
+    //  (this.longitude);
     this.getAddress(this.latitude, this.longitude);
   }
 
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      // console.log(results);
-      // console.log(status);
+      //  (results);
+      //  (status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
@@ -158,7 +158,7 @@ export class EditPlaceComponent implements OnInit {
       this.isLoading = false;
       this.placeData = data;
       this.resultCategory = this.placeData.category;
-      // console.log(data);
+      //  (data);
       this.newplaceFeaturedImage.push(this.placeData.featured_image);
       this.newplaceFeaturedImage.push({ isFeatured: true });
       this.placeName = this.placeData.address.address;
@@ -166,8 +166,8 @@ export class EditPlaceComponent implements OnInit {
       // this.longitude = JSON.parse(this.placeData.address.lng);
       this.oldLatitude = this.placeData.address.lat;
       this.oldLongitude = this.placeData.address.lng;
-      // console.log(this.oldLatitude);
-      // console.log(this.oldLongitude);
+      //  (this.oldLatitude);
+      //  (this.oldLongitude);
       this.allPlaceImages.push({
         url: this.placeData.featured_image.url,
         name: this.placeData.featured_image.name,
@@ -179,16 +179,16 @@ export class EditPlaceComponent implements OnInit {
         });
       }
 
-      // console.log(this.allPlaceImages);
+      //  (this.allPlaceImages);
       this.timePickerFrom = this.placeData.hr_from;
       this.timePickerTo = this.placeData.hr_to;
-      this.selected = this.placeData.place_type.key;
+      this.selected = this.placeData.place_type.name;
       if (this.placeData.delivery && this.placeData.delivery.length > 0) {
         this.formDelivery.forEach(category => {
           const retreivedDelivery = this.placeData.delivery.find(x => x.name == category.name);
           category.checked = retreivedDelivery ? retreivedDelivery.checked : false;
         });
-        console.log(this.formDelivery);
+         (this.formDelivery);
       }
 
       if (this.placeData.payment_methods && this.placeData.payment_methods.length > 0) {
@@ -196,19 +196,19 @@ export class EditPlaceComponent implements OnInit {
           const retreivedPaymentMethod = this.placeData.payment_methods.find(x => x.name == category.name);
           category.checked = retreivedPaymentMethod ? retreivedPaymentMethod.checked : false;
         });
-        // console.log(this.formPaymentMethod);
+        //  (this.formPaymentMethod);
       }
 
       if (this.placeData.category && this.placeData.category.length > 0) {
-        console.log(this.placeData.category);
+         (this.placeData.category);
         this.formCategories.forEach(category => {
           const retreivedCatgory = this.placeData.category.find(x => x.name == category.name);
           category.checked = retreivedCatgory ? retreivedCatgory.checked : false;
         });
-        // console.log(this.formCategories);
+        //  (this.formCategories);
       }
     }, error => {
-      console.log(error);
+       (error);
       this.isLoading = false;
     });
   }
@@ -220,7 +220,7 @@ export class EditPlaceComponent implements OnInit {
   getFormSelectionItems() {
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
-      // console.log(data);
+      //  (data);
       this.openTimeFrom = this.formSelection.hr_from;
       this.openTimeTo = this.formSelection.hr_to;
       this.formType = this.formSelection.type;
@@ -277,7 +277,7 @@ export class EditPlaceComponent implements OnInit {
 
 
   fileChangeEvent(event: any) {
-    // console.log(event);
+    //  (event);
     this.imageChangedEvent = event;
     this.uploadedImage = event.target.files[0].name;
     this.imagesCount = event.target.files.length;
@@ -285,19 +285,19 @@ export class EditPlaceComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = {};
-    // console.log(event);
+    //  (event);
     this.croppedImage = event.base64;
   }
 
   loadImageFailed() {
-    console.log('error loading image');
+     ('error loading image');
   }
   updateProfilePicture() {
-    // console.log(this.croppedImage);
-    // console.log(this.placeData.images);
+    //  (this.croppedImage);
+    //  (this.placeData.images);
     // this.placeData.images.push(this.croppedImage);
     this.allPlaceImages.push({ url: this.croppedImage, name: this.uploadedImage, isFeatured: false });
-    // console.log(this.allPlaceImages);
+    //  (this.allPlaceImages);
     if (this.allPlaceImages.length > 6) {
       this.maxNumber = true;
     } else if (this.allPlaceImages.length < 1) {
@@ -323,7 +323,7 @@ export class EditPlaceComponent implements OnInit {
     this.isLoading = true;
     this.updatedImages = this.allPlaceImages;
     this.updatedImages = this.updatedImages.filter((image) => image.url !== this.newplaceFeaturedImage[0].url);
-    // console.log(this.updatedImages);
+    //  (this.updatedImages);
     this.openFrom = this.openTimeFrom;
     this.openTo = this.openTimeTo;
     form.value.openFrom = this.openFrom.time.toLowerCase();
@@ -357,13 +357,13 @@ export class EditPlaceComponent implements OnInit {
       this.newLongitude,
       this.placeData.id
     ).subscribe(data => {
-      // console.log(data);
+       (data);
       this.isLoading = false;
       this.addPlaceFormError = false;
       form.reset();
       this.router.navigate([this.langURL + '/thank-you']);
     }, error => {
-      console.log(error);
+       (error);
       this.isLoading = false;
       this.addPlaceFormError = true;
       this.formErrorMsg = error.error.message;
@@ -371,7 +371,7 @@ export class EditPlaceComponent implements OnInit {
   }
 
   selectedFeaturedImage(name, url) {
-    // console.log(name, url);
+    //  (name, url);
     // this.newplaceFeaturedImage = [];
     this.featuredImageName = name;
     this.featuredImageUrl = url;

@@ -76,9 +76,9 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
 
   addToFav(id) {
     this.places.addToFavPlaces(id).subscribe(data => {
-      // console.log(data);
+      //  (data);
     }, error => {
-      console.log(error);
+       (error);
     });
   }
 
@@ -95,7 +95,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
       }
       this.translatedId = this.singlePlaceData.translated_id;
       this.singlePlaceParent = this.singlePlaceData;
-      // console.log(this.translatedId)
+      //  (this.translatedId)
       if (!this.translatedId) {
         // this.commons.sendLanguageSwitcherStatus(true);
         this.commons.changeLanguageSwitcherStatus(true);
@@ -105,7 +105,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
       }
 
     }, error => {
-      // console.log(error)
+      //  (error)
       this.commons.hideLoadingSpinner();
     });
   }
@@ -117,7 +117,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
         params = id;
       });
     }, error => {
-      // console.log(error)
+      //  (error)
     });
   }
 

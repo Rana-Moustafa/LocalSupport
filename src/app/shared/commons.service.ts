@@ -34,14 +34,14 @@ export class CommonsService {
     }
   }
   changeLanguageSwitcherStatus(message: boolean) {
-    console.log(message)
+     (message)
     this.languageSwitcherStatus.next(message);
   }
 
 
   sendAnchorScollId(message: string) {
     this.scollAnchorSource.next(message);
-    // console.log(message);
+    //  (message);
   }
 
   showLoadingSpinner() {

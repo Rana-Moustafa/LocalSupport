@@ -56,9 +56,9 @@ export class SearchResultComponent implements OnInit {
     this.searchResultsService._searchResultsRespond.subscribe(message => {
       this.searchWord = JSON.parse(message);
       this.searchQuery(this.searchWord, localStorage.getItem('current_lang'));
-      // console.log(this.searchWord);
+      //  (this.searchWord);
     });
-    // console.log(this.route.snapshot.queryParamMap.get('search'));
+    //  (this.route.snapshot.queryParamMap.get('search'));
     this.searchWord = JSON.parse(this.route.snapshot.queryParamMap.get('search'));
     if (this.route.snapshot.queryParamMap.get('search')) {
       this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), localStorage.getItem('current_lang'));
@@ -93,8 +93,8 @@ export class SearchResultComponent implements OnInit {
       this.isLoading = true;
       this.page++;
       this.placesService.filteredPlaces(this.filterComponent, this.page, this.perPage).subscribe(data => {
-        // console.log('filtered places');
-        // console.log(data);
+        //  ('filtered places');
+        //  (data);
         this.isLoading = false;
         this.sideNav = false;
         this.placesResults = JSON.parse(JSON.stringify(data));
@@ -110,7 +110,7 @@ export class SearchResultComponent implements OnInit {
           this.notfound = false;
         }
       }, (errorMessage) => {
-        console.log(errorMessage);
+         (errorMessage);
         this.isLoading = false;
         this.isFullListDisplayed = true;
         if (errorMessage.status === 400) {
@@ -124,7 +124,7 @@ export class SearchResultComponent implements OnInit {
       this.isLoading = true;
       this.page++;
       this.searchResultsService.GetSearchResults(search, this.page, this.perPage, lang).subscribe(data => {
-        console.log(data);
+         (data);
         this.isLoading = false;
         this.results = data;
         for (var i = 0; i < this.results.length; i++) {
@@ -140,7 +140,7 @@ export class SearchResultComponent implements OnInit {
           this.notfound = false;
         }
       }, error => {
-        console.log(error);
+         (error);
         this.isLoading = false;
       });
     }

@@ -33,11 +33,11 @@ export class FooterComponent implements OnInit, AfterViewChecked {
   }
   socialIcons() {
     this.commons.getSocialIcons().subscribe(data => {
-      // console.log(data);
+      //  (data);
       this.footerData = data;
       this.socialMediaData = this.footerData.social;
     }, error => {
-      // console.log(error);
+      //  (error);
     });
   }
   navigateToNewsletter(section) {

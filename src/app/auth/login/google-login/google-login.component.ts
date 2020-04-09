@@ -33,8 +33,8 @@ export class GoogleLoginComponent implements OnInit {
         // Now sign-in with userData
 
         this.authenticationService.userGoogleLogin(userData).subscribe(data => {
-          // console.log('gmail login');
-          // console.log(data);
+          //  ('gmail login');
+          //  (data);
           this.user = data;
           localStorage.setItem('token', JSON.stringify(this.user.token));
           localStorage.setItem('profile_image', this.user.profile_image);
@@ -43,8 +43,8 @@ export class GoogleLoginComponent implements OnInit {
           localStorage.setItem('id',  JSON.stringify(this.user.id));
           this.userStatus.userLoggedIn();
           this.router.navigate([this.langURL + '/add-new-place']);
-          // console.log('this.user.token_expiration_date')
-          // console.log(this.user.token_expiration_date)
+          //  ('this.user.token_expiration_date')
+          //  (this.user.token_expiration_date)
           this.authenticationService.autoLogout(+this.user.token_expiration_date);
         }, error => {
           this.userStatus.loginError = true;

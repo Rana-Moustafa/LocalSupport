@@ -141,13 +141,13 @@ export class AddNewPalceComponent implements OnInit {
     this.map.getMapLocations().subscribe(data => {
       this.markers = JSON.parse(JSON.stringify(data));
     }, error => {
-      // console.log(error);
+      //  (error);
     });
     this.userData.getUserDetails().subscribe(data => {
 
 
     }, error => {
-      console.log(error);
+       (error);
       if (error.status === 411) {
         this.router.navigate(['/signin']);
       }
@@ -172,7 +172,7 @@ export class AddNewPalceComponent implements OnInit {
 
 
   fileChangeEvent(event: any) {
-    // console.log(event);
+    //  (event);
     this.imageChangedEvent = event;
     this.uploadedImage = event.target.files[0].name;
     this.imagesCount = event.target.files.length;
@@ -180,17 +180,17 @@ export class AddNewPalceComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = '';
-    // console.log(event);
+    //  (event);
     this.croppedImage = event.base64;
   }
 
   loadImageFailed() {
-    console.log('error loading image');
+     ('error loading image');
   }
   updateProfilePicture() {
     this.imagesUrls.push(this.croppedImage);
     this.imagesNames.push(this.uploadedImage);
-    // console.log(this.imagesUrls);
+    //  (this.imagesUrls);
     if (this.imagesUrls.length > 5) {
       this.maxNumber = true;
     } else if (this.imagesUrls.length < 1) {
@@ -203,8 +203,8 @@ export class AddNewPalceComponent implements OnInit {
   getFormSelectionItems() {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
-      // console.log('form selection');
-      // console.log(data);
+      //  ('form selection');
+       (data);
       this.formSelection = data;
       this.formType = this.formSelection.type;
       this.formCategories = this.formSelection.category;
@@ -221,7 +221,7 @@ export class AddNewPalceComponent implements OnInit {
       this.placesCategories = data;
 
     }, error => {
-      // console.log(error);
+      //  (error);
     });
   }
   checkValid() {
@@ -270,19 +270,19 @@ export class AddNewPalceComponent implements OnInit {
     }
   }
   markerDragEnd($event: MouseEvent) {
-    // console.log($event);
+    //  ($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-     // console.log(results);
-     // console.log(status);
+     //  (results);
+     //  (status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 15;
-          // console.log(results[0].formatted_address);
+          //  (results[0].formatted_address);
           this.placeaddress = results[0].formatted_address;
         } else {
           window.alert('No results found');
@@ -325,10 +325,10 @@ export class AddNewPalceComponent implements OnInit {
   }
 
   compressFile() {
-  // console.log(this.addPlaceName.value);
+  //  (this.addPlaceName.value);
    if (!this.maxNumber) {
     this.imageCompress.uploadFile().then(({image, orientation}) => {
-        // console.log(image);
+        //  (image);
         this.imgResultBeforeCompress = image;
         this.featuredImageError = true;
         console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
@@ -356,12 +356,12 @@ export class AddNewPalceComponent implements OnInit {
 }
 
   getFileDetails(event) {
-   // console.log(event);
+   //  (event);
     if (event.target.files && event.target.files[0]) {
       const filesAmount = event.target.files.length;
 
       for (let i = 0; i < filesAmount; i++) {
-        // console.log(event.target.files[i]);
+        //  (event.target.files[i]);
         this.imagesNames.push(event.target.files[i].name);
         // this.imagesUrls.push(this.urls);
         var reader = new FileReader();
@@ -445,13 +445,13 @@ export class AddNewPalceComponent implements OnInit {
       this.minValue,
       this.maxValue
       ).subscribe(data => {
-        // console.log(data);
+         (data);
         this.isLoading = false;
         this.addPlaceFormError = false;
         form.reset();
         this.router.navigate(['/' + this.langURL + '/thank-you']);
       }, error => {
-        console.log(error);
+         (error);
         this.isLoading = false;
         this.addPlaceFormError = true;
         this.formErrorMsg = error.error.message;

@@ -34,7 +34,7 @@ export class ProfileFavoritesComponent implements OnInit {
     //     for (let i = 0; i < this.allFavPlaces.length; i++) {
     //       if (this.allFavPlaces[i].id === this.updatedFavPlace.id) {
     //         this.allFavPlaces.splice(i, 1);
-    //         console.log(this.allFavPlaces);
+    //          (this.allFavPlaces);
     //         if (this.allFavPlaces.length < 1) {
     //           // this.favListEmpty = true;
     //         }
@@ -54,14 +54,14 @@ export class ProfileFavoritesComponent implements OnInit {
   removeFromUserFav(id) {
 
     this.favoritesPlacesservices.addToFavPlaces(id).subscribe(data => {
-      console.log(id);
-      console.log(data);
+       (id);
+       (data);
       this.favPlace = !this.favPlace;
 
       for (let i = 0; i < this.placesFavoritesList.length; i++) {
         if (this.placesFavoritesList[i].id === id) {
           this.allFavPlaces.splice(i, 1);
-          console.log(this.placesFavoritesList);
+           (this.placesFavoritesList);
           if (this.placesFavoritesList.length < 1) {
             this.favListEmpty = true;
           }
@@ -76,12 +76,12 @@ export class ProfileFavoritesComponent implements OnInit {
     if (!this.isFullListDisplayed) {
       this.page++;
       this.favoritesPlacesservices.getFavoritePlaces(this.page, this.perPage).subscribe(data => {
-        console.log(data)
+         (data)
         this.placesFavoritesList = JSON.parse(JSON.stringify(data));
         for (var i = 0; i < this.placesFavoritesList.length; i++) {
           this.allFavPlaces.push(this.placesFavoritesList[i]);
         }
-        console.log(this.allFavPlaces);
+         (this.allFavPlaces);
         if (this.placesFavoritesList.length < 1) {
           this.favListEmpty = true;
         }
@@ -89,7 +89,7 @@ export class ProfileFavoritesComponent implements OnInit {
           this.isFullListDisplayed = true;
         }
       }, error => {
-        // console.log(error)
+        //  (error)
         this.isFullListDisplayed = true;
       });
     }
@@ -97,11 +97,11 @@ export class ProfileFavoritesComponent implements OnInit {
 
   updateFavList($event) {
       this.placeData = $event;
-      console.log($event);
+       ($event);
       for (let i = 0; i < this.allFavPlaces.length; i++) {
         if (this.allFavPlaces[i].id === this.placeData.id) {
           this.allFavPlaces.splice(i, 1);
-          console.log(this.allFavPlaces);
+           (this.allFavPlaces);
           if (this.allFavPlaces.length < 1) {
              this.favListEmpty = true;
           }

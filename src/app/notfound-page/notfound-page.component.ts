@@ -20,7 +20,7 @@ export class NotfoundPageComponent implements OnInit {
     this.commons.getNotFound().subscribe(data => {
         this.notFoundData = data;
     }, error => {
-        // console.log(error);
+        //  (error);
     });
   }
 

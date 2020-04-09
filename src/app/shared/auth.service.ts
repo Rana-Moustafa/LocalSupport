@@ -64,7 +64,7 @@ export class AuthenticationService {
     let loginFormData: FormData = new FormData();
     loginFormData.append('name', userData.username);
     loginFormData.append('password', userData.password);
-    console.log(environment.baseURL + '/wp-json/outdoorf/v1/login');
+     (environment.baseURL + '/wp-json/outdoorf/v1/login');
     return this.http.post<AuthResponseData>(environment.baseURL + '/wp-json/outdoorf/v1/login',
       loginFormData
     ).pipe(catchError(this.handleError), tap(resData => {
@@ -152,10 +152,10 @@ export class AuthenticationService {
 
     let now = new Date();
     let expiredAfter = (new Date(expirationDuration * 1000).getTime()) - ((new Date()).getTime());
-    // console.log(expiredAfter)
+    //  (expiredAfter)
     setTimeout(() => {
-      // console.log('this.tokenExpirationTimer');
-      // console.log(this.tokenExpirationTimer);
+      //  ('this.tokenExpirationTimer');
+      //  (this.tokenExpirationTimer);
       this.userLogout();
     }, +expiredAfter);
   }

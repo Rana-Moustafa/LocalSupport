@@ -16,15 +16,16 @@
 
       <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
       aria-expanded="false">
-      <span>{{ (translate.currentLang?translate.currentLang: selectedLang) | uppercase }}</span>
+      <span>{{ (translate.currentLang
+        ? (translate.currentLang === 'sv'? 'RM': translate.currentLang) : 
+        selectedLang) | uppercase }}</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <span class="dropdown-item" *ngFor="let language of languages" [value]="language.lang"
         [selected]="language.lang === translate.currentLang" #langSelect
         (click)="translation.useLanguage(langSelect.value); getSelectedLang(langSelect.value)">
 
-        {{ (language.lang != translate.currentLang)? (language.lang | uppercase) : ''}}
-
+        {{ (language.lang != translate.currentLang)? ((language.lang === 'sv' ? 'RM' : (language.lang | uppercase))) : ''}}
       </span>
     </div>
 

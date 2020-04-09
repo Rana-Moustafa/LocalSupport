@@ -15,11 +15,11 @@ export class LocationResloverService implements Resolve<any> {
     private route: ActivatedRoute) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-    //////console.log('resolver')
+    ////// ('resolver')
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
        
-        //////console.log(position.coords.latitude + '' + position.coords.longitude)
+        ////// (position.coords.latitude + '' + position.coords.longitude)
         return position.coords.latitude;
       });
     }

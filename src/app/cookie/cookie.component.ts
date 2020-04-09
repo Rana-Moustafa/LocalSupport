@@ -20,9 +20,9 @@ export class CookieComponent implements OnInit {
 }
 Coockietext(){
     this.commons.getCookiesDetails().subscribe(data => {
-      ////console.log(data)
+      //// (data)
   }, error =>{
-      ////console.log(error)
+      //// (error)
   });
 }
 }

@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
 
     translate.addLangs(['de', 'en', 'fr', 'it', 'sv']);
     const browserLang = translate.getBrowserLang();
-    console.log(browserLang);
+     (browserLang);
     translate.use(browserLang.match(/de|en|fr|it|sv/) ? browserLang : 'de');
     localStorage.setItem('current_lang', browserLang);
 
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit {
     // }
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     // translate.use(translate.getBrowserLang());
-    // console.log(this.langURL);
+    //  (this.langURL);
     // translate.addLangs(['de', 'en']);
     // translate.setDefaultLang('de');
 
@@ -117,7 +117,7 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
-    console.log(localStorage.getItem('current_lang'));
+     (localStorage.getItem('current_lang'));
     // let u = this.router.url;
     // u = u.replace(this.route.snapshot.params.language.toString(), localStorage.getItem('current_lang'));
     // this.router.navigateByUrl(u);
@@ -143,7 +143,7 @@ export class AppComponent implements OnInit {
     this.commons.getCookiesDetails().subscribe(data => {
       this.coockiesDetails = data;
     }, error => {
-      // console.log(error)
+      //  (error)
     });
   }
 

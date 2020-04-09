@@ -73,8 +73,8 @@ export class IntroComponent implements OnInit {
   ngOnInit() {
     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
       localStorage.getItem('current_lang')));
-    console.log(this.translate.currentLang);
-    console.log(this.location.getState());
+     (this.translate.currentLang);
+     (this.location.getState());
     this.commons.showPadding = false;
     this.advertiseData = this.location.getState();
     this.commons.hide();
@@ -90,7 +90,7 @@ export class IntroComponent implements OnInit {
     );
   }
   getSelectedLang(lang) {
-    console.log(lang);
+     (lang);
     this.selectedLang = lang;
     this.translation.addTranslationLanguage(lang);
 
@@ -98,9 +98,9 @@ export class IntroComponent implements OnInit {
   introItems() {
     this.commons.getIntroData().subscribe(data => {
       this.introItemsNames = data;
-      console.log(this.introItemsNames);
+       (this.introItemsNames);
     }, error => {
-      console.log(error);
+       (error);
     });
 
   }

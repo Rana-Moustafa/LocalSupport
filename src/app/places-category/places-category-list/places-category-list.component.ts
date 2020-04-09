@@ -73,9 +73,9 @@ export class PlacesCategoryListComponent implements OnInit {
     this.customText = 'All';
     this.placeTypeId = 0;
     this.navigatedCategoryId = this.location.getState();
-     console.log(this.location.getState());
-    // console.log(JSON.parse(JSON.stringify(this.navigatedCategoryId)).length);
-    // console.log(this.navigatedCategoryId.id);
+      (this.location.getState());
+    //  (JSON.parse(JSON.stringify(this.navigatedCategoryId)).length);
+    //  (this.navigatedCategoryId.id);
     if (this.location.getState() && this.navigatedCategoryId && this.navigatedCategoryId.name ) {
       this.navigatedCategoryId = this.location.getState();
       this.placeTypeId = this.navigatedCategoryId.id;
@@ -83,8 +83,8 @@ export class PlacesCategoryListComponent implements OnInit {
       this.placesCategories();
       this.customText = this.navigatedCategoryId.name;
     } else {
-      console.log('$$$$$$');
-      console.log(this.customText)
+       ('$$$$$$');
+       (this.customText)
       this.customText = 'All';
     }
 
@@ -124,11 +124,11 @@ export class PlacesCategoryListComponent implements OnInit {
     this.sideNav = !this.sideNav;
   }
   changePlaceType(name, id, index) {
-    console.log(name);
+     (name);
     this.placeTypeId = id;
     this.customText = name;
     this.customIndex = index;
-    console.log(this.customIndex);
+     (this.customIndex);
     this.allPlaces = [];
     this.isFullListDisplayed = false;
     this.page = 0;
@@ -151,7 +151,7 @@ export class PlacesCategoryListComponent implements OnInit {
       this.PlacesItemsDetails = data;
       this.placescount = this.PlacesItemsDetails.length;
     }, error => {
-      console.log(error);
+       (error);
     });
   }
 
@@ -177,28 +177,28 @@ export class PlacesCategoryListComponent implements OnInit {
     this.selectedPlaceId = placeTypeId;
   }
   placesCategories() {
-    console.log(this.placeFilterSelection);
+     (this.placeFilterSelection);
     this.isLoading = true;
 
     this.page++;
     this.placesService.getPlacesCategories(this.placeTypeId, this.placeFilterSelection, this.page, this.perPage).subscribe(data => {
-      console.log(this.allPlaces);
+       (this.allPlaces);
       this.isLoading = false;
       this.PlacesItemsDetails = JSON.parse(JSON.stringify(data));
-      console.log(this.PlacesItemsDetails);
+       (this.PlacesItemsDetails);
       this.totalPlacesNumber = this.PlacesItemsDetails.length > 0 ? this.PlacesItemsDetails[0].total_places : '0';
       for (var i = 0; i < this.PlacesItemsDetails.length; i++) {
         this.allPlaces.push(this.PlacesItemsDetails[i]);
       }
       if (this.PlacesItemsDetails && this.PlacesItemsDetails.length === 0) {
-        console.log('no comments')
+         ('no comments')
         this.isFullListDisplayed = true;
         // this.loadingComments = false;
       }
 
 
     }, error => {
-      console.log(error);
+       (error);
       if (error.status === 400) {
         this.isFullListDisplayed = true;
       }
@@ -217,7 +217,7 @@ export class PlacesCategoryListComponent implements OnInit {
       this.totalPlacesNumber = this.PlacesItemsDetails.length > 0 ? this.PlacesItemsDetails[0].total_places : '0';
 
     }, error => {
-      console.log(error);
+       (error);
       this.isLoading = false;
     });
   }
@@ -227,21 +227,21 @@ export class PlacesCategoryListComponent implements OnInit {
     this.PlacesItemsDetails = [];
   }
   placesSort(sort) {
-    console.log(this.selectedPlaceId);
+     (this.selectedPlaceId);
     this.page = 0;
     // this.allPlaces = [];
     this.placesCategories();
-    console.log(this.PlacesItemsDetails);
+     (this.PlacesItemsDetails);
   }
   placesEventHandling(places) {
     if (places.length !== 0) {
-      console.log(places);
-      console.log('found');
+       (places);
+       ('found');
       this.allPlaces = places;
       this.notfound = false;
 
     } else {
-      console.log('notfound');
+       ('notfound');
       this.PlacesItemsDetails = [];
       this.notfound = true;
       this.allPlaces = this.PlacesItemsDetails;

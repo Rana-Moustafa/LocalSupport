@@ -25,13 +25,13 @@ export class AddToFavListComponent implements OnInit {
   ngOnInit() {
     this.places.updateFavPlacesList.subscribe(place => {
       this.updatedFavPlace = place;
-      console.log(this.updatedFavPlace.is_favorited);
+       (this.updatedFavPlace.is_favorited);
     });
   }
 
   addToFav(id) {
-    console.log(id);
-    console.log(this.addToFavStatus);
+     (id);
+     (this.addToFavStatus);
 
     if (this.addToFavStatus === false) {
       Swal.fire({
@@ -54,7 +54,7 @@ export class AddToFavListComponent implements OnInit {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.addToFavStatus = false;
           this.notAdded = true;
-          console.log(this.addToFavStatus);
+           (this.addToFavStatus);
           Swal.fire(
             'Cancelled',
             'Your favoties list has not been changed',
@@ -94,24 +94,24 @@ export class AddToFavListComponent implements OnInit {
   }
   addRemoveFavList(id, addORremove) {
     this.places.addToFavPlaces(id).subscribe(data => {
-      console.log('fav');
-      console.log(data);
+       ('fav');
+       (data);
       this.favPlaceData = JSON.parse(JSON.stringify(data));
       if (addORremove) {
-          console.log('removed');
+           ('removed');
           if (this.favPlaceData.id === id) {
             this.addToFavStatus = false;
-            console.log(this.favPlaceData.id);
-            console.log(id);
+             (this.favPlaceData.id);
+             (id);
           }
       } else {
-        console.log('added');
+         ('added');
       }
       this.addedRemovedPlaceId = id;
       // this.updateFavListEvent.emit(this.favPlaceData);
       this.places.updateFavPlaces(this.favPlaceData);
     }, error => {
-      console.log(error);
+       (error);
     });
   }
 }

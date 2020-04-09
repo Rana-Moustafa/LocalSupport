@@ -36,11 +36,11 @@ export class AboutUsComponent implements OnInit {
   getAbout(lang) {
     this.isLoading = true;
     this.commons.getAboutPage(lang).subscribe( data => {
-      // console.log(data);
+      //  (data);
       this.isLoading = false;
       this.aboutContent = data;
     }, error => {
-      console.log(error);
+       (error);
       this.isLoading = false;
     });
   }

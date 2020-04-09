@@ -64,10 +64,10 @@ export class AuthComponent implements OnInit {
 
   signupText() {
     this.authService.getSignupText().subscribe( data => {
-      // console.log(data);
+      //  (data);
       this.signText = data;
     }, error => {
-      console.log(error);
+       (error);
     });
   }
 
