@@ -4,6 +4,7 @@ import { TranslationService } from '../../shared/translation.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { UserStatusService } from 'src/app/shared/user-status.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class CategoriesSliderComponent implements OnInit {
   @Input() productsData;
 
   customOptions: OwlOptions = {
-    loop: false,
+    loop: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -70,21 +71,27 @@ export class CategoriesSliderComponent implements OnInit {
   allSliders = [];
   searchAll = JSON.stringify('');
 
-  constructor(private places: PlacesService,
-              private translation: TranslationService,
-              public userStatus: UserStatusService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private places: PlacesService,
+    private translation: TranslationService,
+    public userStatus: UserStatusService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private translate: TranslateService) {
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+        event.lang)).then(() => {
+          console.log(localStorage.getItem('current_lang'))
+          console.log('***');
+          this.getCategoriesSliders();
+        });
+    });
+  }
 
   ngOnInit() {
-    //  (this.productsData);
+    // console.log(this.productsData);
     this.translation.addRouterLangParam();
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-       this.getCategoriesSliders();
-      }
-    );
-
     this.getCategoriesSliders();
   }
 
@@ -92,13 +99,13 @@ export class CategoriesSliderComponent implements OnInit {
     this.places.getPlacesTypes().subscribe(data => {
       this.categoriesNames = JSON.parse(JSON.stringify(data));
     }, error => {
-      //  (error)
+      // console.log(error)
     });
   }
   getCategoriesSliders() {
 
     this.places.getPlacesCategories(this.placesCategoriesChildId, 'sort_latest', 1, 15).subscribe(data => {
-       (data);
+      console.log(data);
       this.categorySliderDetails = JSON.parse(JSON.stringify(data));
       if (this.categorySliderDetails.length === 0) {
         this.categoryEmpty = true;
@@ -107,23 +114,23 @@ export class CategoriesSliderComponent implements OnInit {
         this.categoryEmpty = false;
       }
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
   showMorePlaces(cateId, catName) {
-    //  (cateId);
-    //  (catName);
+    // console.log(cateId);
+    // console.log(catName);
     this.router.navigateByUrl('/' + this.langURL + '/places-category', { state: { id: cateId, name: catName } });
   }
 
   updateFavList($event) {
     this.placeData = $event;
-    //  ($event);
-    //  (this.favoritePlacesSliderData);
+    // console.log($event);
+    // console.log(this.favoritePlacesSliderData);
 
     if (this.placeData.is_favorited) {
       this.favoritePlacesSliderData.push($event);
-      //  (this.favoritePlacesSliderData);
+      // console.log(this.favoritePlacesSliderData);
     } else {
 
     }

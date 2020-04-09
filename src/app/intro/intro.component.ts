@@ -6,8 +6,7 @@ import { AutoHeightService } from 'ngx-owl-carousel-o/lib/services/autoheight.se
 import { CommonsService } from './../shared/commons.service';
 import { Router, ActivationEnd, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { TranslationService } from '../shared/translation.service';
-import { TranslateService } from '@ngx-translate/core';
-
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-intro',
@@ -36,6 +35,7 @@ export class IntroComponent implements OnInit {
     nav: false
   };
   selectedLang;
+  firstLoad = true;
   languages = [
     {
       fullName: 'English',
@@ -68,29 +68,32 @@ export class IntroComponent implements OnInit {
     private translation: TranslationService,
     private location: Location,
     public translate: TranslateService) {
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      console.log(event.lang);
+      this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+        event.lang)).then(() => {
+          this.introItems();
+        });
+    });
   }
 
   ngOnInit() {
-    this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-      localStorage.getItem('current_lang')));
-     (this.translate.currentLang);
-     (this.location.getState());
+    if (this.firstLoad) {
+      this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+       this.commons.getCurrentLanguage())).then(() => {
+          this.introItems();
+        });
+    }
+    console.log(this.translate.currentLang);
+    console.log(this.location.getState());
     this.commons.showPadding = false;
-    this.advertiseData = this.location.getState();
+    // this.advertiseData = this.location.getState();
     this.commons.hide();
-    this.introItems();
+    // this.introItems();
     this.translation.addRouterLangParam();
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        localStorage.setItem('current_lang', lang);
-        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
-          lang));
-        this.introItems();
-      }
-    );
   }
   getSelectedLang(lang) {
-     (lang);
+    console.log(lang);
     this.selectedLang = lang;
     this.translation.addTranslationLanguage(lang);
 
@@ -98,9 +101,9 @@ export class IntroComponent implements OnInit {
   introItems() {
     this.commons.getIntroData().subscribe(data => {
       this.introItemsNames = data;
-       (this.introItemsNames);
+      console.log(this.introItemsNames);
     }, error => {
-       (error);
+      console.log(error);
     });
 
   }

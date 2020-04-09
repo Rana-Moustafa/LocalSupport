@@ -74,11 +74,22 @@ body {
   }
 }
 .inner-pages{
-
+  color: #000;
   h1{
       margin: 25px 0;
+      color: #000;
+      @media all and (max-width: 640px) {
+        font-size: 30px;
+      }
   }
 
+  h2{
+      color: #000;
+      font-size: 36px;
+      @media all and (max-width: 640px) {
+        font-size: 26px;
+      }
+  }
   a{
       color: #000;
       text-decoration: underline;
@@ -89,6 +100,10 @@ body {
 
   p, li{
       color: #000;
+      margin-top: 25px;
+      @media all and (max-width: 640px){
+        margin-top: 0;
+      }
       a{
           color: #000;
           text-decoration: underline;

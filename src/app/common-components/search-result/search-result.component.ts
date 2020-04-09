@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchResultsService } from '../../shared/search-results.service';
 import { PlacesService } from 'src/app/shared/places.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { TranslationService } from '../../shared/translation.service';
 import { CommonsService } from 'src/app/shared/commons.service';
 
@@ -29,14 +29,6 @@ export class SearchResultComponent implements OnInit {
   notfound = false;
   langURL = localStorage.getItem('current_lang');
   sideNav = false;
-  constructor(
-    public searchResultsService: SearchResultsService,
-    private route: ActivatedRoute,
-    private placesService: PlacesService,
-    public translate: TranslateService,
-    private translation: TranslationService,
-    private router: Router,
-    private commons: CommonsService) { }
   result;
   searchResults;
   results;
@@ -49,6 +41,27 @@ export class SearchResultComponent implements OnInit {
   isFullListDisplayed = false;
   filterComponent;
   isLoading = false;
+  
+  constructor(
+    public searchResultsService: SearchResultsService,
+    private route: ActivatedRoute,
+    private placesService: PlacesService,
+    public translate: TranslateService,
+    private translation: TranslationService,
+    private router: Router,
+    private commons: CommonsService) {
+
+      this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+          event.lang)).then(() => {
+            this.page = 0;
+            this.allPlaces = [];
+            this.allSearchPlaces = [];
+            this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), event.lang);
+          });
+      });
+     }
+
 
   ngOnInit() {
     this.isLoading = false;
@@ -56,25 +69,15 @@ export class SearchResultComponent implements OnInit {
     this.searchResultsService._searchResultsRespond.subscribe(message => {
       this.searchWord = JSON.parse(message);
       this.searchQuery(this.searchWord, localStorage.getItem('current_lang'));
-      //  (this.searchWord);
+      // console.log(this.searchWord);
     });
-    //  (this.route.snapshot.queryParamMap.get('search'));
+    // console.log(this.route.snapshot.queryParamMap.get('search'));
     this.searchWord = JSON.parse(this.route.snapshot.queryParamMap.get('search'));
     if (this.route.snapshot.queryParamMap.get('search')) {
       this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), localStorage.getItem('current_lang'));
     }
 
     // this.searchResults = this.route.snapshot.queryParamMap.get('search');
-
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
-        this.page = 0;
-        this.allPlaces = [];
-        this.allSearchPlaces = [];
-        this.searchQuery(JSON.parse(this.route.snapshot.queryParamMap.get('search')), lang);
-      }
-    );
   }
 
   toggleSideNav() {
@@ -93,8 +96,8 @@ export class SearchResultComponent implements OnInit {
       this.isLoading = true;
       this.page++;
       this.placesService.filteredPlaces(this.filterComponent, this.page, this.perPage).subscribe(data => {
-        //  ('filtered places');
-        //  (data);
+        // console.log('filtered places');
+        // console.log(data);
         this.isLoading = false;
         this.sideNav = false;
         this.placesResults = JSON.parse(JSON.stringify(data));
@@ -110,7 +113,7 @@ export class SearchResultComponent implements OnInit {
           this.notfound = false;
         }
       }, (errorMessage) => {
-         (errorMessage);
+        console.log(errorMessage);
         this.isLoading = false;
         this.isFullListDisplayed = true;
         if (errorMessage.status === 400) {
@@ -124,7 +127,7 @@ export class SearchResultComponent implements OnInit {
       this.isLoading = true;
       this.page++;
       this.searchResultsService.GetSearchResults(search, this.page, this.perPage, lang).subscribe(data => {
-         (data);
+        console.log(data);
         this.isLoading = false;
         this.results = data;
         for (var i = 0; i < this.results.length; i++) {
@@ -140,7 +143,7 @@ export class SearchResultComponent implements OnInit {
           this.notfound = false;
         }
       }, error => {
-         (error);
+        console.log(error);
         this.isLoading = false;
       });
     }

@@ -5,8 +5,9 @@ import { MapsService } from '../../shared/maps.service';
 import { PlacesService } from '../../shared/places.service';
 import { TranslationService } from '../../shared/translation.service';
 import { SearchResultsService } from '../../shared/search-results.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ClusterStyle } from '@agm/js-marker-clusterer/services/google-clusterer-types';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 interface Marker {
   address: string;
@@ -247,18 +248,21 @@ export class MapComponent implements OnInit {
     private places: PlacesService,
     private translation: TranslationService,
     public searchResultsService: SearchResultsService,
-    private router: Router) { }
+    private router: Router,
+    private translate: TranslateService,
+    private route: ActivatedRoute) {
+
+      this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+          event.lang)).then(() => {
+            this.selectedCategory();
+          });
+      });
+    }
 
   ngOnInit() {
     const uA = navigator.userAgent;
     const vendor = navigator.vendor;
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        // console.log(lang)
-        this.selectedCategory();
-      }
-    );
-
     this.selectedCategory();
     // this.loadMap();
   }

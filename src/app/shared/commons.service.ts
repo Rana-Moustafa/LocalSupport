@@ -34,14 +34,14 @@ export class CommonsService {
     }
   }
   changeLanguageSwitcherStatus(message: boolean) {
-     (message)
+    console.log(message)
     this.languageSwitcherStatus.next(message);
   }
 
 
   sendAnchorScollId(message: string) {
     this.scollAnchorSource.next(message);
-    //  (message);
+    // console.log(message);
   }
 
   showLoadingSpinner() {
@@ -117,6 +117,7 @@ export class CommonsService {
       return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/intro?lang=' + this.getCurrentLanguage());
   }
   getAboutPage(lang) {
+    console.log(environment.baseURL + '/wp-json/outdoorf/v1/about?lang=' + lang)
     return this.http.get(environment.baseURL + '/wp-json/outdoorf/v1/about?lang=' + lang);
   }
   getTestimonials(testimonialsIds) {

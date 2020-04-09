@@ -4,6 +4,7 @@ import { PlacesService } from '../shared/places.service';
 import { TranslationService } from '../shared/translation.service';
 import { UserStatusService } from '../shared/user-status.service';
 import { CommonsService } from '../shared/commons.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-single-place',
@@ -43,19 +44,20 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
     private router: Router,
     private translation: TranslationService,
     public userStatus: UserStatusService,
-    public commons: CommonsService) {
+    public commons: CommonsService,
+    private translate: TranslateService) {
     this.innerWidth = window.innerWidth;
 
     this.checkWindowWidth();
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        this.commons.showLoadingSpinner();
-        this.getSinglePlace(this.route.snapshot.params['id']);
-        this.router.url.replace(this.route.snapshot.params.language, lang);
-        this.placeNotTranslated = false;
-      }
-    );
 
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+        event.lang)).then(() => {
+          this.commons.showLoadingSpinner();
+          this.getSinglePlace(this.route.snapshot.params['id']);
+          this.placeNotTranslated = false;
+        });
+    });
   }
   checkWindowWidth() {
     this.innerWidth = window.innerWidth;
@@ -76,9 +78,9 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
 
   addToFav(id) {
     this.places.addToFavPlaces(id).subscribe(data => {
-      //  (data);
+      // console.log(data);
     }, error => {
-       (error);
+      console.log(error);
     });
   }
 
@@ -95,7 +97,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
       }
       this.translatedId = this.singlePlaceData.translated_id;
       this.singlePlaceParent = this.singlePlaceData;
-      //  (this.translatedId)
+      // console.log(this.translatedId)
       if (!this.translatedId) {
         // this.commons.sendLanguageSwitcherStatus(true);
         this.commons.changeLanguageSwitcherStatus(true);
@@ -105,7 +107,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
       }
 
     }, error => {
-      //  (error)
+      // console.log(error)
       this.commons.hideLoadingSpinner();
     });
   }
@@ -117,7 +119,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
         params = id;
       });
     }, error => {
-      //  (error)
+      // console.log(error)
     });
   }
 

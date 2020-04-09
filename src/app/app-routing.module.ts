@@ -33,7 +33,7 @@ import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
 
 const appRoutes: Routes = [
 
-{path: '', redirectTo: 'de/intro', pathMatch: 'full' },
+{ path: '', redirectTo: 'de/intro', pathMatch: 'full' },
 { path: 'signup', component: AuthComponent },
 { path: 'signin', component: AuthComponent },
 { path: ':language/search-result', component: SearchResultComponent },

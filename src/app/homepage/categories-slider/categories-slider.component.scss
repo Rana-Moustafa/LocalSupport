@@ -140,6 +140,10 @@
             }
         }
     }
+
+    &__banner{
+      height: 100% !important;
+    }
     &__place-name-link{
       color        : $slate-grey;
       &:hover {

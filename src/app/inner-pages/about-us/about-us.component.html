@@ -2,39 +2,37 @@
   <div class="container">
     <h1 [innerHTML]="aboutContent? aboutContent.title: ''"></h1>
     <div class="col-xs-6">
-      <p [innerHTML]="aboutContent? aboutContent.left_text: ''">
-
+      <p [innerHTML]="aboutContent? aboutContent.main_text: ''">
       </p>
-      <div class="page_logos">
-        <div class="page_logos__logos">
-          <a href="https://modeso.ch/?lang=de" target="_blank">
-            <img src="../../../assets/images/logo1.svg" />
+      <div class="page_logos" *ngIf="aboutContent.about_logos">
+        <div class="page_logos__logos" *ngFor="let logo of aboutContent.about_logos">
+          <a href="{{logo.url}}" target="_blank">
+            <img [src]="logo.image" />
           </a>
         </div>
-        <div class="page_logos__logos">
-          <a href="https://co-co-co.org/index.html" target="_blank">
-            <img src="../../../assets/images/logo2.svg" />
-          </a>
-        </div>
-        <div class="page_logos__logos">
-          <a href="https://cooperativesuisse.ch/" target="_blank">
-            <img src="../../../assets/images/logo3.svg" />
-          </a>
-        </div>
+
+        <p [innerHTML]="aboutContent.logos_text? aboutContent.logos_text: ''"></p>
       </div>
+
     </div>
     <div class="col-xs-12">
-      <p [innerHTML]="aboutContent? aboutContent.right_text: ''">
+      <h2 [innerHTML]="aboutContent? aboutContent.partner_title: ''"></h2>
 
         <div class="page_logos">
-          <div class="page_logos__logos__small">
-            <a href="https://www.brudi.com/de/" target="_blank">
-              <img src="../../../assets/images/logo4.svg" />
+          <div class="page_logos__logos__small" *ngFor="let partner of aboutContent.partner_logos">
+            <a href="{{partner.url}}" target="_blank">
+              <img [src]="partner.image" />
             </a>
           </div>
-          <div class="page_logos__logos__small">
-            <a href="https://storyup.ch/" target="_blank">
-              <img src="../../../assets/images/logo6.svg" />
+        </div>
+    </div>
+    <div class="col-xs-12">
+      <h2 [innerHTML]="aboutContent? aboutContent.friends_title: ''"></h2>
+
+        <div class="page_logos">
+          <div class="page_logos__logos__small" *ngFor="let friend of aboutContent.friends_logos">
+            <a href="{{friend.url}}" target="_blank">
+              <img [src]="friend.image" />
             </a>
           </div>
         </div>

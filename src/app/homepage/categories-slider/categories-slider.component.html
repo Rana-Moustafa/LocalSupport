@@ -19,6 +19,37 @@
                     <owl-carousel-o [options]="customOptions" class="owl-slider-section">
 
                         <ng-container *ngFor="let categorySlider of categorySliderDetails; let i = index">
+                            <ng-template class="item" carouselSlide [id]="categorySlider.id" [width]="250"
+                            *ngIf="i === 3">
+                                <div class="category-slider__item" data-length="{{categorySlider.length}}">
+                                    <div class="category-slider__img category-slider__banner">
+                                        <a href="https://swiss21.org/" target="_blank"
+                                            class="category-slider__place-name-link">
+                                            <img src="./../assets/images/slider-banner.png"
+                                                alt="" class="img-thumbnail">
+                                        </a>
+                                      
+                                    </div>
+                                    <!-- <a class="category-slider__place-name" [stopLink]="isDragging"
+                                        [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
+                                        class="category-slider__place-name-link">
+                                        <h6 [innerHTML]="categorySlider.title.rendered">
+                                        </h6>
+                                    </a> -->
+                                    <!-- <p class="text" [innerHTML]="(categorySlider.description | slice:0:100)+'...'">
+                                    </p> -->
+                                    <!-- <div>
+                                        <span class="badge" *ngFor="let category of categorySlider.category"
+                                            [innerHTML]="category.name">
+                                        </span>
+                                    </div> -->
+                                    <!-- <p>
+                                        <a [routerLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
+                                            class="read-more">
+                                            {{"read_more" | translate}}</a>
+                                    </p> -->
+                                </div>
+                            </ng-template>
                             <ng-template class="item" carouselSlide [id]="categorySlider.id" [width]="250">
 
                                 <div class="category-slider__item" data-length="{{categorySlider.length}}">

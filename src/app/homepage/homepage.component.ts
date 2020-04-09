@@ -4,6 +4,7 @@ import { PlacesService } from '../shared/places.service';
 import { AuthenticationService } from '../shared/auth.service';
 import { TranslationService } from '../shared/translation.service';
 import { ActivatedRoute, Data, Router } from '@angular/router';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-homepage',
@@ -24,26 +25,27 @@ export class HomepageComponent implements OnInit {
   scrollId: string;
   updatedFavPlace;
 
-  constructor(private commons: CommonsService,
-              private places: PlacesService,
-              private translation: TranslationService,
-              private auth: AuthenticationService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private commons: CommonsService,
+    private places: PlacesService,
+    private translation: TranslationService,
+    private auth: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private translate: TranslateService) {
+
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+        event.lang));
+    });
+  }
 
   ngOnInit() {
     this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, localStorage.getItem('current_lang')));
     this.commons.darkHeader = false;
     this.commons.currentscollAnchor.subscribe(message => this.scrollId = message);
     this.commons.show();
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        localStorage.setItem('current_lang', lang);
-        let u = this.router.url;
-        u = u.replace(this.route.snapshot.params.language.toString(), lang);
-        this.router.navigateByUrl(u);
-      }
-    );
   }
   navigateToSection(section: string) {
     this.route.fragment.subscribe(fragment => {
@@ -57,7 +59,7 @@ export class HomepageComponent implements OnInit {
     this.places.getSinglePlaceData(featuredPlacesId).subscribe(data => {
       this.getPlaceId = data;
     }, error => {
-       (error);
+      console.log(error);
     });
   }
   getTestimonialsData() {
@@ -67,7 +69,7 @@ export class HomepageComponent implements OnInit {
     this.commons.getTestimonials(this.testimonialsIds).subscribe(data => {
       this.GetTestimonialsItem = data;
     }, error => {
-      //  (error)
+      // console.log(error)
     });
   }
 
@@ -76,9 +78,9 @@ export class HomepageComponent implements OnInit {
       this.placesCategories = data;
       this.placesCategories = this.placesCategories.reverse();
 
-       (this.placesCategories);
+      console.log(this.placesCategories);
     }, error => {
-      //  (error)
+      // console.log(error)
     });
   }
   getFavoritePlacesSlider() {
@@ -86,7 +88,7 @@ export class HomepageComponent implements OnInit {
       this.places.getFavoritePlaces(1, 100).subscribe(data => {
         this.favoritePlacesSlider = JSON.parse(JSON.stringify(data));
       }, error => {
-        //  (error)
+        // console.log(error)
       });
     }
 

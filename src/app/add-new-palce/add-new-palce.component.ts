@@ -11,6 +11,7 @@ import { CommonsService } from '../shared/commons.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { MapsService } from '../shared/maps.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -103,7 +104,7 @@ export class AddNewPalceComponent implements OnInit {
       switch (label) {
         case LabelType.Low:
           return '<b>Min:</b> CHF' + value;
-          // value = this.minPriceRange;
+        // value = this.minPriceRange;
         case LabelType.High:
           return '<b>Max:</b> CHF' + value;
         //  value = this.maxPriceRange;
@@ -121,17 +122,28 @@ export class AddNewPalceComponent implements OnInit {
   streetViewControl = false;
   langURL = localStorage.getItem('current_lang');
 
-  @ViewChild ('placename', {static: false}) addPlaceName;
-  constructor(private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone,
-              private places: PlacesService,
-              private router: Router,
-              private translation: TranslationService,
-              private userData: UserDataService,
-              private route: ActivatedRoute,
-              private imageCompress: NgxImageCompressService,
-              private commons: CommonsService,
-              private map: MapsService) { }
+  @ViewChild('placename', { static: false }) addPlaceName;
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private places: PlacesService,
+    private router: Router,
+    private translation: TranslationService,
+    private userData: UserDataService,
+    private route: ActivatedRoute,
+    private imageCompress: NgxImageCompressService,
+    private commons: CommonsService,
+    private map: MapsService,
+    private translate: TranslateService) {
+
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
+        event.lang)).then(() => {
+          this.getFormSelectionItems();
+        });
+    });
+  }
 
 
   ngOnInit() {
@@ -141,38 +153,25 @@ export class AddNewPalceComponent implements OnInit {
     this.map.getMapLocations().subscribe(data => {
       this.markers = JSON.parse(JSON.stringify(data));
     }, error => {
-      //  (error);
+      // console.log(error);
     });
     this.userData.getUserDetails().subscribe(data => {
 
 
     }, error => {
-       (error);
+      console.log(error);
       if (error.status === 411) {
         this.router.navigate(['/signin']);
       }
     });
 
     this.getFormSelectionItems();
-    // this.getPlacesTypesItems();
-
-    this.translation.langUpdated.subscribe(
-      (lang) => {
-        localStorage.setItem('current_lang', lang);
-        this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language, lang));
-        this.getFormSelectionItems();
-        // this.getPlacesTypesItems();
-      }
-    );
-
-
     this.loadMap();
-
   }
 
 
   fileChangeEvent(event: any) {
-    //  (event);
+    // console.log(event);
     this.imageChangedEvent = event;
     this.uploadedImage = event.target.files[0].name;
     this.imagesCount = event.target.files.length;
@@ -180,17 +179,17 @@ export class AddNewPalceComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = '';
-    //  (event);
+    // console.log(event);
     this.croppedImage = event.base64;
   }
 
   loadImageFailed() {
-     ('error loading image');
+    console.log('error loading image');
   }
   updateProfilePicture() {
     this.imagesUrls.push(this.croppedImage);
     this.imagesNames.push(this.uploadedImage);
-    //  (this.imagesUrls);
+    // console.log(this.imagesUrls);
     if (this.imagesUrls.length > 5) {
       this.maxNumber = true;
     } else if (this.imagesUrls.length < 1) {
@@ -203,12 +202,12 @@ export class AddNewPalceComponent implements OnInit {
   getFormSelectionItems() {
     this.isLoading = true;
     this.places.getFormSelections().subscribe(data => {
-      //  ('form selection');
-       (data);
+      // console.log('form selection');
+      console.log(data);
       this.formSelection = data;
       this.formType = this.formSelection.type;
       this.formCategories = this.formSelection.category;
-      this.formDelivery  = this.formSelection.delivery;
+      this.formDelivery = this.formSelection.delivery;
       this.formPaymentMethod = this.formSelection.payment_methods;
       this.isLoading = false;
     }, error => {
@@ -221,12 +220,12 @@ export class AddNewPalceComponent implements OnInit {
       this.placesCategories = data;
 
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
   checkValid() {
     return (this.addPlace.valid && this.placesCategories && this.placesCategories.length && this.placesCategories.find(x => x.checked)
-    && this.newplaceFeaturedImage.length);
+      && this.newplaceFeaturedImage.length);
   }
   checkValidImages() {
     if (this.imagesUrls.length < 1 ||
@@ -250,10 +249,10 @@ export class AddNewPalceComponent implements OnInit {
 
   checkPlayground(event, name) {
     if ((name === 'Playground' || name === 'Spielplatz' || name === 'Spielplätze' || name === 'Playgrounds')
-    && event.target.checked === true) {
+      && event.target.checked === true) {
       this.showSubCategories = true;
     } else if ((name === 'Playground' || name === 'Spielplatz' || name === 'Spielplätze' || name === 'Playgrounds') &&
-     event.target.checked === false) {
+      event.target.checked === false) {
       this.showSubCategories = false;
     }
   }
@@ -270,19 +269,19 @@ export class AddNewPalceComponent implements OnInit {
     }
   }
   markerDragEnd($event: MouseEvent) {
-    //  ($event);
+    // console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-     //  (results);
-     //  (status);
+      // console.log(results);
+      // console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 15;
-          //  (results[0].formatted_address);
+          // console.log(results[0].formatted_address);
           this.placeaddress = results[0].formatted_address;
         } else {
           window.alert('No results found');
@@ -299,7 +298,7 @@ export class AddNewPalceComponent implements OnInit {
       this.geoCoder = new google.maps.Geocoder;
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ['address'],
-        componentRestrictions: { country: ['CH', 'DE', 'AT' ] }
+        componentRestrictions: { country: ['CH', 'DE', 'AT'] }
       });
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
@@ -325,10 +324,10 @@ export class AddNewPalceComponent implements OnInit {
   }
 
   compressFile() {
-  //  (this.addPlaceName.value);
-   if (!this.maxNumber) {
-    this.imageCompress.uploadFile().then(({image, orientation}) => {
-        //  (image);
+    // console.log(this.addPlaceName.value);
+    if (!this.maxNumber) {
+      this.imageCompress.uploadFile().then(({ image, orientation }) => {
+        // console.log(image);
         this.imgResultBeforeCompress = image;
         this.featuredImageError = true;
         console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
@@ -351,17 +350,17 @@ export class AddNewPalceComponent implements OnInit {
           }
         );
       });
-    return false;
-   }
-}
+      return false;
+    }
+  }
 
   getFileDetails(event) {
-   //  (event);
+    // console.log(event);
     if (event.target.files && event.target.files[0]) {
       const filesAmount = event.target.files.length;
 
       for (let i = 0; i < filesAmount; i++) {
-        //  (event.target.files[i]);
+        // console.log(event.target.files[i]);
         this.imagesNames.push(event.target.files[i].name);
         // this.imagesUrls.push(this.urls);
         var reader = new FileReader();
@@ -444,17 +443,17 @@ export class AddNewPalceComponent implements OnInit {
       this.longitude,
       this.minValue,
       this.maxValue
-      ).subscribe(data => {
-         (data);
-        this.isLoading = false;
-        this.addPlaceFormError = false;
-        form.reset();
-        this.router.navigate(['/' + this.langURL + '/thank-you']);
-      }, error => {
-         (error);
-        this.isLoading = false;
-        this.addPlaceFormError = true;
-        this.formErrorMsg = error.error.message;
-      });
+    ).subscribe(data => {
+      console.log(data);
+      this.isLoading = false;
+      this.addPlaceFormError = false;
+      form.reset();
+      this.router.navigate(['/' + this.langURL + '/thank-you']);
+    }, error => {
+      console.log(error);
+      this.isLoading = false;
+      this.addPlaceFormError = true;
+      this.formErrorMsg = error.error.message;
+    });
   }
 }

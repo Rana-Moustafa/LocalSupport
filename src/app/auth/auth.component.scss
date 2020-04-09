@@ -152,14 +152,14 @@
     }
 }
 .language_banner {
-    background: $localSecondary;
-    width: 100%;
-    position: fixed;
-    z-index: 99;
-    color: white;
-    padding: 10px;
-    letter-spacing: 2px;
-    word-spacing: 4px;
+    // background: $localSecondary;
+    // width: 100%;
+    // position: fixed;
+    // z-index: 99;
+    // color: white;
+    // padding: 10px;
+    // letter-spacing: 2px;
+    // word-spacing: 4px;
 
     @media all and (max-width: 640px){
         font-size: 12px;

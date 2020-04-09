@@ -84,6 +84,11 @@
       min-width: 70px;
       left: -20px !important;
     }
+
+    @media all and (max-width: 400px){
+      right: 15px;
+      top: 55px;
+    }
   }
   .b-footer {
     @media all and (min-width: 641px) {
