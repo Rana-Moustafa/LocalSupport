@@ -224,9 +224,10 @@ export class PlacesService {
     placeData.append('hr_to', (place.openTo).toString());
     placeData.append('lat', latitude);
     placeData.append('lng', longitude);
-    placeData.forEach((value, key) => {
-       (key + ' ' + value);
-    });
+
+    // placeData.forEach((value, key) => {
+    //   console.log(key + ' ' + value);
+    // });
     return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/add_place',
       placeData);
 
@@ -243,7 +244,7 @@ export class PlacesService {
     let filterPayment = '';
     let filterTypes = '';
 
-     (filterObj);
+    console.log(filterObj);
 
     if (filterObj && filterObj.selectedPayment.length > 0) {
       for (var i = 0; i < filterObj.selectedPayment.length; i++) {
@@ -281,7 +282,7 @@ export class PlacesService {
       filterTypes = '';
     }
 
-     (environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
       filterDelivery + filterCategories + filterTypes + '&skip_cache=1&page=' + page + '&per_page=' + perpage +
       '&lang=' + this.getCurrentLanguage());
     return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&' + filterPayment +
@@ -347,7 +348,7 @@ export class PlacesService {
       placeData.append('feat_image_name', placeFeaturedImage[0].name);
       placeData.append('feat_image', placeFeaturedImage[0].url);
     } else {
-      //  (placeFeaturedImage.length);
+      // console.log(placeFeaturedImage.length);
     }
 
     placeData.append('token', JSON.parse(localStorage.getItem('token')));
@@ -368,16 +369,16 @@ export class PlacesService {
     placeData.append('lng', longitude);
     placeData.append('place_id', placeId);
     placeData.append('edit_image', 'true');
-    placeData.forEach((value, key) => {
-       (key + ' ' + value);
-    });
+    // placeData.forEach((value, key) => {
+    //   console.log(key + ' ' + value);
+    // });
 
     return this.http.post(environment.baseURL + '/wp-json/outdoorf/v1/edit_place',
       placeData);
   }
 
   userPlaces() {
-     (environment.baseURL + '/wp-json/wp/v2/place?myplaces&core&token=' + JSON.parse(localStorage.getItem('token')) +
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?myplaces&core&token=' + JSON.parse(localStorage.getItem('token')) +
     '&lang=' + this.getCurrentLanguage());
     return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&token=' +
       JSON.parse(localStorage.getItem('token')) +

@@ -73,7 +73,7 @@
                                         <h6 [innerHTML]="categorySlider.title.rendered">
                                         </h6>
                                     </a>
-                                    <p class="text" [innerHTML]="(categorySlider.description | slice:0:100)+'...'">
+                                    <p class="text" [innerHTML]="(categorySlider.description | slice:0:100 | filterPipe)+'...'">
                                     </p>
                                     <div>
                                         <span class="badge" *ngFor="let category of categorySlider.category"
