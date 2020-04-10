@@ -89,9 +89,14 @@
                     <small>({{ "local_Description_2" | translate }})</small> (*)</h4>
                 <div class="form-group">
 
-
-                    <textarea type="text" class="form-control" [ngModel]="placeData?placeData.description: ''"
-                        name="description" #description="ngModel" required></textarea>
+                    <ckeditor [editor]="Editor" [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList','numberedList'],
+                    heading: {
+                      options: [ { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' }
+                      ]}}"
+                      [ngModel]="placeData?placeData.description: ''" name="description" #description="ngModel"
+                      required></ckeditor>
+                    <!-- <textarea type="text" class="form-control" [ngModel]="placeData?placeData.description: ''"
+                        name="description" #description="ngModel" required></textarea> -->
                     <small class="help-block"
                         *ngIf="!description.valid && description.touched && description.errors.required">{{'field_requird'  | translate }}</small>
                 </div>

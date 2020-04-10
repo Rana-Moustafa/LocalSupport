@@ -10,7 +10,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { CommonsService } from '../../shared/commons.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-edit-place',
   templateUrl: './edit-place.component.html',
@@ -18,6 +18,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None
 })
 export class EditPlaceComponent implements OnInit {
+  public Editor = ClassicEditor;
   private geoCoder;
   latitude;
   longitude;

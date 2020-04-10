@@ -99,15 +99,15 @@
               <h4 class="subtitle">{{"local_Description" |translate}}
                 <small>({{ "local_Description_2" | translate }})</small> (*)</h4>
               <div class="form-group">
-                <!-- <ckeditor [editor]="Editor" [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList','numberedList'],
+                <ckeditor [editor]="Editor" [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList','numberedList'],
                 heading: {
                   options: [ { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' }
                   ]}}"
                   ngModel name="description" #description="ngModel"
-                  required></ckeditor> -->
-
+                  required></ckeditor>
+<!-- 
                 <textarea type="text" class="form-control col-12" ngModel name="description" #description="ngModel"
-                  required></textarea>
+                  required></textarea> -->
                 <small class="help-block"
                   *ngIf="!description.valid && description.touched && description.errors.required">{{'field_requird'  | translate }}</small>
               </div>

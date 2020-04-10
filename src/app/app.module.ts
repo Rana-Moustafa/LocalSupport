@@ -105,7 +105,7 @@ import { EditPlaceComponent } from './single-place/edit-place/edit-place.compone
 import { ProfilePlacesComponent } from './profile-details/profile-places/profile-places.component';
 import { LegalComponent } from './inner-pages/legal/legal.component';
 import { PrivacyComponent } from './inner-pages/privacy/privacy.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -213,10 +213,11 @@ export const ngxDropTargetOptions: DropTargetOptions = {
     ShareModule,
     CarouselModule,
     ImageCropperModule,
+    CKEditorModule,
     NgxUploadModule.forRoot(ngxDropTargetOptions),
     // Swal.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAyWxJuiFnfiMbs4WR1iablJIro0n8M-FE',
+      apiKey: 'AIzaSyCuFUqz0SR3cbfgdD5WIiINcx0Hn9pxsgk',
       libraries: ['places']
     }),
     AgmJsMarkerClustererModule,
