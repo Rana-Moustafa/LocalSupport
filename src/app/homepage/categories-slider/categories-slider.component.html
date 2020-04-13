@@ -16,26 +16,25 @@
                 </div>
 
                 <div class="slider-wrapper">
-                    <owl-carousel-o [options]="customOptions" class="owl-slider-section"
-                    (dragging)="isDragging = $event.dragging">
+                    <owl-carousel-o [options]="customOptions" class="owl-slider-section">
 
                         <ng-container *ngFor="let categorySlider of categorySliderDetails; let i = index">
                             <ng-template class="item" carouselSlide [id]="categorySlider.id" [width]="250"
                             *ngIf="i === 3">
                                 <div class="category-slider__item" data-length="{{categorySlider.length}}">
                                     <div class="category-slider__img category-slider__banner">
-                                        <a [stopLink]="false"
-                                        [owlRouterLink]="['https://swiss21.org/']" target="_blank"
+                                        <a href="https://swiss21.org/" 
+                                        [stopLink]="false" target="_blank"
                                             class="category-slider__place-name-link outer-link">
                                             <img src="./../assets/images/slider-banner.png"
                                                 alt="" class="img-thumbnail">
                                         </a>
                                       
                                     </div>
-                                   <a class="category-slider__place-name" [stopLink]="false"
-                                        [owlRouterLink]="['https://swiss21.org/']"
-                                        class="category-slider__place-name-link">
-                                    </a>
+                                    <a href="https://swiss21.org/" 
+                                        [stopLink]="false" target="_blank"
+                                            class="category-slider__place-name-link outer-link">
+                                        </a>
                                     <!-- <p class="text" [innerHTML]="(categorySlider.description | slice:0:100)+'...'">
                                     </p> -->
                                     <!-- <div>
