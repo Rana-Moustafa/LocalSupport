@@ -70,6 +70,7 @@ export class CategoriesSliderComponent implements OnInit {
   perPage = 100;
   allSliders = [];
   searchAll = JSON.stringify('');
+  isDragging;
 
   constructor(
     private places: PlacesService,
@@ -82,8 +83,8 @@ export class CategoriesSliderComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
         event.lang)).then(() => {
-          console.log(localStorage.getItem('current_lang'))
-          console.log('***');
+          // console.log(localStorage.getItem('current_lang'))
+          // console.log('***');
           this.getCategoriesSliders();
         });
     });
