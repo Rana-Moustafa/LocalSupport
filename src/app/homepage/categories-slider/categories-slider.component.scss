@@ -143,6 +143,10 @@
 
     &__banner{
       height: 100% !important;
+
+      a{
+        display: block;
+      }
     }
     &__place-name-link{
       color        : $slate-grey;

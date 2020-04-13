@@ -16,7 +16,8 @@
                 </div>
 
                 <div class="slider-wrapper">
-                    <owl-carousel-o [options]="customOptions" class="owl-slider-section">
+                    <owl-carousel-o [options]="customOptions" class="owl-slider-section"
+                    (dragging)="isDragging = $event.dragging">
 
                         <ng-container *ngFor="let categorySlider of categorySliderDetails; let i = index">
                             <ng-template class="item" carouselSlide [id]="categorySlider.id" [width]="250"
@@ -24,18 +25,16 @@
                                 <div class="category-slider__item" data-length="{{categorySlider.length}}">
                                     <div class="category-slider__img category-slider__banner">
                                         <a href="https://swiss21.org/" target="_blank"
-                                            class="category-slider__place-name-link">
+                                            class="category-slider__place-name-link outer-link">
                                             <img src="./../assets/images/slider-banner.png"
                                                 alt="" class="img-thumbnail">
                                         </a>
                                       
                                     </div>
-                                    <!-- <a class="category-slider__place-name" [stopLink]="isDragging"
-                                        [owlRouterLink]="['/'+langURL, 'single-place', categorySlider.id, categorySlider.slug]"
+                                   <a class="category-slider__place-name" [stopLink]="isDragging"
+                                        [owlRouterLink]="['https://swiss21.org/']"
                                         class="category-slider__place-name-link">
-                                        <h6 [innerHTML]="categorySlider.title.rendered">
-                                        </h6>
-                                    </a> -->
+                                    </a>
                                     <!-- <p class="text" [innerHTML]="(categorySlider.description | slice:0:100)+'...'">
                                     </p> -->
                                     <!-- <div>
