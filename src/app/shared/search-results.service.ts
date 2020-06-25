@@ -30,8 +30,8 @@ export class SearchResultsService implements OnDestroy {
       'Access-Control-Allow-Origin': '*'
     });
 
-     (result);
-     (environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
+    console.log(result);
+    console.log(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +
       (result.length > 0 ? result : '') + '&page=' +
        page + '&per_page=' + perpage + '&lang=' + this.getCurrentLanguage());
     return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?core&skip_cache=1&place_search=' +

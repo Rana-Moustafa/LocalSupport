@@ -22,7 +22,7 @@ export class FooterComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
 
-    this.socialIcons();
+    // this.socialIcons();
   }
   ngAfterViewChecked(): void {
     try {
@@ -33,11 +33,11 @@ export class FooterComponent implements OnInit, AfterViewChecked {
   }
   socialIcons() {
     this.commons.getSocialIcons().subscribe(data => {
-      //  (data);
+      // console.log(data);
       this.footerData = data;
       this.socialMediaData = this.footerData.social;
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
   navigateToNewsletter(section) {

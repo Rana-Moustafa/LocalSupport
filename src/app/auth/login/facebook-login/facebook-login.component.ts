@@ -37,8 +37,8 @@ export class FacebookLoginComponent implements OnInit {
         // Now sign-in with userData
         this.authenticationService.userFacebookLogin(userData).subscribe(data => {
           this.facebookUser = data;
-          //  ('facebook login');
-          //  (this.facebookUser);
+          // console.log('facebook login');
+          // console.log(this.facebookUser);
           localStorage.setItem('token', JSON.stringify(this.facebookUser.token));
           localStorage.setItem('profile_image', this.facebookUser.profile_image);
           this.userData.changeProfilePicture(this.facebookUser.profile_image);
@@ -48,7 +48,7 @@ export class FacebookLoginComponent implements OnInit {
           this.router.navigate([this.langURL + '/add-new-place']);
           this.authenticationService.autoLogout(this.facebookUser.token_expiration_date);
         }, error => {
-          //////  (error);
+          ////// console.log(error);
           this.userStatus.loginError = true;
         });
       }

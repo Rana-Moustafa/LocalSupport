@@ -49,7 +49,7 @@ export class SinglePlaceComponent implements OnInit, OnDestroy {
     this.innerWidth = window.innerWidth;
 
     this.checkWindowWidth();
-
+    this.places.getCurrentLocation();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
         event.lang)).then(() => {

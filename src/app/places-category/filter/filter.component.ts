@@ -115,8 +115,8 @@ export class FilterComponent implements OnInit {
   }
 
   checkPlayground(event, name) {
-    //  (name)
-    //  (event.target.checked)
+    // console.log(name)
+    // console.log(event.target.checked)
     if ((name === 'Playground' || name === 'Spielplatz' || name === 'Spielplätze' || name === 'Playgrounds')
       && event.target.checked === true) {
       this.showSubCategories = true;
@@ -136,15 +136,15 @@ export class FilterComponent implements OnInit {
   getFormSelectionItems() {
     this.places.getFormSelections().subscribe(data => {
       this.formSelection = data;
-       ('filter this.formSelection');
-       (this.formSelection);
+      console.log('filter this.formSelection');
+      console.log(this.formSelection);
       this.formTypes = this.formSelection.type;
       this.formCategories = this.formSelection.category;
       this.formDelivery = this.formSelection.delivery;
       this.formPayment = this.formSelection.payment_methods;
       // this.placeType = '';
     }, error => {
-      //  (error)
+      // console.log(error)
     });
   }
   getPlacesTypesItems() {
@@ -152,16 +152,16 @@ export class FilterComponent implements OnInit {
       // this.placesCategories = data;
 
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 
   public filterPlaces(form: NgForm) {
     this.sendCheckedCategories();
     this.types = form.value.subcats.name;
-    //  (this.types);
+    // console.log(this.types);
     const filterObject = this.constructFiltertObject();
-    //  (filterObject);
+    // console.log(filterObject);
     this.placesHandlerEvent.emit(filterObject);
 
   }
@@ -184,7 +184,7 @@ export class FilterComponent implements OnInit {
       selectedCategory: this.formCategories.filter((category) => category.checked),
       selectedTypes: this.types
     };
-    //  (filterObject);
+    // console.log(filterObject);
     return filterObject;
   }
 }

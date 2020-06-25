@@ -69,7 +69,7 @@ export class IntroComponent implements OnInit {
     private location: Location,
     public translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      console.log(event.lang);
+      // console.log(event.lang);
       this.router.navigateByUrl(this.router.url.replace(this.route.snapshot.params.language,
         event.lang)).then(() => {
           this.introItems();
@@ -84,8 +84,8 @@ export class IntroComponent implements OnInit {
           this.introItems();
         });
     }
-    console.log(this.translate.currentLang);
-    console.log(this.location.getState());
+    // console.log(this.translate.currentLang);
+    // console.log(this.location.getState());
     this.commons.showPadding = false;
     // this.advertiseData = this.location.getState();
     this.commons.hide();
@@ -93,7 +93,7 @@ export class IntroComponent implements OnInit {
     this.translation.addRouterLangParam();
   }
   getSelectedLang(lang) {
-    console.log(lang);
+    // console.log(lang);
     this.selectedLang = lang;
     this.translation.addTranslationLanguage(lang);
 
@@ -101,7 +101,7 @@ export class IntroComponent implements OnInit {
   introItems() {
     this.commons.getIntroData().subscribe(data => {
       this.introItemsNames = data;
-      console.log(this.introItemsNames);
+      // console.log(this.introItemsNames);
     }, error => {
       console.log(error);
     });

@@ -264,7 +264,7 @@ export class MapComponent implements OnInit {
     const uA = navigator.userAgent;
     const vendor = navigator.vendor;
     this.selectedCategory();
-    // this.loadMap();
+    this.loadMap();
   }
 
   selectedCategory() {

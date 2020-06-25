@@ -12,7 +12,7 @@ export class CountriesService {
 
   constructor(private http: HttpClient) {
     // this.getJSON().subscribe(data => {
-    //   ////// (data);
+    //   //////console.log(data);
     // });
    }
   // public getJSON(): Observable<any> {

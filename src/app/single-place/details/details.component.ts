@@ -27,12 +27,11 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.setCurrentLocation();
-     ('this.singlePlaceDetails');
-     (this.singlePlaceDetails);
+    console.log('this.singlePlaceDetails');
+    console.log(this.singlePlaceDetails);
     this.singlePlaceWebsite = this.singlePlaceDetails.website.replace(/(^\w+:|^)\/\//, '');
     this.placeLat = this.singlePlaceDetails.address.lat;
     this.placeLng = this.singlePlaceDetails.address.lng;
-    this.setCurrentLocation();
   }
 
   calculateDistance(x1: number, y1: number, x2: number, y2: number) {
@@ -51,17 +50,17 @@ export class DetailsComponent implements OnInit {
         result = (3958.8 * METRES_IN_MILE) * Math.acos(Math.sin(lt1) * Math.sin(lt2) + Math.cos(lt1) * Math.cos(lt2) * Math.cos(lg2 - lg1));
       }
       this.distance = Math.round(result * 1.609344);
-      //  (Math.round(result * 1.609344));
+      // console.log(Math.round(result * 1.609344));
       // return result;
   }
 
   findPlaceRoute(id: number) {
     this.places.getPlaceRoute(id).subscribe( data => {
       this.placeMap = data;
-      // window.location.href = this.placeMap;
+      window.location.href = this.placeMap;
       window.open(this.placeMap, 'blank');
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 

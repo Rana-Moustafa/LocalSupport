@@ -33,7 +33,7 @@ export class EditProfileComponent implements OnInit {
 
   onEditProfile(form: NgForm){
     this.userDataService.editUserDetails(this.editProfileForm.value).subscribe(data => {
-      //  (data);
+      // console.log(data);
       this.updatedInfo = data;
       // this.editProfileForm.reset();
       this.userDataService.editFormStatus.emit(false);

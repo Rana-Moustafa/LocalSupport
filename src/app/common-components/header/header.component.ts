@@ -84,15 +84,15 @@ export class HeaderComponent implements OnInit {
   }
   menuItems() {
     this.commons.getMenuItems().subscribe(data => {
-      //  (data)
+      // console.log(data)
       this.menuItemsNames = data;
     }, error => {
-      //  (error)
+      // console.log(error)
     });
   }
   searchResult(resultForm: NgForm) {
     this.searchResultsService.getSearchResultSubject(resultForm.value.search);
-    //  (resultForm.value.search);
+    // console.log(resultForm.value.search);
     this.router.navigate(['/' + this.langURL + '/search-result'], { queryParams: { search: JSON.stringify(resultForm.value.search) } });
     if (this.mobileSearch) {
       this.toggleSearch();
@@ -116,7 +116,7 @@ export class HeaderComponent implements OnInit {
     this.places.getPlacesTypess(lang).subscribe(data => {
       this.categoriesNames = JSON.parse(JSON.stringify(data));
     }, error => {
-      //  (error)
+      // console.log(error)
     });
   }
 

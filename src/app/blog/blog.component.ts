@@ -38,8 +38,8 @@ export class BlogComponent implements OnInit {
     this.translation.langUpdated.subscribe(
       (lang) => {
         this.commons.showLoadingSpinner();
-        //  (this.route.snapshot.params.language)
-        //  (lang)
+        // console.log(this.route.snapshot.params.language)
+        // console.log(lang)
         const u = this.route.snapshot.params.language;
         const y = lang;
         this.router.navigateByUrl(this.router.url.replace(u, y));
@@ -51,12 +51,12 @@ export class BlogComponent implements OnInit {
   blogItems(language) {
     this.noBlogs = true;
     this.commons.getBlogPageData(language, this.page, this.perPage).subscribe(data => {
-         (data);
+        console.log(data);
         this.commons.hideLoadingSpinner();
         this.noBlogs = false;
         this.blogItamsNames = JSON.parse(JSON.stringify(data));
         if (this.blogItamsNames && this.blogItamsNames.length === 0 ) {
-           ('no blogs to show');
+          console.log('no blogs to show');
           this.noBlogs = true;
           this.isFullListDisplayed = true;
         } else {
@@ -73,7 +73,7 @@ export class BlogComponent implements OnInit {
         this.blogCount = this.blogItamsNames.length;
         this.isLoading = false;
     }, error => {
-        //////  (error)
+        ////// console.log(error)
         this.noBlogs = false;
         this.isFullListDisplayed = true;
         this.commons.hideLoadingSpinner();
@@ -84,7 +84,7 @@ export class BlogComponent implements OnInit {
      this.isShow = true;
      else
      this.isShow=false;
-     // (this.isShow);
+     //console.log(this.isShow);
      
   }
 

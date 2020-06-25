@@ -23,7 +23,7 @@ export class FeaturedPlaceAdComponent implements OnInit {
 
   ngOnInit() {
     if (this.FaturedAddItemsChild) {
-      //  (this.FaturedAddItemsChild)
+      // console.log(this.FaturedAddItemsChild)
     }
   }
 }

@@ -56,7 +56,7 @@ export class SingleBlogComponent implements OnInit, OnDestroy {
               private commons: CommonsService) {
     this.endurl = this.route.snapshot.routeConfig.path;
     this.currentURL = location.origin;
-     (this.endurl);
+    console.log(this.endurl);
   }
   ngOnInit() {
     this.commons.darkHeader = true;
@@ -95,14 +95,14 @@ export class SingleBlogComponent implements OnInit, OnDestroy {
   getSingleBlog(blogid) {
     this.blogService.getSingleBlogDetails(blogid).subscribe(data => {
       this.blogItem = data;
-      //  (this.blogItem);
+      // console.log(this.blogItem);
       this.commons.hideLoadingSpinner();
       this.translatedId = this.blogItem.translated_id;
-      //  (data)
+      // console.log(data)
       // this.blogItem = JSON.stringify(data);
       this.authorData(this.blogItem.author);
     }, error => {
-      //  (error);
+      // console.log(error);
       this.commons.hideLoadingSpinner();
     });
   }
@@ -113,9 +113,9 @@ export class SingleBlogComponent implements OnInit, OnDestroy {
       this.noAuthorInfoAvatar = false;
       this.authorInfoAvatar = this.authorInfo.avatar_urls['96'];
 
-      //  (this.authorInfo.avatar_urls['96']);
+      // console.log(this.authorInfo.avatar_urls['96']);
     }, error => {
-      //  (error);
+      // console.log(error);
       this.noAuthorInfoAvatar = true;
     });
   }

@@ -33,7 +33,7 @@ export class NewsletterComponent implements OnInit {
     this.mailNotValid = false;
 
     this.commons.postSubscribtion(newsletter.value.email).subscribe(data => {
-      //  (data);
+      // console.log(data);
       this.userData = data;
       if (this.userData.status === 400 && this.userData.title === 'Member Exists') {
         this.alreadyRegistered = true;
@@ -42,7 +42,7 @@ export class NewsletterComponent implements OnInit {
       }
       this.newsletter.reset();
     }, (error) => {
-      //  (error);
+      // console.log(error);
       if (error.error.data.status === 400) {
         this.mailNotValid = true;
       } else {

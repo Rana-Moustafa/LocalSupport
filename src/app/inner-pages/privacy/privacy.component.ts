@@ -40,9 +40,9 @@ export class PrivacyComponent implements OnInit {
     this.commons.getPrivacyPage().subscribe(data => {
       this.privacyContent = data;
       this.isLoading = false;
-      //  (data);
+      // console.log(data);
     }, error => {
-       (error);
+      console.log(error);
       this.isLoading = false;
     });
   }

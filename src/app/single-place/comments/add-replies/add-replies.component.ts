@@ -27,11 +27,11 @@ export class AddRepliesComponent implements OnInit {
   sendReply(index) {
 
     this.comments.sendCommentsReply(this.route.snapshot.params['id'], index, this.commentsReplyForm.value.message).subscribe( data => {
-    //  (data);
+    // console.log(data);
       this.talkBack(JSON.parse(JSON.stringify(data)));
       this.commentsReplyForm.reset();
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 

@@ -33,10 +33,10 @@ export class ProfilePlacesComponent implements OnInit {
 
   getUserPlaces() {
     this.places.userPlaces().subscribe( data => {
-      //  (data);
+      // console.log(data);
       this.userPlaces = data;
     }, error => {
-       (error);
+      console.log(error);
     });
   }
 

@@ -380,7 +380,7 @@ export class PlacesService {
   userPlaces() {
     console.log(environment.baseURL + '/wp-json/wp/v2/place?myplaces&core&token=' + JSON.parse(localStorage.getItem('token')) +
     '&lang=' + this.getCurrentLanguage());
-    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place/?myplaces&core&token=' +
+    return this.http.get(environment.baseURL + '/wp-json/wp/v2/place?myplaces&core&token=' +
       JSON.parse(localStorage.getItem('token')) +
       '&lang=' + this.getCurrentLanguage());
     }

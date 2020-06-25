@@ -77,19 +77,19 @@ export class RelatedPlacesComponent implements OnInit {
       (lang) => {
         // this.dict = this.translation.getLang();
         localStorage.setItem('current_lang', lang);
-        //  (this.returnedRelatedPlaces)
+        // console.log(this.returnedRelatedPlaces)
         this.listRelatedPlaces();
       }
     );
   }
 
   listRelatedPlaces() {
-    //  (this.relatedPlacesIds)
+    // console.log(this.relatedPlacesIds)
     this.places.getRelatedPlaces(this.relatedPlacesIds).subscribe( data => {
-      //  (data)
+      // console.log(data)
       this.relatedPlacesList  = data;
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 
@@ -97,7 +97,7 @@ export class RelatedPlacesComponent implements OnInit {
     this.places.addToFavPlaces(id).subscribe( data => {
       this.favPlace = !this.favPlace;
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 }

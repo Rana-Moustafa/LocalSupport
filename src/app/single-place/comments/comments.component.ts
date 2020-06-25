@@ -72,12 +72,12 @@ export class CommentsComponent implements OnInit {
     this.allComments = this.allComments.concat(this.placeComments);
     this.page++;
     this.places.getPlaceParentComments(this.route.snapshot.params['id'], this.page, this.sum).subscribe(data => {
-       (data);
+      console.log(data);
       this.loadingComments = false;
       this.placeComments = data;
       this.placeComments = JSON.parse(JSON.stringify(this.placeComments));
       if (this.placeComments && this.placeComments.length === 0) {
-        //  ('no comments')
+        // console.log('no comments')
         this.isFullListDisplayed = true;
       }
 
@@ -88,21 +88,21 @@ export class CommentsComponent implements OnInit {
           this.showParentComments.push(this.placeComments[i]);
         }
       }
-       (this.commentsCount )
+      console.log(this.commentsCount )
       // this.commentsCount = this.placeComments.length;
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 
   getReplies(parentId) {
     this.noReplies = true;
     this.places.getPlaceReplies(this.route.snapshot.params['id'], parentId).subscribe(data => {
-      //  (data)
+      // console.log(data)
       this.replies = JSON.parse(JSON.stringify(data));
       this.noReplies = false;
     }, error => {
-      //  (error);
+      // console.log(error);
       this.noReplies = false;
     });
   }
@@ -113,10 +113,10 @@ export class CommentsComponent implements OnInit {
       let comment;
       comment = JSON.parse(JSON.stringify(data));
       this.showParentComments.unshift(comment);
-      //  (this.allComments);
+      // console.log(this.allComments);
       form.reset();
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 
@@ -135,7 +135,7 @@ export class CommentsComponent implements OnInit {
         }
       }
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 

@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
 
     translate.addLangs(['de', 'en', 'fr', 'it', 'sv']);
     const browserLang = translate.getBrowserLang();
-    console.log(browserLang);
+    // console.log(browserLang);
     translate.use(browserLang.match(/de|en|fr|it|sv/) ? browserLang : 'de');
     localStorage.setItem('current_lang', browserLang);
 

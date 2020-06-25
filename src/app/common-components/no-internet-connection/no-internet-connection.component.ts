@@ -14,10 +14,10 @@ export class NoInternetConnectionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //  (this.internetConnectionStatus)
+    // console.log(this.internetConnectionStatus)
 
     this.createOnline$().subscribe(isOnline => {
-      //  (isOnline)
+      // console.log(isOnline)
       this.internetConnectionStatus = isOnline;
     }
     );

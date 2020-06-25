@@ -41,7 +41,7 @@ export class SearchResultComponent implements OnInit {
   isFullListDisplayed = false;
   filterComponent;
   isLoading = false;
-  
+
   constructor(
     public searchResultsService: SearchResultsService,
     private route: ActivatedRoute,
@@ -91,6 +91,7 @@ export class SearchResultComponent implements OnInit {
     this.isFullListDisplayed = false;
     this.getFilterPlaces();
   }
+
   getFilterPlaces() {
     if (!this.isFullListDisplayed) {
       this.isLoading = true;
@@ -122,12 +123,13 @@ export class SearchResultComponent implements OnInit {
       });
     }
   }
+
   searchQuery(search, lang) {
     if (!this.isFullListDisplayed) {
       this.isLoading = true;
       this.page++;
       this.searchResultsService.GetSearchResults(search, this.page, this.perPage, lang).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.isLoading = false;
         this.results = data;
         for (var i = 0; i < this.results.length; i++) {

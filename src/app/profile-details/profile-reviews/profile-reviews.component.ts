@@ -58,14 +58,14 @@ export class ProfileReviewsComponent implements OnInit {
       this.page++;
       this.comments.getUserComments(this.page, this.perPage).subscribe(data => {
         this.CommentsData = data;
-         ('Reviews');
-         (data)
+        console.log('Reviews');
+        console.log(data)
         if (this.CommentsData.length < 1) {
           this.ReviewEmpty = true;
           this.isFullListDisplayed = true;
         }
 
-         (this.CommentsData);
+        console.log(this.CommentsData);
         for (var i = 0; i < this.CommentsData.length; i++) {
           if (this.CommentsData[i].parent === 0) {
             this.MainComment.push(this.CommentsData[i]);
@@ -91,7 +91,7 @@ export class ProfileReviewsComponent implements OnInit {
       this.editEnabled = false;
       this.userDataService.editFormStatus.emit(false);
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
 
@@ -107,12 +107,12 @@ export class ProfileReviewsComponent implements OnInit {
       this.MainComment = [];
       this.getComments();
     }, error => {
-      //  (error);
+      // console.log(error);
     });
   }
   toggleEditMode(commentID) {
     this.editEnabled = !this.editEnabled;
     this.editIndex = commentID;
-    //  (this.editIndex);
+    // console.log(this.editIndex);
   }
 }

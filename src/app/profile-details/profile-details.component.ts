@@ -48,7 +48,7 @@ export class ProfileDetailsComponent implements OnInit {
               private translate: TranslateService) { }
 
   ngOnInit() {
-    //  (this.selectedUserInfo)
+    // console.log(this.selectedUserInfo)
     this.userDataService.currentProfilePicture.subscribe(picture => this.url = picture);
     this.commons.darkHeader = true;
     this.commons.lightHeader = true;
@@ -81,13 +81,13 @@ export class ProfileDetailsComponent implements OnInit {
       this.commons.hideLoadingSpinner();
       localStorage.setItem('profile_image', JSON.stringify(this.newProfilePicture));
     }, (error) => {
-      //  (error);
+      // console.log(error);
       this.commons.hideLoadingSpinner();
     });
 
   }
   imageLoaded() {
-    //  (e)
+    // console.log(e)
     // show cropper
   }
   cropperReady() {
@@ -101,7 +101,7 @@ export class ProfileDetailsComponent implements OnInit {
     this.url = null;
   }
   getSelectedUserProfilePicture(info) {
-    //  (info);
+    // console.log(info);
     this.selectedUserInfo = info;
     this.url = this.selectedUserInfo.profile_image;
   }
